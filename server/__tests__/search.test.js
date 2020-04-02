@@ -17,8 +17,8 @@ describe("Search", () => {
 
       expect(res).toBeDefined();
       expect(res).toHaveProperty("nextPage");
-      expect(res).toHaveProperty("medias");
-      expect(res.medias).toBeInstanceOf(Array);
+      expect(res).toHaveProperty("movies");
+      expect(res.movies).toBeInstanceOf(Array);
     });
   });
 });

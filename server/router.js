@@ -1,30 +1,36 @@
 import express from "express";
-import path from "path";
-
-import movie from "./Controllers/movie";
 
 import signUpController from "./Controllers/signUp";
+import SignInControllers from "./Controllers/signIn";
+import movieController from "./Controllers/movie";
 import searchController from "./Controllers/search";
+import checkAuth from "./Helpers/auth";
 
 const router = express.Router();
 
-router.get("/movies", searchController.searchMovies);
+/* Static files */
+router.use("/avatar", checkAuth, express.static("./server/data/avatar"));
 
-router.get("/check-token", (req, res) => {
-  res.status(200).send({ validToken: true });
+/* User */
+// create a new user
+router.post("/users", signUpController.signUp);
+router.put(
+  "/users/:id/send-validation-email",
+  signUpController.resendValidationEmail
+);
+router.put("/tokens/:value/verify-email", signUpController.verifyEmail);
+
+/* Auth */
+router.post("/users/login", SignInControllers);
+router.get("/check-auth", checkAuth, (req, res) => {
+  res.status(200).json({ validToken: true });
 });
 
-/* Sign Up */
-router.post("/inscription", signUpController.signUp);
+/* Search */
+router.get("/movies", checkAuth, searchController.searchMovies);
 
 /* Movie */
-router.get("/movie/infos/:id", movie.getInfos);
-router.post("/movie/review", movie.receiveReviews);
-
-router.get("/data/avatar/:id", (req, res) => {
-  const pictureName = req.params.id;
-  const absolutePath = path.resolve(`./data/avatar/${pictureName}`);
-  res.status(200).sendFile(absolutePath);
-});
+router.get("/movies/:id", checkAuth, movieController.getInfos);
+router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
 
 export default router;

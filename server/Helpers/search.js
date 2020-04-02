@@ -23,31 +23,28 @@ export const searchMoviesOnYts = async ({
 
   const { data } = await axios.get(`${YTS_URL}?${queryParams}`);
 
-  if (data && data.data.movie_count === 0) {
+  // Checking `movies` because sometime `data.data.movie_count` is positive and there's no `movies` (wtf)
+  if (!data || !data.data.movies) {
     return {
       nextPage: false,
-      medias: []
+      movies: []
     };
   }
 
-  const parsedMovies =
-    (data &&
-      data.data.movies.map((movie) => ({
-        cover: YTS_BASE_URL + movie.large_cover_image,
-        title: movie.title_english,
-        year: movie.year,
-        summary: movie.summary,
-        genres: movie.genres,
-        rating: movie.rating / 2,
-        id: movie.id,
-        runtime: movie.runtime,
-        seasons: null
-      }))) ||
-    [];
+  const parsedMovies = data.data.movies.map((movie) => ({
+    id: movie.id,
+    title: movie.title_english,
+    cover: YTS_BASE_URL + movie.large_cover_image,
+    year: movie.year,
+    summary: movie.summary,
+    genres: movie.genres,
+    rating: movie.rating / 2,
+    runtime: movie.runtime
+  }));
 
   return {
     nextPage: parsedMovies.length === 12,
-    medias: parsedMovies
+    movies: parsedMovies
   };
 };
 

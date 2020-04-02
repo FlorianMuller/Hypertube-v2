@@ -2,37 +2,60 @@ import React from "react";
 import Adapter from "enzyme-adapter-react-16";
 import EnzymeToJson from "enzyme-to-json";
 import { configure } from "enzyme";
+import { History, Location, LocationState } from "history";
 
 import Search from "../components/Search";
 
 import { mountWithIntl } from "./helpers/intl-enzyme-test-helper";
 
 import * as ServiceSearch from "../components/Search/service";
+import { UseApiReturn, ApiSearchReponse } from "../models/models";
 
 configure({ adapter: new Adapter() });
 
 jest.mock("react-router-dom", () => ({
-  useHistory: (): Record<string, unknown> => ({
+  ...jest.requireActual("react-router-dom"),
+  useHistory: (): History<LocationState> => ({
+    length: null,
+    action: null,
+    location: { pathname: "/search", search: "", state: {}, hash: null },
     push: jest.fn(),
-    location: { state: {}, pathname: "/search/movies" }
+    replace: jest.fn(),
+    go: jest.fn(),
+    goBack: jest.fn(),
+    goForward: jest.fn(),
+    block: jest.fn(),
+    listen: jest.fn(),
+    createHref: jest.fn()
   }),
-  useLocation: (): Record<string, unknown> => ({
-    pathname: "/search/movies",
+  useLocation: (): Location<LocationState> => ({
+    pathname: "/search",
+    search: "",
     state: {},
-    search: ""
+    hash: null
   })
 }));
 
-jest.mock("../hooks/useApi", () => (): {
-  data: unknown;
-  loading: boolean;
-  error: void;
-  setUrl: () => void;
-} => ({
-  data: [],
+jest.mock("../hooks/useApi", () => (): UseApiReturn<
+  ApiSearchReponse,
+  void
+> => ({
+  callApi: jest.fn(),
   loading: false,
+  res: {
+    data: { movies: [], nextPage: false },
+    status: 200,
+    statusText: null,
+    headers: null,
+    config: null
+  },
+  resData: { movies: [], nextPage: false },
   error: null,
-  setUrl: jest.fn()
+  setUrl: jest.fn(),
+  setMethod: jest.fn(),
+  setHeaders: jest.fn(),
+  setData: jest.fn(),
+  cancelAllRequests: jest.fn()
 }));
 
 describe("Search", () => {

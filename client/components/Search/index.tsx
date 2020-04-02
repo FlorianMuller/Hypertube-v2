@@ -15,20 +15,24 @@ import Card from "@material-ui/core/Card";
 
 import useApi from "../../hooks/useApi";
 import { formatQueryUrl } from "./service";
-import { SearchData } from "../../models/models";
+import { Movie, ApiSearchReponse } from "../../models/models";
 
 import useSearchStyles from "./styles";
 
 const Search = (): ReactElement => {
   const classes = useSearchStyles({});
   const { formatMessage: _t } = useIntl();
-  const [filmList, setFilmList] = useState([]);
+  const [filmList, setFilmList] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const history = useHistory();
   const location = useLocation();
-  const { data, loading, error, setUrl }: SearchData = (useApi(
-    formatQueryUrl(location.search, 1)
-  ) as unknown) as SearchData;
+
+  const { resData: data, loading, error, setUrl } = useApi<
+    ApiSearchReponse,
+    void
+  >(formatQueryUrl(location.search, 1), {
+    hotReload: true
+  });
 
   /**
    * Starting a new search
@@ -43,11 +47,11 @@ const Search = (): ReactElement => {
    * New Data receive
    */
   useEffect(() => {
-    if (data && data.medias?.length) {
+    if (data && data.movies?.length) {
       if (page === 1) {
-        setFilmList(data.medias);
+        setFilmList(data.movies);
       } else {
-        setFilmList((oldFilmList) => [...oldFilmList, ...data.medias]);
+        setFilmList((oldFilmList) => [...oldFilmList, ...data.movies]);
       }
     }
   }, [data]);
@@ -56,7 +60,7 @@ const Search = (): ReactElement => {
    * Getting next page
    */
   const loadMore = (): void => {
-    if (loading || !data.nextPage) {
+    if (loading || !data?.nextPage) {
       return;
     }
     setPage(page + 1);
@@ -73,7 +77,7 @@ const Search = (): ReactElement => {
         className={classes.container}
         initialLoad={false}
         loadMore={loadMore}
-        hasMore={data.nextPage}
+        hasMore={data?.nextPage}
         threshold={100}
       >
         {/* No media found */}

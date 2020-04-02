@@ -1,19 +1,44 @@
+import { AxiosResponse, AxiosError, Canceler } from "axios";
+
 export interface Locale {
   locale: string;
   setLocale: (locale: string) => void;
 }
 
-export interface ApiRecord {
-  data: Record<string, unknown>;
-  loading: boolean;
-  error: {};
-  setUrl: (url: string) => void;
+export type Method = "get" | "put" | "post" | "patch" | "delete";
+export type Headers = { [key: string]: string } | undefined;
+export type Data = object | undefined;
+
+export interface UseApiOption {
+  method?: Method;
+  headers?: Headers;
+  data?: Data;
+  hotReload?: boolean;
+  validateStatus?: (status: number) => boolean;
 }
 
-export interface Fixture {
-  data: {};
+export interface UseApiReturn<T, E> {
+  callApi: (freshData?: Data) => Promise<void>;
   loading: boolean;
-  error: {};
+  res: AxiosResponse<T>;
+  resData: T;
+  error: AxiosError<E>;
+  setUrl: (url: string) => void;
+  setMethod: (method: Method) => void;
+  setHeaders: (headers: Headers) => void;
+  setData: (data: Data) => void;
+  cancelAllRequests: Canceler;
+}
+
+export interface ApiAuthResponse {
+  validToken: boolean;
+  error?: string;
+}
+
+export interface AuthInfo {
+  username: string;
+  password: string;
+  [key: string]: string;
 }
 
 export interface Review {
@@ -24,16 +49,6 @@ export interface Review {
   body: string;
 }
 
-export interface Film {
-  title: string;
-  avg_rating: number;
-  date: string;
-  creator: string;
-  subject: string | string[];
-  description: string;
-  identifier: string;
-}
-
 export interface Filters {
   query: string;
   collections: string[];
@@ -41,15 +56,25 @@ export interface Filters {
   minRating: number;
 }
 
-export interface ApiData {
-  loading: boolean;
-  error: unknown;
-  setUrl: Function;
+export interface Movie {
+  id: string;
+  title: string;
+  cover: string;
+  year: number;
+  summary: string;
+  genres: string[];
+  rating: number;
+  runtime: number;
 }
 
-export interface SearchData extends ApiData {
-  data: {
-    medias: Record<string, string | number>[];
-    nextPage: boolean;
-  };
+export interface ApiSearchReponse {
+  movies: Movie[];
+  nextPage: boolean;
 }
+
+export type CustomSnackbarVariant =
+  | "success"
+  | "warning"
+  | "error"
+  | "info"
+  | "default";
