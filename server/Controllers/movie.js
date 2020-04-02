@@ -3,6 +3,7 @@ import Axios from "axios";
 import movieHelpers from "../Helpers/movie";
 import mongoose from "../mongo";
 import ioConnection from "..";
+import UserModel from "../Schemas/User";
 
 const getInfos = (req, res) => {
   const movieId = req.params.id;
@@ -61,10 +62,11 @@ const receiveReviews = (req, res) => {
   Axios.get(`https://archive.org/metadata/${movieId}`)
     .then(async ({ data }) => {
       if (data.metadata && req.body.body && req.body.body.length < 1001) {
+        const user = await UserModel.findById(req.userId, "username");
         const ret = await movieHelpers.saveReview({
           _id: new mongoose.Types.ObjectId(),
           movieId,
-          name: req.body.name,
+          name: user.username,
           date: req.body.date,
           stars: req.body.stars,
           body: req.body.body
@@ -73,7 +75,7 @@ const receiveReviews = (req, res) => {
           const fullDate = String(new Date(req.body.date)).split(" ");
           ioConnection.ioConnection.to(movieId).emit("New comments", {
             id: Date.now(),
-            name: req.body.name,
+            name: user.username,
             date: movieHelpers.timestampToDate(
               fullDate[1],
               fullDate[2],
