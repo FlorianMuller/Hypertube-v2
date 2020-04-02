@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useIntl } from "react-intl";
 import _ from "lodash";
 import InfiniteScroll from "react-infinite-scroller";
@@ -8,21 +8,18 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import StarIcon from "@material-ui/icons/Star";
-import { Button, Chip } from "@material-ui/core";
-import Image from "material-ui-image";
-import Card from "@material-ui/core/Card";
 
 import useApi from "../../hooks/useApi";
 import { formatQueryUrl } from "./service";
 import { Movie, ApiSearchReponse } from "../../models/models";
-
 import useSearchStyles from "./styles";
+
+import MovieThumbnail from "./MovieThumbnail";
 
 const Search = (): ReactElement => {
   const classes = useSearchStyles({});
   const { formatMessage: _t } = useIntl();
-  const [filmList, setFilmList] = useState<Movie[]>([]);
+  const [movieList, setMovieList] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const history = useHistory();
   const location = useLocation();
@@ -39,7 +36,7 @@ const Search = (): ReactElement => {
    */
   useEffect(() => {
     setPage(1);
-    setFilmList([]);
+    setMovieList([]);
     setUrl(formatQueryUrl(location.search, 1));
   }, [location.search, location.pathname]);
 
@@ -49,9 +46,9 @@ const Search = (): ReactElement => {
   useEffect(() => {
     if (data && data.movies?.length) {
       if (page === 1) {
-        setFilmList(data.movies);
+        setMovieList(data.movies);
       } else {
-        setFilmList((oldFilmList) => [...oldFilmList, ...data.movies]);
+        setMovieList((oldFilmList) => [...oldFilmList, ...data.movies]);
       }
     }
   }, [data]);
@@ -81,7 +78,7 @@ const Search = (): ReactElement => {
         threshold={100}
       >
         {/* No media found */}
-        {!filmList.length && !loading && (
+        {!movieList.length && !loading && (
           <div className={classes.noMediaContainer}>
             <img
               src={`${window.location.origin}/public/no-media.png`}
@@ -95,53 +92,8 @@ const Search = (): ReactElement => {
         )}
 
         {/* Medias list */}
-        {filmList.map((media) => (
-          <div className={classes.thumbnailContainer} key={media.id}>
-            <Image
-              animationDuration={500}
-              src={media.cover}
-              color="rgba(0,0,0,0)"
-              imageStyle={{ width: 300, height: 450 }}
-              style={{ width: 300, height: 450 }}
-              disableSpinner
-              errorIcon={
-                <Card className={classes.altContainer}>
-                  <Typography variant="h4">{media.title}</Typography>
-                </Card>
-              }
-            />
-            <div className={classes.thumbnailOverlay}>
-              <Typography variant="h5">{media.title}</Typography>
-              <Typography variant="h6">{media.year}</Typography>
-              <Typography variant="caption" className={classes.summary}>
-                {media.summary}
-              </Typography>
-              <div className={classes.metaInfos}>
-                {media.genres && (
-                  <div>
-                    {media.genres.map((genre: string) => (
-                      <Chip
-                        className={classes.tag}
-                        label={genre}
-                        clickable
-                        color="primary"
-                        key={genre}
-                      />
-                    ))}
-                  </div>
-                )}
-                <Typography className={classes.rating}>
-                  {media.rating} <StarIcon className={classes.ratingIcon} />
-                  {media.runtime && <span>- {media.runtime} mins</span>}
-                </Typography>
-                <Link to={`/movie/${media.id}`} className={classes.watchLink}>
-                  <Button color="primary" variant="contained">
-                    {_t({ id: "search.film.watch" })}
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
+        {movieList.map((movie) => (
+          <MovieThumbnail key={movie.id} movie={movie} />
         ))}
 
         {/* Fake movies Loading */}
