@@ -1,6 +1,6 @@
 import React, { useState, ReactElement } from "react";
 import { useIntl } from "react-intl";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   AppBar,
   Typography,
@@ -15,6 +15,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
 import { useHeaderStyles } from "./styles";
+import API from "../../util/api";
 
 interface Props {
   locale: string;
@@ -33,6 +34,7 @@ const Header = ({
   const { formatMessage: _t } = useIntl();
   const [localeAnchorEl, setLocaleAnchor] = useState(undefined);
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(undefined);
+  const history = useHistory();
 
   const setNewLocale = (newLocale: string): void => {
     setLocale(newLocale);
@@ -41,6 +43,16 @@ const Header = ({
 
   const onMenuProfile = (): void => {
     setProfileMenuAnchor(undefined);
+  };
+
+  const logOut = (): void => {
+    console.log("logout");
+
+    API.post(`/logout`).catch((e) => {
+      console.error(e);
+    });
+    history.push("/");
+    onMenuProfile();
   };
 
   return (
@@ -96,11 +108,11 @@ const Header = ({
               onClose={(): void => setProfileMenuAnchor(undefined)}
             >
               <MenuItem onClick={onMenuProfile}>
-                {_t({ id: "profile" })}
+                <Link className={classes.titleLink} to="/myprofile">
+                  {_t({ id: "profile" })}
+                </Link>
               </MenuItem>
-              <MenuItem onClick={onMenuProfile}>
-                {_t({ id: "disconnect" })}
-              </MenuItem>
+              <MenuItem onClick={logOut}>{_t({ id: "disconnect" })}</MenuItem>
             </Menu>
           </div>
         </div>

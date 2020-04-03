@@ -1078,7 +1078,12 @@ exports[`App renders correctly 1`] = `
                                                             role="menuitem"
                                                             tabindex="0"
                                                           >
-                                                            My profile
+                                                            <a
+                                                              class="makeStyles-titleLink-4"
+                                                              href="/myprofile"
+                                                            >
+                                                              My profile
+                                                            </a>
                                                             <span
                                                               class="MuiTouchRipple-root"
                                                             />
@@ -1865,7 +1870,12 @@ exports[`App renders correctly 1`] = `
                                                             role="menuitem"
                                                             tabindex="0"
                                                           >
-                                                            My profile
+                                                            <a
+                                                              class="makeStyles-titleLink-4"
+                                                              href="/myprofile"
+                                                            >
+                                                              My profile
+                                                            </a>
                                                             <span
                                                               class="MuiTouchRipple-root"
                                                             />
@@ -2160,7 +2170,25 @@ exports[`App renders correctly 1`] = `
                                                                                     role="menuitem"
                                                                                     tabIndex={0}
                                                                                   >
-                                                                                    My profile
+                                                                                    <Link
+                                                                                      className="makeStyles-titleLink-4"
+                                                                                      key=".0"
+                                                                                      to="/myprofile"
+                                                                                    >
+                                                                                      <LinkAnchor
+                                                                                        className="makeStyles-titleLink-4"
+                                                                                        href="/myprofile"
+                                                                                        navigate={[Function]}
+                                                                                      >
+                                                                                        <a
+                                                                                          className="makeStyles-titleLink-4"
+                                                                                          href="/myprofile"
+                                                                                          onClick={[Function]}
+                                                                                        >
+                                                                                          My profile
+                                                                                        </a>
+                                                                                      </LinkAnchor>
+                                                                                    </Link>
                                                                                     <NoSsr>
                                                                                       <WithStyles(undefined)
                                                                                         center={false}
