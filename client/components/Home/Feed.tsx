@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Paper, Typography } from "@material-ui/core";
 
 import Rating from "@material-ui/lab/Rating";
-import { useFeedStyles } from "./styles";
+import { useFeedStyles } from "./Home.styles";
 
 const mock = [
   {

@@ -8,11 +8,11 @@ import { useLocation, useHistory } from "react-router-dom";
 import { Button, Paper, Select, MenuItem, InputLabel } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 
-import FiltersSelect from "./Filters.select";
+import FiltersSelect from "./FiltersSelect";
 
 import useDebounce from "../../hooks/useDebounce";
 
-import { useFiltersStyles } from "./styles";
+import { useFiltersStyles } from "./Layout.styles";
 
 interface Props {
   searchQuery: string;

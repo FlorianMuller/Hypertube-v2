@@ -7,7 +7,7 @@ import { useIntl } from "react-intl";
 import { Button, Typography, Chip, Paper } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 
-import { useFilmStyles } from "./styles";
+import { useFilmStyles } from "./Home.styles";
 
 const film = {
   title: "fee",

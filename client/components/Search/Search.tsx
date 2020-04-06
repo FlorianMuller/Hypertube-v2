@@ -10,9 +10,9 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 
 import useApi from "../../hooks/useApi";
-import { formatQueryUrl } from "./service";
+import { formatQueryUrl } from "./Search.service";
 import { Movie, ApiSearchReponse } from "../../models/models";
-import useSearchStyles from "./styles";
+import useSearchStyles from "./Search.styles";
 
 import MovieThumbnail from "./MovieThumbnail";
 

@@ -1,5 +1,5 @@
 import mongoose from "../mongo";
-import MovieCommentModel from "../Schemas/Movie";
+import MovieCommentModel from "../Schemas/MovieComment";
 import movieHelpers from "../Helpers/movie";
 
 describe("Movie Comments", () => {

@@ -9,7 +9,7 @@ import { ClickAwayListener, Box } from "@material-ui/core";
 import Header from "./Header";
 import Filters from "./Filters";
 
-import { useLayoutStyles } from "./styles";
+import { useLayoutStyles } from "./Layout.styles";
 
 interface Props {
   children: ReactElement;

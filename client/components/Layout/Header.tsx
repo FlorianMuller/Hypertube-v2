@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { Search, AccountCircle } from "@material-ui/icons";
 
-import { useHeaderStyles } from "./styles";
+import { useHeaderStyles } from "./Layout.styles";
 
 interface Props {
   locale: string;

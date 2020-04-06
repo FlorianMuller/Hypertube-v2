@@ -5,7 +5,7 @@ import { Button, Chip, Typography, Card } from "@material-ui/core";
 import Image from "material-ui-image";
 import StarIcon from "@material-ui/icons/Star";
 
-import useSearchStyles from "./styles";
+import useSearchStyles from "./Search.styles";
 import { Movie } from "../../models/models";
 
 interface Props {

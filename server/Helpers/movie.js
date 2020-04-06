@@ -1,4 +1,4 @@
-import MovieCommentModel from "../Schemas/Movie";
+import MovieCommentModel from "../Schemas/MovieComment";
 
 const timestampToDate = (month, day, year) => {
   return `${month}, ${day}, ${year}`;

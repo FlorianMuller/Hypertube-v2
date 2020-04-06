@@ -4,11 +4,11 @@ import EnzymeToJson from "enzyme-to-json";
 import { configure } from "enzyme";
 import { History, Location, LocationState } from "history";
 
-import Search from "../components/Search";
+import Search from "../components/Search/Search";
 
 import { mountWithIntl } from "./helpers/intl-enzyme-test-helper";
 
-import * as ServiceSearch from "../components/Search/service";
+import * as ServiceSearch from "../components/Search/Search.service";
 import { UseApiReturn, ApiSearchReponse } from "../models/models";
 
 configure({ adapter: new Adapter() });
