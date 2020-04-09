@@ -45,10 +45,8 @@ const Header = ({
     setProfileMenuAnchor(undefined);
   };
 
-  const logOut = (): void => {
-    console.log("logout");
-
-    API.post(`/logout`).catch((e) => {
+  const logOut = async (): Promise<void> => {
+    await API.put(`/users/logout`).catch((e) => {
       console.error(e);
     });
     history.push("/");
@@ -107,12 +105,15 @@ const Header = ({
               open={!!profileMenuAnchor}
               onClose={(): void => setProfileMenuAnchor(undefined)}
             >
-              <MenuItem onClick={onMenuProfile}>
-                <Link className={classes.titleLink} to="/myprofile">
-                  {_t({ id: "profile" })}
-                </Link>
+              <Link className={classes.titleLink} to="/myprofile">
+                <MenuItem onClick={onMenuProfile}>
+                  {_t({ id: "header.profile" })}
+                </MenuItem>
+              </Link>
+
+              <MenuItem onClick={logOut}>
+                {_t({ id: "header.disconnect" })}
               </MenuItem>
-              <MenuItem onClick={logOut}>{_t({ id: "disconnect" })}</MenuItem>
             </Menu>
           </div>
         </div>
