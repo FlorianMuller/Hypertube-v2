@@ -11,13 +11,13 @@ import useStyles from "./Profile.styles";
 interface UrlParam {
   username: string;
 }
-interface Comment {
-  movieName: string;
-  date: number;
-  name: string;
-  body: string;
-  stars: number;
-  _id: number;
+
+interface User {
+  username: string;
+  firstName: string;
+  email: string;
+  lastName: string;
+  picture: string;
 }
 
 const Profile = ({
@@ -25,26 +25,28 @@ const Profile = ({
     params: { username }
   }
 }: RouteComponentProps<UrlParam>): ReactElement => {
-  const { resData: data, loading, error } = useApi(`/user/${username}`, {
-    hotReload: true
-  });
+  const { resData: data, loading, error } = useApi<User, void>(
+    `/user/${username}`,
+    {
+      hotReload: true
+    }
+  );
   const classes = useStyles({});
-  // const timestampToString = (date: string) => {
-  //   const date = new Date(date);
-  //   const hours = date.getHours();
-  // };
+
   if (loading) {
     return <Loading />;
   }
+
   if (error) {
     return <Error />;
   }
+
   return (
     <div className={classes.containerProfile}>
       <Paper className={classes.containerUser}>
         <div className={classes.containerPicture}>
           <Avatar
-            alt="Test"
+            alt="Profile picture"
             src={`${window.location.origin}/api/data/avatar/${data?.picture}`}
             className={classes.large}
           />
@@ -55,7 +57,6 @@ const Profile = ({
           </h1>
           <p>{data.username}</p>
         </div>
-        <Paper elevation={3} />
       </Paper>
       <ShowComments username={username} />
     </div>

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   containerHistory: {
     flexGrow: 1,
-    margin: `0px ${theme.spacing(1)}`,
+    margin: theme.spacing(0, 1),
     overflow: "auto",
     maxWidth: "600px",
     maxHeight: "85vh",
@@ -28,20 +28,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: "8px",
     display: "inline-block",
     maxWidth: "400px",
-    padding: `${theme.spacing(3)}px`
+    padding: theme.spacing(3)
   },
   containerPicture: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
+  },
+  containerPictureProfile: {
     cursor: "pointer",
-    zIndex: 100,
+    display: "flex",
+    justifyContent: "center",
+
     "&:hover": {
       filter: "brightness(80%)",
-      changePhoto: {
-        display: "none",
-        border: "2px solid red",
-        cursor: "pointer"
-      }
+      cursor: "pointer"
     }
   },
   containerInfo: {
@@ -69,18 +69,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "100%",
     maxWidth: "250px",
     justifyContent: "center",
-    overflow: "hidden",
-    gap: "70%"
+    overflow: "hidden"
   },
   commentDate: {
     marginTop: theme.spacing(0.5),
     color: "grey"
-  },
-  root: {
-    display: "flex",
-    "& > *": {
-      margin: theme.spacing(1)
-    }
   },
   small: {
     width: theme.spacing(3),
@@ -93,10 +86,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   changePhoto: {
     position: "absolute",
     top: "60px",
-    left: "60px"
+    left: "60px",
+    fontSize: 150,
+    cursor: "pointer"
   },
   textComment: {
     wordBreak: "break-all"
+  },
+  photoIcon: {},
+  username: {
+    fontStyle: "italic"
   }
 }));
 export default useStyles;

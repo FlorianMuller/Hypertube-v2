@@ -15,8 +15,7 @@ interface ApiResponse {
 
 export const sendPictureData = (picture: File): AxiosPromise<ApiResponse> => {
   const data = new FormData();
-  console.log("AGNEUGEGEGE", picture);
-  data.append("image", picture, picture.name);
+  data.append("image", picture);
   return API({
     method: "post",
     url: "/change-picture",
@@ -27,13 +26,7 @@ export const sendPictureData = (picture: File): AxiosPromise<ApiResponse> => {
 
 const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
   if (e.target.type === "file") {
-    sendPictureData(e.target.files[0])
-      .then(() => {
-        console.log("file sent");
-      })
-      .catch(({ response: { data } }) => {
-        console.log("could not send file", data);
-      });
+    sendPictureData(e.target.files[0]);
   }
 };
 
@@ -45,29 +38,23 @@ const EditableAvatar = ({ picture }: Props): ReactElement => {
     <div
       onMouseEnter={(): void => setMouseIn(true)}
       onMouseLeave={(): void => setMouseIn(false)}
-      className={classes.containerPicture}
+      className={classes.containerPictureProfile}
     >
       <label htmlFor="raised-button-file">
         <input
           accept="image/*"
           style={{ display: "none" }}
           id="raised-button-file"
-          multiple
           type="file"
           name="picture"
           onChange={handleInputChange}
         />
         <Avatar
-          alt="Test"
+          alt="user-pic"
           src={`${window.location.origin}/api/data/avatar/${picture}`}
           className={classes.large}
         />
-        {mouseIn ? (
-          <AddAPhotoIcon
-            style={{ fontSize: 150 }}
-            className={classes.changePhoto}
-          />
-        ) : null}
+        {mouseIn && <AddAPhotoIcon className={classes.changePhoto} />}
       </label>
     </div>
   );

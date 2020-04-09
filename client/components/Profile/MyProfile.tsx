@@ -4,25 +4,13 @@ import Paper from "@material-ui/core/Paper";
 
 import Button from "@material-ui/core/Button";
 
-import API from "../../util/api";
+import { useIntl } from "react-intl";
 import useApi from "../../hooks/useApi";
 import useStyles from "./Profile.styles";
 import ShowComments from "./ShowComments";
 import OnClickInput from "./OnClickInput";
 import Password from "./Password";
 import EditableAvatar from "./EditableAvatar";
-
-interface UrlParam {
-  username: string;
-}
-interface Comment {
-  movieName: string;
-  date: number;
-  name: string;
-  body: string;
-  stars: number;
-  _id: number;
-}
 
 interface User {
   username: string;
@@ -33,20 +21,19 @@ interface User {
 }
 
 const MyProfile = (): ReactElement => {
-  const { resData: data } = useApi<User, void>(`/user/`, { hotReload: true });
-  const { username } = data || {};
+  const { resData: data } = useApi<User, void>(`/user`, { hotReload: true });
+  const username = data?.username;
   const classes = useStyles({});
   const [changingPassword, setChangingPassword] = useState(false);
+  const { callApi } = useApi<User, void>("/edit-profile", { method: "put" });
+  const { locale, formatMessage: _t } = useIntl();
 
   const updateInfo = (value: string, name: string): void => {
     if (value && name) {
-      API.put("/edit-profile", { [name]: value })
-        // .then(() => {
-        //   console.log("");
-        // })
-        .catch((e) => {
-          console.error(e);
-        });
+      // API.put("/edit-profile", { [name]: value }).catch((e) => {
+      //   console.error(e);
+      // });
+      callApi({ [name]: value });
     }
   };
   return (
@@ -59,7 +46,7 @@ const MyProfile = (): ReactElement => {
               <OnClickInput
                 autocomplete="given-name"
                 startValue={data?.firstName}
-                label="First name"
+                label={_t({ id: "profile.myprofile.label.firstName" })}
                 name="firstName"
                 updateInfo={updateInfo}
               />
@@ -69,7 +56,7 @@ const MyProfile = (): ReactElement => {
                 autocomplete="family-name"
                 updateInfo={updateInfo}
                 startValue={data?.lastName}
-                label="Last name"
+                label={_t({ id: "profile.myprofile.label.familyName" })}
                 name="lastName"
               />
             </h1>
@@ -79,10 +66,10 @@ const MyProfile = (): ReactElement => {
             autocomplete="email"
             updateInfo={updateInfo}
             startValue={data?.email}
-            label="Email"
+            label={_t({ id: "profile.myprofile.label.email" })}
             name="email"
           />
-          <p>{data?.username}</p>
+          <p className={classes.username}>@{data?.username}</p>
           <Button
             onClick={(): void => {
               setChangingPassword((val) => {
@@ -90,7 +77,7 @@ const MyProfile = (): ReactElement => {
               });
             }}
           >
-            Change Password
+            {_t({ id: "profile.myprofile.changePassword" })}
           </Button>
           {changingPassword && <Password />}
         </div>

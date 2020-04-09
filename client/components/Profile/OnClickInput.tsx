@@ -8,7 +8,6 @@ interface Props {
   startValue: string;
   label: string;
   name: string;
-  // onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   updateInfo: (newInfo: string, label: string) => void;
 }
 
@@ -26,6 +25,7 @@ const OnClickInput = ({
   const changeEditMode = (): void => {
     setEditMode((oldEditMode) => !oldEditMode);
   };
+
   useEffect(() => {
     if (editMode) {
       inputEl.current.focus();
@@ -51,16 +51,13 @@ const OnClickInput = ({
             updateInfo(value, name);
           }}
         />
-        <IconButton
-          color="primary"
-          aria-label="upload picture"
-          component="span"
-        >
+        <IconButton color="primary" aria-label="edit" component="span">
           <SaveAlt />
         </IconButton>
       </div>
     );
   };
+
   const renderDefaultView = (): ReactElement => {
     return (
       <div
@@ -73,6 +70,7 @@ const OnClickInput = ({
       </div>
     );
   };
+
   return editMode ? renderEditView() : renderDefaultView();
 };
 

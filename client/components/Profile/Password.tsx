@@ -3,9 +3,18 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useIntl } from "react-intl";
 import API from "../../util/api";
+import useApi from "../../hooks/useApi";
 import useProfileStyles from "./Profile.styles";
 import useStyles from "./Password.styles";
 import { validatePassword } from "../Authentication/SignUp.service";
+
+interface User {
+  username: string;
+  firstName: string;
+  email: string;
+  lastName: string;
+  picture: string;
+}
 
 const Password = (): ReactElement => {
   const { formatMessage: _t } = useIntl();
@@ -17,7 +26,10 @@ const Password = (): ReactElement => {
   const [oldPasswordError, setOldPasswordError] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
   const [confirmedPasswordError, setConfirmedPasswordError] = useState("");
-  const [status, setStatus] = useState();
+  const [status, setStatus] = useState<number>();
+  const { callApi } = useApi<User, void>("/change-password", {
+    method: "put"
+  });
 
   const checkPassword = (): void => {
     // Checking required field
@@ -51,20 +63,23 @@ const Password = (): ReactElement => {
       newNewPasswordError === "" &&
       newConfirmedPasswordError === ""
     ) {
-      API.put("/change-password/", { newPassword, oldPassword })
-        .then(() => {
-          setStatus(200);
-        })
-        .catch((e) => {
-          console.error(e);
-          setStatus(e.response.status);
-        });
+      // API.put("/change-password/", { newPassword, oldPassword })
+      //   .then(() => {
+      //     setStatus(200);
+      //   })
+      //   .catch((e) => {
+      //     console.error(e);
+      //     setStatus(e.response.status);
+      //   });
+      callApi({ newPassword, oldPassword });
     }
   };
 
   return (
     <div className={profileClasses.containerInfo}>
+      {/* <form onSubmit={checkPassword}> */}
       <TextField
+        inputProps={{ maxLength: 1028 }}
         autoComplete="current-password"
         className={classes.input}
         onChange={(e): void => setOldPassword(e.target.value)}
@@ -76,6 +91,7 @@ const Password = (): ReactElement => {
         type="password"
       />
       <TextField
+        inputProps={{ maxLength: 1028 }}
         autoComplete="new-password"
         className={classes.input}
         onChange={(e): void => setNewPassword(e.target.value)}
@@ -87,6 +103,7 @@ const Password = (): ReactElement => {
         type="password"
       />
       <TextField
+        inputProps={{ maxLength: 1028 }}
         autoComplete="new-password"
         className={classes.input}
         onChange={(e): void => setConfirmedPassword(e.target.value)}
@@ -101,17 +118,22 @@ const Password = (): ReactElement => {
         }
         type="password"
       />
-      {status === 401 ? (
+      {status === 401 && (
         <p className={classes.badMessage}>
           {_t({ id: "profile.myprofile.password.error.not_matching_old" })}
         </p>
-      ) : null}
-      {status === 200 ? (
+      )}
+      {status === 200 && (
         <p className={classes.goodMessage}>
           {_t({ id: "profile.myprofile.password.changed" })}
         </p>
-      ) : null}
-      <Button onClick={checkPassword}>Ok</Button>
+      )}
+      <Button onClick={checkPassword}>
+        {_t({
+          id: "profile.myprofile.password.validate"
+        })}
+      </Button>
+      {/* </form> */}
     </div>
   );
 };
