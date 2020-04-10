@@ -32,7 +32,7 @@ export const searchMoviesOnYts = async ({
   }
 
   const parsedMovies = data.data.movies.map((movie) => ({
-    id: movie.id,
+    id: movie.imdb_code || movie.id,
     title: movie.title_english,
     cover: YTS_BASE_URL + movie.large_cover_image,
     year: movie.year,
