@@ -17,14 +17,19 @@ router.get("/check-token", (req, res) => {
 router.post("/inscription", signUpController.signUp);
 
 /* Movie */
-router.get("/movie/infos/:id", movieControllers.getInfos);
-router.get("/movie/download/:id", movieControllers.startDlVideo);
-router.get("/movie/streaming/:directory/:id", (req, res) => {
-  const fileName = req.params.id;
+router.use("/movie", express.static("./server/data/movie"));
+router.get("/movie/infos/:imdbId", movieControllers.getInfos);
+router.get("/movie/play/:imdbId", movieControllers.PlayMovie);
+router.get("/movie/subtitles/:imdbId", movieControllers.getSubtitles);
+router.use("/subtitles", express.static("./server/data/subtitles"));
+router.get("/movie/streaming/:directory/:fileName", (req, res) => {
+  const { fileName } = req.params;
   const { directory } = req.params;
   const dest = `./server/data/movie/${directory}/${fileName}`;
-  const absolutePath = path.resolve(dest);
-  res.status(200).sendFile(absolutePath);
+
+  // console.log(req.params.path)
+  console.log(dest);
+  res.status(200).send(dest);
 });
 router.post("/movie/review", movieControllers.receiveReviews);
 

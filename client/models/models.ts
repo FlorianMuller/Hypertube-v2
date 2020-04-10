@@ -24,6 +24,7 @@ export interface MovieInfos {
   prodDate: string;
   imdbRating: number;
   poster: string;
+  imdbid: string;
 }
 
 export interface Reviews {

@@ -4,10 +4,14 @@ const useStyles = makeStyles(() => ({
   containerPlayer: {
     marginTop: "5rem",
     display: "flex",
-    justifyContent: "center",
+    width: "70%",
+    height: "auto",
+    overflow: "hidden"
+  },
+  player: {
     width: "100%",
-    maxHeight: "50%",
-    minHeight: "50%"
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   playerBroken: {
     display: "flex",
