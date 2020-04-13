@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import { Location } from "history";
 import { useIntl } from "react-intl";
 
 import GradientButton from "../Buttons/GradientButton";
@@ -37,7 +38,7 @@ const SignIn = (): ReactElement => {
   const { formatMessage: _t } = useIntl();
   const classes = useStyle({});
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<{ from?: Location<{}> }>();
   const [authInfo, setAuthInfo] = useState<AuthInfo>({
     username: "",
     password: ""
@@ -99,7 +100,7 @@ const SignIn = (): ReactElement => {
    */
   useEffect(() => {
     if (res) {
-      history.replace(location.state?.from || "/");
+      history.replace(location.state?.from || { pathname: "/" });
     }
   }, [res]);
 

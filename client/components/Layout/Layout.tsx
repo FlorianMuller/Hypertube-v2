@@ -1,4 +1,7 @@
 import React, { useState, ReactElement } from "react";
+import qs from "qs";
+import { useLocation } from "react-router-dom";
+
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
 import { ClickAwayListener, Box } from "@material-ui/core";
@@ -6,9 +9,7 @@ import { ClickAwayListener, Box } from "@material-ui/core";
 import Header from "./Header";
 import Filters from "./Filters";
 
-import { ClickAwayEventTarget } from "../../models/models";
-
-import { useLayoutStyles } from "./styles";
+import { useLayoutStyles } from "./Layout.styles";
 
 interface Props {
   children: ReactElement;
@@ -48,13 +49,21 @@ export const theme = createMuiTheme({
 
 const Layout = ({ children, locale, setLocale }: Props): ReactElement => {
   const classes = useLayoutStyles({});
+  const location = useLocation();
   const [expandedFilters, setExpandedFilters] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(
+    qs.parse(location.search.slice(1)).query || ""
+  );
 
-  const onClickAway = (e: ClickAwayEventTarget): void => {
-    const id = String(e.target?.id);
+  const handleClickAway = (e: React.MouseEvent<EventTarget>): void => {
+    const target = e.target as HTMLElement;
+    const { id } = target;
 
-    if (!id.includes("menuitem") && !id.includes("body")) {
+    if (
+      !id.includes("menuitem") &&
+      !target.children.namedItem("menuitem-search") && // Check if it's search input's wrapper
+      !id.includes("body")
+    ) {
       setExpandedFilters(false);
     }
   };
@@ -66,21 +75,23 @@ const Layout = ({ children, locale, setLocale }: Props): ReactElement => {
         <Header
           locale={locale}
           setLocale={setLocale}
-          onSearchChange={(query): void => setSearchQuery(query)}
-          onExpand={(): void => setExpandedFilters(true)}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          onExpandFilters={(): void => setExpandedFilters(true)}
         />
         <Box className={classes.contentContainer}>
-          {expandedFilters && (
-            <ClickAwayListener
-              onClickAway={(e): void =>
-                onClickAway((e as unknown) as ClickAwayEventTarget)
-              }
+          <ClickAwayListener onClickAway={handleClickAway}>
+            <Box
+              className={classes.filtersContainer}
+              style={expandedFilters ? {} : { display: "none" }}
             >
-              <Box className={classes.filtersContainer}>
-                <Filters searchQuery={searchQuery} />
-              </Box>
-            </ClickAwayListener>
-          )}
+              <Filters
+                searchQuery={searchQuery}
+                onReset={(): void => setSearchQuery("")}
+              />
+            </Box>
+          </ClickAwayListener>
+
           <Box>{children}</Box>
         </Box>
       </div>
