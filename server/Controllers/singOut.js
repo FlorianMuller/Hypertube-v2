@@ -6,7 +6,7 @@ const singOutController = async (_req, res) => {
     res.sendStatus(200);
   } catch (e) {
     console.log(e);
-    res.sendStatus(400);
+    res.sendStatus(500);
   }
 };
 

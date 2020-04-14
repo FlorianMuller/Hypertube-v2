@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 // todo: reduce this time and implement refresh token
 const ACCES_TOKEN_EXPIRATION = 86400; // 24h in secondes
 
-// const accestTokenName = "accesToken";
-const accesTokenOption = {
+export const accestTokenName = "accesToken";
+export const accesTokenOption = {
   httpOnly: true
   // todo: add `secure: true` to only send token in https
   // secure: true,
@@ -19,10 +19,8 @@ export const createAccestToken = (userId) => {
 export const setAccesTokenCookie = (res, userId) => {
   const accesToken = createAccestToken(userId);
 
-  res.cookie("accesToken", accesToken, {
+  res.cookie(accestTokenName, accesToken, {
     ...accesTokenOption,
-    // todo: add `secure: true` to only send token in https
-    // secure: true,
     maxAge: ACCES_TOKEN_EXPIRATION * 1000
   });
 };

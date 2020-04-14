@@ -46,9 +46,11 @@ const Header = ({
   };
 
   const logOut = async (): Promise<void> => {
-    await API.put(`/users/logout`).catch((e) => {
-      console.error(e);
-    });
+    try {
+      await API.put(`/users/logout`);
+    } catch (e) {
+      return;
+    }
     history.push("/");
     onMenuProfile();
   };
@@ -87,10 +89,10 @@ const Header = ({
               onClose={(): void => setLocaleAnchor(undefined)}
             >
               <MenuItem onClick={(): void => setNewLocale("fr")}>
-                {_t({ id: "language.fr" })}
+                {_t({ id: "header.language.fr" })}
               </MenuItem>
               <MenuItem onClick={(): void => setNewLocale("en")}>
-                {_t({ id: "language.en" })}
+                {_t({ id: "header.language.en" })}
               </MenuItem>
             </Menu>
             <IconButton

@@ -1,8 +1,8 @@
 {
   "title": "Hypertube",
-  "search": "Search...",
-  "language.fr": "🇫🇷",
-  "language.en": "🇬🇧",
+  "header.search": "Search...",
+  "header.language.fr": "🇫🇷",
+  "header.language.en": "🇬🇧",
   "header.profile": "My profile",
   "header.disconnect": "Disconnect",
   "justError": " ",
