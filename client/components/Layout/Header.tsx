@@ -79,7 +79,7 @@ const Header = ({
               onClick={(e): void => setLocaleAnchor(e.currentTarget)}
             >
               <span className={classes.flagIcon}>
-                {_t({ id: `language.${locale}` })}
+                {_t({ id: `header.language.${locale}` })}
               </span>
             </IconButton>
             <Menu
