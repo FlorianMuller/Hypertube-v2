@@ -46,11 +46,7 @@ const Header = ({
   };
 
   const logOut = async (): Promise<void> => {
-    try {
-      await API.put(`/users/logout`);
-    } catch (e) {
-      return;
-    }
+    await API.put(`/users/logout`);
     history.push("/");
     onMenuProfile();
   };

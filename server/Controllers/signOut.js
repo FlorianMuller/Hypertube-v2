@@ -1,6 +1,6 @@
 import deleteAccessTokenCookie from "../Helpers/signOut";
 
-const singOutController = async (_req, res) => {
+const signOutController = async (_req, res) => {
   try {
     deleteAccessTokenCookie(res);
     res.sendStatus(200);
@@ -10,4 +10,4 @@ const singOutController = async (_req, res) => {
   }
 };
 
-export default singOutController;
+export default signOutController;

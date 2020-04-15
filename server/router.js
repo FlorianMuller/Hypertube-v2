@@ -5,7 +5,7 @@ import SignInControllers from "./Controllers/signIn";
 import movieController from "./Controllers/movie";
 import searchController from "./Controllers/search";
 import checkAuth from "./Helpers/auth";
-import singOutController from "./Controllers/singOut";
+import signOutController from "./Controllers/signOut";
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.post("/users/login", SignInControllers);
 router.get("/check-auth", checkAuth, (req, res) => {
   res.status(200).json({ validToken: true });
 });
-router.put("/users/logout", singOutController);
+router.put("/users/logout", signOutController);
 
 /* Search */
 router.get("/search", checkAuth, searchController.search);
