@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 
 import Typography from "@material-ui/core/Typography";
 
-import useErrorStyles from "./styles";
+import useErrorStyles from "./Error.styles";
 
 const Error = (): ReactElement => {
   const classes = useErrorStyles({});

@@ -29,7 +29,7 @@ router.get("/check-auth", checkAuth, (req, res) => {
 router.put("/users/logout", signOutController);
 
 /* Search */
-router.get("/search", checkAuth, searchController.search);
+router.get("/movies", checkAuth, searchController.searchMovies);
 
 /* Movie */
 router.get("/movies/:id", checkAuth, movieController.getInfos);

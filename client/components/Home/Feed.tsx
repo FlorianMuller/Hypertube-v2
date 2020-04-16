@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { Paper, Typography } from "@material-ui/core";
 
 import Rating from "@material-ui/lab/Rating";
-import { useFeedStyles } from "./styles";
-
-import { clamp } from "../Search/service";
+import { useFeedStyles } from "./Home.styles";
 
 const mock = [
   {
@@ -82,7 +80,7 @@ const Feed = (): ReactElement => {
               <Rating value={recentFeed.rating} readOnly />
             </div>
             <Typography variant="caption">
-              {clamp(recentFeed.review, 400)}
+              {(recentFeed.review, 400)}
             </Typography>
           </div>
         </div>
