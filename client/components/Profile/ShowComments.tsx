@@ -3,26 +3,34 @@ import Paper from "@material-ui/core/Paper";
 
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
+import { useIntl } from "react-intl";
 import useApi from "../../hooks/useApi";
 import Loading from "../Routes/Loading";
 import useStyles from "./Profile.styles";
-
-interface Comment {
-  movieName: string;
-  date: number;
-  name: string;
-  body: string;
-  stars: number;
-  _id: number;
-}
+import { Comment } from "../../models/models";
 
 interface Props {
   username: string;
 }
 
 const ShowComment = ({ username }: Props): ReactElement => {
+  const { formatMessage: _t } = useIntl();
   const classes = useStyles({});
-  const { resData: data, setUrl } = useApi("", {
+  const monthNames = [
+    _t({ id: "profile.showcomment.month1" }),
+    _t({ id: "profile.showcomment.month2" }),
+    _t({ id: "profile.showcomment.month3" }),
+    _t({ id: "profile.showcomment.month4" }),
+    _t({ id: "profile.showcomment.month5" }),
+    _t({ id: "profile.showcomment.month6" }),
+    _t({ id: "profile.showcomment.month7" }),
+    _t({ id: "profile.showcomment.month8" }),
+    _t({ id: "profile.showcomment.month9" }),
+    _t({ id: "profile.showcomment.month10" }),
+    _t({ id: "profile.showcomment.month11" }),
+    _t({ id: "profile.showcomment.month12" })
+  ];
+  const { resData: data, setUrl } = useApi<Comment, void>("", {
     hotReload: true
   });
   useEffect(() => {
@@ -33,56 +41,38 @@ const ShowComment = ({ username }: Props): ReactElement => {
   if (!data) {
     return null;
   }
-  // if (error) {
-  //   return <Error />;
-  // }
+
   return (
     <div>
       <Paper className={classes.containerHistory}>
-        <h2 className={classes.titleHistory}>Last comments : </h2>
-        {username === undefined || data === null ? (
-          <Loading />
-        ) : (
-          data?.map((element: Comment) => {
-            const date = new Date(element.date);
-            const monthNames = [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December"
-            ];
-            return (
-              <div key={element._id} className={classes.containerComment}>
-                <div className={classes.containerMovieInfos}>
-                  <Rating
-                    style={{ marginRight: "8px" }}
-                    name="read-only"
-                    value={element.stars}
-                    readOnly
-                  />
-                  <Typography variant="subtitle1">
-                    {element.movieName}
-                  </Typography>
-                </div>
-                <Typography className={classes.commentDate} variant="caption">
-                  {date.getDate()} {monthNames[date.getMonth()]}{" "}
-                  {date.getFullYear()}
-                </Typography>
-                <Typography variant="body1" className={classes.textComment}>
-                  {element.body}
-                </Typography>
+        <h2 className={classes.titleHistory}>
+          {_t({ id: "profile.showcomment.lastComment" })}{" "}
+        </h2>
+        {data?.map((comment: Comment) => {
+          const date = new Date(comment.date);
+
+          return (
+            <div key={comment._id} className={classes.containerComment}>
+              <div className={classes.containerMovieInfos}>
+                <Rating
+                  // style={{ marginRight: "8px" }}
+                  className={classes.rating}
+                  name="read-only"
+                  value={comment.stars}
+                  readOnly
+                />
+                <Typography variant="subtitle1">{comment.movieName}</Typography>
               </div>
-            );
-          })
-        )}
+              <Typography className={classes.commentDate} variant="caption">
+                {date.getDate()} {monthNames[date.getMonth()]}{" "}
+                {date.getFullYear()}
+              </Typography>
+              <Typography variant="body1" className={classes.textComment}>
+                {comment.body}
+              </Typography>
+            </div>
+          );
+        })}
       </Paper>
     </div>
   );

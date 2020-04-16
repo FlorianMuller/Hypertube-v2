@@ -105,5 +105,20 @@
   "profile.myprofile.label.familyName": "Last name",
   "profile.myprofile.label.email": "Email address",
   "profile.myprofile.changePassword": "CHANGE PASSWORD",
-  "profile.myprofile.password.validate": "Change"
+  "profile.myprofile.password.validate": "Change",
+  "profile.showcomment.lastComment": "Last comments :",
+  "profile.showcomment.month1": "January",
+  "profile.showcomment.month2": "February",
+  "profile.showcomment.month3": "March",
+  "profile.showcomment.month4": "April",
+  "profile.showcomment.month5": "May",
+  "profile.showcomment.month6": "June",
+  "profile.showcomment.month7": "July",
+  "profile.showcomment.month8": "August",
+  "profile.showcomment.month9": "September",
+  "profile.showcomment.month10": "October",
+  "profile.showcomment.month11": "November",
+  "profile.showcomment.month12": "December"
+  
+
 }

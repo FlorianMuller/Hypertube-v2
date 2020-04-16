@@ -105,7 +105,20 @@
   "profile.myprofile.label.familyName": "Postnom",
   "profile.myprofile.label.email": "Adresse mél",
   "profile.myprofile.changePassword": "CHANGER DE MOT DE PASSE",
-  "profile.myprofile.password.validate": "Changer"
+  "profile.myprofile.password.validate": "Changer",
+  "profile.showcomment.lastComment": "Dernier commentaires :",
+  "profile.showcomment.month1": "Janvier",
+  "profile.showcomment.month2": "Février",
+  "profile.showcomment.month3": "Mars",
+  "profile.showcomment.month4": "Avril",
+  "profile.showcomment.month5": "Mai",
+  "profile.showcomment.month6": "Juin",
+  "profile.showcomment.month7": "Juillet",
+  "profile.showcomment.month8": "Aout",
+  "profile.showcomment.month9": "Septembre",
+  "profile.showcomment.month10": "Octobre",
+  "profile.showcomment.month11": "Novembre",
+  "profile.showcomment.month12": "Décembre"
   
 
 

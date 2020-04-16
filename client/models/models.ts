@@ -45,6 +45,15 @@ export interface AuthInfo {
   [key: string]: string;
 }
 
+export interface Comment {
+  movieName: string;
+  date: number;
+  name: string;
+  body: string;
+  stars: number;
+  _id: number;
+}
+
 export interface Review {
   id: string;
   name: string;

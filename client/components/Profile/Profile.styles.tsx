@@ -96,6 +96,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   photoIcon: {},
   username: {
     fontStyle: "italic"
+  },
+  rating: {
+    marginRight: "8px"
   }
 }));
 export default useStyles;
