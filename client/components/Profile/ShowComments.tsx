@@ -5,7 +5,6 @@ import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import { useIntl } from "react-intl";
 import useApi from "../../hooks/useApi";
-import Loading from "../Routes/Loading";
 import useStyles from "./Profile.styles";
 import { Comment } from "../../models/models";
 
@@ -30,7 +29,7 @@ const ShowComment = ({ username }: Props): ReactElement => {
     _t({ id: "profile.showcomment.month11" }),
     _t({ id: "profile.showcomment.month12" })
   ];
-  const { resData: data, setUrl } = useApi<Comment, void>("", {
+  const { resData: data, setUrl } = useApi<Comment[], void>("", {
     hotReload: true
   });
   useEffect(() => {
