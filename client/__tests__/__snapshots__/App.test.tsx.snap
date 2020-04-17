@@ -60,20 +60,14 @@ exports[`App renders correctly 1`] = `
         "fourOhFour.content": "Page not found",
         "fourOhFour.link_menu": "Go back",
         "fourOhFour.title": "404",
-<<<<<<< HEAD
         "header.disconnect": "Disconnect",
         "header.language.en": "🇬🇧",
         "header.language.fr": "🇫🇷",
         "header.profile": "My profile",
         "header.search": "Search...",
-        "justError": " ",
-=======
         "header.trending_movies": "Trending Movies",
         "justError": " ",
-        "language.en": "🇬🇧",
-        "language.fr": "🇫🇷",
         "layout.filters.all": "All",
->>>>>>> develop
         "layout.filters.collection": "Collection",
         "layout.filters.production_year": "Production year",
         "layout.filters.search": "Search a film, an author...",
@@ -1153,7 +1147,7 @@ exports[`App renders correctly 1`] = `
                                                           tabindex="-1"
                                                         >
                                                           <a
-                                                            class="makeStyles-titleLink-4"
+                                                            class="makeStyles-titleLink-5"
                                                             href="/myprofile"
                                                             tabindex="0"
                                                           >
@@ -1946,7 +1940,7 @@ exports[`App renders correctly 1`] = `
                                                           tabindex="-1"
                                                         >
                                                           <a
-                                                            class="makeStyles-titleLink-4"
+                                                            class="makeStyles-titleLink-5"
                                                             href="/myprofile"
                                                             tabindex="0"
                                                           >
@@ -2155,19 +2149,19 @@ exports[`App renders correctly 1`] = `
                                                                       tabIndex={-1}
                                                                     >
                                                                       <Link
-                                                                        className="makeStyles-titleLink-4"
+                                                                        className="makeStyles-titleLink-5"
                                                                         key=".$.0"
                                                                         tabIndex={0}
                                                                         to="/myprofile"
                                                                       >
                                                                         <LinkAnchor
-                                                                          className="makeStyles-titleLink-4"
+                                                                          className="makeStyles-titleLink-5"
                                                                           href="/myprofile"
                                                                           navigate={[Function]}
                                                                           tabIndex={0}
                                                                         >
                                                                           <a
-                                                                            className="makeStyles-titleLink-4"
+                                                                            className="makeStyles-titleLink-5"
                                                                             href="/myprofile"
                                                                             onClick={[Function]}
                                                                             tabIndex={0}
@@ -6788,17 +6782,23 @@ exports[`App renders correctly 1`] = `
                                                                     role="menu"
                                                                     tabindex="-1"
                                                                   >
-                                                                    <li
-                                                                      aria-disabled="false"
-                                                                      class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
-                                                                      role="menuitem"
+                                                                    <a
+                                                                      class="makeStyles-titleLink-5"
+                                                                      href="/myprofile"
                                                                       tabindex="0"
                                                                     >
-                                                                      My profile
-                                                                      <span
-                                                                        class="MuiTouchRipple-root"
-                                                                      />
-                                                                    </li>
+                                                                      <li
+                                                                        aria-disabled="false"
+                                                                        class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+                                                                        role="menuitem"
+                                                                        tabindex="-1"
+                                                                      >
+                                                                        My profile
+                                                                        <span
+                                                                          class="MuiTouchRipple-root"
+                                                                        />
+                                                                      </li>
+                                                                    </a>
                                                                     <li
                                                                       aria-disabled="false"
                                                                       class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
@@ -8197,17 +8197,23 @@ exports[`App renders correctly 1`] = `
                                                                       role="menu"
                                                                       tabindex="-1"
                                                                     >
-                                                                      <li
-                                                                        aria-disabled="false"
-                                                                        class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
-                                                                        role="menuitem"
+                                                                      <a
+                                                                        class="makeStyles-titleLink-5"
+                                                                        href="/myprofile"
                                                                         tabindex="0"
                                                                       >
-                                                                        My profile
-                                                                        <span
-                                                                          class="MuiTouchRipple-root"
-                                                                        />
-                                                                      </li>
+                                                                        <li
+                                                                          aria-disabled="false"
+                                                                          class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
+                                                                          role="menuitem"
+                                                                          tabindex="-1"
+                                                                        >
+                                                                          My profile
+                                                                          <span
+                                                                            class="MuiTouchRipple-root"
+                                                                          />
+                                                                        </li>
+                                                                      </a>
                                                                       <li
                                                                         aria-disabled="false"
                                                                         class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button"
