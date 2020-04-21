@@ -1,5 +1,6 @@
 import mongoose from "../mongo";
-import MovieModel from "../Schemas/Movie";
+import MovieCommentModel from "../Schemas/MovieComment";
+import UserHistoryModel from "../Schemas/UserHistory";
 import movieHelpers from "../Helpers/movie";
 
 describe("Movie Comments", () => {
@@ -46,11 +47,11 @@ describe("Movie Comments", () => {
   });
 
   afterAll(async () => {
-    await MovieModel.MovieCommentModel.deleteOne({ _id: mockedUserId });
-    await MovieModel.MovieCommentModel.deleteOne({ _id: mockedUserId2 });
-    await MovieModel.MovieCommentModel.deleteOne({ _id: mockedUserId3 });
-    await MovieModel.MovieCommentModel.deleteOne({ _id: mockedUserId4 });
-    await MovieModel.UserHistoryModel.deleteOne({ _id: mockedUserId });
+    await MovieCommentModel.deleteOne({ _id: mockedUserId });
+    await MovieCommentModel.deleteOne({ _id: mockedUserId2 });
+    await MovieCommentModel.deleteOne({ _id: mockedUserId3 });
+    await MovieCommentModel.deleteOne({ _id: mockedUserId4 });
+    await UserHistoryModel.deleteOne({ _id: mockedUserId });
   });
 
   it("shouldn't inserts user's review when less stars than allowed", async () => {
@@ -81,7 +82,7 @@ describe("Movie Comments", () => {
 
   it("should inserts user's review", async () => {
     await movieHelpers.saveReview(mockedReview);
-    const reviewDb = await MovieModel.MovieCommentModel.findById(mockedUserId);
+    const reviewDb = await MovieCommentModel.findById(mockedUserId);
     expect(reviewDb.toJSON()).toEqual(finalReview);
   });
 
@@ -150,9 +151,7 @@ describe("Movie Comments", () => {
 
   it("should logs user's history", async () => {
     await movieHelpers.logHistory(mockedHistory);
-    const userHistory = await MovieModel.UserHistoryModel.findById(
-      mockedUserId
-    );
+    const userHistory = await UserHistoryModel.findById(mockedUserId);
     expect(userHistory.toJSON()).toEqual(finalHistory);
   });
 });

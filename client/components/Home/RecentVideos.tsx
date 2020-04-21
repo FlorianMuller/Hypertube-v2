@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { Paper, Typography } from "@material-ui/core";
 
-import { useRecentMoviesStyle } from "./styles";
+import { useRecentMoviesStyle } from "./Home.styles";
 
 const mock = [
   {

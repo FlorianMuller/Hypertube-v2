@@ -1,14 +1,16 @@
 import "./dotenv.config";
 import express from "express";
 import morgan from "morgan";
+import bodyParser from "body-parser";
 import path from "path";
 import favicon from "serve-favicon";
+import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
-import bodyParser from "body-parser";
 
 import router from "./router";
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
@@ -23,11 +25,12 @@ app.use(favicon(path.join(__dirname, "views", "favicon.ico")));
 app.use("/public", express.static("public"));
 app.use(morgan("dev"));
 app.use(fileUpload());
-
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 /* Webpack Hot Reload */
+
 const webpack = require("webpack");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const webpackConfig = require("../webpack.config.js");
@@ -66,8 +69,8 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(8080, () => {
-  console.log("Server running on 8080");
+http.listen(port, () => {
+  console.log(`Server running on ${port}`);
 });
 
 export default { ioConnection };

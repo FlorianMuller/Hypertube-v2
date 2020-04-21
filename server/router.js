@@ -1,42 +1,50 @@
 import express from "express";
-import path from "path";
 
 import signUpController from "./Controllers/signUp";
+import SignInControllers from "./Controllers/signIn";
 import searchController from "./Controllers/search";
-import movieControllers from "./Controllers/movie";
+import movieController from "./Controllers/movie";
+import checkAuth from "./Helpers/auth";
 
 const router = express.Router();
 
-router.get("/search", searchController.search);
+/* Static files */
+router.use("/avatar", checkAuth, express.static("./server/data/avatar"));
 
-router.get("/check-token", (req, res) => {
-  res.status(200).send({ validToken: true });
+/* User */
+// create a new user
+router.post("/users", signUpController.signUp);
+router.put(
+  "/users/:id/send-validation-email",
+  signUpController.resendValidationEmail
+);
+router.put("/tokens/:value/verify-email", signUpController.verifyEmail);
+
+/* Auth */
+router.post("/users/login", SignInControllers);
+router.get("/check-auth", checkAuth, (req, res) => {
+  res.status(200).json({ validToken: true });
 });
 
-/* Sign Up */
-router.post("/inscription", signUpController.signUp);
+/* Search */
+router.get("/movies", checkAuth, searchController.searchMovies);
 
 /* Movie */
-router.use("/movie", express.static("./server/data/movie"));
-router.get("/movie/infos/:imdbId", movieControllers.getInfos);
-router.get("/movie/play/:imdbId", movieControllers.PlayMovie);
-router.get("/movie/subtitles/:imdbId", movieControllers.getSubtitles);
-router.use("/subtitles", express.static("./server/data/subtitles"));
-router.get("/movie/streaming/:directory/:fileName", (req, res) => {
+router.use("/movie", checkAuth, express.static("./server/data/movie"));
+router.get("/movie/infos/:imdbId", checkAuth, movieController.getInfos);
+router.get("/movie/play/:imdbId", checkAuth, movieController.PlayMovie);
+router.get("/movie/subtitles/:imdbId", checkAuth, movieController.getSubtitles);
+router.use("/subtitles", checkAuth, express.static("./server/data/subtitles"));
+router.get("/movie/streaming/:directory/:fileName", checkAuth, (req, res) => {
   const { fileName } = req.params;
   const { directory } = req.params;
   const dest = `./server/data/movie/${directory}/${fileName}`;
 
-  // console.log(req.params.path)
   console.log(dest);
   res.status(200).send(dest);
 });
-router.post("/movie/review", movieControllers.receiveReviews);
+router.post("/movie/review", checkAuth, movieController.receiveReviews);
 
-router.get("/data/avatar/:id", (req, res) => {
-  const pictureName = req.params.id;
-  const absolutePath = path.resolve(`./server/data/avatar/${pictureName}`);
-  res.status(200).sendFile(absolutePath);
-});
+router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
 
 export default router;

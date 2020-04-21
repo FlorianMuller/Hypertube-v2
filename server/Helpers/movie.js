@@ -1,8 +1,9 @@
 import torrentStream from "torrent-stream";
 import fs from "fs";
 
-import MovieModels from "../Schemas/Movie";
 import ioConnection from "..";
+import MovieCommentModel from "../Schemas/MovieComment";
+import UserHistoryModel from "../Schemas/UserHistory";
 
 const timestampToDate = (month, day, year) => {
   return `${month}, ${day}, ${year}`;
@@ -10,7 +11,7 @@ const timestampToDate = (month, day, year) => {
 
 const findReviews = async (movieId) => {
   try {
-    const reviews = await MovieModels.MovieCommentModel.find({ movieId });
+    const reviews = await MovieCommentModel.find({ movieId });
     const ourReviews = { movieRating: 0, review: [] };
     if (reviews.length > 0) {
       let totalStars = 0;
@@ -38,12 +39,12 @@ const findReviews = async (movieId) => {
 
 const logHistory = async (history) => {
   try {
-    const userHistory = await MovieModels.UserHistoryModel.find({
+    const userHistory = await UserHistoryModel.find({
       movieName: history.movieName,
       userId: history.userId
     });
     if (userHistory.length > 0) {
-      await MovieModels.UserHistoryModel.findOneAndUpdate(
+      await UserHistoryModel.findOneAndUpdate(
         {
           movieName: history.movieName,
           userId: history.userId
@@ -52,7 +53,7 @@ const logHistory = async (history) => {
         { useFindAndModify: false }
       );
     } else {
-      await MovieModels.UserHistoryModel.create({
+      await UserHistoryModel.create({
         _id: history._id,
         userId: history.userId,
         movieId: history.movieId,
@@ -131,7 +132,7 @@ const downloadVideo = (movieId, magnet) => {
 
 const saveReview = async (comment) => {
   try {
-    await MovieModels.MovieCommentModel.create({
+    await MovieCommentModel.create({
       _id: comment._id,
       movieId: comment.movieId,
       movieName: comment.movieName,

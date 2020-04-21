@@ -4,7 +4,7 @@ import EnzymeToJson from "enzyme-to-json";
 import { mountWithIntl } from "./helpers/intl-enzyme-test-helper";
 import MovieComments from "../components/Movie/MovieComments";
 import Movie from "../components/Movie/Movie";
-import { Reviews } from "../models/models";
+import { Reviews, UseApiReturn, MovieInfos } from "../models/models";
 import checkInvalidCommentOrStars from "../components/Movie/MovieComments.service";
 
 jest.mock("../helpers/socket", () => ({
@@ -21,6 +21,45 @@ jest.mock("../hooks/useApi", () => (): {
   loading: false,
   error: null,
   setUrl: jest.fn()
+}));
+
+jest.mock("../hooks/useApi", () => (): UseApiReturn<MovieInfos, void> => ({
+  callApi: jest.fn(),
+  loading: false,
+  res: {
+    data: {
+      title: "James Bond 007",
+      description: "Voici une excelente description de ma part",
+      prodDate: "2018",
+      runTime: 200,
+      imdbRating: 4,
+      poster:
+        "https://image.shutterstock.com/image-photo/white-transparent-leaf-on-mirror-260nw-577160911.jpg",
+      imdbid: "tt4154756",
+      creator: "Lulu castagnette"
+    },
+    status: 200,
+    statusText: null,
+    headers: null,
+    config: null
+  },
+  resData: {
+    title: `"James Bond 007"`,
+    description: "Voici une excelente description de ma part",
+    prodDate: "2018",
+    runTime: 200,
+    imdbRating: 4,
+    poster:
+      "https://image.shutterstock.com/image-photo/white-transparent-leaf-on-mirror-260nw-577160911.jpg",
+    imdbid: "tt4154756",
+    creator: "Lulu castagnette"
+  },
+  error: null,
+  setUrl: jest.fn(),
+  setMethod: jest.fn(),
+  setHeaders: jest.fn(),
+  setData: jest.fn(),
+  cancelAllRequests: jest.fn()
 }));
 
 describe("Movie", () => {

@@ -13,7 +13,7 @@ import Loading from "../Routes/Loading";
 import MoviePlayer from "./MoviePlayer";
 import useApi from "../../hooks/useApi";
 import socket from "../../helpers/socket";
-import Error from "../Error";
+import Error from "../Error/Error";
 
 const Movie = (): ReactElement => {
   const { formatMessage: _t } = useIntl();
@@ -31,13 +31,13 @@ const Movie = (): ReactElement => {
     generateUrl();
   }
 
-  const {
-    data: { infos, reviews: reviewsData },
-    loading,
-    error
-  } = useApi(`/movie/infos/${imdbId}`);
+  const { resData, loading, error } = useApi(`/movie/infos/${imdbId}`, {
+    hotReload: true
+  });
+  const { infos, reviews: reviewsData } = resData || {};
 
   const movieInfos = infos as MovieInfos;
+
   const reviews = reviewsData as Reviews;
 
   const initComments = (reviewReceived: Review): void => {
@@ -50,6 +50,39 @@ const Movie = (): ReactElement => {
   };
 
   useEffect(() => {
+    // const initComments = (reviewReceived: Review): void => {
+    //   let totalStars = reviewReceived.stars;
+    //   let reviewsLength: number;
+    //   setReviews((reviewsHook) => {
+    //     totalStars = reviewsHook.reduce(
+    //       (acc, review) => acc + review.stars,
+    //       reviewReceived.stars
+    //     );
+    //     reviewsLength = reviewsHook.length + 1;
+    //     return [...reviewsHook, reviewReceived];
+    //   });
+    //   setMovieInfos((movieInfosHook) => {
+    //     return {
+    //       ...movieInfosHook,
+    //       stars: Math.floor(totalStars / reviewsLength)
+    //     };
+    //   });
+    // };
+    // if (loading) {
+    //   API.get(`/movies/${movieId}`)
+    //     .then(({ data: { infos, reviews: allReviews } }) => {
+    //       setMovieInfos(infos);
+    //       setReviews(allReviews);
+    //       setDataDone(true);
+    //       socket.socket.emit("join-movie-room", movieId);
+    //       socket.socket.on("New comments", initComments);
+    //     })
+    //     .catch((e) => {
+    //       console.error(e);
+    //       setDataDone(true);
+    //     });
+    //   setLoading(false);
+    // }
     return (): void => {
       if (loading || error) {
         return;
@@ -93,7 +126,7 @@ const Movie = (): ReactElement => {
                   </div>
                 )}
               </span>
-              {movieInfos.imdbRating && (
+              {movieInfos?.imdbRating && (
                 <>
                   {_t({ id: "movie.imdb.rating" })}
                   <Rating

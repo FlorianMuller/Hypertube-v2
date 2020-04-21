@@ -135,20 +135,21 @@ const getInfos = async (req, res) => {
     return res.satus(400).send({ error: "Votre requête ne comporte pas d'id" });
 
   const response = await Axios(
-    `https://tv-v2.api-fetch.website/movie/${req.params.imdbId}`
+    `https://yts.ae/api/v2/list_movies.json?query_term=${req.params.imdbId}`
   );
   let sourceUrl;
   let sourceSite;
-  if (response.data._id !== undefined) {
-    sourceUrl = "https://tv-v2.api-fetch.website/movie/";
-    sourceSite = "popCornTime";
-  } else {
-    sourceUrl = "https://yts.ae/api/v2/movie_details.json?movie_id=";
+  if (response.data.data.movies[0].imdb_code === req.params.imdbId) {
+    sourceUrl = `https://yts.ae/api/v2/movie_details.json?movie_id=${response.data.data.movies[0].id}`;
     sourceSite = "yts";
+  } else {
+    sourceUrl = `https://tv-v2.api-fetch.website/movie/${req.params.imdbId}`;
+    sourceSite = "popCornTime";
   }
   let reviews;
   let infos;
-  await Axios.get(sourceUrl + req.params.imdbId)
+
+  await Axios.get(sourceUrl)
     .then(async (movieRes) => {
       let movie;
       if (sourceSite === "yts") movie = movieRes.data.data.movie;
@@ -156,26 +157,25 @@ const getInfos = async (req, res) => {
       infos = {
         title: movie.title,
         description:
-          req.params.site === "yts" ? movie.description_full : movie.synopsis,
+          sourceSite === "yts" ? movie.description_full : movie.synopsis,
         prodDate: movie.year,
         runTime: movie.runtime,
         imdbRating:
-          req.params.site === "yts"
-            ? movie.rating / 2
-            : movie.rating.percentage / 2,
+          sourceSite === "yts" ? movie.rating / 2 : movie.rating.percentage / 2,
         poster:
-          req.params.site === "yts"
-            ? movie.medium_cover_image
+          sourceSite === "yts"
+            ? `https://yts.ae${movie.medium_cover_image}`
             : movie.images.poster,
-        imdbid: req.params.site === "yts" ? movie.imdb_code : movie.imdb_id
+        imdbid: sourceSite === "yts" ? movie.imdb_code : movie.imdb_id
       };
       reviews = await movieHelpers.findReviews(movie.id);
+      res.status(200).send({ infos, reviews });
     })
     .catch((e) => {
       console.error(e.message);
       res.sendStatus(500);
     });
-  return res.status(200).send({ infos, reviews });
+  return undefined;
 };
 
 const convertVideoDownload = (res, file) => {
@@ -309,15 +309,16 @@ const downloadMovie = (movieId, movie, sourceSite, req, res) => {
             const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
             const chunksize = end - start + 1;
 
+            const isGoodFormat =
+              mime.getType(file.name) === "video/mp4" ||
+              mime.getType(file.name) === "video/ogg";
             const head = {
               "Content-Range": `bytes ${start}-${end}/${fileSize}`,
               "Accept-Ranges": "bytes",
               "Content-Length": chunksize,
-              "Content-Type":
-                mime.getType(file.name) === "video/mp4" ||
-                  mime.getType(file.name) === "video/ogg"
-                  ? mime.getType(file.name)
-                  : "video/webm",
+              "Content-Type": isGoodFormat
+                ? mime.getType(file.name)
+                : "video/webm",
               Connection: "keep-alive"
             };
             if (
@@ -327,13 +328,15 @@ const downloadMovie = (movieId, movie, sourceSite, req, res) => {
               res.writeHead(206, head);
             streamMovieDownload(file, start, end, res);
           } else {
+            const isGoodFormat =
+              mime.getType(file.name) === "video/mp4" ||
+              mime.getType(file.name) === "video/ogg";
+
             const head = {
               "Content-Length": fileSize,
-              "Content-Type":
-                mime.getType(file.name) === "video/mp4" ||
-                  mime.getType(file.name) === "video/ogg"
-                  ? mime.getType(file.name)
-                  : "video/webm"
+              "Content-Type": isGoodFormat
+                ? mime.getType(file.name)
+                : "video/webm"
             };
             res.writeHead(200, head);
             streamMovieDownload(file, 0, fileSize - 1, res);
@@ -359,19 +362,19 @@ const downloadMovie = (movieId, movie, sourceSite, req, res) => {
 const PlayMovie = async (req, res) => {
   const movieId = req.params.imdbId;
   const response = await Axios(
-    `https://tv-v2.api-fetch.website/movie/${req.params.imdbId}`
+    `https://yts.ae/api/v2/list_movies.json?query_term=${req.params.imdbId}`
   );
-  let sourceUrl = "";
-  let sourceSite = "";
-  if (response.data._id !== undefined) {
-    sourceUrl = "https://tv-v2.api-fetch.website/movie/";
-    sourceSite = "popCornTime";
-  } else {
-    sourceUrl = "https://yts.mx/api/v2/movie_details.json?movie_id=";
+  let sourceUrl;
+  let sourceSite;
+  if (response.data.data.movies[0].imdb_code === req.params.imdbId) {
+    sourceUrl = `https://yts.ae/api/v2/movie_details.json?movie_id=${response.data.data.movies[0].id}`;
     sourceSite = "yts";
+  } else {
+    sourceUrl = `https://tv-v2.api-fetch.website/movie/${req.params.imdbId}`;
+    sourceSite = "popCornTime";
   }
 
-  Axios.get(sourceUrl + movieId)
+  Axios.get(sourceUrl)
     .then(async (movieRes) => {
       const movie =
         sourceSite === "yts" ? movieRes.data.data.movie : movieRes.data;
@@ -392,9 +395,8 @@ const PlayMovie = async (req, res) => {
             ioConnection.ioConnection
               .to(movieId)
               .emit("Video source", pathMovie);
-            pathMovie = `${process.cwd()}/server/data/movie/${
-              movieFound.path.split("/").reverse()[1]
-              }/${movieFound.path.split("/").reverse()[0]}`;
+            const [pathFile, pathRepo] = movieFound.path.split("/").reverse();
+            pathMovie = `${process.cwd()}/server/data/movie/${pathRepo}/${pathFile}`;
             const stat = fs.statSync(pathMovie);
             const fileSize = stat.size;
             let start = 0;
