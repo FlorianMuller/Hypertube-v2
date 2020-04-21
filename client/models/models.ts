@@ -56,27 +56,27 @@ export interface Review {
   body: string;
 }
 
-export interface Film {
-  title: string;
-  avg_rating: number;
-  date: string;
-  creator: string;
-  subject: string | string[];
-  description: string;
-  identifier: string;
-}
-
 export interface Filters {
   query: string;
   collections: string[];
-  startYear: number;
-  endYear: number;
+  year: number;
   minRating: number;
-  maxRating: number;
 }
 
-export interface ClickAwayEventTarget extends EventTarget {
-  target: { id: string };
+export interface Movie {
+  id: string;
+  title: string;
+  cover: string;
+  year: number;
+  summary: string;
+  genres: string[];
+  rating: number;
+  runtime: number;
+}
+
+export interface ApiSearchReponse {
+  movies: Movie[];
+  nextPage: boolean;
 }
 
 export type CustomSnackbarVariant =

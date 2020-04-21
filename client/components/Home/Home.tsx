@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { useHomeStyles } from "./styles";
+import { useHomeStyles } from "./Home.styles";
 import useApi from "../../hooks/useApi";
 import { Movies } from "../../models/models";
 

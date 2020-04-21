@@ -23,10 +23,12 @@ jest.mock("react-router-dom", () => ({
     listen: jest.fn(),
     createHref: jest.fn()
   }),
-  useLocation: (): Location<LocationState> => ({
+  useLocation: (): Location<{ from?: Location<{}> | string }> => ({
     pathname: "/",
     search: "",
-    state: { from: "/" },
+    state: {
+      from: { pathname: "/search", search: "", state: null, hash: null }
+    },
     hash: null
   })
 }));

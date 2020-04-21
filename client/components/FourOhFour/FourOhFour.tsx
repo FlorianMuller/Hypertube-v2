@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 
 import Typography from "@material-ui/core/Typography";
 
-import useFourOhFourStyles from "./styles";
+import useFourOhFourStyles from "./FourOhFour.styles";
 
 const FourOhFour = (): ReactElement => {
   const classes = useFourOhFourStyles({});

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import MovieCommentModel from "../Schemas/Movie";
+import MovieCommentModel from "../Schemas/MovieComment";
 
 const getRecommendation = async (req, res) => {
   const list = [];
