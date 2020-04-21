@@ -1,7 +1,7 @@
 import Axios from "axios";
 import MovieCommentModel from "../Schemas/MovieComment";
 
-const getRecommendation = async (req, res) => {
+const getRandomMoviesFromPCT = async () => {
   const list = [];
   await Axios(`https://tv-v2.api-fetch.website/movies/1`).then((response) => {
     for (let index = 0; index < 4; index++) {
@@ -22,7 +22,7 @@ const getRecommendation = async (req, res) => {
       }
     }
   });
-  return res.send({ list });
+  return list;
 };
 
 const timestampToDate = (month, day, year) => {
@@ -84,5 +84,5 @@ export default {
   saveReview,
   sortReviews,
   findReviews,
-  getRecommendation
+  getRandomMoviesFromPCT
 };

@@ -14,7 +14,6 @@ const Home = (): ReactElement => {
     <div className={classes.mainPoster}>
       {resData && (
         <div className={classes.boxContent}>
-          {console.log(resData)}
           {resData.list.map((movie) => (
             <Link
               key={movie.imdbId}

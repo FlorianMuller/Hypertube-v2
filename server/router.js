@@ -3,7 +3,6 @@ import express from "express";
 import signUpController from "./Controllers/signUp";
 import SignInControllers from "./Controllers/signIn";
 import movieController from "./Controllers/movie";
-import movieServices from "./Helpers/movie";
 import searchController from "./Controllers/search";
 import checkAuth from "./Helpers/auth";
 
@@ -31,7 +30,7 @@ router.get("/check-auth", checkAuth, (req, res) => {
 router.get("/movies", checkAuth, searchController.searchMovies);
 
 /* Movie */
-router.get("/movies/recommended", checkAuth, movieServices.getRecommendation);
+router.get("/movies/recommended", checkAuth, movieController.getRecommendation);
 router.get("/movies/:id", checkAuth, movieController.getInfos);
 router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
 export default router;

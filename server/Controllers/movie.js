@@ -96,4 +96,14 @@ const receiveReviews = (req, res) => {
     });
 };
 
-export default { receiveReviews, getInfos };
+const getRecommendation = async (req, res) => {
+  try {
+    const movieList = await movieHelpers.getRandomMoviesFromPCT();
+    res.send({ list: movieList });
+  } catch (e) {
+    console.error(e);
+    res.sendStatus(500);
+  }
+};
+
+export default { receiveReviews, getInfos, getRecommendation };
