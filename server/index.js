@@ -11,6 +11,7 @@ import passport from "./passport-config";
 import apiRouter from "./router";
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
@@ -33,6 +34,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 /* Webpack Hot Reload */
+
 const webpack = require("webpack");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const webpackConfig = require("../webpack.config.js");
@@ -77,8 +79,8 @@ io.on("connection", (socket) => {
 
 // Listening
 
-http.listen(8080, () => {
-  console.log("Server running on 8080");
+http.listen(port, () => {
+  console.log(`Server running on ${port}`);
 });
 
 export default { ioConnection };

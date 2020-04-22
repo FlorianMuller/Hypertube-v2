@@ -9,15 +9,16 @@ import enTranslation from "../translations/en.json";
 import frTranslation from "../translations/fr.json";
 
 import CustomRoute from "./Routes/CustomRoute";
-import Layout from "./Layout";
-import Home from "./Home";
+import Layout from "./Layout/Layout";
+import ConfirmEmail from "./Authentication/ConfirmEmail";
+import Home from "./Home/Home";
 import Movie from "./Movie/Movie";
-import Search from "./Search";
-import FourOhFour from "./FourOhFour";
+import Search from "./Search/Search";
+import FourOhFour from "./FourOhFour/FourOhFour";
 import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
 import ResetPassword from "./Authentication/ResetPassword";
-import Error from "./Error";
+import Error from "./Error/Error";
 
 import useLocaleStorage from "../hooks/useLocaleStorage";
 
@@ -43,6 +44,7 @@ const App = (): ReactElement => {
           setLocale={(locale: string): void => setItem("language", locale)}
         >
           <Switch>
+            <Route exact path="/confirm-email/:id" component={ConfirmEmail} />
             <CustomRoute exact path="/sign-up" notAuthComponent={SignUp} />
             <CustomRoute
               exact
@@ -50,7 +52,7 @@ const App = (): ReactElement => {
               notAuthComponent={ResetPassword}
             />
             <CustomRoute path="/search" authComponent={Search} />
-            <CustomRoute path="/movie" authComponent={Movie} />
+            <CustomRoute path="/movie/:id" authComponent={Movie} />
             <CustomRoute
               exact
               path="/"

@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import Typography from "@material-ui/core/Typography";
 
-import { useHomeStyles } from "./styles";
+import { useHomeStyles } from "./Home.styles";
 
 import Feed from "./Feed";
 import RecentVideos from "./RecentVideos";

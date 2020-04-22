@@ -363,7 +363,12 @@ exports[`SignIn should render <SignIn> in english 1`] = `
                             Object {
                               "pathname": "/sign-up",
                               "state": Object {
-                                "from": "/",
+                                "from": Object {
+                                  "hash": null,
+                                  "pathname": "/search",
+                                  "search": "",
+                                  "state": null,
+                                },
                               },
                             }
                           }
@@ -2710,7 +2715,12 @@ exports[`SignIn should render <SignIn> in french 1`] = `
                             Object {
                               "pathname": "/sign-up",
                               "state": Object {
-                                "from": "/",
+                                "from": Object {
+                                  "hash": null,
+                                  "pathname": "/search",
+                                  "search": "",
+                                  "state": null,
+                                },
                               },
                             }
                           }
@@ -2807,7 +2817,7 @@ exports[`SignIn should render <SignIn> in french 1`] = `
                                         <span
                                           className="MuiButton-label"
                                         >
-                                          Je m'inscrit
+                                          Je m'inscris
                                         </span>
                                         <NoSsr>
                                           <WithStyles(undefined)
