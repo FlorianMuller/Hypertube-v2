@@ -1,6 +1,6 @@
 import React, { useState, ReactElement } from "react";
 import { useIntl } from "react-intl";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   AppBar,
   Typography,
@@ -13,6 +13,9 @@ import {
 } from "@material-ui/core";
 import { Search, AccountCircle } from "@material-ui/icons";
 
+import SearchIcon from "@material-ui/icons/Search";
+
+import API from "../../util/api";
 import { useHeaderStyles } from "./Layout.styles";
 
 interface Props {
@@ -34,6 +37,7 @@ const Header = ({
   const { formatMessage: _t } = useIntl();
   const [localeAnchorEl, setLocaleAnchorEl] = useState(undefined);
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(undefined);
+  const history = useHistory();
 
   const setNewLocale = (newLocale: string): void => {
     setLocale(newLocale);
@@ -42,6 +46,12 @@ const Header = ({
 
   const onMenuProfile = (): void => {
     setProfileMenuAnchor(undefined);
+  };
+
+  const logOut = async (): Promise<void> => {
+    await API.put(`/users/logout`);
+    history.push("/");
+    onMenuProfile();
   };
 
   return (
@@ -79,7 +89,7 @@ const Header = ({
               onClick={(e): void => setLocaleAnchorEl(e.currentTarget)}
             >
               <span className={classes.flagIcon}>
-                {_t({ id: `language.${locale}` })}
+                {_t({ id: `header.language.${locale}` })}
               </span>
             </IconButton>
             <Menu
@@ -89,10 +99,10 @@ const Header = ({
               onClose={(): void => setLocaleAnchorEl(undefined)}
             >
               <MenuItem onClick={(): void => setNewLocale("fr")}>
-                {_t({ id: "language.fr" })}
+                {_t({ id: "header.language.fr" })}
               </MenuItem>
               <MenuItem onClick={(): void => setNewLocale("en")}>
-                {_t({ id: "language.en" })}
+                {_t({ id: "header.language.en" })}
               </MenuItem>
             </Menu>
             <IconButton
@@ -107,11 +117,14 @@ const Header = ({
               open={!!profileMenuAnchor}
               onClose={(): void => setProfileMenuAnchor(undefined)}
             >
-              <MenuItem onClick={onMenuProfile}>
-                {_t({ id: "profile" })}
-              </MenuItem>
-              <MenuItem onClick={onMenuProfile}>
-                {_t({ id: "disconnect" })}
+              <Link className={classes.titleLink} to="/myprofile">
+                <MenuItem onClick={onMenuProfile}>
+                  {_t({ id: "header.profile" })}
+                </MenuItem>
+              </Link>
+
+              <MenuItem onClick={logOut}>
+                {_t({ id: "header.disconnect" })}
               </MenuItem>
             </Menu>
           </div>
