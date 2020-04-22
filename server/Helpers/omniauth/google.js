@@ -69,15 +69,13 @@ passport.use(
     },
     async (_accessToken, _refreshToken, profile, done) => {
       const exist = await userExist(profile.id);
-      console.log(exist);
       if (exist.error) done(null, { error: exist.error });
       if (exist) {
         done(null, await logUser(profile.id));
       } else {
         await createAccount(profile);
-        done(null, await logUser());
+        done(null, await logUser(profile.id));
       }
-      done(null, { user: profile.id, lol: "toto" });
     }
   )
 );

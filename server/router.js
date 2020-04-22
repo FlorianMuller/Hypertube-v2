@@ -50,8 +50,32 @@ router.get(
     } else if (req.user.id) {
       setAccesTokenCookie(res, req.id);
       res.redirect("/");
-    }
-    res.redirect("/");
+    } else res.redirect("/");
+  }
+);
+
+// 42 omniauth
+router.get(
+  "/user/42",
+  passport.authenticate("oauth2", {
+    scope: ["public"],
+    session: false
+  })
+);
+
+router.get(
+  "/user/42/callback",
+  passport.authenticate("oauth2", {
+    failureRedirect: "/error",
+    session: false
+  }),
+  (req, res) => {
+    if (req.error) {
+      res.sendstatus(req.error.status);
+    } else if (req.user.id) {
+      setAccesTokenCookie(res, req.id);
+      res.redirect("/");
+    } else res.redirect("/");
   }
 );
 

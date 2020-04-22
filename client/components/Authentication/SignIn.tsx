@@ -159,7 +159,12 @@ const SignIn = (): ReactElement => {
             </span>
           </Typography>
 
-          <a href="/api/user/google">Sign In with Google</a>
+          <Button href="/api/user/42" className={classes.omniauthBtn}>
+            {_t({ id: "authentication.SignIn.school" })}
+          </Button>
+          <Button href="/api/user/google" className={classes.omniauthBtn}>
+            {_t({ id: "authentication.SignIn.google" })}
+          </Button>
 
           <form onSubmit={handleSubmit} className={classes.form}>
             <Grid container direction="column" alignItems="center">
@@ -168,7 +173,7 @@ const SignIn = (): ReactElement => {
                   value={authInfo.username}
                   helperText={
                     authError.username !== "" &&
-                    authError.username !== errorWithoutTextErrorKey
+                      authError.username !== errorWithoutTextErrorKey
                       ? _t({ id: authError.username })
                       : ""
                   }

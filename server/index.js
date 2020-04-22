@@ -7,7 +7,8 @@ import favicon from "serve-favicon";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
-import passport from "./Helpers/omniauth/google";
+import passportGoogle from "./Helpers/omniauth/google";
+import passport42 from "./Helpers/omniauth/42";
 import apiRouter from "./router";
 
 const app = express();
@@ -31,7 +32,8 @@ app.use(fileUpload());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(passport.initialize());
+app.use(passportGoogle.initialize());
+app.use(passport42.initialize());
 
 /* Webpack Hot Reload */
 
