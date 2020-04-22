@@ -6,6 +6,8 @@ import SignInControllers from "./Controllers/signIn";
 import movieController from "./Controllers/movie";
 import searchController from "./Controllers/search";
 import checkAuth from "./Helpers/auth";
+import { setAccesTokenCookie } from "./Helpers/signIn";
+// import omniauthGoogle from './Helpers/omniauth/google'
 
 const router = express.Router();
 
@@ -43,8 +45,12 @@ router.get(
     session: false
   }),
   (req, res) => {
-    console.log("user:", req.user);
-    // todo: set cookie with acces token here
+    if (req.error) {
+      res.sendstatus(req.error.status);
+    } else if (req.user.id) {
+      setAccesTokenCookie(res, req.id);
+      res.redirect("/");
+    }
     res.redirect("/");
   }
 );

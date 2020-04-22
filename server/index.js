@@ -7,7 +7,7 @@ import favicon from "serve-favicon";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
-import passport from "./passport-config";
+import passport from "./Helpers/omniauth/google";
 import apiRouter from "./router";
 
 const app = express();
