@@ -17,7 +17,6 @@ import Search from "./Search/Search";
 import FourOhFour from "./FourOhFour/FourOhFour";
 import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
-import ResetPassword from "./Authentication/ResetPassword";
 import Error from "./Error/Error";
 
 import useLocaleStorage from "../hooks/useLocaleStorage";
@@ -46,11 +45,6 @@ const App = (): ReactElement => {
           <Switch>
             <Route exact path="/confirm-email/:id" component={ConfirmEmail} />
             <CustomRoute exact path="/sign-up" notAuthComponent={SignUp} />
-            <CustomRoute
-              exact
-              path="/reset-password"
-              notAuthComponent={ResetPassword}
-            />
             <CustomRoute path="/search" authComponent={Search} />
             <CustomRoute path="/movie/:id" authComponent={Movie} />
             <CustomRoute

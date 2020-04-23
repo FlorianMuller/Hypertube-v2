@@ -110,7 +110,10 @@ const resendValidationEmail = async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.id);
     if (user && !user.emailVerified) {
-      const token = await TokenModel.findOne({ user: user._id });
+      const token = await TokenModel.findOne({
+        user: user._id,
+        type: "emailSignUp"
+      });
       // check if 1mn is passed
       if (Date.now() - token.createdAt.getTime() >= 60000) {
         // Deleting old token
@@ -134,7 +137,8 @@ const verifyEmail = async (req, res) => {
   try {
     // Getting data from DB
     const token = await TokenModel.findOne({
-      value: req.params.value
+      value: req.params.value,
+      type: "emailSignUp"
     }).populate("user", "emailVerified");
 
     if (token) {

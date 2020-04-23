@@ -25,7 +25,8 @@ const confirmEmailInfo = {
 export const sendValidateEmail = async (user, locale) => {
   const emailInfo = confirmEmailInfo[locale];
   const token = await TokenModel.create({
-    user: user._id
+    user: user._id,
+    type: "emailSignUp"
   });
 
   await sendEmail({
@@ -49,7 +50,7 @@ export const createUser = async (user, dontInsertPicture) => {
     hashedPT = `${user.picture.name.split(".")[0] +
       crypto.randomBytes(5).toString("hex")}.${
       user.picture.mimetype.split("/")[1]
-    }`;
+      }`;
     user.picture.mv(`./server/data/avatar/${hashedPT}`, (e) => {
       if (e) console.error(e);
     });

@@ -4,6 +4,7 @@ import signUpController from "./Controllers/signUp";
 import SignInControllers from "./Controllers/signIn";
 import movieController from "./Controllers/movie";
 import searchController from "./Controllers/search";
+import ResetPassword from "./Controllers/ResetPassword";
 import checkAuth from "./Helpers/auth";
 
 const router = express.Router();
@@ -25,6 +26,10 @@ router.post("/users/login", SignInControllers);
 router.get("/check-auth", checkAuth, (req, res) => {
   res.status(200).json({ validToken: true });
 });
+
+/* Reset password */
+router.post("/reset-password", ResetPassword.SendMail);
+router.post("/change-password", ResetPassword.ResetPassword);
 
 /* Search */
 router.get("/movies", checkAuth, searchController.searchMovies);
