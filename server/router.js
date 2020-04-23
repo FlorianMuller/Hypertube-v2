@@ -32,6 +32,7 @@ router.put("/users/logout", signOutController);
 router.get("/movies", checkAuth, searchController.searchMovies);
 
 /* Movie */
+router.get("/movies/recommended", checkAuth, movieController.getRecommendation);
 router.get("/movies/:id", checkAuth, movieController.getInfos);
 router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
 
