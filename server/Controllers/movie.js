@@ -1,6 +1,7 @@
 import Axios from "axios";
 
 import movieHelpers from "../Helpers/movie";
+import { searchMoviesOnYts } from "../Helpers/search";
 import mongoose from "../mongo";
 import ioConnection from "..";
 
@@ -96,10 +97,18 @@ const receiveReviews = (req, res) => {
     });
 };
 
-const getRecommendation = async (req, res) => {
+const getRecommendation = async (_req, res) => {
   try {
-    const movieList = await movieHelpers.getRandomMoviesFromPCT();
-    res.send({ list: movieList });
+    // Get most downloaded movies of the current year (or year before in january)
+    const { movies } = await searchMoviesOnYts({
+      year: new Date().getFullYear() - (new Date().getMonth > 0 ? 0 : 1)
+    });
+
+    // Shuffle array
+    movies.sort(() => 0.5 - Math.random());
+
+    // Sending sub-array of the first 4 elements after shuffle
+    res.send({ list: movies.slice(0, 4) });
   } catch (e) {
     console.error(e);
     res.sendStatus(500);

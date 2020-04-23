@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useHomeStyles = makeStyles(() => ({
+export const useHomeStyles = makeStyles((theme) => ({
   mainPoster: {
     background:
       "linear-gradient(to bottom, transparent 40%, black 80%), url('/public/backgroundImage.jpg')",
@@ -13,35 +13,11 @@ export const useHomeStyles = makeStyles(() => ({
     display: "flex"
   },
   boxContent: {
-    marginTop: "23%",
-    width: "100%",
     display: "flex",
-    flexWrap: "wrap"
-  },
-  miniaturePoster: {
-    height: "400px",
-    width: "280px",
-    bottom: "0",
-    marginBottom: "120px",
-    marginRight: "auto",
-    marginLeft: "auto",
-    display: "flex",
-    cursor: "pointer",
     flexWrap: "wrap",
-    textDecoration: "none",
-    color: "white"
-  },
-  miniatureImage: {
+    justifyContent: "center",
     width: "100%",
-    height: "100%"
-  },
-  movieTitle: {
-    width: "100%",
-    margin: "0",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans- serif"
-  },
-  genre: {
-    margin: "0"
+    marginTop: theme.spacing(10)
   }
 }));
 

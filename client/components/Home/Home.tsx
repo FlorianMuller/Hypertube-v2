@@ -1,36 +1,27 @@
 import React, { ReactElement } from "react";
-import { Link } from "react-router-dom";
+import MovieThumbnail from "../Search/MovieThumbnail";
+import Loading from "../Routes/Loading";
 import { useHomeStyles } from "./Home.styles";
 import useApi from "../../hooks/useApi";
-import { Movies } from "../../models/models";
+import { Movie } from "../../models/models";
 
 const Home = (): ReactElement => {
   const classes = useHomeStyles({});
-  const { resData } = useApi<{ list: Movies[] }, void>("/movies/recommended", {
-    hotReload: true
-  });
+  const { resData, loading } = useApi<{ list: Movie[] }, void>(
+    "/movies/recommended",
+    {
+      hotReload: true
+    }
+  );
 
   return (
     <div className={classes.mainPoster}>
       {resData && (
         <div className={classes.boxContent}>
           {resData.list.map((movie) => (
-            <Link
-              key={movie.imdbId}
-              className={classes.miniaturePoster}
-              to={`/movie/${movie.imdbId}`}
-            >
-              <img
-                className={classes.miniatureImage}
-                src={movie.img}
-                alt="Movie poster"
-              />
-
-              <h2 className={classes.movieTitle}>{movie.title}</h2>
-
-              <h3 className={classes.genre}>({movie.genre})</h3>
-            </Link>
+            <MovieThumbnail movie={movie} key={movie.id} />
           ))}
+          {loading && <Loading />}
         </div>
       )}
     </div>

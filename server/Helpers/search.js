@@ -16,7 +16,7 @@ export const searchMoviesOnYts = async ({
     limit: 12,
     sort_by: "download_count",
     minimum_rating: minRating * 2 || 0,
-    page,
+    page: page || 1,
     query_term: `${query || ""} ${year || ""}`,
     genre: collections
   });
