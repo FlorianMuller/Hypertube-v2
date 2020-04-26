@@ -1,15 +1,11 @@
-import qs from "qs";
-
-import { searchMoviesOnYts } from "../Helpers/search";
+import searchMoviesOnAllSource from "../Helpers/search";
 
 const searchMovies = async (req, res) => {
-  const parsedQuery = qs.parse(req.query);
-
   try {
-    const data = await searchMoviesOnYts(parsedQuery);
-    res.status(200).send(data);
-  } catch (error) {
-    console.error(error);
+    const moviesList = await searchMoviesOnAllSource(req.query);
+    res.send(moviesList);
+  } catch (e) {
+    console.error(e);
     res.sendStatus(500);
   }
 };

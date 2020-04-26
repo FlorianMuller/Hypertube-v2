@@ -1,4 +1,4 @@
-import { searchMoviesOnYts } from "../Helpers/search";
+import { searchMoviesOnYts } from "../Helpers/searchSources/yts";
 
 describe("Search", () => {
   describe("Helper/search movies", () => {

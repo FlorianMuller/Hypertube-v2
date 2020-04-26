@@ -1,82 +1,40 @@
-import axios from "axios";
-import qs from "qs";
+import yts from "./searchSources/yts";
+// import popCornTime from "./searchSources/popCornTime";
 
-const YTS_BASE_URL = "https://yts.ae";
-const YTS_URL = `${YTS_BASE_URL}/api/v2/list_movies.json`;
-// const POPCORN_URL = "https://tv-v2.api-fetch.website/shows";
+// const sourceList = [popCornTime];
+const sourceList = [yts];
 
-export const searchMoviesOnYts = async ({
-  query,
-  page,
-  minRating,
-  year,
-  collections
-}) => {
-  const queryParams = qs.stringify({
-    limit: 12,
-    sort_by: "download_count",
-    minimum_rating: minRating * 2 || 0,
-    page,
-    query_term: `${query || ""} ${year || ""}`,
-    genre: collections
-  });
-
-  const { data } = await axios.get(`${YTS_URL}?${queryParams}`);
-
-  // Checking `movies` because sometime `data.data.movie_count` is positive and there's no `movies` (wtf)
-  if (!data || !data.data.movies) {
-    return {
-      nextPage: false,
-      movies: []
-    };
-  }
-
-  const parsedMovies = data.data.movies.map((movie) => ({
-    id: movie.id,
-    title: movie.title_english,
-    cover: YTS_BASE_URL + movie.large_cover_image,
-    year: movie.year,
-    summary: movie.summary,
-    genres: movie.genres,
-    rating: movie.rating / 2,
-    runtime: movie.runtime
-  }));
-
+// [{ nextPage: bool, movies: [] }, { nextPage: bool, movies: [] }, ...] -> {nextPage: bool, movies: []}
+const mergeMoviesList = async (allData) => {
+  const idList = [];
   return {
-    nextPage: parsedMovies.length === 12,
-    movies: parsedMovies
+    nextPage: !!allData.filter((data) => data.nextPage),
+    movies: allData
+      .flatMap((data) => data.movies)
+      .filter((movie) => {
+        return !idList.includes(movie.id) && idList.push(movie.id);
+      })
   };
 };
 
-// Todo: adapt to film
+/**
+ * sort: sorting method
+ * query: search string
+ * page: page number
+ *
+ * minRating: minimum note
+ * year: specific year
+ * collections: specific movie categories
+ */
+const searchMoviesOnAllSource = async (searchParam) => {
+  const allData = await Promise.all(
+    sourceList.map((func) => func(searchParam))
+  );
 
-// export const searchShowsOnPCT = async ({ query, page, collections }) => {
-//   const queryParams = qs.stringify({
-//     genre: collections,
-//     keywords: query,
-//     sort: "trending"
-//   });
-//   const { data } = await axios.get(`${POPCORN_URL}/${page}?${queryParams}`);
+  const moviesList = await mergeMoviesList(allData);
+  // console.log(moviesList);
 
-//   const parsedShows =
-//     (data &&
-//       data.map((show) => ({
-//         cover: show.images.poster,
-//         title: show.title,
-//         year: show.year,
-//         summary: null,
-//         genres: null,
-//         rating: show.rating.percentage / 20,
-//         id: show.imdb_id,
-//         runtime: null,
-//         seaons: show.num_seasons
-//       }))) ||
-//     [];
+  return moviesList;
+};
 
-//   return {
-//     nextPage: parsedShows.length === 50,
-//     medias: parsedShows
-//   };
-// };
-
-export default { searchMoviesOnYts };
+export default searchMoviesOnAllSource;
