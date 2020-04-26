@@ -1,20 +1,15 @@
 import fileType from "file-type";
 
-import { createUser, sendValidateEmail } from "../Helpers/signUp";
+import validEmail, {
+  createUser,
+  sendValidateEmail,
+  validPassword,
+  emailIsFree
+} from "../Helpers/signUp";
 import { setAccesTokenCookie } from "../Helpers/signIn";
 
 import UserModel from "../Schemas/User";
 import TokenModel from "../Schemas/Token";
-
-const validEmail = (email) => {
-  const regex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-  return email && regex.test(String(email));
-};
-
-const validPassword = (password) => {
-  const regex = /(?=^.{8,}$)((?!.*\s)(?=.*[A-Z])(?=.*[a-z]))((?=(.*\d){1,})|(?=(.*\W){1,}))^.*$/;
-  return password && regex.test(password);
-};
 
 const validFile = (file) => {
   const { name, size, data, mimetype: type } = file;
@@ -34,16 +29,6 @@ const validFile = (file) => {
     return false;
   }
   return true;
-};
-
-const emailIsFree = async (email) => {
-  try {
-    const users = await UserModel.findOne({ email });
-    return users === null;
-  } catch (e) {
-    console.error(e);
-    return false;
-  }
 };
 
 const usernameIsFree = async (username) => {
@@ -135,8 +120,7 @@ const verifyEmail = async (req, res) => {
     // Getting data from DB
     const token = await TokenModel.findOne({
       value: req.params.value
-    }).populate("user", "emailVerified");
-
+    }).populate("user", "emailVerified newEmail");
     if (token) {
       // Changing user data
       if (!token.user.emailVerified) {
@@ -144,6 +128,13 @@ const verifyEmail = async (req, res) => {
         await token.user.save();
 
         setAccesTokenCookie(res, token.user.id);
+        // Updating email
+      } else if (token.user.newEmail) {
+        await UserModel.findByIdAndUpdate(
+          token.user.id,
+          { email: token.user.newEmail, newEmail: null },
+          { runValidators: true }
+        );
       }
 
       // Deleting the token

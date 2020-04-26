@@ -26,7 +26,7 @@ const Profile = ({
   }
 }: RouteComponentProps<UrlParam>): ReactElement => {
   const { resData: data, loading, error } = useApi<User, void>(
-    `/user/${username}`,
+    `/users/${username}`,
     {
       hotReload: true
     }

@@ -99,6 +99,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   rating: {
     marginRight: "8px"
+  },
+  badMessage: {
+    color: "red"
+  },
+  goodMessage: {
+    color: "green"
   }
 }));
 export default useStyles;

@@ -34,7 +34,7 @@ const ShowComment = ({ username }: Props): ReactElement => {
   });
   useEffect(() => {
     if (username !== undefined) {
-      setUrl(`/user-comments/${username}`);
+      setUrl(`/comments/${username}`);
     }
   }, [username]);
   if (!data) {

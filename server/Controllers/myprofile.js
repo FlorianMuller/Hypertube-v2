@@ -1,25 +1,21 @@
 import UserModel from "../Schemas/User";
 
-const getUserInfos = async (req, res) => {
+const getUser = async (req, res) => {
   try {
-    const userInfos = await UserModel.findById(req.userId);
+    const userInfos = await UserModel.findById(
+      req.userId,
+      "email username firstName lastName picture"
+    );
 
     if (userInfos === null) {
-      res.status(404).send();
+      res.sendStatus(400);
     } else {
-      const cleanUserInfos = {
-        username: userInfos.username,
-        firstName: userInfos.firstName,
-        email: userInfos.email,
-        lastName: userInfos.lastName,
-        picture: userInfos.picture
-      };
-      res.status(200).send({ ...cleanUserInfos });
+      res.status(200).send(userInfos);
     }
   } catch (e) {
     console.error(e);
-    res.status(500);
+    res.sendStatus(500);
   }
 };
 
-export default { getUserInfos };
+export default { getUser };

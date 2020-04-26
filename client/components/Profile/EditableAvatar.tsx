@@ -18,7 +18,7 @@ export const sendPictureData = (picture: File): AxiosPromise<ApiResponse> => {
   data.append("image", picture);
   return API({
     method: "post",
-    url: "/change-picture",
+    url: "/users/picture",
     headers: { "Content-Type": "multipart/form-data" },
     data
   });

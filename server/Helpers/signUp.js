@@ -22,6 +22,26 @@ const confirmEmailInfo = {
   }
 };
 
+export const emailIsFree = async (email) => {
+  try {
+    const users = await UserModel.findOne({ email });
+    return users === null;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
+export const validEmail = (email) => {
+  const regex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+  return email && regex.test(String(email));
+};
+
+export const validPassword = (password) => {
+  const regex = /(?=^.{8,}$)((?!.*\s)(?=.*[A-Z])(?=.*[a-z]))((?=(.*\d){1,})|(?=(.*\W){1,}))^.*$/;
+  return password && regex.test(password);
+};
+
 export const sendValidateEmail = async (user, locale) => {
   const emailInfo = confirmEmailInfo[locale];
   const token = await TokenModel.create({

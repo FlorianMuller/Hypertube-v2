@@ -11,6 +11,7 @@ import ShowComments from "./ShowComments";
 import OnClickInput from "./OnClickInput";
 import Password from "./Password";
 import EditableAvatar from "./EditableAvatar";
+import { validateEmail } from "../Authentication/SignUp.service";
 
 interface User {
   username: string;
@@ -21,21 +22,29 @@ interface User {
 }
 
 const MyProfile = (): ReactElement => {
-  const { resData: data } = useApi<User, void>(`/user`, { hotReload: true });
+  const { resData: data } = useApi<User, void>(`/users`, { hotReload: true });
   const username = data?.username;
   const classes = useStyles({});
+
   const [changingPassword, setChangingPassword] = useState(false);
-  const { callApi } = useApi<User, void>("/edit-profile", { method: "put" });
-  const { locale, formatMessage: _t } = useIntl();
+  const { callApi } = useApi<User, void>("/users", { method: "put" });
+  const { formatMessage: _t } = useIntl();
+  // emailStatus = 0 : email not typed, 1 = typed and wrong, 2 = typed and ok
+  const [emailStatus, setEmailStatus] = useState(0);
 
   const updateInfo = (value: string, name: string): void => {
-    if (value && name) {
-      // API.put("/edit-profile", { [name]: value }).catch((e) => {
-      //   console.error(e);
-      // });
+    if (value && name === "email") {
+      if (!validateEmail(value)) setEmailStatus(1);
+      else {
+        setEmailStatus(2);
+        callApi({ [name]: value });
+      }
+    } else if (value && name) {
+      setEmailStatus(0);
       callApi({ [name]: value });
     }
   };
+
   return (
     <div className={classes.containerProfile}>
       <Paper className={classes.containerUser}>
@@ -69,6 +78,16 @@ const MyProfile = (): ReactElement => {
             label={_t({ id: "profile.myprofile.label.email" })}
             name="email"
           />
+          {emailStatus === 1 ? (
+            <p className={classes.badMessage}>
+              {_t({ id: "profile.myprofile.email.invalid" })}
+            </p>
+          ) : null}
+          {emailStatus === 2 ? (
+            <p className={classes.goodMessage}>
+              {_t({ id: "profile.myprofile.email.sent" })}
+            </p>
+          ) : null}
           <p className={classes.username}>@{data?.username}</p>
           <Button
             onClick={(): void => {

@@ -5,10 +5,6 @@ export interface Locale {
   setLocale: (locale: string) => void;
 }
 
-export interface ApiRecord<T> {
-  data: T;
-}
-
 export type Method = "get" | "put" | "post" | "patch" | "delete";
 export type Headers = { [key: string]: string } | undefined;
 export type Data = object | undefined;

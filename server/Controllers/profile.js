@@ -1,7 +1,7 @@
 import UserModel from "../Schemas/User";
 import MovieCommentModel from "../Schemas/Movie";
 
-const getUserComments = async (req, res) => {
+const getMovieCommentsByUsername = async (req, res) => {
   const name = req.params.username;
   try {
     const userComments = await MovieCommentModel.find({ name });
@@ -12,29 +12,25 @@ const getUserComments = async (req, res) => {
     }
   } catch (e) {
     console.error(e);
-    res.status(500);
+    res.sendStatus(500);
   }
 };
 
-const getProfile = async (req, res) => {
+const getUserByUsername = async (req, res) => {
   const { username } = req.params;
   try {
-    const userInfos = await UserModel.findOne({ username });
+    const userInfos = await UserModel.findOne(
+      { username },
+      "username firstName lastName picture"
+    );
     if (userInfos === null) {
-      res.status(404).send();
-    } else {
-      const cleanUserInfos = {
-        username: userInfos.username,
-        firstName: userInfos.firstName,
-        lastName: userInfos.lastName,
-        picture: userInfos.picture
-      };
-      res.status(200).send(cleanUserInfos);
+      res.sendStatus(404);
     }
+    res.status(200).send(userInfos);
   } catch (e) {
     console.error(e);
-    res.status(500);
+    res.sendStatus(500);
   }
 };
 
-export default { getProfile, getUserComments };
+export default { getUserByUsername, getMovieCommentsByUsername };
