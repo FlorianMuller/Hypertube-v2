@@ -1,32 +1,29 @@
 import React, { ReactElement } from "react";
-import Typography from "@material-ui/core/Typography";
-
+import MovieThumbnail from "../Search/MovieThumbnail";
+import Loading from "../Routes/Loading";
 import { useHomeStyles } from "./Home.styles";
-
-import Feed from "./Feed";
-import RecentVideos from "./RecentVideos";
-import Film from "./FeaturedMovie";
+import useApi from "../../hooks/useApi";
+import { Movie } from "../../models/models";
 
 const Home = (): ReactElement => {
   const classes = useHomeStyles({});
+  const { resData, loading } = useApi<{ list: Movie[] }, void>(
+    "/movies/recommended",
+    {
+      hotReload: true
+    }
+  );
 
   return (
-    <div className={classes.container}>
-      <div className={classes.header}>
-        <Typography variant="h1">Welcome Julien</Typography>
-        <Typography variant="h2">Start browsing videos</Typography>
-      </div>
-      <div className={classes.mainContent}>
-        <div className={classes.feedContainer}>
-          <Feed />
+    <div className={classes.mainPoster}>
+      {resData && (
+        <div className={classes.boxContent}>
+          {resData.list.map((movie) => (
+            <MovieThumbnail movie={movie} key={movie.id} />
+          ))}
+          {loading && <Loading />}
         </div>
-        <div className={classes.filmContainer}>
-          <Film />
-        </div>
-      </div>
-      <div>
-        <RecentVideos />
-      </div>
+      )}
     </div>
   );
 };
