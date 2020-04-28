@@ -18,6 +18,7 @@ import FourOhFour from "./FourOhFour/FourOhFour";
 import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
 import Error from "./Error/Error";
+import ResetPassword from "./Authentication/ResetPassword";
 
 import useLocaleStorage from "../hooks/useLocaleStorage";
 
@@ -52,6 +53,10 @@ const App = (): ReactElement => {
               path="/"
               notAuthComponent={SignIn}
               authComponent={Home}
+            />
+            <CustomRoute
+              path="/reset-password"
+              notAuthComponent={ResetPassword}
             />
 
             <Route exact path="/error" authComponent={Error} />
