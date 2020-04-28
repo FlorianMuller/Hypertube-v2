@@ -19,6 +19,7 @@ import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
 import Error from "./Error/Error";
 import ResetPassword from "./Authentication/ResetPassword";
+import NewPassword from "./Authentication/NewPassword";
 
 import useLocaleStorage from "../hooks/useLocaleStorage";
 
@@ -55,9 +56,11 @@ const App = (): ReactElement => {
               authComponent={Home}
             />
             <CustomRoute
-              path="/reset-password"
+              exact
+              path="/reset-password/:id"
               notAuthComponent={ResetPassword}
             />
+            <CustomRoute path="/new-password" notAuthComponent={NewPassword} />
 
             <Route exact path="/error" authComponent={Error} />
             <Route component={FourOhFour} />
