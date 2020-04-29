@@ -54,4 +54,9 @@ const saveReview = async (comment) => {
   }
 };
 
-export default { timestampToDate, saveReview, sortReviews, findReviews };
+export default {
+  timestampToDate,
+  saveReview,
+  sortReviews,
+  findReviews
+};
