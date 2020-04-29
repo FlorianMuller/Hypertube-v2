@@ -3,25 +3,18 @@ import { Paper, TextField, Button } from "@material-ui/core";
 import { useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
 import useStyles from "./NewPassword.style";
-import useApi from "../../hooks/useApi";
+import API from "../../util/api";
 import { validatePassword } from "./SignUp.service";
-
-interface UrlParam {
-  id: string;
-}
 
 const NewPassword = (): ReactElement => {
   const classes = useStyles({});
-  const params = useParams();
+  const { token } = useParams<{ token: string }>();
   const { formatMessage: _t } = useIntl();
   const [newPassword, setNewPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
   const [confirmedPasswordError, setConfirmedPasswordError] = useState("");
   const [validPassword, setValidPassword] = useState(null);
-  const { callApi, res } = useApi<{}, void>("/change-password", {
-    method: "put"
-  });
 
   const checkPassword = (): void => {
     // checking if fields are completed
@@ -43,15 +36,16 @@ const NewPassword = (): ReactElement => {
     setConfirmedPasswordError(localConfirmedPasswordError);
 
     if (localConfirmedPasswordError === "" && localNewPasswordError === "") {
-      const { token } = params?.token && params;
-      callApi({ newPassword, confirmedPassword, token })
-        .then(() => {
+      API.put("/change-password", { newPassword, confirmedPassword, token })
+        .then((res) => {
           console.log(res);
-          // if (res.status === 200) {
-          //   setValidPassword(1);
-          // } else {
-          //   setValidPassword(0);
-          // }
+          if (res.data.status === 200) {
+            setValidPassword(1);
+          } else {
+            setValidPassword(0);
+          }
+          setNewPassword("");
+          setConfirmedPassword("");
         })
         .catch(() => {
           setValidPassword(0);
@@ -65,6 +59,7 @@ const NewPassword = (): ReactElement => {
         <TextField
           inputProps={{ maxLength: 1028 }}
           autoComplete="new-password"
+          value={newPassword}
           className={classes.input}
           onChange={(e): void => setNewPassword(e.target.value)}
           placeholder={_t({ id: "newpassword.newpassword.placeholder" })}
@@ -79,6 +74,7 @@ const NewPassword = (): ReactElement => {
           inputProps={{ maxLength: 1028 }}
           autoComplete="new-password"
           className={classes.input}
+          value={confirmedPassword}
           onChange={(e): void => setConfirmedPassword(e.target.value)}
           placeholder={_t({ id: "newpassword.confirmedpassword.placeholder" })}
           error={!!confirmedPasswordError}

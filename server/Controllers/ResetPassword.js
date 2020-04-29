@@ -19,13 +19,6 @@ const resetEmailInfo = {
   }
 };
 
-// const checkToken = async (req, res) => {
-//   if (req.params.token === undefined) return res.status(401);
-//   const token = await TokenModel.findOne({ value: req.params.token });
-//   if (token === null) return res.status(401).redirect("/");
-//   res.status(200).redirect("/change-password");
-// };
-
 const SendMail = async (req, res) => {
   if (req.params.email === undefined || req.params.lang === undefined)
     return res.send({ status: 401 });
@@ -66,14 +59,12 @@ const CheckResetToken = async (resetPasswordToken) => {
 };
 
 const ResetPassword = async (req, res) => {
-  console.log(req.body);
   if (req.body.newPassword === null) return res.sendStatus(400);
   if (req.body.newPassword !== req.body.confirmedPassword)
     return res.send({ status: 401 });
   if ((await CheckResetToken(req.body.token)) === false)
     return res.send({ status: 401 });
   const found = await TokenModel.findOne({ value: req.body.token });
-  console.log(found);
   if (found) {
     const newHash = bcrypt.hashSync(req.body.newPassword, 10);
     await UserModel.findByIdAndUpdate(

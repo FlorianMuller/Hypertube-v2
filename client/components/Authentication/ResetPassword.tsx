@@ -1,46 +1,38 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, ChangeEvent } from "react";
 import { Paper, TextField, Button } from "@material-ui/core";
 import { useIntl } from "react-intl";
 import useStyles from "./ResetPassword.style";
 // import useApi from "../../hooks/useApi";
 import API from "../../util/api";
 import useLocaleStorage from "../../hooks/useLocaleStorage";
+import { validateEmail } from "./SignUp.service";
 
 const ResetPassword = (): ReactElement => {
   const classes = useStyles({});
   const { formatMessage: _t } = useIntl();
   const [localStorageData] = useLocaleStorage();
-  // validmail = 1 when all ok,
-  // 0 when wrong,
-  // "" when no mail sent
   // validmail is used to display error/ok message to user
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(null);
   // const { callApi, res } = useApi<string, void>("/reset-password");
 
-  const checkEmail = async () => {
-    return new RegExp(
-      /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/
-    ).test(email);
-  };
-
-  const send = async () => {
+  const send = async (): Promise<void> => {
     // change the callApi function according to back-end
-    const isValid = await checkEmail();
-    if (isValid) {
+    if (validateEmail(email)) {
       API.get(`/reset-password/${localStorageData.language}/${email}`).then(
         ({ data }) => {
           if (data.status === 401) setValidEmail(0);
-          else if (data.status === 200) setValidEmail(1);
+          if (data.status === 200) setValidEmail(1);
+          return undefined;
         }
       );
     } else {
-      setValidEmail(0);
+      return setValidEmail(0);
     }
     return undefined;
   };
 
-  const handleChangeEmail = (event): void => {
+  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>): void => {
     setValidEmail(null);
     setEmail(event.target.value);
   };
