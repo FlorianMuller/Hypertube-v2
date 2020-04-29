@@ -57,10 +57,13 @@ const App = (): ReactElement => {
             />
             <CustomRoute
               exact
-              path="/reset-password/:id"
+              path="/reset-password"
               notAuthComponent={ResetPassword}
             />
-            <CustomRoute path="/new-password" notAuthComponent={NewPassword} />
+            <CustomRoute
+              path="/new-password/:token"
+              notAuthComponent={NewPassword}
+            />
 
             <Route exact path="/error" authComponent={Error} />
             <Route component={FourOhFour} />

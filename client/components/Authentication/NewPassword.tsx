@@ -1,8 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import { Paper, TextField, Button } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
 import { useIntl } from "react-intl";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useStyles from "./NewPassword.style";
 import useApi from "../../hooks/useApi";
 import { validatePassword } from "./SignUp.service";
@@ -11,19 +10,18 @@ interface UrlParam {
   id: string;
 }
 
-const NewPassword = ({
-  match: {
-    params: { id: token }
-  }
-}: RouteComponentProps<UrlParam>): ReactElement => {
+const NewPassword = (): ReactElement => {
   const classes = useStyles({});
+  const params = useParams();
   const { formatMessage: _t } = useIntl();
   const [newPassword, setNewPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
   const [confirmedPasswordError, setConfirmedPasswordError] = useState("");
   const [validPassword, setValidPassword] = useState(null);
-  const { callApi, res } = useApi<{}, void>("/route", { method: "put" });
+  const { callApi, res } = useApi<{}, void>("/change-password", {
+    method: "put"
+  });
 
   const checkPassword = (): void => {
     // checking if fields are completed
@@ -45,13 +43,15 @@ const NewPassword = ({
     setConfirmedPasswordError(localConfirmedPasswordError);
 
     if (localConfirmedPasswordError === "" && localNewPasswordError === "") {
+      const { token } = params?.token && params;
       callApi({ newPassword, confirmedPassword, token })
         .then(() => {
-          if (res.status === 200) {
-            setValidPassword(1);
-          } else {
-            setValidPassword(0);
-          }
+          console.log(res);
+          // if (res.status === 200) {
+          //   setValidPassword(1);
+          // } else {
+          //   setValidPassword(0);
+          // }
         })
         .catch(() => {
           setValidPassword(0);

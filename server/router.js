@@ -28,8 +28,9 @@ router.get("/check-auth", checkAuth, (req, res) => {
 });
 
 /* Reset password */
-router.post("/reset-password", ResetPassword.SendMail);
-router.post("/change-password", ResetPassword.ResetPassword);
+router.get("/reset-password/:lang/:email", ResetPassword.SendMail);
+// router.get("/resetPassword/:token", ResetPassword.checkToken);
+router.put("/change-password", ResetPassword.ResetPassword);
 
 /* Search */
 router.get("/movies", checkAuth, searchController.searchMovies);

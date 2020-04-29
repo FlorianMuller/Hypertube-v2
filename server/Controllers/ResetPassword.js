@@ -19,34 +19,42 @@ const resetEmailInfo = {
   }
 };
 
+// const checkToken = async (req, res) => {
+//   if (req.params.token === undefined) return res.status(401);
+//   const token = await TokenModel.findOne({ value: req.params.token });
+//   if (token === null) return res.status(401).redirect("/");
+//   res.status(200).redirect("/change-password");
+// };
+
 const SendMail = async (req, res) => {
-  if (req.body.email === undefined || req.body.lang === undefined)
-    return res.sendStatut(401);
-  const user = await UserModel.findOne({ email: req.body.email });
-  if (user === null) return res.sendStatut(401);
-  console.log(user);
+  if (req.params.email === undefined || req.params.lang === undefined)
+    return res.send({ status: 401 });
+  const user = await UserModel.findOne({ email: req.params.email });
+  if (user === null) return res.send({ status: 401 });
   if (user.schoolID !== undefined || user.googleID !== undefined)
-    return res.sendStatus(401);
+    return res.send({ status: 401 });
   const token = await TokenModel.create({
     user: user.id,
     type: "password"
   });
   const emailInfo =
-    req.body.lang === "fr" ? resetEmailInfo.fr.html : resetEmailInfo.en.html;
+    req.params.lang === "fr" ? resetEmailInfo.fr.html : resetEmailInfo.en.html;
   await sendEmail({
     to: user.email,
     ...resetEmailInfo,
     // Setting unique url in html/text
     html: emailInfo.replace(
       /{{resetUrl}}/g,
-      `${process.env.CLIENT_ORIGIN}/resetPassword/${token}`
+      // `${process.env.CLIENT_ORIGIN}/resetPassword/${token}`
+      `${process.env.CLIENT_ORIGIN}/new-password/${token.value}`
     ),
     text: emailInfo.replace(
       /{{resetUrl}}/g,
-      `${process.env.CLIENT_ORIGIN}/resetPassword/${token}`
+      // `${process.env.CLIENT_ORIGIN}/resetPassword/${token}`
+      `${process.env.CLIENT_ORIGIN}/new-password/${token.value}`
     )
   });
-  return res.status(200).send("OK");
+  return res.send({ status: 200 });
 };
 
 const CheckResetToken = async (resetPasswordToken) => {
@@ -58,19 +66,24 @@ const CheckResetToken = async (resetPasswordToken) => {
 };
 
 const ResetPassword = async (req, res) => {
-  if (req.body.password === null) return res.sendStatus(400);
-  if (req.body.password !== req.body.repeatPassword) return res.sendStatus(400);
+  console.log(req.body);
+  if (req.body.newPassword === null) return res.sendStatus(400);
+  if (req.body.newPassword !== req.body.confirmedPassword)
+    return res.send({ status: 401 });
   if ((await CheckResetToken(req.body.token)) === false)
-    return res.redirect("/");
+    return res.send({ status: 401 });
   const found = await TokenModel.findOne({ value: req.body.token });
   console.log(found);
-  const newPassword = bcrypt.hashSync(req.body.password, 10);
-  await UserModel.findByIdAndUpdate(
-    { _id: found.user },
-    { password: newPassword }
-  );
-  await TokenModel.findOneAndDelete({ value: req.body.token });
-  return res.redirect("/");
+  if (found) {
+    const newHash = bcrypt.hashSync(req.body.newPassword, 10);
+    await UserModel.findByIdAndUpdate(
+      { _id: found.user },
+      { password: newHash }
+    );
+    await TokenModel.findOneAndDelete({ value: req.body.token });
+    return res.send({ status: 200 });
+  }
+  return res.send({ status: 401 });
 };
 
 export default { SendMail, ResetPassword };
