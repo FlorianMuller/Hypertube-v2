@@ -21,12 +21,23 @@ import checkInvalidCommentOrStars from "./MovieComments.service";
 interface Props {
   movieId: string;
   reviews: Reviews;
+  movieName: string;
+  setReviews: Function;
 }
 
-const MovieComments = ({ movieId, reviews }: Props): ReactElement => {
+const MovieComments = ({
+  movieId,
+  reviews,
+  movieName,
+  setReviews
+}: Props): ReactElement => {
   const { formatMessage: _t } = useIntl();
   const [stars, setStars] = useState(0);
-  const [comment, setComment] = useState({ name: "", date: null, body: "" });
+  const [comment, setComment] = useState({
+    name: "",
+    date: null,
+    body: ""
+  });
   const [error, setError] = useState();
   const scroll = Scroll.animateScroll;
   const classes = useStyles({});
@@ -60,21 +71,26 @@ const MovieComments = ({ movieId, reviews }: Props): ReactElement => {
     });
   };
 
-  const sendComment = (): void => {
+  const sendComment = async (): Promise<void> => {
     const ret = checkInvalidCommentOrStars(stars, comment.body);
     if (!ret.comment && !ret.stars) {
       const body = {
         ...comment,
-        stars
+        stars,
+        movieId,
+        movieName
       };
-      API.post(`/movies/${movieId}/reviews`, body)
-        .then(() => {
+      await API.post(`/movies/${movieId}/reviews`, body)
+        .then(async () => {
           setComment({
             name: "",
             date: null,
             body: ""
           });
           setStars(0);
+          await API.get(`/movie/review/${movieId}`).then((req) => {
+            setReviews(req.data);
+          });
         })
         .catch((e) => {
           console.error(e);
@@ -122,10 +138,10 @@ const MovieComments = ({ movieId, reviews }: Props): ReactElement => {
             ))}
           </div>
         ) : (
-          <div className={classes.comment}>
-            {_t({ id: "movie.comment.none" })}
-          </div>
-        )}
+            <div className={classes.comment}>
+              {_t({ id: "movie.comment.none" })}
+            </div>
+          )}
         <div className={classes.personalCommentContainer}>
           <TextField
             error={error?.comment}

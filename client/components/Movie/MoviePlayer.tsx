@@ -66,8 +66,8 @@ const MoviePlayer = ({ imdbId, srcVideo }: Props): ReactElement => {
           )}
         </video>
       ) : (
-          <Loading />
-        )}
+        <Loading />
+      )}
     </div>
   );
 };

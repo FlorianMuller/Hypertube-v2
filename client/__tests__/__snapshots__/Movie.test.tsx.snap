@@ -517,6 +517,7 @@ exports[`Movie should renders <Movie> in french 1`] = `
 exports[`Movie should renders <MovieComments> in english 1`] = `
 <MovieComments
   movieId="Dokku_obrash"
+  movieName="Titanic"
   reviews={
     Object {
       "movieRating": 5,
@@ -531,6 +532,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
       ],
     }
   }
+  setReviews={[Function]}
 >
   <div
     className="makeStyles-containerRatingAndComment-162"
@@ -4912,6 +4914,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
 exports[`Movie should renders <MovieComments> in french 1`] = `
 <MovieComments
   movieId="Dokku_obrash"
+  movieName="Titanic"
   reviews={
     Object {
       "movieRating": 5,
@@ -4926,6 +4929,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
       ],
     }
   }
+  setReviews={[Function]}
 >
   <div
     className="makeStyles-containerRatingAndComment-162"

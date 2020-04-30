@@ -31,14 +31,20 @@ const Movie = (): ReactElement => {
     generateUrl();
   }
 
-  const { resData, loading, error } = useApi(`/movie/infos/${imdbId}`, {
+  const { resData, loading, error } = useApi<
+    {
+      infos: MovieInfos;
+      reviews: Reviews;
+    },
+    void
+  >(`/movie/infos/${imdbId}`, {
     hotReload: true
   });
   const { infos, reviews: reviewsData } = resData || {};
 
   const movieInfos = infos as MovieInfos;
 
-  const reviews = reviewsData as Reviews;
+  const [reviews, setReviews] = useState<Reviews>();
 
   const initComments = (reviewReceived: Review): void => {
     let totalStars = reviewReceived.stars;
@@ -48,6 +54,10 @@ const Movie = (): ReactElement => {
     reviews.movieRating = totalStars / (reviews.review.length + 1);
     reviews.review.push(reviewReceived);
   };
+
+  useEffect(() => {
+    if (reviewsData) setReviews(reviewsData);
+  }, [reviewsData]);
 
   useEffect(() => {
     // const initComments = (reviewReceived: Review): void => {
@@ -142,7 +152,12 @@ const Movie = (): ReactElement => {
         {srcVideo && <MoviePlayer imdbId={imdbId} srcVideo={srcVideo} />}
 
         {movieInfos && (
-          <MovieComments movieId={movieInfos.imdbid} reviews={reviews} />
+          <MovieComments
+            movieId={movieInfos.imdbid}
+            reviews={reviews}
+            movieName={movieInfos.title}
+            setReviews={setReviews}
+          />
         )}
       </div>
       <RecommendedMovies />

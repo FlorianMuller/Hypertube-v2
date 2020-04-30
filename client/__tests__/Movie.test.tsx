@@ -92,7 +92,14 @@ describe("Movie", () => {
 
   it("should renders <MovieComments> in english", () => {
     const domNode = mountWithIntl(
-      <MovieComments movieId="Dokku_obrash" reviews={reviews} />,
+      <MovieComments
+        movieId="Dokku_obrash"
+        reviews={reviews}
+        movieName="Titanic"
+        setReviews={(): void => {
+          console.log("Heloo");
+        }}
+      />,
       "en"
     );
     expect(EnzymeToJson(domNode)).toMatchSnapshot();
@@ -100,7 +107,14 @@ describe("Movie", () => {
 
   it("should renders <MovieComments> in french", () => {
     const domNode = mountWithIntl(
-      <MovieComments movieId="Dokku_obrash" reviews={reviews} />,
+      <MovieComments
+        movieId="Dokku_obrash"
+        reviews={reviews}
+        movieName="Titanic"
+        setReviews={(): void => {
+          console.log("Heloo");
+        }}
+      />,
       "fr"
     );
     expect(EnzymeToJson(domNode)).toMatchSnapshot();

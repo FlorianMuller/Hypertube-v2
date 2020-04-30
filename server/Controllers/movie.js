@@ -13,6 +13,7 @@ import mongoose from "../mongo";
 import ioConnection from "..";
 
 import MovieModel from "../Schemas/MoviesDatabase";
+import MovieCommentModel from "../Schemas/MovieComment";
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
@@ -169,7 +170,7 @@ const getInfos = async (req, res) => {
             : movie.images.poster,
         imdbid: sourceSite === "yts" ? movie.imdb_code : movie.imdb_id
       };
-      reviews = await movieHelpers.findReviews(movie.id);
+      reviews = await movieHelpers.findReviews(req.params.imdbId);
       res.status(200).send({ infos, reviews });
     })
     .catch((e) => {
@@ -441,52 +442,21 @@ const PlayMovie = async (req, res) => {
 };
 
 const receiveReviews = (req, res) => {
-  const { movieId } = req.body;
-  Axios.get(`https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}`)
-    .then(
-      async ({
-        data: {
-          data: { movie }
-        }
-      }) => {
-        if (movie.title && req.body.body && req.body.body.length < 1001) {
-          const ret = await movieHelpers.saveReview({
-            _id: new mongoose.Types.ObjectId(),
-            movieId: req.body.movieId,
-            movieName: movie.title,
-            name: req.body.name,
-            date: req.body.date,
-            stars: req.body.stars,
-            body: req.body.body
-          });
-          if (typeof ret !== "string") {
-            const fullDate = String(new Date(req.body.date)).split(" ");
-            ioConnection.ioConnection
-              .to(req.body.movieId)
-              .emit("New comments", {
-                id: Date.now(),
-                name: req.body.name,
-                date: movieHelpers.timestampToDate(
-                  fullDate[1],
-                  fullDate[2],
-                  fullDate[3]
-                ),
-                stars: req.body.stars,
-                body: req.body.body
-              });
-            res.sendStatus(200);
-          } else {
-            res.sendStatus(500);
-          }
-        } else {
-          res.sendStatus(409);
-        }
-      }
-    )
-    .catch((e) => {
-      console.error(e.message);
-      res.sendStatus(500);
+  const comment = req.body;
+  try {
+    MovieCommentModel.create({
+      movieId: comment.movieId,
+      movieName: comment.movieName,
+      name: comment.name,
+      date: Date.now(),
+      stars: comment.stars,
+      body: comment.body
     });
+    res.status(200).send("OK");
+  } catch (e) {
+    console.log(e);
+    res.status(500);
+  }
 };
 
 const getRecommendation = async (_req, res) => {
@@ -507,10 +477,16 @@ const getRecommendation = async (_req, res) => {
   }
 };
 
+const getReviews = async (req, res) => {
+  const newReviews = await movieHelpers.findReviews(req.params.id);
+  res.status(200).send(newReviews);
+};
+
 export default {
   PlayMovie,
   getInfos,
   receiveReviews,
   getSubtitles,
-  getRecommendation
+  getRecommendation,
+  getReviews
 };

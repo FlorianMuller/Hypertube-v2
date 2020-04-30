@@ -45,8 +45,7 @@ router.get("/movie/streaming/:directory/:fileName", checkAuth, (req, res) => {
   console.log(dest);
   res.status(200).send(dest);
 });
-router.post("/movie/review", checkAuth, movieController.receiveReviews);
-
+router.get("/movie/review/:id", checkAuth, movieController.getReviews);
 router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
 
 export default router;
