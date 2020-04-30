@@ -20,7 +20,7 @@ const MovieThumbnail = ({ movie }: Props): ReactElement => {
     <div className={classes.thumbnailContainer} key={movie.id}>
       <Image
         animationDuration={500}
-        src={movie.cover}
+        src={movie.cover || "no-image"}
         color="rgba(0,0,0,0)"
         imageStyle={{ width: 300, height: 450 }}
         style={{ width: 300, height: 450 }}
@@ -52,8 +52,13 @@ const MovieThumbnail = ({ movie }: Props): ReactElement => {
             </div>
           )}
           <Typography className={classes.rating}>
-            {movie.rating} <StarIcon className={classes.ratingIcon} />
-            {movie.runtime && <span>- {movie.runtime} mins</span>}
+            {movie.rating !== null && (
+              <>
+                {movie.rating} <StarIcon className={classes.ratingIcon} />
+              </>
+            )}
+            {movie.rating !== null && movie.runtime && <span> - </span>}
+            {movie.runtime && <span>{movie.runtime} mins</span>}
           </Typography>
           <Link to={`/movie/${movie.id}`} className={classes.watchLink}>
             <Button color="primary" variant="contained">

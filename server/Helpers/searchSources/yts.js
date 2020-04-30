@@ -1,16 +1,19 @@
 import axios from "axios";
+import _ from "lodash";
 
 const YTS_BASE_URL = "https://yts.ae";
 const YTS_MOVIE_URL = `${YTS_BASE_URL}/api/v2/list_movies.json`;
 
+const YTS_LIMIT = 50;
+
 // our category -> YTS category
-const YTS_COLLECTION = {
+const OUR_TO_YTS_GENRES = {
   action: "Action",
   adventure: "Adventure",
   animation: "Animation",
-  aiography: "Biography",
-  aomedy: "Comedy",
-  arime: "Crime",
+  biography: "Biography",
+  comedy: "Comedy",
+  crime: "Crime",
   documentary: "Documentary",
   drama: "Drama",
   family: "Family",
@@ -30,6 +33,7 @@ const YTS_COLLECTION = {
   war: "War",
   western: "Western"
 };
+const YTS_TO_OUR_GENRES = _.invert(OUR_TO_YTS_GENRES);
 
 const YTS_SORT = {
   seeds: "seeds",
@@ -39,12 +43,21 @@ const YTS_SORT = {
   rating: "rating"
 };
 
-const getCollection = (cat) => {
-  return cat ? YTS_COLLECTION[cat] : undefined;
-};
+const ourToYtsGenres = (genre) => OUR_TO_YTS_GENRES[genre];
+const YtsToOurGenres = (genre) => YTS_TO_OUR_GENRES[genre];
 
-const getSort = (sort) => {
-  return sort ? YTS_SORT[sort] : "date_added";
+const getSort = (sort) => (sort ? YTS_SORT[sort] : "date_added");
+
+/**
+ * Check if the source is able to search with the given option
+ * Cant search if:
+ * - sorting is not supported
+ * - collection is not supported
+ */
+const cantSearch = (sort, collection) => {
+  return (
+    (sort && !YTS_SORT[sort]) || (collection && !OUR_TO_YTS_GENRES[collection])
+  );
 };
 
 export const searchMoviesOnYts = async ({
@@ -57,10 +70,7 @@ export const searchMoviesOnYts = async ({
   collection
 }) => {
   // Checking if source can use this sorting method and this collection
-  if (
-    (sort && !YTS_SORT[sort]) ||
-    (collection && !YTS_COLLECTION[collection])
-  ) {
+  if (cantSearch(sort, collection)) {
     console.warn("[YTS]: Sort or collection not supported");
     return {
       name: "yts",
@@ -78,7 +88,7 @@ export const searchMoviesOnYts = async ({
       query_term: (query || "") + (query && year ? " " : "") + (year || ""),
       page,
       minimum_rating: minRating * 2 || 0,
-      genre: getCollection(collection)
+      genre: ourToYtsGenres(collection)
     }
   });
 
@@ -93,21 +103,21 @@ export const searchMoviesOnYts = async ({
   }
 
   // Formating the movie list
-  const parsedMovies = data.data.movies.map((movie) => ({
+  const formatedMovies = data.data.movies.map((movie) => ({
     id: movie.imdb_code,
     title: movie.title_english,
     cover: YTS_BASE_URL + movie.large_cover_image,
     year: movie.year,
     summary: movie.synopsis,
-    genres: movie.genres,
+    genres: movie.genres.map((genre) => YtsToOurGenres(genre)),
     rating: movie.rating / 2,
     runtime: movie.runtime
   }));
 
   return {
     name: "yts",
-    nextPage: parsedMovies.length === 12,
-    movies: parsedMovies
+    nextPage: formatedMovies.length === YTS_LIMIT,
+    movies: formatedMovies
   };
 };
 

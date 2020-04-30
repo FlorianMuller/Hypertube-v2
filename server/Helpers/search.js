@@ -1,14 +1,15 @@
 import yts from "./searchSources/yts";
+import rarbg from "./searchSources/rarbg";
 // import popCornTime from "./searchSources/popCornTime";
 
-// const sourceList = [popCornTime];
-const sourceList = [yts];
+// const sourceList = [yts, popCornTime, rarbg];
+const sourceList = [yts, rarbg];
 
 // [{ nextPage: bool, movies: [] }, { nextPage: bool, movies: [] }, ...] -> {nextPage: bool, movies: []}
 const mergeMoviesList = async (allData) => {
   const idList = [];
   return {
-    nextPage: !!allData.filter((data) => data.nextPage),
+    nextPage: !!allData.filter((data) => data.nextPage).length,
     movies: allData
       .flatMap((data) => data.movies)
       .filter((movie) => {
