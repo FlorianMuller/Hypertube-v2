@@ -91,6 +91,9 @@ const useSearchStyles = makeStyles((theme) => ({
   noMedia: {
     width: "20rem",
     height: "20rem"
+  },
+  niceLink: {
+    textDecoration: "none"
   }
 }));
 

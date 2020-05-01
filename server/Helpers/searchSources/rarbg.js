@@ -12,8 +12,8 @@ let RARBG_TOKEN = null;
 let lastCall = null;
 
 const RARBG_SORT = {
-  seeds: "seeders",
-  date_added: "last"
+  dateAdded: "last",
+  seeds: "seeders"
 };
 
 const defautlResponse = {

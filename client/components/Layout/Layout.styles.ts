@@ -21,7 +21,7 @@ export const useLayoutStyles = makeStyles((theme) => ({
     position: "absolute",
     zIndex: 1000,
     top: theme.spacing(-1.5),
-    right: theme.spacing(4),
+    right: theme.spacing(23),
     width: "20rem",
     [theme.breakpoints.down("xs")]: {
       position: "relative",
@@ -96,39 +96,55 @@ export const useHeaderStyles = makeStyles((theme) => ({
     height: theme.spacing(6),
     width: theme.spacing(6),
     "&:hover": {
-      background: theme.palette.grey[800]
+      backgroundColor: theme.palette.grey[800]
     }
   },
   thumb: {
     color: theme.palette.primary.main
+  },
+  localeItem: {
+    fontSize: "24px"
   }
 }));
 
 export const useFiltersStyles = makeStyles((theme) => ({
-  container: {
+  paper: {
     width: "100%",
-    padding: theme.spacing(4, 3, 6.5, 3)
+    padding: theme.spacing(4, 3, 3),
+    display: "flex",
+    flexDirection: "column"
   },
-  collectionsContainer: {
-    marginBottom: theme.spacing(2),
+  firstElement: {
+    marginTop: theme.spacing(2)
+  },
+  filterElement: {
+    marginBottom: theme.spacing(4)
+  },
+  select: {
     width: "100%"
   },
-  filtersComponent: {
-    width: "100%"
-  },
-  yearItem: {
+  centerItem: {
     display: "flex",
     justifyContent: "center",
     textAlign: "center"
   },
   ratingContainer: {
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(4),
     [theme.breakpoints.down("xs")]: {
       display: "flex",
       justifyContent: "space-evenly"
     }
   },
+  resetFilterButtonWrapper: {
+    height: "24px",
+    marginBottom: theme.spacing(2)
+  },
   resetFilterButton: {
-    float: "right"
+    float: "right",
+    color: "#a94b4b",
+    borderColor: "#a94b4b",
+    "&:hover": {
+      backgroundColor: "rgba(169, 75, 75, 0.1) !important"
+    }
   }
 }));

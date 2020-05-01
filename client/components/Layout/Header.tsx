@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import { useIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import {
@@ -11,22 +11,33 @@ import {
   OutlinedInput,
   Hidden
 } from "@material-ui/core";
-import { Search, AccountCircle } from "@material-ui/icons";
+import {
+  Search,
+  ExpandMore,
+  ExpandLess,
+  AccountCircle
+} from "@material-ui/icons";
 
 import { useHeaderStyles } from "./Layout.styles";
 
 interface Props {
   locale: string;
   setLocale: (locale: string) => void;
-  onExpandFilters: () => void;
+  expandedFilters: boolean;
+  setExpandedFilters: (
+    value: boolean | ((oldValue: boolean) => boolean)
+  ) => void;
   onSearchChange: (query: string) => void;
   searchQuery: string;
 }
 
+const localeCompleteLst = ["en", "fr"];
+
 const Header = ({
   locale,
   setLocale,
-  onExpandFilters,
+  expandedFilters,
+  setExpandedFilters,
   onSearchChange,
   searchQuery
 }: Props): ReactElement => {
@@ -34,6 +45,13 @@ const Header = ({
   const { formatMessage: _t } = useIntl();
   const [localeAnchorEl, setLocaleAnchorEl] = useState(undefined);
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(undefined);
+  const [localeLst, setLocaleLst] = useState(
+    localeCompleteLst.filter((loc) => loc !== locale)
+  );
+
+  useEffect(() => {
+    setLocaleLst(localeCompleteLst.filter((loc) => loc !== locale));
+  }, [locale]);
 
   const setNewLocale = (newLocale: string): void => {
     setLocale(newLocale);
@@ -57,23 +75,40 @@ const Header = ({
           <Hidden smDown>
             <Typography className={classes.linkMedia} variant="subtitle2">
               <Link className={classes.titleLink} to="/search">
-                {_t({ id: "header.trending_movies" })}
+                {_t({ id: "header.last_add" })}
               </Link>
             </Typography>
           </Hidden>
         </div>
         <div className={classes.headerContent}>
+          {/* Searchbar */}
           <OutlinedInput
             value={searchQuery}
             onChange={(e): void => onSearchChange(e.target.value)}
-            onFocus={onExpandFilters}
+            onFocus={(): void => setExpandedFilters(true)}
             placeholder={_t({ id: "layout.filters.search" })}
             className={classes.searchInput}
             startAdornment={<Search className={classes.inputLabel} />}
             labelWidth={0}
             id="menuitem-search"
+            autoComplete="off"
           />
+          {/* Filters button */}
+          <IconButton
+            id="expandFiltersButton"
+            onClick={(): void => setExpandedFilters((oldIsExp) => !oldIsExp)}
+            className={classes.localeItem}
+          >
+            {expandedFilters ? (
+              <ExpandLess id="expandFiltersIcon" />
+            ) : (
+              <ExpandMore id="expandFiltersIcon" />
+            )}
+          </IconButton>
+
+          {/* Language + profile button */}
           <div className={classes.buttonsMenu}>
+            {/* Language */}
             <IconButton
               className={classes.headerButtons}
               onClick={(e): void => setLocaleAnchorEl(e.currentTarget)}
@@ -85,16 +120,30 @@ const Header = ({
             <Menu
               keepMounted
               anchorEl={localeAnchorEl}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "center"
+              }}
+              getContentAnchorEl={null}
               open={!!localeAnchorEl}
               onClose={(): void => setLocaleAnchorEl(undefined)}
             >
-              <MenuItem onClick={(): void => setNewLocale("fr")}>
-                {_t({ id: "language.fr" })}
-              </MenuItem>
-              <MenuItem onClick={(): void => setNewLocale("en")}>
-                {_t({ id: "language.en" })}
-              </MenuItem>
+              {localeLst.map((loc) => (
+                <MenuItem
+                  key={loc}
+                  onClick={(): void => setNewLocale(loc)}
+                  className={classes.localeItem}
+                >
+                  {_t({ id: `language.${loc}` })}
+                </MenuItem>
+              ))}
             </Menu>
+
+            {/* Profile */}
             <IconButton
               className={classes.headerButtons}
               onClick={(e): void => setProfileMenuAnchor(e.currentTarget)}
@@ -104,6 +153,15 @@ const Header = ({
             <Menu
               keepMounted
               anchorEl={profileMenuAnchor}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              getContentAnchorEl={null}
               open={!!profileMenuAnchor}
               onClose={(): void => setProfileMenuAnchor(undefined)}
             >

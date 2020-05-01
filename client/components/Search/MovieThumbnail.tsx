@@ -41,13 +41,20 @@ const MovieThumbnail = ({ movie }: Props): ReactElement => {
           {movie.genres && (
             <div>
               {movie.genres.map((genre: string) => (
-                <Chip
-                  className={classes.tag}
-                  label={genre}
-                  clickable
-                  color="primary"
-                  key={genre}
-                />
+                <Link
+                  to={`/search?collection=${genre}`}
+                  className={classes.niceLink}
+                >
+                  <Chip
+                    className={classes.tag}
+                    label={_t({
+                      id: `layout.filters.select_category.${genre}`
+                    })}
+                    clickable
+                    color="primary"
+                    key={genre}
+                  />
+                </Link>
               ))}
             </div>
           )}

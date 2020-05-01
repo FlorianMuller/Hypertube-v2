@@ -25,7 +25,7 @@ const mergeMoviesList = async (allData) => {
  *
  * minRating: minimum note
  * year: specific year
- * collections: specific movie categories
+ * collection: a specific movie genre
  */
 const searchMoviesOnAllSource = async (searchParam) => {
   const allData = await Promise.all(

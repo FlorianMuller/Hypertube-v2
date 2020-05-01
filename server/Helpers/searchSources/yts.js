@@ -18,7 +18,7 @@ const OUR_TO_YTS_GENRES = {
   drama: "Drama",
   family: "Family",
   fantasy: "Fantasy",
-  filmNoir: "Film Noir",
+  filmNoir: "Film-Noir",
   history: "History",
   horror: "Horror",
   music: "Music",
@@ -26,7 +26,7 @@ const OUR_TO_YTS_GENRES = {
   mystery: "Mystery",
   romance: "Romance",
   sciFi: "Sci-Fi",
-  shortFilm: "Short Film",
+  // shortFilm: "Short Film", // didn't found it on YTS but it's an IMDb official genre 🤷🏻‍♂️
   sport: "Sport",
   superhero: "Superhero",
   thriller: "Thriller",
@@ -36,17 +36,26 @@ const OUR_TO_YTS_GENRES = {
 const YTS_TO_OUR_GENRES = _.invert(OUR_TO_YTS_GENRES);
 
 const YTS_SORT = {
-  seeds: "seeds",
-  date_added: "date_added",
+  dateAdded: "date_added",
+  // seeds: "seeds",
   title: "title",
   year: "year",
   rating: "rating"
+};
+
+const YTS_ORDER = {
+  dateAdded: "des",
+  // seeds: "des",
+  title: "asc",
+  year: "des",
+  rating: "des"
 };
 
 const ourToYtsGenres = (genre) => OUR_TO_YTS_GENRES[genre];
 const YtsToOurGenres = (genre) => YTS_TO_OUR_GENRES[genre];
 
 const getSort = (sort) => (sort ? YTS_SORT[sort] : "date_added");
+const getOrder = (sort) => YTS_ORDER[sort];
 
 /**
  * Check if the source is able to search with the given option
@@ -62,7 +71,6 @@ const cantSearch = (sort, collection) => {
 
 export const searchMoviesOnYts = async ({
   sort,
-  order,
   query,
   page,
   minRating,
@@ -84,7 +92,7 @@ export const searchMoviesOnYts = async ({
     params: {
       limit: 50,
       sort_by: getSort(sort),
-      order_by: order,
+      order_by: getOrder(sort),
       query_term: (query || "") + (query && year ? " " : "") + (year || ""),
       page,
       minimum_rating: minRating * 2 || 0,
