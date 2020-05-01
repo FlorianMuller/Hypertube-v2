@@ -10,6 +10,7 @@ interface Props {
   setCollection: (value: string) => void;
   labelid: string;
 }
+
 const collectionName = [
   "action",
   "adventure",
@@ -26,17 +27,20 @@ const collectionName = [
   "horror",
   "music",
   "musical",
+  "news",
   "mystery",
+  "realityTV",
   "romance",
   "sciFi",
   // "tvMovie", // We're not searching on TMDb, we can't search this category
-  // "shortFilm", // Not found on YTS 🤷🏻‍♂️
+  // "shortFilm", // Not found on YTS 🤷🏻‍♂️ (but on IMDb)
   "sport",
   "superhero",
   "thriller",
   "war",
   "western"
 ];
+
 const CollectionSelect = ({
   collection,
   setCollection,

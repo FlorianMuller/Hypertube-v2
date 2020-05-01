@@ -12,6 +12,37 @@ interface Props {
   movie: Movie;
 }
 
+// Our genre (mix of IMDb (yts) and TMDb (rarbg) genres)
+const supportedGenre = [
+  "action",
+  "adventure",
+  "animation",
+  "biography",
+  "comedy",
+  "crime",
+  "documentary",
+  "drama",
+  "family",
+  "fantasy",
+  "filmNoir",
+  "history",
+  "horror",
+  "music",
+  "musical",
+  "mystery",
+  "news",
+  "romance",
+  "realityTV",
+  "sciFi",
+  "tvMovie",
+  "shortFilm",
+  "sport",
+  "superhero",
+  "thriller",
+  "war",
+  "western"
+];
+
 const MovieThumbnail = ({ movie }: Props): ReactElement => {
   const classes = useSearchStyles({});
   const { formatMessage: _t } = useIntl();
@@ -40,22 +71,27 @@ const MovieThumbnail = ({ movie }: Props): ReactElement => {
         <div className={classes.metaInfos}>
           {movie.genres && (
             <div>
-              {movie.genres.map((genre: string) => (
-                <Link
-                  to={`/search?collection=${genre}`}
-                  className={classes.niceLink}
-                >
-                  <Chip
-                    className={classes.tag}
-                    label={_t({
-                      id: `layout.filters.select_category.${genre}`
-                    })}
-                    clickable
-                    color="primary"
-                    key={genre}
-                  />
-                </Link>
-              ))}
+              {movie.genres.map((genre: string) => {
+                if (supportedGenre.includes(genre)) {
+                  return (
+                    <Link
+                      to={`/search?collection=${genre}`}
+                      className={classes.niceLink}
+                      key={genre}
+                    >
+                      <Chip
+                        className={classes.tag}
+                        label={_t({
+                          id: `layout.filters.select_category.${genre}`
+                        })}
+                        clickable
+                        color="primary"
+                      />
+                    </Link>
+                  );
+                }
+                return null;
+              })}
             </div>
           )}
           <Typography className={classes.rating}>

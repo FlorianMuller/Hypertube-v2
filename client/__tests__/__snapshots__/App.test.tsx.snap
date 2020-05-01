@@ -87,6 +87,8 @@ exports[`App renders correctly 1`] = `
         "layout.filters.select_category.music": "Music",
         "layout.filters.select_category.musical": "Musical",
         "layout.filters.select_category.mystery": "Mystery",
+        "layout.filters.select_category.news": "News",
+        "layout.filters.select_category.realityTV": "Reality TV",
         "layout.filters.select_category.romance": "Romance",
         "layout.filters.select_category.sciFi": "Science Fiction",
         "layout.filters.select_category.shortFilm": "Short Film",
@@ -7101,10 +7103,22 @@ exports[`App renders correctly 1`] = `
                                                   Musical
                                                 </ForwardRef(WithStyles)>,
                                                 <ForwardRef(WithStyles)
+                                                  id="menuitem-news"
+                                                  value="news"
+                                                >
+                                                  News
+                                                </ForwardRef(WithStyles)>,
+                                                <ForwardRef(WithStyles)
                                                   id="menuitem-mystery"
                                                   value="mystery"
                                                 >
                                                   Mystery
+                                                </ForwardRef(WithStyles)>,
+                                                <ForwardRef(WithStyles)
+                                                  id="menuitem-realityTV"
+                                                  value="realityTV"
+                                                >
+                                                  Reality TV
                                                 </ForwardRef(WithStyles)>,
                                                 <ForwardRef(WithStyles)
                                                   id="menuitem-romance"
@@ -7349,10 +7363,22 @@ exports[`App renders correctly 1`] = `
                                                     Musical
                                                   </ForwardRef(WithStyles)>,
                                                   <ForwardRef(WithStyles)
+                                                    id="menuitem-news"
+                                                    value="news"
+                                                  >
+                                                    News
+                                                  </ForwardRef(WithStyles)>,
+                                                  <ForwardRef(WithStyles)
                                                     id="menuitem-mystery"
                                                     value="mystery"
                                                   >
                                                     Mystery
+                                                  </ForwardRef(WithStyles)>,
+                                                  <ForwardRef(WithStyles)
+                                                    id="menuitem-realityTV"
+                                                    value="realityTV"
+                                                  >
+                                                    Reality TV
                                                   </ForwardRef(WithStyles)>,
                                                   <ForwardRef(WithStyles)
                                                     id="menuitem-romance"
@@ -7598,10 +7624,22 @@ exports[`App renders correctly 1`] = `
                                                       Musical
                                                     </ForwardRef(WithStyles)>,
                                                     <ForwardRef(WithStyles)
+                                                      id="menuitem-news"
+                                                      value="news"
+                                                    >
+                                                      News
+                                                    </ForwardRef(WithStyles)>,
+                                                    <ForwardRef(WithStyles)
                                                       id="menuitem-mystery"
                                                       value="mystery"
                                                     >
                                                       Mystery
+                                                    </ForwardRef(WithStyles)>,
+                                                    <ForwardRef(WithStyles)
+                                                      id="menuitem-realityTV"
+                                                      value="realityTV"
+                                                    >
+                                                      Reality TV
                                                     </ForwardRef(WithStyles)>,
                                                     <ForwardRef(WithStyles)
                                                       id="menuitem-romance"
@@ -7853,10 +7891,22 @@ exports[`App renders correctly 1`] = `
                                                         Musical
                                                       </ForwardRef(WithStyles)>,
                                                       <ForwardRef(WithStyles)
+                                                        id="menuitem-news"
+                                                        value="news"
+                                                      >
+                                                        News
+                                                      </ForwardRef(WithStyles)>,
+                                                      <ForwardRef(WithStyles)
                                                         id="menuitem-mystery"
                                                         value="mystery"
                                                       >
                                                         Mystery
+                                                      </ForwardRef(WithStyles)>,
+                                                      <ForwardRef(WithStyles)
+                                                        id="menuitem-realityTV"
+                                                        value="realityTV"
+                                                      >
+                                                        Reality TV
                                                       </ForwardRef(WithStyles)>,
                                                       <ForwardRef(WithStyles)
                                                         id="menuitem-romance"

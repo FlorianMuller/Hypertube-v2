@@ -19,6 +19,7 @@ import MovieThumbnail from "./MovieThumbnail";
 const Search = (): ReactElement => {
   const classes = useSearchStyles({});
   const { formatMessage: _t } = useIntl();
+  const [printedMovieList, setPrintedMovieList] = useState<Movie[]>([]);
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const history = useHistory();
@@ -37,6 +38,7 @@ const Search = (): ReactElement => {
   useEffect(() => {
     setPage(1);
     setMovieList([]);
+    setPrintedMovieList([]);
     setUrl(formatQueryUrl(location.search, 1));
   }, [location.search, location.pathname]);
 
@@ -46,22 +48,42 @@ const Search = (): ReactElement => {
   useEffect(() => {
     if (data && data.movies?.length) {
       if (page === 1) {
-        setMovieList(data.movies);
+        setPrintedMovieList(data.movies.slice(0, 12));
+        setMovieList(data.movies.slice(12));
       } else {
-        setMovieList((oldFilmList) => [...oldFilmList, ...data.movies]);
+        console.log(
+          "movieList.length",
+          movieList.length,
+          " -> ",
+          movieList.length + data.movies.length
+        );
+        setMovieList((oldMovieList) => [...oldMovieList, ...data.movies]);
       }
     }
   }, [data]);
 
   /**
-   * Getting next page
+   * Getting next 12 movies (and next page if needed)
    */
   const loadMore = (): void => {
-    if (loading || !data?.nextPage) {
-      return;
+    console.log(
+      "movieList.length",
+      movieList.length,
+      " -> ",
+      movieList.length - 12
+    );
+    // Getting next page if we don't have enough moovie in stock
+    if (!loading && data?.nextPage && movieList.length < 24) {
+      console.log("getting more movies");
+      setPage(page + 1);
+      setUrl(formatQueryUrl(location.search, page + 1));
     }
-    setPage(page + 1);
-    setUrl(formatQueryUrl(location.search, page + 1));
+
+    // Printing next 12 movies
+    if (movieList.length) {
+      setPrintedMovieList((old) => [...old, ...movieList.slice(0, 12)]);
+      setMovieList((old) => old.slice(12));
+    }
   };
 
   if (error) {
@@ -74,11 +96,11 @@ const Search = (): ReactElement => {
         className={classes.container}
         initialLoad={false}
         loadMore={loadMore}
-        hasMore={data?.nextPage}
+        hasMore={!!movieList.length}
         threshold={100}
       >
         {/* No media found */}
-        {!movieList.length && !loading && (
+        {!printedMovieList.length && !loading && (
           <div className={classes.noMediaContainer}>
             <img
               src={`${window.location.origin}/public/no-media.png`}
@@ -92,12 +114,13 @@ const Search = (): ReactElement => {
         )}
 
         {/* Medias list */}
-        {movieList.map((movie) => (
+        {printedMovieList.map((movie) => (
           <MovieThumbnail key={movie.id} movie={movie} />
         ))}
 
         {/* Fake movies Loading */}
         {loading &&
+          movieList.length === 0 &&
           _.times(12, (i) => (
             <div className={classes.thumbnailContainer} key={i}>
               <Skeleton

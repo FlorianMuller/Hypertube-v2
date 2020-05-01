@@ -95,6 +95,8 @@
   "layout.filters.select_category.music": "Musique",
   "layout.filters.select_category.musical": "Comédie Musicale",
   "layout.filters.select_category.mystery": "Mystère",
+  "layout.filters.select_category.news": "Actualités",
+  "layout.filters.select_category.realityTV": "Téléréalité",
   "layout.filters.select_category.romance": "Romance",
   "layout.filters.select_category.sciFi": "Science Fiction",
   "layout.filters.select_category.tvMovie": "Téléfilm",

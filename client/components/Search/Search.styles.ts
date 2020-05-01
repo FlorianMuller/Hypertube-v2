@@ -5,7 +5,8 @@ const useSearchStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginBottom: theme.spacing(4)
   },
   thumbnailContainer: {
     position: "relative",
