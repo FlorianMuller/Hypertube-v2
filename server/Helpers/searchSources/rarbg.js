@@ -112,6 +112,7 @@ const safeSearch = async (options) => {
 
 /**
  * Remove duplicate and movies without IMDb id
+ * (in case of duplicate -> take the first one)
  */
 const cleanMovies = (movies) => {
   const idList = [];
@@ -160,7 +161,7 @@ const searchMoviesOnRarbg = async (options) => {
 
   // No movies found / Error
   if (!data.torrent_results) {
-    console.warn("[rargb] no found movies", data);
+    console.warn("[rargb] no movies found", data);
     return { ...defautlResponse };
   }
 
@@ -192,7 +193,12 @@ const searchMoviesOnRarbg = async (options) => {
     genres:
       movie.genres && movie.genres.map((genre) => TmdbToOurGenre(genre.name)),
     rating: (movie.vote_count > 0 && movie.vote_average / 2) || null,
-    runtime: movie.runtime
+    runtime: movie.runtime,
+    dateAdded:
+      options.sort === "dateAdded" || !options.sort
+        ? new Date(movies[i].pubdate)
+        : undefined,
+    seeds: options.sort === "seeds" ? movies[i].seeders : undefined
   }));
 
   return {

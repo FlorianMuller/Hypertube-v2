@@ -81,7 +81,7 @@ export const searchMoviesOnYts = async ({
 }) => {
   // Checking if source can use this sorting method and this collection
   if (cantSearch(sort, collection)) {
-    console.warn("[YTS]: Sort or collection not supported");
+    console.warn("[YTS]: Sort or genre not supported");
     return {
       name: "yts",
       nextPage: false,
@@ -105,7 +105,7 @@ export const searchMoviesOnYts = async ({
 
   // Checking `movies` because sometime `data.data.movie_count` is positive and there's no `movies` (wtf)
   if (!data || !data.data.movies) {
-    console.warn("[YTS]: no result]");
+    console.warn("[YTS]: no movies found]");
     return {
       name: "yts",
       nextPage: false,
@@ -122,7 +122,11 @@ export const searchMoviesOnYts = async ({
     summary: movie.synopsis,
     genres: movie.genres.map((genre) => YtsToOurGenres(genre)),
     rating: movie.rating / 2,
-    runtime: movie.runtime
+    runtime: movie.runtime,
+    dateAdded:
+      sort === "dateAdded" || !sort
+        ? new Date(movie.date_uploaded_unix * 1000)
+        : undefined
   }));
 
   return {
