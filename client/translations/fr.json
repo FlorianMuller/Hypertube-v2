@@ -107,7 +107,7 @@
   "layout.filters.select_category.war": "Guerre",
   "layout.filters.select_category.western": "Western",
   "layout.filters.minrating": "Note minimale",
-  "layout.filters.sort": "Triée par",
+  "layout.filters.sort": "Trier par",
   "layout.filters_sort.dateAdded": "Dernier ajouté",
   "layout.filters_sort.seeds": "Nombre de seed",
   "layout.filters_sort.title": "Titre",

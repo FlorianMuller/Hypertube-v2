@@ -207,7 +207,7 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
 
       {/* Sort */}
       <div className={classes.filterElement}>
-        <InputLabel id="sort">Sort by</InputLabel>
+        <InputLabel id="sort">{_t({ id: "layout.filters.sort" })}</InputLabel>
         <SortSelect labelid="sort" sort={sort} setSort={setSort} />
       </div>
     </Paper>
