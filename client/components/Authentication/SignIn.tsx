@@ -14,7 +14,6 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { Location } from "history";
 import { useIntl } from "react-intl";
 
-import Cookies from "universal-cookie";
 import GradientButton from "../Buttons/GradientButton";
 import useStyle from "./SignIn.styles";
 import { checkErrors } from "./SignIn.service";
@@ -37,7 +36,6 @@ const errorsToRemoveOnChange = [
 
 const SignIn = (): ReactElement => {
   const { formatMessage: _t } = useIntl();
-  const cookies = new Cookies();
   const classes = useStyle({});
   const history = useHistory();
   const location = useLocation<{ from?: Location<{}> }>();
@@ -94,7 +92,6 @@ const SignIn = (): ReactElement => {
     setAuthError(newError);
     if (newError.username === "" && newError.password === "") {
       callApi(authInfo);
-      cookies.set("loggedCookie", "logged", { maxAge: 86400000 });
     }
   };
 

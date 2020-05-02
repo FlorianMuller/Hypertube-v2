@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-import { setAccesTokenCookie } from "../Helpers/signIn";
+import { setAccesTokenCookie, setLoggedCookie } from "../Helpers/signIn";
 import UserModel from "../Schemas/User";
 
 const signIn = async (req, res) => {
@@ -16,6 +16,8 @@ const signIn = async (req, res) => {
       if (user && (await bcrypt.compare(password, user.password))) {
         if (user.emailVerified) {
           setAccesTokenCookie(res, user.id);
+          setLoggedCookie(res, user.id);
+
           res.sendStatus(200);
         } else {
           res.status(400).send({ error: "EMAIL_NOT_VERIFIED" });

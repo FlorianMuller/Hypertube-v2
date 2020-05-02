@@ -59,7 +59,6 @@ const Header = ({
     await API.put(`/users/logout`);
     history.push("/");
     onMenuProfile();
-    cookies.remove("loggedCookie");
     setLogged(!!cookies.get("loggedCookie"));
   };
 
