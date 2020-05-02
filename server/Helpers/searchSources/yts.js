@@ -24,6 +24,8 @@ const OUR_TO_YTS_GENRES = {
   music: "Music",
   musical: "Musical",
   mystery: "Mystery",
+  news: "News",
+  realityTV: "Reality-TV",
   romance: "Romance",
   sciFi: "Sci-Fi",
   // shortFilm: "Short Film", // didn't found it on YTS but it's an IMDb official genre 🤷🏻‍♂️
@@ -54,7 +56,7 @@ const YTS_ORDER = {
 const ourToYtsGenres = (genre) => OUR_TO_YTS_GENRES[genre];
 const YtsToOurGenres = (genre) => YTS_TO_OUR_GENRES[genre];
 
-const getSort = (sort) => (sort ? YTS_SORT[sort] : "date_added");
+const getSort = (sort) => (sort ? YTS_SORT[sort] : YTS_SORT.dateAdded);
 const getOrder = (sort) => YTS_ORDER[sort];
 
 /**
@@ -91,11 +93,12 @@ export const searchMoviesOnYts = async ({
   const { data } = await axios.get(YTS_MOVIE_URL, {
     params: {
       limit: 50,
+      page,
       sort_by: getSort(sort),
       order_by: getOrder(sort),
-      query_term: (query || "") + (query && year ? " " : "") + (year || ""),
-      page,
-      minimum_rating: minRating * 2 || 0,
+      query_term:
+        (query || "") + (query && year ? " " : "") + (year || "") || undefined,
+      minimum_rating: minRating * 2 || undefined,
       genre: ourToYtsGenres(collection)
     }
   });
