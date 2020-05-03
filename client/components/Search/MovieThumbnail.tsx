@@ -82,7 +82,7 @@ const MovieThumbnail = ({ movie }: Props): ReactElement => {
                   if (supportedGenre.includes(genre)) {
                     return (
                       <Link
-                        to={`/search?collection=${genre}`}
+                        to={`/search?genre=${genre}`}
                         className={classes.niceLink}
                         key={genre}
                       >

@@ -6,12 +6,12 @@ import { MenuItem, Select } from "@material-ui/core";
 import { useFiltersStyles } from "./Layout.styles";
 
 interface Props {
-  collection: string;
-  setCollection: (value: string) => void;
+  genre: string;
+  setGenre: (value: string) => void;
   labelid: string;
 }
 
-const collectionName = [
+const genreName = [
   "action",
   "adventure",
   "animation",
@@ -41,21 +41,17 @@ const collectionName = [
   "western"
 ];
 
-const CollectionSelect = ({
-  collection,
-  setCollection,
-  labelid
-}: Props): ReactElement => {
+const GenreSelect = ({ genre, setGenre, labelid }: Props): ReactElement => {
   const { formatMessage: _t } = useIntl();
   const classes = useFiltersStyles({});
 
   return (
     <Select
       labelId={labelid}
-      defaultValue={collection}
-      value={collection}
+      defaultValue={genre}
+      value={genre}
       onChange={(e: ChangeEvent<{ value: string }>): void =>
-        setCollection(e.target.value)
+        setGenre(e.target.value)
       }
       className={classes.select}
     >
@@ -63,7 +59,7 @@ const CollectionSelect = ({
         {_t({ id: "layout.filters.all" })}
       </MenuItem>
 
-      {collectionName.map((name) => (
+      {genreName.map((name) => (
         <MenuItem value={name} id={`menuitem-${name}`} key={name}>
           {_t({ id: `layout.filters.select_category.${name}` })}
         </MenuItem>
@@ -72,4 +68,4 @@ const CollectionSelect = ({
   );
 };
 
-export default CollectionSelect;
+export default GenreSelect;

@@ -63,12 +63,10 @@ const getOrder = (sort) => YTS_ORDER[sort];
  * Check if the source is able to search with the given option
  * Cant search if:
  * - sorting is not supported
- * - collection is not supported
+ * - genre is not supported
  */
-const cantSearch = (sort, collection) => {
-  return (
-    (sort && !YTS_SORT[sort]) || (collection && !OUR_TO_YTS_GENRES[collection])
-  );
+const cantSearch = (sort, genre) => {
+  return (sort && !YTS_SORT[sort]) || (genre && !OUR_TO_YTS_GENRES[genre]);
 };
 
 export const searchMoviesOnYts = async ({
@@ -77,10 +75,10 @@ export const searchMoviesOnYts = async ({
   page,
   minRating,
   year,
-  collection
+  genre
 }) => {
-  // Checking if source can use this sorting method and this collection
-  if (cantSearch(sort, collection)) {
+  // Checking if source can use this sorting method and this genre
+  if (cantSearch(sort, genre)) {
     console.warn("[YTS]: Sort or genre not supported");
     return {
       name: "yts",
@@ -99,7 +97,7 @@ export const searchMoviesOnYts = async ({
       query_term:
         (query || "") + (query && year ? " " : "") + (year || "") || undefined,
       minimum_rating: minRating * 2 || undefined,
-      genre: ourToYtsGenres(collection)
+      genre: ourToYtsGenres(genre)
     }
   });
 
@@ -120,7 +118,7 @@ export const searchMoviesOnYts = async ({
     cover: YTS_BASE_URL + movie.large_cover_image,
     year: movie.year,
     summary: movie.synopsis,
-    genres: movie.genres.map((genre) => YtsToOurGenres(genre)),
+    genres: movie.genres.map((ytsGenre) => YtsToOurGenres(ytsGenre)),
     rating: movie.rating / 2,
     runtime: movie.runtime,
     dateAdded:

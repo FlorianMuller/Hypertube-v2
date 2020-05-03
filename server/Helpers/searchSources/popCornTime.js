@@ -3,9 +3,9 @@ import qs from "qs";
 
 const POPCORN_URL = "https://tv-v2.api-fetch.website/movies";
 
-export const searchShowsOnPCT = async ({ query, page, collections }) => {
+export const searchShowsOnPCT = async ({ query, page, genre }) => {
   const queryParams = qs.stringify({
-    genre: collections,
+    genre,
     keywords: query,
     // sort: "trending"
     sort: "title",

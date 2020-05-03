@@ -132,7 +132,7 @@ const cleanMovies = (movies) => {
  * - page granter than 2 is wanted
  * - a minimal rating is wanted
  * - a year is wanted
- * - a collection is wanted
+ * - a genre is wanted
  */
 const cantSearch = (options) => {
   return (
@@ -140,7 +140,7 @@ const cantSearch = (options) => {
     options.minRating ||
     options.page > 2 ||
     options.year ||
-    options.collection
+    options.genre
   );
 };
 

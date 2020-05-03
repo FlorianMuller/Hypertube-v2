@@ -51,7 +51,7 @@ export interface Review {
 
 export interface Filters {
   query?: string;
-  collection?: string;
+  genre?: string;
   year?: number;
   minRating?: number;
   sort?: string;

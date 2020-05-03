@@ -10,7 +10,7 @@ describe("Search", () => {
         page: 1,
         year: 2017,
         query: "",
-        collections: "Action"
+        genre: "Action"
       };
 
       const res = await searchMoviesOnYts(filters);
@@ -26,7 +26,7 @@ describe("Search", () => {
 // describe("Helper/search shows", () => {
 //   it("Should get the data", async () => {
 //     const filters = {
-//       collections: "Action",
+//       genre: "Action",
 //       page: 1,
 //       query: "",
 //       sort: "trending"

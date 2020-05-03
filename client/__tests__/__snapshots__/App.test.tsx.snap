@@ -66,7 +66,7 @@ exports[`App renders correctly 1`] = `
         "language.en": "🇬🇧",
         "language.fr": "🇫🇷",
         "layout.filters.all": "All",
-        "layout.filters.collection": "Collection",
+        "layout.filters.genre": "Genre",
         "layout.filters.minrating": "Min. rating",
         "layout.filters.production_year": "Production year",
         "layout.filters.search": "Search a film, an author...",
@@ -98,8 +98,8 @@ exports[`App renders correctly 1`] = `
         "layout.filters.select_category.tvMovie": "TV Movie",
         "layout.filters.select_category.war": "War",
         "layout.filters.select_category.western": "Western",
-        "layout.filters.select_collection": "Select a collection",
-        "layout.filters.selected_collections": "{count} collections selected",
+        "layout.filters.select_genre": "Select a genre",
+        "layout.filters.selected_genres": "{count} genres selected",
         "layout.filters.sort": "Sort by",
         "layout.filters_sort.dateAdded": "Last added",
         "layout.filters_sort.rating": "Best Rating",
@@ -6855,7 +6855,7 @@ exports[`App renders correctly 1`] = `
                                 className="makeStyles-filterElement-155"
                               >
                                 <WithStyles(ForwardRef(InputLabel))
-                                  id="collection"
+                                  id="genre"
                                 >
                                   <ForwardRef(InputLabel)
                                     classes={
@@ -6874,7 +6874,7 @@ exports[`App renders correctly 1`] = `
                                         "shrink": "MuiInputLabel-shrink",
                                       }
                                     }
-                                    id="collection"
+                                    id="genre"
                                   >
                                     <WithStyles(ForwardRef(FormLabel))
                                       className="MuiInputLabel-root MuiInputLabel-animated"
@@ -6887,7 +6887,7 @@ exports[`App renders correctly 1`] = `
                                           "required": "Mui-required",
                                         }
                                       }
-                                      id="collection"
+                                      id="genre"
                                     >
                                       <ForwardRef(FormLabel)
                                         className="MuiInputLabel-root MuiInputLabel-animated"
@@ -6903,27 +6903,27 @@ exports[`App renders correctly 1`] = `
                                             "root": "MuiFormLabel-root",
                                           }
                                         }
-                                        id="collection"
+                                        id="genre"
                                       >
                                         <label
                                           className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
-                                          id="collection"
+                                          id="genre"
                                         >
-                                          Collection
+                                          Genre
                                         </label>
                                       </ForwardRef(FormLabel)>
                                     </WithStyles(ForwardRef(FormLabel))>
                                   </ForwardRef(InputLabel)>
                                 </WithStyles(ForwardRef(InputLabel))>
-                                <CollectionSelect
-                                  collection="all"
-                                  labelid="collection"
-                                  setCollection={[Function]}
+                                <GenreSelect
+                                  genre="all"
+                                  labelid="genre"
+                                  setGenre={[Function]}
                                 >
                                   <WithStyles(ForwardRef(Select))
                                     className="makeStyles-select-156"
                                     defaultValue="all"
-                                    labelId="collection"
+                                    labelId="genre"
                                     onChange={[Function]}
                                     value="all"
                                   >
@@ -6944,7 +6944,7 @@ exports[`App renders correctly 1`] = `
                                         }
                                       }
                                       defaultValue="all"
-                                      labelId="collection"
+                                      labelId="genre"
                                       onChange={[Function]}
                                       value="all"
                                     >
@@ -7177,7 +7177,7 @@ exports[`App renders correctly 1`] = `
                                               "selectMenu": "MuiSelect-selectMenu",
                                             },
                                             "displayEmpty": false,
-                                            "labelId": "collection",
+                                            "labelId": "genre",
                                             "multiple": false,
                                             "onClose": undefined,
                                             "onOpen": undefined,
@@ -7437,7 +7437,7 @@ exports[`App renders correctly 1`] = `
                                                 "selectMenu": "MuiSelect-selectMenu",
                                               },
                                               "displayEmpty": false,
-                                              "labelId": "collection",
+                                              "labelId": "genre",
                                               "multiple": false,
                                               "onClose": undefined,
                                               "onOpen": undefined,
@@ -7698,7 +7698,7 @@ exports[`App renders correctly 1`] = `
                                                   "selectMenu": "MuiSelect-selectMenu",
                                                 },
                                                 "displayEmpty": false,
-                                                "labelId": "collection",
+                                                "labelId": "genre",
                                                 "multiple": false,
                                                 "onClose": undefined,
                                                 "onOpen": undefined,
@@ -7965,7 +7965,7 @@ exports[`App renders correctly 1`] = `
                                                     "selectMenu": "MuiSelect-selectMenu",
                                                   },
                                                   "displayEmpty": false,
-                                                  "labelId": "collection",
+                                                  "labelId": "genre",
                                                   "multiple": false,
                                                   "onClose": undefined,
                                                   "onOpen": undefined,
@@ -8021,7 +8021,7 @@ exports[`App renders correctly 1`] = `
                                                   defaultValue="all"
                                                   displayEmpty={false}
                                                   inputRef={[Function]}
-                                                  labelId="collection"
+                                                  labelId="genre"
                                                   multiple={false}
                                                   onAnimationStart={[Function]}
                                                   onBlur={[Function]}
@@ -8032,7 +8032,7 @@ exports[`App renders correctly 1`] = `
                                                 >
                                                   <div
                                                     aria-haspopup="listbox"
-                                                    aria-labelledby="collection "
+                                                    aria-labelledby="genre "
                                                     className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
                                                     onBlur={[Function]}
                                                     onFocus={[Function]}
@@ -8087,7 +8087,7 @@ exports[`App renders correctly 1`] = `
                                                   <WithStyles(ForwardRef(Menu))
                                                     MenuListProps={
                                                       Object {
-                                                        "aria-labelledby": "collection",
+                                                        "aria-labelledby": "genre",
                                                         "disableListWrap": true,
                                                         "role": "listbox",
                                                       }
@@ -8102,7 +8102,7 @@ exports[`App renders correctly 1`] = `
                                                     anchorEl={
                                                       <div
                                                         aria-haspopup="listbox"
-                                                        aria-labelledby="collection "
+                                                        aria-labelledby="genre "
                                                         class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
                                                         role="button"
                                                         tabindex="0"
@@ -8117,7 +8117,7 @@ exports[`App renders correctly 1`] = `
                                                     <ForwardRef(Menu)
                                                       MenuListProps={
                                                         Object {
-                                                          "aria-labelledby": "collection",
+                                                          "aria-labelledby": "genre",
                                                           "disableListWrap": true,
                                                           "role": "listbox",
                                                         }
@@ -8132,7 +8132,7 @@ exports[`App renders correctly 1`] = `
                                                       anchorEl={
                                                         <div
                                                           aria-haspopup="listbox"
-                                                          aria-labelledby="collection "
+                                                          aria-labelledby="genre "
                                                           class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
                                                           role="button"
                                                           tabindex="0"
@@ -8164,7 +8164,7 @@ exports[`App renders correctly 1`] = `
                                                         anchorEl={
                                                           <div
                                                             aria-haspopup="listbox"
-                                                            aria-labelledby="collection "
+                                                            aria-labelledby="genre "
                                                             class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
                                                             role="button"
                                                             tabindex="0"
@@ -8205,7 +8205,7 @@ exports[`App renders correctly 1`] = `
                                                           anchorEl={
                                                             <div
                                                               aria-haspopup="listbox"
-                                                              aria-labelledby="collection "
+                                                              aria-labelledby="genre "
                                                               class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
                                                               role="button"
                                                               tabindex="0"
@@ -8352,7 +8352,7 @@ exports[`App renders correctly 1`] = `
                                       </WithStyles(ForwardRef(Input))>
                                     </ForwardRef(Select)>
                                   </WithStyles(ForwardRef(Select))>
-                                </CollectionSelect>
+                                </GenreSelect>
                               </div>
                               <div
                                 className="makeStyles-ratingContainer-158"
