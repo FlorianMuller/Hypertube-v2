@@ -14,13 +14,22 @@ import MoviePlayer from "./MoviePlayer";
 import useApi from "../../hooks/useApi";
 import socket from "../../helpers/socket";
 import Error from "../Error/Error";
+import UseLocalStorage from "../../hooks/useLocaleStorage";
 
 const Movie = (): ReactElement => {
   const { formatMessage: _t } = useIntl();
   const [srcVideo, setSrcVideo] = useState("");
   const [refreshPage, setRefreshPage] = useState(true);
   const imdbId = window.location.pathname.split("/")[2];
+  const [localStorageData] = UseLocalStorage();
   const classes = useStyles({});
+  const [notRef, setNotRef] = useState(false);
+  const style = {
+    span: {
+      fontSize: "2em",
+      marginTop: "50px"
+    }
+  };
 
   const generateUrl = (): void => {
     setSrcVideo(`http://localhost:8080/api/movie/play/${imdbId}`);
@@ -37,7 +46,7 @@ const Movie = (): ReactElement => {
       reviews: Reviews;
     },
     void
-  >(`/movie/infos/${imdbId}`, {
+  >(`/movie/infos/${imdbId}/${localStorageData}`, {
     hotReload: true
   });
   const { infos, reviews: reviewsData } = resData || {};
@@ -98,14 +107,19 @@ const Movie = (): ReactElement => {
         return;
       }
 
-      socket.socket.removeListener("New comments", initComments);
+      socket.removeListener("New comments", initComments);
     };
   });
 
   if (loading) return <Loading />;
   if (error) return <Error />;
 
-  socket.socket.on("New comments", initComments);
+  socket.on("movie-not-ref", () => {
+    setNotRef(true);
+  });
+  socket.on("New comments", initComments);
+
+  socket.emit("join-movie-room", imdbId);
 
   return (
     <div className={classes.root}>
@@ -149,8 +163,12 @@ const Movie = (): ReactElement => {
             </div>
           </div>
         </Paper>
-        {srcVideo && <MoviePlayer imdbId={imdbId} srcVideo={srcVideo} />}
-
+        {srcVideo && notRef === false && (
+          <MoviePlayer imdbId={imdbId} srcVideo={srcVideo} />
+        )}
+        {notRef === true && (
+          <span style={style.span}>{_t({ id: "movie.notRef" })}</span>
+        )}
         {movieInfos && (
           <MovieComments
             movieId={movieInfos.imdbid}

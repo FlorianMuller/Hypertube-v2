@@ -138,10 +138,10 @@ const MovieComments = ({
             ))}
           </div>
         ) : (
-            <div className={classes.comment}>
-              {_t({ id: "movie.comment.none" })}
-            </div>
-          )}
+          <div className={classes.comment}>
+            {_t({ id: "movie.comment.none" })}
+          </div>
+        )}
         <div className={classes.personalCommentContainer}>
           <TextField
             error={error?.comment}

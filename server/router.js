@@ -33,7 +33,11 @@ router.get("/movies", checkAuth, searchController.searchMovies);
 
 /* Movie */
 router.use("/movie", checkAuth, express.static("./server/data/movie"));
-router.get("/movie/infos/:imdbId", checkAuth, movieController.getInfos);
+router.get(
+  "/movie/infos/:imdbId/:language",
+  checkAuth,
+  movieController.getInfos
+);
 router.get("/movie/play/:imdbId", checkAuth, movieController.PlayMovie);
 router.get("/movie/subtitles/:imdbId", checkAuth, movieController.getSubtitles);
 router.use("/subtitles", checkAuth, express.static("./server/data/subtitles"));
@@ -47,5 +51,6 @@ router.get("/movie/streaming/:directory/:fileName", checkAuth, (req, res) => {
 });
 router.get("/movie/review/:id", checkAuth, movieController.getReviews);
 router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
+router.get("/movies/recommended", checkAuth, movieController.getRecommendation);
 
 export default router;

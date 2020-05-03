@@ -14,6 +14,9 @@ import ioConnection from "..";
 
 import MovieModel from "../Schemas/MoviesDatabase";
 import MovieCommentModel from "../Schemas/MovieComment";
+// import UserModel from "../Schemas/User";
+import UserHistoryModel from "../Schemas/UserHistory";
+import Io from "../Helpers/socket";
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
@@ -25,6 +28,10 @@ const OpenSubtitles = new OS({
   password: "Hypertube1234",
   ssl: true
 });
+
+const TMDBURL = "https://api.themoviedb.org/3/movie/";
+const TMDBKEY = "b0d86f66b9c1cc3286e862e306745391";
+const TMDBPOSTERURL = "http://image.tmdb.org/t/p/w300//";
 
 const options = {
   connections: 100,
@@ -55,7 +62,70 @@ const options = {
     "http://tracker.mg64.net:6881/announce",
     "http://tracker.devil-torrents.pl:80/announce",
     "http://ipv4.tracker.harry.lu:80/announce",
-    "http://tracker.electro-torrent.pl:80/announce"
+    "http://tracker.electro-torrent.pl:80/announce",
+    " udp://151.80.120.114:2710/announce",
+    "udp://182.176.139.129:6969/announce",
+    "udp://5.79.249.77:6969/announce",
+    "udp://5.79.83.193:6969/announce",
+    "udp://62.138.0.158:6969/announce",
+    "udp://9.rarbg.com:2710/announce",
+    "udp://9.rarbg.com:2750/announce",
+    "udp://9.rarbg.com:2770/announce",
+    "udp://9.rarbg.com:2780/announce",
+    "udp://9.rarbg.me:2710/announce",
+    "udp://9.rarbg.me:2730/announce",
+    "udp://9.rarbg.me:2750/announce",
+    "udp://9.rarbg.me:2780/announce",
+    "udp://9.rarbg.to:2710/announce",
+    "udp://9.rarbg.to:2730/announce",
+    "udp://9.rarbg.to:2740/announce",
+    "udp://9.rarbg.to:2790/announce",
+    "udp://91.218.230.81:6969/announce",
+    "udp://bt.xxx-tracker.com:2710/announce",
+    "udp://eddie4.nl:6969/announce",
+    "udp://exodus.desync.com:6969",
+    "udp://inferno.demonoid.ph:3389/announce",
+    "udp://inferno.demonoid.pw:3391/announce",
+    "udp://inferno.demonoid.pw:3418/announce",
+    "udp://ipv4.tracker.harry.lu:80/announce",
+    "udp://mgtracker.org:2710/announce",
+    "udp://mgtracker.org:6969/announce",
+    "udp://open.stealth.si:80/announce",
+    "udp://opentrackr.org:1337/announce",
+    "udp://p4p.arenabg.ch:1337",
+    "udp://p4p.arenabg.ch:1337/announce",
+    "udp://p4p.arenabg.com:1337",
+    "udp://p4p.arenabg.com:1337/announce",
+    "udp://pubt.in:2710/announce",
+    "udp://retracker.coltel.ru:2710/announce",
+    "udp://sandrotorde.de:1337/announce",
+    "udp://shadowshq.eddie4.nl:6969/announce",
+    "udp://shadowshq.yi.org:6969/announce",
+    "udp://thetracker.org:80",
+    "udp://thetracker.org:80/announce",
+    "udp://tracker.christianbro.pw:6969/announce",
+    "udp://tracker.coppersurfer.tk:6969",
+    "udp://tracker.coppersurfer.tk:6969/announce",
+    "udp://tracker.coppersurfer.tk:80",
+    "udp://tracker.coppersurfer.tk:80/announce",
+    "udp://tracker.cypherpunks.ru:6969/announce",
+    "udp://tracker.eddie4.nl:6969/announce",
+    "udp://tracker.internetwarriors.net:1337/announce",
+    "udp://tracker.justseed.it:1337/announce",
+    "udp://tracker.leechers-paradise.org:6969",
+    "udp://tracker.leechers-paradise.org:6969/announce",
+    "udp://tracker.mg64.net:2710/announce",
+    "udp://tracker.mg64.net:6969/announce",
+    "udp://tracker.mgtracker.org:2710/announce",
+    "udp://tracker.open-internet.nl:6969/announce",
+    "udp://tracker.opentrackr.org:1337/announce",
+    "udp://tracker.pirateparty.gr:6969/announce",
+    "udp://tracker.tiny-vps.com:6969/announce",
+    "udp://tracker.torrent.eu.org:451",
+    "udp://tracker.torrent.eu.org:451/announce",
+    "udp://tracker.vanitycore.co:6969/announce",
+    "udp://www.eddie4.nl:6969/announce",
+    "udp://zephir.monocul.us:6969/announce"
   ]
 };
 
@@ -141,12 +211,15 @@ const getInfos = async (req, res) => {
   );
   let sourceUrl;
   let sourceSite;
-  if (response.data.data.movies[0].imdb_code === req.params.imdbId) {
+  if (
+    response.data.data.movie_count &&
+    response.data.data.movies[0].imdb_code === req.params.imdbId
+  ) {
     sourceUrl = `https://yts.ae/api/v2/movie_details.json?movie_id=${response.data.data.movies[0].id}`;
     sourceSite = "yts";
   } else {
-    sourceUrl = `https://tv-v2.api-fetch.website/movie/${req.params.imdbId}`;
-    sourceSite = "popCornTime";
+    sourceUrl = `${TMDBURL}${req.params.imdbId}?api_key=${TMDBKEY}&language=${req.params.language}`;
+    sourceSite = "tmdb";
   }
   let reviews;
   let infos;
@@ -159,17 +232,30 @@ const getInfos = async (req, res) => {
       infos = {
         title: movie.title,
         description:
-          sourceSite === "yts" ? movie.description_full : movie.synopsis,
-        prodDate: movie.year,
+          sourceSite === "yts" ? movie.description_full : movie.overview,
+        prodDate:
+          sourceSite === "yts" ? movie.year : movie.release_date.split("_")[0],
         runTime: movie.runtime,
         imdbRating:
-          sourceSite === "yts" ? movie.rating / 2 : movie.rating.percentage / 2,
+          sourceSite === "yts" ? movie.rating / 2 : movie.vote_average / 2,
         poster:
           sourceSite === "yts"
             ? `https://yts.ae${movie.medium_cover_image}`
-            : movie.images.poster,
+            : `${TMDBPOSTERURL}${movie.poster_path}`,
         imdbid: sourceSite === "yts" ? movie.imdb_code : movie.imdb_id
       };
+      console.log(Date.now());
+      try {
+        UserHistoryModel.create({
+          _id: String(new mongoose.Types.ObjectId()),
+          userId: req.userId,
+          movieId: req.params.imdbId,
+          movieName: infos.title,
+          date: Date.now()
+        });
+      } catch (e) {
+        console.error(e);
+      }
       reviews = await movieHelpers.findReviews(req.params.imdbId);
       res.status(200).send({ infos, reviews });
     })
@@ -268,27 +354,42 @@ const streamMovie = async (pathMovie, start, end, res) => {
 };
 
 const downloadMovie = (movieId, movie, sourceSite, req, res) => {
-  let magnetPopCorn;
+  const ArrayMagnet = [];
   if (sourceSite !== "yts") {
-    const quality = "720p";
-    magnetPopCorn = movie.torrents.en[quality];
-    magnetPopCorn = magnetPopCorn.url;
-    [, , , magnetPopCorn] = magnetPopCorn.split(":");
-    [magnetPopCorn] = magnetPopCorn.split("&");
+    movie.map((el) => {
+      const [magnetTmp] = el.download.split("&");
+      ArrayMagnet.push(magnetTmp);
+      return undefined;
+    });
   }
-
-  const magnet =
-    sourceSite === "yts"
-      ? `magnet:?xt=urn:btih:${movie.torrents[0].hash}`
-      : magnetPopCorn;
+  let magnet;
+  if (sourceSite === "yts")
+    magnet = `magnet:?xt=urn:btih:${movie.torrents[0].hash}`;
+  else {
+    ArrayMagnet.map((el) => {
+      magnet = el;
+      return undefined;
+    });
+  }
 
   const engine = TorrentStream(magnet, options);
 
   let newFilePath;
   let fileSize;
-
+  let isDownloading = false;
+  let downloadingInProgress = false;
+  setTimeout(() => {
+    if (!isDownloading) Io.socket.to(movieId).emit("movie-not-ref");
+    return undefined;
+  }, 20000);
   engine
     .on("ready", () => {
+      isDownloading = true;
+      setTimeout(() => {
+        if (!downloadingInProgress) Io.socket.to(movieId).emit("movie-not-ref");
+        return undefined;
+      }, 120000);
+      console.log("Begin download");
       engine.files.forEach(async (file) => {
         let ext = file.name.substr(-4, 4);
         if (
@@ -348,6 +449,13 @@ const downloadMovie = (movieId, movie, sourceSite, req, res) => {
         }
       });
     })
+    .on("download", () => {
+      downloadingInProgress = true;
+      const downloaded =
+        Math.round((engine.swarm.downloaded / fileSize) * 100 * 100) / 100;
+
+      console.log(`Downloaded: ${downloaded}%`);
+    })
     .on("idle", async () => {
       console.log(`Download finish !`);
       const directory = newFilePath.split("/").reverse()[1];
@@ -363,82 +471,94 @@ const downloadMovie = (movieId, movie, sourceSite, req, res) => {
 
 const PlayMovie = async (req, res) => {
   const movieId = req.params.imdbId;
+  const token = await Axios.get(
+    "https://torrentapi.org/pubapi_v2.php?get_token=get_token&app_id=Hypertube1"
+  );
   const response = await Axios(
     `https://yts.ae/api/v2/list_movies.json?query_term=${req.params.imdbId}`
   );
   let sourceUrl;
   let sourceSite;
-  if (response.data.data.movies[0].imdb_code === req.params.imdbId) {
+  if (
+    response.data.data.movie_count &&
+    response.data.data.movies[0].imdb_code === req.params.imdbId
+  ) {
     sourceUrl = `https://yts.ae/api/v2/movie_details.json?movie_id=${response.data.data.movies[0].id}`;
     sourceSite = "yts";
   } else {
-    sourceUrl = `https://tv-v2.api-fetch.website/movie/${req.params.imdbId}`;
-    sourceSite = "popCornTime";
+    sourceUrl = `https://torrentapi.org/pubapi_v2.php?token=${token.data.token}&app_id=Hypertube1&mode=search&category=movies&format=json_extended&limit=100&search_imdb=${movieId}`;
+    sourceSite = "TorrentApi";
   }
+  setTimeout(() => {
+    Axios.get(sourceUrl)
+      .then(async (movieRes) => {
+        if (movieRes.data.error) return res.status(500).send("Ressource error");
+        const movie =
+          sourceSite === "yts"
+            ? movieRes.data.data.movie
+            : movieRes.data.torrent_results;
 
-  Axios.get(sourceUrl)
-    .then(async (movieRes) => {
-      const movie =
-        sourceSite === "yts" ? movieRes.data.data.movie : movieRes.data;
+        // Check if the movie is already download in the database
+        Movie.findOne({ movieId }, (err, result) => {
+          if (err) {
+            console.error(err);
+            return res.status(500).send("Internal Server Error");
+          }
+          if (result) {
+            Movie.findOne({ movieId }, (error, movieFound) => {
+              if (error) {
+                console.error(error.message);
+                return res.statu(500).send("Intenal server error");
+              }
+              let pathMovie = movieFound.path;
+              ioConnection.ioConnection
+                .to(movieId)
+                .emit("Video source", pathMovie);
+              const [pathFile, pathRepo] = movieFound.path.split("/").reverse();
+              pathMovie = `${process.cwd()}/server/data/movie/${pathRepo}/${pathFile}`;
+              const stat = fs.statSync(pathMovie);
+              const fileSize = stat.size;
+              let start = 0;
+              let end = fileSize - 1;
 
-      // Check if the movie is already download in the database
-      Movie.findOne({ movieId }, (err, result) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Internal Server Error");
-        }
-        if (result) {
-          Movie.findOne({ movieId }, (error, movieFound) => {
-            if (error) {
-              console.error(error.message);
-              return res.statu(500).send("Intenal server error");
-            }
-            let pathMovie = movieFound.path;
-            ioConnection.ioConnection
-              .to(movieId)
-              .emit("Video source", pathMovie);
-            const [pathFile, pathRepo] = movieFound.path.split("/").reverse();
-            pathMovie = `${process.cwd()}/server/data/movie/${pathRepo}/${pathFile}`;
-            const stat = fs.statSync(pathMovie);
-            const fileSize = stat.size;
-            let start = 0;
-            let end = fileSize - 1;
+              const { range } = req.headers;
+              if (range) {
+                const parts = range.replace(/bytes=/, "").split("-");
+                start = parseInt(parts[0], 10);
+                end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+                const chunksize = end - start + 1;
 
-            const { range } = req.headers;
-            if (range) {
-              const parts = range.replace(/bytes=/, "").split("-");
-              start = parseInt(parts[0], 10);
-              end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-              const chunksize = end - start + 1;
-
-              const head = {
-                "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-                "Accept-Ranges": "bytes",
-                "Content-Length": chunksize,
-                "Content-Type": mime.getType(pathMovie)
-              };
-              res.writeHead(206, head);
-              streamMovie(pathMovie, start, end, res);
-            } else {
-              const head = {
-                "Content-Length": fileSize,
-                "Content-Type": mime.getType(movie.path)
-              };
-              res.writeHead(200, head);
-              streamMovie(pathMovie, start, end, res);
-            }
-            return true;
-          });
-        } else {
-          downloadMovie(movieId, movie, sourceSite, req, res);
-        }
-        return true;
+                const head = {
+                  "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+                  "Accept-Ranges": "bytes",
+                  "Content-Length": chunksize,
+                  "Content-Type": mime.getType(pathMovie)
+                };
+                res.writeHead(206, head);
+                streamMovie(pathMovie, start, end, res);
+              } else {
+                const head = {
+                  "Content-Length": fileSize,
+                  "Content-Type": mime.getType(movie.path)
+                };
+                res.writeHead(200, head);
+                streamMovie(pathMovie, start, end, res);
+              }
+              return true;
+            });
+          } else {
+            downloadMovie(movieId, movie, sourceSite, req, res);
+          }
+          return true;
+        });
+        return undefined;
+      })
+      .catch((e) => {
+        console.error(e);
+        // console.log("--------Error");
+        res.sendStatus(500);
       });
-    })
-    .catch((e) => {
-      console.error(e);
-      res.sendStatus(500);
-    });
+  }, 2000);
 };
 
 const receiveReviews = (req, res) => {
