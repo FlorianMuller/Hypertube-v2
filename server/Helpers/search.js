@@ -1,9 +1,20 @@
 import axios from "axios";
 import qs from "qs";
+import UserHistoryModel from "../Schemas/UserHistory";
 
 const YTS_BASE_URL = "https://yts.ae";
 const YTS_URL = `${YTS_BASE_URL}/api/v2/list_movies.json`;
 // const POPCORN_URL = "https://tv-v2.api-fetch.website/shows";
+
+export const checkIfViewed = async (data, userId) => {
+  const history = await UserHistoryModel.find({ userId });
+  const newData = data.movies.map((movie) => {
+    const found = history.find((el) => el.imdb_code === movie.id);
+    if (found) return { ...movie, viewed: true };
+    return { ...movie, viewed: false };
+  });
+  return { movies: newData, nextPage: data.nextPage };
+};
 
 export const searchMoviesOnYts = async ({
   query,
@@ -48,6 +59,8 @@ export const searchMoviesOnYts = async ({
   };
 };
 
+// export default { searchMoviesOnYts, checkIfViewed };
+
 // Todo: adapt to film
 
 // export const searchShowsOnPCT = async ({ query, page, collections }) => {
@@ -78,5 +91,3 @@ export const searchMoviesOnYts = async ({
 //     medias: parsedShows
 //   };
 // };
-
-export default { searchMoviesOnYts };

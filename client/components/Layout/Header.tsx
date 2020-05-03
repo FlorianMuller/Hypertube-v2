@@ -13,8 +13,6 @@ import {
 } from "@material-ui/core";
 import { Search, AccountCircle } from "@material-ui/icons";
 
-import SearchIcon from "@material-ui/icons/Search";
-
 import API from "../../util/api";
 import { useHeaderStyles } from "./Layout.styles";
 
