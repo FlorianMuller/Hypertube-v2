@@ -535,17 +535,17 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
   setReviews={[Function]}
 >
   <div
-    className="makeStyles-containerRatingAndComment-162"
+    className="makeStyles-containerRatingAndComment-11"
   >
     <Styled(MuiBox)
       borderColor="transparent"
       component="fieldset"
     >
       <fieldset
-        className="MuiBox-root MuiBox-root-176"
+        className="MuiBox-root MuiBox-root-25"
       >
         <div
-          className="makeStyles-movieRating-163"
+          className="makeStyles-movieRating-12"
         >
           Movie's rating
         </div>
@@ -3607,15 +3607,15 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
       </fieldset>
     </Styled(MuiBox)>
     <span
-      className="makeStyles-commentTitle-164"
+      className="makeStyles-commentTitle-13"
     >
       Wanna say something about it ?
     </span>
     <WithStyles(ForwardRef(Paper))
-      className="makeStyles-containerComment-165"
+      className="makeStyles-containerComment-14"
     >
       <ForwardRef(Paper)
-        className="makeStyles-containerComment-165"
+        className="makeStyles-containerComment-14"
         classes={
           Object {
             "elevation0": "MuiPaper-elevation0",
@@ -3650,14 +3650,14 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
         }
       >
         <div
-          className="MuiPaper-root makeStyles-containerComment-165 MuiPaper-elevation1 MuiPaper-rounded"
+          className="MuiPaper-root makeStyles-containerComment-14 MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
-            className="makeStyles-containerPeople-166"
+            className="makeStyles-containerPeople-15"
             id="scrollComment"
           >
             <div
-              className="makeStyles-comment-168"
+              className="makeStyles-comment-17"
               key="0123456789"
             >
               <span
@@ -3979,14 +3979,14 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                 </ForwardRef(Rating)>
               </WithStyles(ForwardRef(Rating))>
               <div
-                className="makeStyles-commentText-167"
+                className="makeStyles-commentText-16"
               >
                 That was actually really awesome
               </div>
             </div>
           </div>
           <div
-            className="makeStyles-personalCommentContainer-169"
+            className="makeStyles-personalCommentContainer-18"
           >
             <WithStyles(ForwardRef(TextField))
               InputProps={
@@ -3998,7 +3998,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                   </ForwardRef(WithStyles)>,
                 }
               }
-              className="makeStyles-textField-170"
+              className="makeStyles-textField-19"
               inputProps={
                 Object {
                   "maxLength": 1000,
@@ -4019,7 +4019,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                     </ForwardRef(WithStyles)>,
                   }
                 }
-                className="makeStyles-textField-170"
+                className="makeStyles-textField-19"
                 classes={
                   Object {
                     "root": "MuiTextField-root",
@@ -4036,7 +4036,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                 value=""
               >
                 <WithStyles(ForwardRef(FormControl))
-                  className="MuiTextField-root makeStyles-textField-170"
+                  className="MuiTextField-root makeStyles-textField-19"
                   color="primary"
                   disabled={false}
                   error={false}
@@ -4045,7 +4045,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                   variant="standard"
                 >
                   <ForwardRef(FormControl)
-                    className="MuiTextField-root makeStyles-textField-170"
+                    className="MuiTextField-root makeStyles-textField-19"
                     classes={
                       Object {
                         "fullWidth": "MuiFormControl-fullWidth",
@@ -4062,7 +4062,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                     variant="standard"
                   >
                     <div
-                      className="MuiFormControl-root MuiTextField-root makeStyles-textField-170"
+                      className="MuiFormControl-root MuiTextField-root makeStyles-textField-19"
                     >
                       <WithStyles(ForwardRef(InputLabel))>
                         <ForwardRef(InputLabel)
@@ -4380,13 +4380,13 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
               </ForwardRef(TextField)>
             </WithStyles(ForwardRef(TextField))>
             <div
-              className="makeStyles-rateAndSendButton-171"
+              className="makeStyles-rateAndSendButton-20"
             >
               <div
-                className="makeStyles-rateIt-172"
+                className="makeStyles-rateIt-21"
               >
                 <span
-                  className="makeStyles-askRating-173"
+                  className="makeStyles-askRating-22"
                 >
                   Rate it :
                 </span>
@@ -4932,17 +4932,17 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
   setReviews={[Function]}
 >
   <div
-    className="makeStyles-containerRatingAndComment-162"
+    className="makeStyles-containerRatingAndComment-11"
   >
     <Styled(MuiBox)
       borderColor="transparent"
       component="fieldset"
     >
       <fieldset
-        className="MuiBox-root MuiBox-root-310"
+        className="MuiBox-root MuiBox-root-187"
       >
         <div
-          className="makeStyles-movieRating-163"
+          className="makeStyles-movieRating-12"
         >
           Note du film
         </div>
@@ -8004,15 +8004,15 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
       </fieldset>
     </Styled(MuiBox)>
     <span
-      className="makeStyles-commentTitle-164"
+      className="makeStyles-commentTitle-13"
     >
       Quelque chose à dire à son propos ?
     </span>
     <WithStyles(ForwardRef(Paper))
-      className="makeStyles-containerComment-165"
+      className="makeStyles-containerComment-14"
     >
       <ForwardRef(Paper)
-        className="makeStyles-containerComment-165"
+        className="makeStyles-containerComment-14"
         classes={
           Object {
             "elevation0": "MuiPaper-elevation0",
@@ -8047,14 +8047,14 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
         }
       >
         <div
-          className="MuiPaper-root makeStyles-containerComment-165 MuiPaper-elevation1 MuiPaper-rounded"
+          className="MuiPaper-root makeStyles-containerComment-14 MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
-            className="makeStyles-containerPeople-166"
+            className="makeStyles-containerPeople-15"
             id="scrollComment"
           >
             <div
-              className="makeStyles-comment-168"
+              className="makeStyles-comment-17"
               key="0123456789"
             >
               <span
@@ -8376,14 +8376,14 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                 </ForwardRef(Rating)>
               </WithStyles(ForwardRef(Rating))>
               <div
-                className="makeStyles-commentText-167"
+                className="makeStyles-commentText-16"
               >
                 That was actually really awesome
               </div>
             </div>
           </div>
           <div
-            className="makeStyles-personalCommentContainer-169"
+            className="makeStyles-personalCommentContainer-18"
           >
             <WithStyles(ForwardRef(TextField))
               InputProps={
@@ -8395,7 +8395,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                   </ForwardRef(WithStyles)>,
                 }
               }
-              className="makeStyles-textField-170"
+              className="makeStyles-textField-19"
               inputProps={
                 Object {
                   "maxLength": 1000,
@@ -8416,7 +8416,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                     </ForwardRef(WithStyles)>,
                   }
                 }
-                className="makeStyles-textField-170"
+                className="makeStyles-textField-19"
                 classes={
                   Object {
                     "root": "MuiTextField-root",
@@ -8433,7 +8433,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                 value=""
               >
                 <WithStyles(ForwardRef(FormControl))
-                  className="MuiTextField-root makeStyles-textField-170"
+                  className="MuiTextField-root makeStyles-textField-19"
                   color="primary"
                   disabled={false}
                   error={false}
@@ -8442,7 +8442,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                   variant="standard"
                 >
                   <ForwardRef(FormControl)
-                    className="MuiTextField-root makeStyles-textField-170"
+                    className="MuiTextField-root makeStyles-textField-19"
                     classes={
                       Object {
                         "fullWidth": "MuiFormControl-fullWidth",
@@ -8459,7 +8459,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                     variant="standard"
                   >
                     <div
-                      className="MuiFormControl-root MuiTextField-root makeStyles-textField-170"
+                      className="MuiFormControl-root MuiTextField-root makeStyles-textField-19"
                     >
                       <WithStyles(ForwardRef(InputLabel))>
                         <ForwardRef(InputLabel)
@@ -8777,13 +8777,13 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
               </ForwardRef(TextField)>
             </WithStyles(ForwardRef(TextField))>
             <div
-              className="makeStyles-rateAndSendButton-171"
+              className="makeStyles-rateAndSendButton-20"
             >
               <div
-                className="makeStyles-rateIt-172"
+                className="makeStyles-rateIt-21"
               >
                 <span
-                  className="makeStyles-askRating-173"
+                  className="makeStyles-askRating-22"
                 >
                   Note le :
                 </span>

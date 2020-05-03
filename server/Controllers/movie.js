@@ -10,7 +10,7 @@ import ffmpeg from "fluent-ffmpeg";
 import movieHelpers from "../Helpers/movie";
 import { searchMoviesOnYts } from "../Helpers/search";
 import mongoose from "../mongo";
-import ioConnection from "..";
+// import ioConnection from "..";
 
 import MovieModel from "../Schemas/MoviesDatabase";
 import MovieCommentModel from "../Schemas/MovieComment";
@@ -128,6 +128,8 @@ const options = {
     "udp://zephir.monocul.us:6969/announce"
   ]
 };
+
+const miniDownload = 1;
 
 const getSubtitles = async (req, res) => {
   const { imdbId } = req.params;
@@ -247,11 +249,10 @@ const getInfos = async (req, res) => {
       console.log(Date.now());
       try {
         UserHistoryModel.create({
-          _id: String(new mongoose.Types.ObjectId()),
           userId: req.userId,
           movieId: req.params.imdbId,
           movieName: infos.title,
-          date: Date.now()
+          date: Date()
         });
       } catch (e) {
         console.error(e);
@@ -377,7 +378,7 @@ const downloadMovie = (movieId, movie, sourceSite, req, res) => {
   let newFilePath;
   let fileSize;
   let isDownloading = false;
-  let downloadingInProgress = false;
+  // let downloadingInProgress = false;
   setTimeout(() => {
     if (!isDownloading) Io.socket.to(movieId).emit("movie-not-ref");
     return undefined;
@@ -385,10 +386,10 @@ const downloadMovie = (movieId, movie, sourceSite, req, res) => {
   engine
     .on("ready", () => {
       isDownloading = true;
-      setTimeout(() => {
-        if (!downloadingInProgress) Io.socket.to(movieId).emit("movie-not-ref");
-        return undefined;
-      }, 120000);
+      // setTimeout(() => {
+      //   if (!downloadingInProgress) Io.socket.to(movieId).emit("movie-not-ref");
+      //   return undefined;
+      // }, 120000);
       console.log("Begin download");
       engine.files.forEach(async (file) => {
         let ext = file.name.substr(-4, 4);
@@ -450,10 +451,10 @@ const downloadMovie = (movieId, movie, sourceSite, req, res) => {
       });
     })
     .on("download", () => {
-      downloadingInProgress = true;
+      // downloadingInProgress = true;
       const downloaded =
         Math.round((engine.swarm.downloaded / fileSize) * 100 * 100) / 100;
-
+      if (downloaded > miniDownload) Io.socket.to(movieId).emit("start-stream");
       console.log(`Downloaded: ${downloaded}%`);
     })
     .on("idle", async () => {
@@ -511,9 +512,9 @@ const PlayMovie = async (req, res) => {
                 return res.statu(500).send("Intenal server error");
               }
               let pathMovie = movieFound.path;
-              ioConnection.ioConnection
-                .to(movieId)
-                .emit("Video source", pathMovie);
+              // ioConnection.ioConnection
+              //   .to(movieId)
+              //   .emit("Video source", pathMovie);
               const [pathFile, pathRepo] = movieFound.path.split("/").reverse();
               pathMovie = `${process.cwd()}/server/data/movie/${pathRepo}/${pathFile}`;
               const stat = fs.statSync(pathMovie);

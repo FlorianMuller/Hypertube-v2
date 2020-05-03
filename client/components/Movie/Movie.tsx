@@ -6,7 +6,6 @@ import Rating from "@material-ui/lab/Rating";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import useStyles from "./Movie.styles";
 
-import RecommendedMovies from "./MovieRecommended";
 import MovieComments from "./MovieComments";
 import { MovieInfos, Reviews, Review } from "../../models/models";
 import Loading from "../Routes/Loading";
@@ -69,39 +68,6 @@ const Movie = (): ReactElement => {
   }, [reviewsData]);
 
   useEffect(() => {
-    // const initComments = (reviewReceived: Review): void => {
-    //   let totalStars = reviewReceived.stars;
-    //   let reviewsLength: number;
-    //   setReviews((reviewsHook) => {
-    //     totalStars = reviewsHook.reduce(
-    //       (acc, review) => acc + review.stars,
-    //       reviewReceived.stars
-    //     );
-    //     reviewsLength = reviewsHook.length + 1;
-    //     return [...reviewsHook, reviewReceived];
-    //   });
-    //   setMovieInfos((movieInfosHook) => {
-    //     return {
-    //       ...movieInfosHook,
-    //       stars: Math.floor(totalStars / reviewsLength)
-    //     };
-    //   });
-    // };
-    // if (loading) {
-    //   API.get(`/movies/${movieId}`)
-    //     .then(({ data: { infos, reviews: allReviews } }) => {
-    //       setMovieInfos(infos);
-    //       setReviews(allReviews);
-    //       setDataDone(true);
-    //       socket.socket.emit("join-movie-room", movieId);
-    //       socket.socket.on("New comments", initComments);
-    //     })
-    //     .catch((e) => {
-    //       console.error(e);
-    //       setDataDone(true);
-    //     });
-    //   setLoading(false);
-    // }
     return (): void => {
       if (loading || error) {
         return;
@@ -178,7 +144,6 @@ const Movie = (): ReactElement => {
           />
         )}
       </div>
-      <RecommendedMovies />
     </div>
   );
 };
