@@ -61,6 +61,7 @@
   "movie.runTime": "Run time : ",
   "movie.imdb.rating": "IMDb's rating",
   "movie.rating": "Movie's rating",
+  "movie.casting": "Cast",
   "movie.comment.title": "Wanna say something about it ?",
   "movie.comment.none": "There is no comment yet, add yours !",
   "movie.comment.label": "Tell us what you think about the movie",

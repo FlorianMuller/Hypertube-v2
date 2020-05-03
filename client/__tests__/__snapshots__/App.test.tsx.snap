@@ -97,6 +97,7 @@ exports[`App renders correctly 1`] = `
         "layout.filters.select_category.western": "Western",
         "layout.filters.select_collection": "Select a collection",
         "layout.filters.selected_collections": "{count} collections selected",
+        "movie.casting": "Cast",
         "movie.comment.askRating": "Rate it :",
         "movie.comment.label": "Tell us what you think about the movie",
         "movie.comment.none": "There is no comment yet, add yours !",

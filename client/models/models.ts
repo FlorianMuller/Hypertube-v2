@@ -43,6 +43,7 @@ export interface AuthInfo {
 
 export interface MovieInfos {
   title: string;
+  casting: string[];
   description: string;
   creator: string;
   runTime: number;

@@ -31,6 +31,7 @@ const OpenSubtitles = new OS({
 
 const TMDBURL = "https://api.themoviedb.org/3/movie/";
 const TMDBKEY = "b0d86f66b9c1cc3286e862e306745391";
+const TMDB_API_KEY_V3 = "83c2bcadbf1d325b41d0bb1253079038";
 const TMDBPOSTERURL = "http://image.tmdb.org/t/p/w300//";
 
 const options = {
@@ -211,6 +212,8 @@ const getInfos = async (req, res) => {
   );
   let sourceUrl;
   let sourceSite;
+  let actors = [];
+  const castingUrl = `https://api.themoviedb.org/3/movie/${req.params.imdbId}/credits?api_key=${TMDB_API_KEY_V3}`;
   if (
     response.data.data.movie_count &&
     response.data.data.movies[0].imdb_code === req.params.imdbId
@@ -223,6 +226,15 @@ const getInfos = async (req, res) => {
   }
   let reviews;
   let infos;
+
+  await Axios.get(castingUrl).then(async (castingRes) => {
+    const { cast } = castingRes.data;
+
+    const fivecast = cast.slice(0, 5);
+
+    actors = fivecast.map((el) => el.name);
+    console.log(actors);
+  });
 
   await Axios.get(sourceUrl)
     .then(async (movieRes) => {
@@ -242,7 +254,8 @@ const getInfos = async (req, res) => {
           sourceSite === "yts"
             ? `https://yts.ae${movie.medium_cover_image}`
             : `${TMDBPOSTERURL}${movie.poster_path}`,
-        imdbid: sourceSite === "yts" ? movie.imdb_code : movie.imdb_id
+        imdbid: sourceSite === "yts" ? movie.imdb_code : movie.imdb_id,
+        casting: actors
       };
       console.log(Date.now());
       try {

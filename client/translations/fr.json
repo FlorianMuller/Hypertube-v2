@@ -68,6 +68,7 @@
   "movie.comment.send": "Envoyer",
   "movie.error": "Désolé, ce film n'est pas disponible.",
   "movie.error.invalid": "Désolé, ce film n'existe pas. Pourquoi pas en chercher un autre ?",
+  "movie.casting": "Acteurs",
   "search.no_media": "Aucun média trouvé !",
   "search.film.author": "Par {author}",
   "search.film.norating": "Aucune note",

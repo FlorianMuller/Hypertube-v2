@@ -52,6 +52,7 @@ const Movie = (): ReactElement => {
   const { infos, reviews: reviewsData } = resData || {};
 
   const movieInfos = infos as MovieInfos;
+  console.log(movieInfos);
 
   const [reviews, setReviews] = useState<Reviews>();
 
@@ -149,7 +150,17 @@ const Movie = (): ReactElement => {
                     {_t({ id: "movie.runTime" })} {movieInfos?.runTime} minutes
                   </div>
                 )}
+                {movieInfos?.casting && (
+                  <div>
+                    {_t({ id: "movie.casting" })}
+                    {": "}
+                    {movieInfos?.casting.map((actor: string) => (
+                      <span key={actor}>{`${actor}, `}</span>
+                    ))}
+                  </div>
+                )}
               </span>
+              {console.log(movieInfos)}
               {movieInfos?.imdbRating && (
                 <>
                   {_t({ id: "movie.imdb.rating" })}
