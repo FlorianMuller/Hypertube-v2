@@ -11,8 +11,8 @@ describe("Movie Comments", () => {
   let mockedUserId4;
   let mockedReview;
   let finalReview;
-  let mockedHistory;
-  let finalHistory;
+  // let mockedHistory;
+  // let finalHistory;
 
   beforeAll(() => {
     mockedMovieId = "4242";
@@ -33,17 +33,17 @@ describe("Movie Comments", () => {
       ...mockedReview,
       __v: 0
     };
-    mockedHistory = {
-      _id: mockedUserId,
-      userId: "42",
-      movieId: mockedMovieId,
-      movieName: "ExampleMovie",
-      date: 1577118711809
-    };
-    finalHistory = {
-      ...mockedHistory,
-      __v: 0
-    };
+    // mockedHistory = {
+    //   _id: mockedUserId,
+    //   userId: "42",
+    //   movieId: mockedMovieId,
+    //   movieName: "ExampleMovie",
+    //   date: 1577118711809
+    // };
+    // finalHistory = {
+    //   ...mockedHistory,
+    //   __v: 0
+    // };
   });
 
   afterAll(async () => {
@@ -149,9 +149,9 @@ describe("Movie Comments", () => {
     });
   });
 
-  it("should logs user's history", async () => {
-    await movieHelpers.logHistory(mockedHistory);
-    const userHistory = await UserHistoryModel.findById(mockedUserId);
-    expect(userHistory.toJSON()).toEqual(finalHistory);
-  });
+  // it("should logs user's history", async () => {
+  //   await movieHelpers.logHistory(mockedHistory);
+  //   const userHistory = await UserHistoryModel.findById(mockedUserId);
+  //   expect(userHistory.toJSON()).toEqual(finalHistory);
+  // });
 });

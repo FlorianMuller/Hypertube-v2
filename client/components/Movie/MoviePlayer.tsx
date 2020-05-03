@@ -37,7 +37,12 @@ const MoviePlayer = ({ imdbId, srcVideo }: Props): ReactElement => {
   return (
     <div className={classes.containerPlayer}>
       {playerReader ? (
-        <video src={srcVideo} className={classes.player} controls autoPlay>
+        <video
+          src={srcVideo}
+          className={classes.player}
+          controls
+          preload="auto"
+        >
           <track kind="captions" />
           {pathSubEn && (
             <track
