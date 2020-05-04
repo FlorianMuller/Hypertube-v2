@@ -18,7 +18,6 @@ const NewPassword = (): ReactElement => {
 
   const checkPassword = (): void => {
     // checking if fields are completed
-    console.log("test");
     let localNewPasswordError = newPassword ? "" : "newpassword.error.required";
     let localConfirmedPasswordError = confirmedPassword
       ? ""
@@ -38,7 +37,6 @@ const NewPassword = (): ReactElement => {
     if (localConfirmedPasswordError === "" && localNewPasswordError === "") {
       API.put("/change-password", { newPassword, confirmedPassword, token })
         .then((res) => {
-          console.log(res);
           if (res.data.status === 200) {
             setValidPassword(1);
           } else {
