@@ -210,8 +210,8 @@ const searchMoviesOnAllSource = async (searchOptions) => {
   const cacheDetails = await SearchCache.findOne({ searchType: searchOptions });
 
   // If wanted page is cache, return it
-  if (cacheDetails && cacheDetails.cache.length >= searchOptions.page) {
-    return { movies: cacheDetails.cache[searchOptions.page - 1] };
+  if (cacheDetails && cacheDetails.cache.length >= (searchOptions.page || 1)) {
+    return { movies: cacheDetails.cache[(searchOptions.page || 1) - 1] };
   }
 
   // Search on all sources

@@ -39,7 +39,7 @@ const YTS_TO_OUR_GENRES = _.invert(OUR_TO_YTS_GENRES);
 
 const YTS_SORT = {
   dateAdded: "date_added",
-  // seeds: "seeds",
+  // seeds: "seeds", // Didn't understood how movies were sorted 🤔, so not using it
   title: "title",
   year: "year",
   rating: "rating"

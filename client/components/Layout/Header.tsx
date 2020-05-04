@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactElement } from "react";
 import { useIntl } from "react-intl";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   AppBar,
   Typography,
@@ -18,6 +18,7 @@ import {
   AccountCircle
 } from "@material-ui/icons";
 
+import API from "../../util/api";
 import { useHeaderStyles } from "./Layout.styles";
 
 interface Props {
@@ -43,6 +44,7 @@ const Header = ({
 }: Props): ReactElement => {
   const classes = useHeaderStyles({});
   const { formatMessage: _t } = useIntl();
+  const history = useHistory();
   const [localeAnchorEl, setLocaleAnchorEl] = useState(undefined);
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(undefined);
   const [localeLst, setLocaleLst] = useState(
@@ -60,6 +62,12 @@ const Header = ({
 
   const onMenuProfile = (): void => {
     setProfileMenuAnchor(undefined);
+  };
+
+  const logOut = async (): Promise<void> => {
+    await API.put(`/users/logout`);
+    history.push("/");
+    onMenuProfile();
   };
 
   return (
@@ -114,7 +122,7 @@ const Header = ({
               onClick={(e): void => setLocaleAnchorEl(e.currentTarget)}
             >
               <span className={classes.flagIcon}>
-                {_t({ id: `language.${locale}` })}
+                {_t({ id: `header.language.${locale}` })}
               </span>
             </IconButton>
             <Menu
@@ -138,7 +146,7 @@ const Header = ({
                   onClick={(): void => setNewLocale(loc)}
                   className={classes.localeItem}
                 >
-                  {_t({ id: `language.${loc}` })}
+                  {_t({ id: `header.language.${loc}` })}
                 </MenuItem>
               ))}
             </Menu>
@@ -165,11 +173,14 @@ const Header = ({
               open={!!profileMenuAnchor}
               onClose={(): void => setProfileMenuAnchor(undefined)}
             >
-              <MenuItem onClick={onMenuProfile}>
-                {_t({ id: "profile" })}
-              </MenuItem>
-              <MenuItem onClick={onMenuProfile}>
-                {_t({ id: "disconnect" })}
+              <Link className={classes.titleLink} to="/myprofile">
+                <MenuItem onClick={onMenuProfile}>
+                  {_t({ id: "header.profile" })}
+                </MenuItem>
+              </Link>
+
+              <MenuItem onClick={logOut}>
+                {_t({ id: "header.disconnect" })}
               </MenuItem>
             </Menu>
           </div>
