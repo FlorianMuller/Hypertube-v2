@@ -49,6 +49,7 @@ const Search = (): ReactElement => {
         setMovieList(data.movies);
       } else {
         setMovieList((oldFilmList) => [...oldFilmList, ...data.movies]);
+        console.log(movieList);
       }
     }
   }, [data]);

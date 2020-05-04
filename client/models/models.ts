@@ -65,6 +65,7 @@ export interface Movie {
   genres: string[];
   rating: number;
   runtime: number;
+  viewed: boolean;
 }
 
 export interface ApiSearchReponse {
