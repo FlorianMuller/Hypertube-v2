@@ -29,6 +29,7 @@ jest.mock("../hooks/useApi", () => (): UseApiReturn<MovieInfos, void> => ({
   res: {
     data: {
       title: "James Bond 007",
+      casting: ["Jean Neymar", "Cyril Dufisc"],
       description: "Voici une excelente description de ma part",
       prodDate: "2018",
       runTime: 200,
@@ -45,6 +46,7 @@ jest.mock("../hooks/useApi", () => (): UseApiReturn<MovieInfos, void> => ({
   },
   resData: {
     title: `"James Bond 007"`,
+    casting: ["Jean Neymar", "Cyril Dufisc"],
     description: "Voici une excelente description de ma part",
     prodDate: "2018",
     runTime: 200,
