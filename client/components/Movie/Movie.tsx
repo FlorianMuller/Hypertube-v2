@@ -27,6 +27,9 @@ const Movie = (): ReactElement => {
     span: {
       fontSize: "2em",
       marginTop: "50px"
+    },
+    actor: {
+      margin: "10px"
     }
   };
 
@@ -117,7 +120,7 @@ const Movie = (): ReactElement => {
                   </div>
                 )}
                 {movieInfos?.casting && (
-                  <div>
+                  <div style={style.actor}>
                     {_t({ id: "movie.casting" })}
                     {": "}
                     {movieInfos?.casting.map((actor: string) => (
@@ -126,7 +129,6 @@ const Movie = (): ReactElement => {
                   </div>
                 )}
               </span>
-              {console.log(movieInfos)}
               {movieInfos?.imdbRating && (
                 <>
                   {_t({ id: "movie.imdb.rating" })}

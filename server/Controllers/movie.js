@@ -235,7 +235,6 @@ const getInfos = async (req, res) => {
     const fivecast = cast.slice(0, 5);
 
     actors = fivecast.map((el) => el.name);
-    console.log(actors);
   });
 
   await Axios.get(sourceUrl)
@@ -259,7 +258,6 @@ const getInfos = async (req, res) => {
         imdbid: sourceSite === "yts" ? movie.imdb_code : movie.imdb_id,
         casting: actors
       };
-      console.log(Date.now());
       try {
         UserHistoryModel.create({
           userId: req.userId,
