@@ -65,32 +65,16 @@ const getOrder = (sort) => YTS_ORDER[sort];
  * - sorting is not supported
  * - genre is not supported
  */
-const cantSearch = (sort, genre) => {
-  return (sort && !YTS_SORT[sort]) || (genre && !OUR_TO_YTS_GENRES[genre]);
-};
+const cantSearch = (sort, genre) =>
+  (sort && !YTS_SORT[sort]) || (genre && !OUR_TO_YTS_GENRES[genre]);
 
-export const searchMoviesOnYts = async ({
-  sort,
-  query,
-  page,
-  minRating,
-  year,
-  genre
-}) => {
-  // Checking if source can use this sorting method and this genre
-  if (cantSearch(sort, genre)) {
-    console.warn("[YTS]: Sort or genre not supported");
-    return {
-      name: "yts",
-      nextPage: false,
-      movies: []
-    };
-  }
-
-  // Request to get movies corresponding to the search
-  const { data } = await axios.get(YTS_MOVIE_URL, {
+/**
+ * Search moovies on YTS and return axios reponse
+ */
+const ytsRawSearch = async ({ sort, query, minRating, year, genre }, page) =>
+  axios.get(YTS_MOVIE_URL, {
     params: {
-      limit: 50,
+      limit: YTS_LIMIT,
       page,
       sort_by: getSort(sort),
       order_by: getOrder(sort),
@@ -101,9 +85,50 @@ export const searchMoviesOnYts = async ({
     }
   });
 
-  // Checking `movies` because sometime `data.data.movie_count` is positive and there's no `movies` (wtf)
-  if (!data || !data.data.movies) {
-    console.warn("[YTS]: no movies found]");
+const getStart = (i) => i - YTS_LIMIT * Math.floor(i / YTS_LIMIT);
+
+/**
+ * Get at least YTS_LIMIT moovies starting from the index
+ * If needed, make 2 request to get enough moovie
+ */
+const getMovies = async (options, index) => {
+  const page = Math.floor(index / YTS_LIMIT) + 1;
+
+  // Need one or two page (to get YTS_LIMIT movies)
+  if (index % YTS_LIMIT) {
+    const [{ data: data1 }, { data: data2 }] = await Promise.all([
+      ytsRawSearch(options, page),
+      ytsRawSearch(options, page + 1)
+    ]);
+    const start = getStart(index);
+
+    if (data1 && data1.data.movies && data2 && data2.data.movies) {
+      return [...data1.data.movies.slice(start), ...data2.data.movies];
+    }
+
+    return data1 && data1.data.movies.slice(start);
+  }
+
+  const { data } = await ytsRawSearch(options, page);
+  return data && data.data.movies;
+};
+
+export const searchMoviesOnYts = async (options, index) => {
+  // Checking if source can use this sorting method and this genre
+  if (cantSearch(options.sort, options.genre)) {
+    console.info("[yts]: Sort or genre not supported");
+    return {
+      name: "yts",
+      nextPage: false,
+      movies: []
+    };
+  }
+
+  // Request to get movies corresponding to the search
+  const rawMovies = await getMovies(options, index);
+
+  if (!rawMovies) {
+    console.info("[yts]: no movies found]");
     return {
       name: "yts",
       nextPage: false,
@@ -112,24 +137,28 @@ export const searchMoviesOnYts = async ({
   }
 
   // Formating the movie list
-  const formatedMovies = data.data.movies.map((movie) => ({
+  const formatedMovies = rawMovies.map((movie) => ({
     id: movie.imdb_code,
     title: movie.title_english,
     cover: YTS_BASE_URL + movie.large_cover_image,
     year: movie.year,
     summary: movie.synopsis,
-    genres: movie.genres.map((ytsGenre) => YtsToOurGenres(ytsGenre)),
+    genres: [
+      ...new Set(movie.genres.map((ytsGenre) => YtsToOurGenres(ytsGenre)))
+    ],
     rating: movie.rating / 2,
     runtime: movie.runtime,
     dateAdded:
-      sort === "dateAdded" || !sort
+      options.sort === "dateAdded" || !options.sort
         ? new Date(movie.date_uploaded_unix * 1000)
         : undefined
   }));
 
   return {
     name: "yts",
-    nextPage: formatedMovies.length === YTS_LIMIT,
+    nextPage:
+      formatedMovies.length >=
+      (index % YTS_LIMIT ? YTS_LIMIT - getStart(index) + YTS_LIMIT : YTS_LIMIT),
     movies: formatedMovies
   };
 };

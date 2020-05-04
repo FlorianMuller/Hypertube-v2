@@ -38,14 +38,12 @@ const waitDecorator = (func) => async (...params) => {
   const timeSinceLastCall = Date.now() - lastCall;
 
   if (!lastCall || timeSinceLastCall > 1000) {
-    console.log("[rarbg] calling yts api NOW");
     const ret = await func(...params);
     lastCall = Date.now();
     return ret;
   }
 
   // Need to wait before call to api
-  console.log("[rarbg] calling yts api", 1000 - timeSinceLastCall);
   await timeout(1000 - timeSinceLastCall);
 
   const ret = await func(...params);
@@ -66,7 +64,6 @@ const getRarbgToken = waitDecorator(async () => {
       app_id: "Hypertube"
     }
   });
-  console.log(`[rarbg]: got Token ${token}`);
 
   return token;
 });
@@ -75,10 +72,8 @@ const getRarbgToken = waitDecorator(async () => {
  * Search movies with the rar
  */
 // @waitDecorator
-const search = waitDecorator(async (options) => {
-  console.log(`[rarbg]: searching (${RARBG_TOKEN})`);
-
-  return axios.get(RARBG_URL, {
+const search = waitDecorator(async (options) =>
+  axios.get(RARBG_URL, {
     params: {
       token: RARBG_TOKEN,
       app_id: "Hypertube",
@@ -89,8 +84,8 @@ const search = waitDecorator(async (options) => {
       sort: getSort(options.sort),
       search_string: options.query
     }
-  });
-});
+  })
+);
 
 /**
  * Try to search on Rarbg, if needed, ask for a token
@@ -144,10 +139,10 @@ const cantSearch = (options) => {
   );
 };
 
-const searchMoviesOnRarbg = async (options) => {
+const searchMoviesOnRarbg = async (options, index) => {
   // Check if we can make this search with Rarbg
   if (cantSearch(options)) {
-    console.warn("[rarbg] search not supported");
+    console.info("[rarbg] search not supported");
     return { ...defautlResponse };
   }
 
@@ -161,19 +156,12 @@ const searchMoviesOnRarbg = async (options) => {
 
   // No movies found / Error
   if (!data.torrent_results) {
-    console.warn("[rargb] no movies found", data);
+    console.info("[rargb] no movies found", data);
     return { ...defautlResponse };
   }
 
-  // Removing duplicate and movies without IMDb id
-  let movies = cleanMovies(data.torrent_results);
-
-  // Fake paging (there's no page system in the api, it can only return 100 elements max)
-  if (options.page > 1) {
-    movies = movies.slice(50, movies.length);
-  } else {
-    movies = movies.slice(0, 50);
-  }
+  // Removing duplicate and movies without IMDb id + slicing already viewed moovies
+  const movies = cleanMovies(data.torrent_results).slice(index);
 
   // Getting more info about all movies with TMDb
   const moviesData = await Promise.all(
@@ -190,8 +178,9 @@ const searchMoviesOnRarbg = async (options) => {
     cover: movie.poster_path && `${IMAGE_URL}/w300${movie.poster_path}`,
     year: movie.release_date && movie.release_date.split("-")[0],
     summary: movie.overview,
-    genres:
-      movie.genres && movie.genres.map((genre) => TmdbToOurGenre(genre.name)),
+    genres: movie.genres && [
+      ...new Set(movie.genres.map((genre) => TmdbToOurGenre(genre.name)))
+    ],
     rating: (movie.vote_count > 0 && movie.vote_average / 2) || null,
     runtime: movie.runtime,
     dateAdded:
@@ -203,7 +192,7 @@ const searchMoviesOnRarbg = async (options) => {
 
   return {
     name: "rarbg",
-    nextPage: options.page === 1 && formatedMovies.length >= 50, // max 2 page
+    nextPage: false, // send max directly
     movies: formatedMovies
   };
 };

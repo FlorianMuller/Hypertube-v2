@@ -51,12 +51,6 @@ const Search = (): ReactElement => {
         setPrintedMovieList(data.movies.slice(0, 12));
         setMovieList(data.movies.slice(12));
       } else {
-        console.log(
-          "movieList.length",
-          movieList.length,
-          " -> ",
-          movieList.length + data.movies.length
-        );
         setMovieList((oldMovieList) => [...oldMovieList, ...data.movies]);
       }
     }
@@ -66,15 +60,8 @@ const Search = (): ReactElement => {
    * Getting next 12 movies (and next page if needed)
    */
   const loadMore = (): void => {
-    console.log(
-      "movieList.length",
-      movieList.length,
-      " -> ",
-      movieList.length - 12
-    );
     // Getting next page if we don't have enough moovie in stock
-    if (!loading && data?.nextPage && movieList.length < 24) {
-      console.log("getting more movies");
+    if (!loading && movieList.length < 24) {
       setPage(page + 1);
       setUrl(formatQueryUrl(location.search, page + 1));
     }

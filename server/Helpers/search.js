@@ -1,9 +1,13 @@
+import SearchCache from "../Schemas/SearchCache";
 import yts from "./searchSources/yts";
 import rarbg from "./searchSources/rarbg";
 // import popCornTime from "./searchSources/popCornTime";
 
 // const sourceList = [yts, popCornTime, rarbg];
-const sourceList = [yts, rarbg];
+const sourceList = [
+  { name: "yts", func: yts },
+  { name: "rarbg", func: rarbg }
+];
 
 /**
  * List of function used to sort movies of different source
@@ -38,6 +42,28 @@ class MergeError extends Error {
   }
 }
 
+/**
+ * Create or update cache
+ */
+const manageCache = async (cacheDetails, indexes, result, searchOptions) => {
+  if (cacheDetails) {
+    indexes.forEach((value, key) => {
+      cacheDetails.indexes.set(
+        key,
+        value + (cacheDetails.indexes.get(key) || 0)
+      );
+    });
+    cacheDetails.cache.push(result);
+    await cacheDetails.save();
+  } else {
+    await SearchCache.create({
+      indexes,
+      cache: [result],
+      searchType: searchOptions
+    });
+  }
+};
+
 const hasSourceEnded = (indexes, src) =>
   indexes.get(src.name) === src.movies.length && src.nextPage;
 
@@ -58,7 +84,13 @@ const hasIndexReachEnd = (indexes, src) =>
  * transformation:
  * [{ nextPage: bool, movies: [] }, { nextPage: bool, movies: [] }, ...]  ->  {nextPage: bool, movies: []}
  */
-const mergeMoviesList = async (allData, sortFunc) => {
+const mergeMoviesList = async (
+  allData,
+  sortFunc,
+  searchOptions,
+  cacheDetails
+) => {
+  // Getting source with result
   const sources = allData.filter((src) => src.movies.length);
 
   // No result for all sources
@@ -69,23 +101,34 @@ const mergeMoviesList = async (allData, sortFunc) => {
     };
   }
 
-  // todo: get old movies from cache and remove duplicate
+  const idList = [];
+  // Adding cache id to idList
+  if (cacheDetails && cacheDetails.cache.length) {
+    idList.push(
+      ...cacheDetails.cache.flatMap((page) =>
+        page.movies.map((movie) => movie.id)
+      )
+    );
+  }
 
-  // Only one source has result -> No nerge needed
+  // Only one source has result -> No merge needed
   if (sources.length === 1) {
-    return {
+    const result = {
       nextPage: sources[0].nextPage,
-      movies: sources[0].movies
+      movies: sources[0].movies.filter((movie) => !idList.includes(movie.id))
     };
+    await manageCache(
+      cacheDetails,
+      new Map([[sources[0].name, sources[0].movies.length]]),
+      result,
+      searchOptions
+    );
+    return result;
   }
 
   // Mutlple source have result -> we must merge acording to sort
-  // todo: get indexes from cache
   const indexes = new Map(sources.map((source) => [source.name, 0]));
-  // console.log("indexes", indexes);
-
   const finalMovies = [];
-  const idList = [];
 
   try {
     // While one source (with nextPage true) hasn't run out of movies OR all sources have run out of movies
@@ -96,42 +139,42 @@ const mergeMoviesList = async (allData, sortFunc) => {
     ) {
       let bestMovie = null;
       let bestSource = null;
-      // console.log(
-      //   "gona compare: ",
-      //   sources.map((source) => source.movies[indexes.get(source.name)])
-      // );
 
       // Searching for the best movie (in the first movie of each source)
       sources.forEach((source) => {
         if (!hasIndexReachEnd(indexes, source)) {
           let testedMovie = source.movies[indexes.get(source.name)];
 
-          // Getting next movie from source until the movie is already in finalMovies (or source run out of movie)
+          // Passing movie already in our final list
           while (idList.includes(testedMovie.id)) {
             indexes.set(source.name, indexes.get(source.name) + 1); // i++
+
             // One source with nextPage true has finished, we stop the merge by throwing an exception
             if (hasSourceEnded(indexes, source)) {
               throw new MergeError("One sources has no movies");
             }
-            // One source with nextPage false has finished, we continue the sort, but this source will be ignore
+            // One source with nextPage false has finished, we continue the merge, but this source will be ignore
             if (hasIndexReachEnd(indexes, source)) {
               return;
             }
+
             testedMovie = source.movies[indexes.get(source.name)];
           }
 
+          // Testing for the best movie
           if (bestMovie === null || sortFunc(testedMovie, bestMovie)) {
             bestMovie = testedMovie;
             bestSource = source.name;
           }
         }
       });
-      // console.log(`${bestSource} won with ${bestMovie && bestMovie.title}\n\n`);
 
       // Adding best movie to list
-      finalMovies.push(bestMovie);
-      idList.push(bestMovie.id);
-      indexes.set(bestSource, indexes.get(bestSource) + 1); // i++
+      if (bestMovie) {
+        finalMovies.push(bestMovie);
+        idList.push(bestMovie.id);
+        indexes.set(bestSource, indexes.get(bestSource) + 1); // i++
+      }
     }
   } catch (e) {
     // If it's not an error relative to sort, we throw it, else we continue
@@ -140,13 +183,15 @@ const mergeMoviesList = async (allData, sortFunc) => {
     }
   }
 
-  // todo: Cache indexes + result
-
-  // console.log("indexes", indexes);
-  return {
+  const result = {
     nextPage: !!allData.filter((source) => source.nextPage).length,
     movies: finalMovies
   };
+
+  // Completing or creating cache
+  await manageCache(cacheDetails, indexes, result, searchOptions);
+
+  return result;
 };
 
 /**
@@ -156,16 +201,33 @@ const mergeMoviesList = async (allData, sortFunc) => {
  *
  * minRating: minimum note
  * year: specific year
- * collection: a specific movie genre
+ * genre: a specific movie genre
  */
-const searchMoviesOnAllSource = async (searchParam) => {
+const searchMoviesOnAllSource = async (searchOptions) => {
+  // Get cache
+  const cacheDetails = await SearchCache.findOne({ searchType: searchOptions });
+
+  // If wanted page is cache, return it
+  if (cacheDetails && cacheDetails.cache.length >= searchOptions.page) {
+    return cacheDetails.cache[searchOptions.page - 1];
+  }
+
+  // Search on all sources
   const allData = await Promise.all(
-    sourceList.map((func) => func(searchParam))
+    sourceList.map((src) =>
+      src.func(
+        searchOptions,
+        (cacheDetails && cacheDetails.indexes.get(src.name)) || 0
+      )
+    )
   );
 
+  // Merging sources and caching
   const moviesList = await mergeMoviesList(
     allData,
-    SORT_FUNC.get(searchParam.sort || "dateAdded")
+    SORT_FUNC.get(searchOptions.sort || "dateAdded"),
+    searchOptions,
+    cacheDetails
   );
 
   return moviesList;
