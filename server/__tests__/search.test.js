@@ -2,41 +2,33 @@ import { searchMoviesOnYts } from "../Helpers/searchSources/yts";
 
 describe("Search", () => {
   describe("Helper/search movies", () => {
-    it("Should get the data", async () => {
+    // it("Should get the data", async () => {
+    //   const filters = {
+    //     minRating: 0,
+    //     year: 2017,
+    //     genre: "action"
+    //   };
+
+    //   const res = await searchMoviesOnYts(filters, 0);
+
+    //   expect(res).toBeDefined();
+    //   expect(res).toHaveProperty("nextPage");
+    //   expect(res).toHaveProperty("movies");
+    //   expect(res.movies).toBeInstanceOf(Array);
+    // });
+
+    it("Should send empty list", async () => {
       const filters = {
-        limit: 12,
-        sort_by: "download_count",
-        minRating: 0,
-        page: 1,
-        year: 2017,
-        query: "",
-        genre: "Action"
+        sort: "this sort doesn't exist"
       };
 
-      const res = await searchMoviesOnYts(filters);
+      const res = await searchMoviesOnYts(filters, 0);
 
-      expect(res).toBeDefined();
-      expect(res).toHaveProperty("nextPage");
-      expect(res).toHaveProperty("movies");
-      expect(res.movies).toBeInstanceOf(Array);
+      expect(res).toEqual({
+        name: "yts",
+        nextPage: false,
+        movies: []
+      });
     });
   });
 });
-
-// describe("Helper/search shows", () => {
-//   it("Should get the data", async () => {
-//     const filters = {
-//       genre: "Action",
-//       page: 1,
-//       query: "",
-//       sort: "trending"
-//     };
-
-//     const res = await searchShowsOnPCT(filters);
-
-//     expect(res).toBeDefined();
-//     expect(res).toHaveProperty("nextPage");
-//     expect(res).toHaveProperty("medias");
-//     expect(res.medias).toBeInstanceOf(Array);
-//   });
-// });

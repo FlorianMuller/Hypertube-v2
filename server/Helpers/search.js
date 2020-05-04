@@ -45,7 +45,12 @@ class MergeError extends Error {
 /**
  * Create or update cache
  */
-const manageCache = async (cacheDetails, indexes, result, searchOptions) => {
+const manageCache = async (
+  cacheDetails,
+  indexes,
+  resultMovies,
+  searchOptions
+) => {
   if (cacheDetails) {
     indexes.forEach((value, key) => {
       cacheDetails.indexes.set(
@@ -53,12 +58,12 @@ const manageCache = async (cacheDetails, indexes, result, searchOptions) => {
         value + (cacheDetails.indexes.get(key) || 0)
       );
     });
-    cacheDetails.cache.push(result);
+    cacheDetails.cache.push(resultMovies);
     await cacheDetails.save();
   } else {
     await SearchCache.create({
       indexes,
-      cache: [result],
+      cache: [resultMovies],
       searchType: searchOptions
     });
   }
@@ -105,30 +110,32 @@ const mergeMoviesList = async (
   // Adding cache id to idList
   if (cacheDetails && cacheDetails.cache.length) {
     idList.push(
-      ...cacheDetails.cache.flatMap((page) =>
-        page.movies.map((movie) => movie.id)
+      ...cacheDetails.cache.flatMap((moviesLst) =>
+        moviesLst.map((movie) => movie.id)
       )
     );
   }
 
   // Only one source has result -> No merge needed
   if (sources.length === 1) {
-    const result = {
-      nextPage: sources[0].nextPage,
-      movies: sources[0].movies.filter((movie) => !idList.includes(movie.id))
-    };
+    // Removinf duplicate
+    const resultMovies = sources[0].movies.filter(
+      (movie) => !idList.includes(movie.id)
+    );
+
     await manageCache(
       cacheDetails,
       new Map([[sources[0].name, sources[0].movies.length]]),
-      result,
+      resultMovies,
       searchOptions
     );
-    return result;
+
+    return resultMovies;
   }
 
   // Mutlple source have result -> we must merge acording to sort
   const indexes = new Map(sources.map((source) => [source.name, 0]));
-  const finalMovies = [];
+  const resultMovies = [];
 
   try {
     // While one source (with nextPage true) hasn't run out of movies OR all sources have run out of movies
@@ -171,7 +178,7 @@ const mergeMoviesList = async (
 
       // Adding best movie to list
       if (bestMovie) {
-        finalMovies.push(bestMovie);
+        resultMovies.push(bestMovie);
         idList.push(bestMovie.id);
         indexes.set(bestSource, indexes.get(bestSource) + 1); // i++
       }
@@ -183,15 +190,10 @@ const mergeMoviesList = async (
     }
   }
 
-  const result = {
-    nextPage: !!allData.filter((source) => source.nextPage).length,
-    movies: finalMovies
-  };
-
   // Completing or creating cache
-  await manageCache(cacheDetails, indexes, result, searchOptions);
+  await manageCache(cacheDetails, indexes, resultMovies, searchOptions);
 
-  return result;
+  return resultMovies;
 };
 
 /**
@@ -209,7 +211,7 @@ const searchMoviesOnAllSource = async (searchOptions) => {
 
   // If wanted page is cache, return it
   if (cacheDetails && cacheDetails.cache.length >= searchOptions.page) {
-    return cacheDetails.cache[searchOptions.page - 1];
+    return { movies: cacheDetails.cache[searchOptions.page - 1] };
   }
 
   // Search on all sources
@@ -230,7 +232,7 @@ const searchMoviesOnAllSource = async (searchOptions) => {
     cacheDetails
   );
 
-  return moviesList;
+  return { movies: moviesList };
 };
 
 export default searchMoviesOnAllSource;

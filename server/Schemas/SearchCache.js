@@ -16,14 +16,6 @@ const searchedMoviesSchema = new mongoose.Schema(
   { _id: false }
 );
 
-const searchResultSchema = new mongoose.Schema(
-  {
-    nextPage: { type: Boolean, required: true },
-    movies: { type: [searchedMoviesSchema], required: true }
-  },
-  { _id: false }
-);
-
 const searchTypeSchema = new mongoose.Schema(
   {
     sort: String,
@@ -37,7 +29,7 @@ const searchTypeSchema = new mongoose.Schema(
 
 const searchCacheSchema = new mongoose.Schema({
   indexes: { type: Map, required: true },
-  cache: { type: [searchResultSchema], required: true },
+  cache: { type: [[searchedMoviesSchema]], required: true },
   searchType: {
     type: searchTypeSchema,
     required: true,
