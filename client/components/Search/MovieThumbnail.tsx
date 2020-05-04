@@ -4,6 +4,7 @@ import { useIntl } from "react-intl";
 import { Button, Chip, Typography, Card } from "@material-ui/core";
 import Image from "material-ui-image";
 import StarIcon from "@material-ui/icons/Star";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 
 import useSearchStyles from "./Search.styles";
 import { Movie } from "../../models/models";
@@ -15,6 +16,13 @@ interface Props {
 const MovieThumbnail = ({ movie }: Props): ReactElement => {
   const classes = useSearchStyles({});
   const { formatMessage: _t } = useIntl();
+  const style = {
+    icon: {
+      position: "absolute",
+      top: "10px",
+      right: "10px"
+    }
+  };
 
   return (
     <div className={classes.thumbnailContainer} key={movie.id}>
@@ -32,6 +40,9 @@ const MovieThumbnail = ({ movie }: Props): ReactElement => {
         }
       />
       <div className={classes.thumbnailOverlay}>
+        {movie.viewed === true && (
+          <VisibilityIcon fontSize="small" color="primary" />
+        )}
         <Typography variant="h5">{movie.title}</Typography>
         <Typography variant="h6">{movie.year}</Typography>
         <Typography variant="caption" className={classes.summary}>
