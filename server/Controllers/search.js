@@ -11,7 +11,6 @@ const searchMovies = async (req, res) => {
     data = await checkIfViewed(data, req.userId);
     res.status(200).send(data);
   } catch (error) {
-    console.error(error);
     res.sendStatus(500);
   }
 };

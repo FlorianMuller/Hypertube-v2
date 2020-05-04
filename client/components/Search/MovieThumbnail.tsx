@@ -16,13 +16,6 @@ interface Props {
 const MovieThumbnail = ({ movie }: Props): ReactElement => {
   const classes = useSearchStyles({});
   const { formatMessage: _t } = useIntl();
-  const style = {
-    icon: {
-      position: "absolute",
-      top: "10px",
-      right: "10px"
-    }
-  };
 
   return (
     <div className={classes.thumbnailContainer} key={movie.id}>
