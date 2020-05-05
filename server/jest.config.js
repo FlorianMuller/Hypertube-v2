@@ -8,5 +8,6 @@ module.exports = {
   preset: "@shelf/jest-mongodb",
   transform: {
     "^.+\\.js?$": "babel-jest"
-  }
+  },
+  setupFilesAfterEnv: ["<rootDir>/server/jest.setup.js"]
 };

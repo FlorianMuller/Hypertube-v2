@@ -1,5 +1,5 @@
 import UserModel from "../Schemas/User";
-import MovieCommentModel from "../Schemas/Movie";
+import MovieCommentModel from "../Schemas/MovieComment";
 
 const getMovieCommentsByUsername = async (req, res) => {
   const name = req.params.username;

@@ -1,6 +1,6 @@
 import mongoose from "../mongo";
 
-const commentSchema = new mongoose.Schema({
+const movieCommentSchema = new mongoose.Schema({
   _id: String,
   movieId: { type: String, required: true },
   movieName: { type: String, required: true },
@@ -15,6 +15,6 @@ const commentSchema = new mongoose.Schema({
   body: { type: String, required: true }
 });
 
-const MovieCommentModel = mongoose.model("movieComments", commentSchema);
+const MovieCommentModel = mongoose.model("movieComments", movieCommentSchema);
 
 export default MovieCommentModel;

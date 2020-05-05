@@ -1,4 +1,4 @@
-import MovieCommentModel from "../Schemas/Movie";
+import MovieCommentModel from "../Schemas/MovieComment";
 
 const timestampToDate = (month, day, year) => {
   return `${month}, ${day}, ${year}`;
@@ -55,4 +55,9 @@ const saveReview = async (comment) => {
   }
 };
 
-export default { timestampToDate, saveReview, sortReviews, findReviews };
+export default {
+  timestampToDate,
+  saveReview,
+  sortReviews,
+  findReviews
+};

@@ -4,7 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import useApi from "../../hooks/useApi";
 import Loading from "../Routes/Loading";
-import Error from "../Error";
+import Error from "../Error/Error";
 import ShowComments from "./ShowComments";
 import useStyles from "./Profile.styles";
 
