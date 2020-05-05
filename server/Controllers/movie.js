@@ -559,7 +559,7 @@ const PlayMovie = async (req, res) => {
         console.error(e);
         res.sendStatus(500);
       });
-  }, 2000);
+  }, 5000);
 };
 
 const receiveReviews = (req, res) => {
