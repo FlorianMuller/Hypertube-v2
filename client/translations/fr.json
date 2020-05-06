@@ -52,6 +52,7 @@
   "authentication.SignIn.login": "Connexion",
   "authentication.SignIn.school": "Connection avec 42",
   "authentication.SignIn.google": "Connection avec Google",
+  "authentication.SignIn.omniError": "Vous devez vous connecter avec votre compte Hypertube !",
   "authentication.SignIn.login.loading": "Connexion en cours...",
   "authentication.SignIn.error.badCredentials": "Mauvaise combinaison nom d'utilisateur/mot de passe",
   "authentication.SignIn.error.emailNotVerified": "Tu n'as pas encore vérifié ton adresse email",

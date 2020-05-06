@@ -50,7 +50,7 @@ router.get(
     } else if (req.user.id) {
       setAccesTokenCookie(res, req.id);
       res.redirect("/");
-    } else res.redirect("/");
+    } else res.redirect("/?auth=google");
   }
 );
 
@@ -75,7 +75,7 @@ router.get(
     } else if (req.user.id) {
       setAccesTokenCookie(res, req.id);
       res.redirect("/");
-    } else res.redirect("/");
+    } else res.redirect("/?auth=school");
   }
 );
 
