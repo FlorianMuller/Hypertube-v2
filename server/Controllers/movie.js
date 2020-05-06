@@ -130,7 +130,7 @@ const options = {
   ]
 };
 
-const miniDownload = 1;
+// const miniDownload = 1;
 
 const getSubtitles = async (req, res) => {
   const { imdbId } = req.params;
@@ -366,31 +366,27 @@ const streamMovie = async (pathMovie, start, end, res) => {
 };
 
 const downloadMovie = (movieId, movie, sourceSite, req, res) => {
-  const ArrayMagnet = [];
-  let newmovie = movie;
-  newmovie.torrents = movie.torrents.sort((a, b) =>
-    a.seeds < b.seeds ? 1 : -1
-  );
-  newmovie.torrents = movie.torrents.filter(
-    (torrent) => torrent.quality !== "3D"
-  );
-  newmovie = newmovie.torrents.length ? newmovie : movie;
-  if (sourceSite !== "yts") {
-    newmovie.map((el) => {
-      const [magnetTmp] = el.download.split("&");
-      ArrayMagnet.push(magnetTmp);
-      return undefined;
-    });
-  }
   let magnet;
+  if (sourceSite !== "yts") {
+    const sortedmovie = movie.sort((a, b) => b.seeders - a.seeders);
+    const no3d = sortedmovie.filter(
+      (torrent) => torrent.category !== "Movies/x264/3D"
+    );
+
+    [magnet] = (no3d.length ? no3d[0].download : sortedmovie[0].download).split(
+      "&"
+    );
+  }
+
   if (sourceSite === "yts") {
-    // const isfullhd = (el) => el.hash === "1080p"
-    magnet = `magnet:?xt=urn:btih:${newmovie.torrents[0].hash}`;
-  } else {
-    ArrayMagnet.map((el) => {
-      magnet = el;
-      return undefined;
-    });
+    const sortedTorrents = movie.torrents.sort((a, b) => b.seeds - a.seeds);
+    const validTorrents = sortedTorrents.filter(
+      (torrent) => torrent.quality !== "3D"
+    );
+    const selectedTorrent = validTorrents.length
+      ? validTorrents[0]
+      : sortedTorrents[0];
+    magnet = `magnet:?xt=urn:btih:${selectedTorrent.hash}`;
   }
 
   const engine = TorrentStream(magnet, options);

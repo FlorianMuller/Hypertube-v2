@@ -7,9 +7,9 @@ import Movie from "../components/Movie/Movie";
 import { Reviews, UseApiReturn, MovieInfos } from "../models/models";
 import checkInvalidCommentOrStars from "../components/Movie/MovieComments.service";
 
-jest.mock("../helpers/socket", () => ({
-  socket: { on: jest.fn(), emit: jest.fn() }
-}));
+// jest.mock("../helpers/socket", () => ({
+//   socket: { on: jest.fn(), emit: jest.fn() }
+// }));
 
 jest.mock("../hooks/useApi", () => (): {
   data: unknown;
