@@ -130,11 +130,8 @@ const options = {
   ]
 };
 
-const miniDownload = 1;
-
 const getSubtitles = async (req, res) => {
   const { imdbId } = req.params;
-
   let subPathEn;
   let subPathEs;
   let subPathFr;
@@ -145,7 +142,6 @@ const getSubtitles = async (req, res) => {
     imdbid: imdbId
   }).then(async (subtitles) => {
     const subPath = `${process.cwd()}/server/data/subtitles/`;
-
     if (
       subtitles.en &&
       subtitles.en.vtt &&
@@ -155,8 +151,7 @@ const getSubtitles = async (req, res) => {
         .then((data) => {
           fs.writeFileSync(`${subPath + imdbId}_en.vtt`, data);
         })
-        .catch((err) => {
-          console.error(err.message);
+        .catch(() => {
           console.log("No english subtitles");
         });
       subPathEn = fs.existsSync(`${subPath + imdbId}_en.vtt`)
