@@ -24,7 +24,7 @@ const signIn = async (req, res) => {
         res.status(400).send({ error: "BAD_CREDENTIALS" });
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
       res.status(500).send();
     }
   } else {

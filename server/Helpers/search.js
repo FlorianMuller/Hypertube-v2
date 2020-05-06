@@ -1,93 +1,238 @@
-import axios from "axios";
-import qs from "qs";
-import UserHistoryModel from "../Schemas/UserHistory";
+import SearchCache from "../Schemas/SearchCache";
+import yts from "./searchSources/yts";
+import rarbg from "./searchSources/rarbg";
+// import popCornTime from "./searchSources/popCornTime";
 
-const YTS_BASE_URL = "https://yts.ae";
-const YTS_URL = `${YTS_BASE_URL}/api/v2/list_movies.json`;
-// const POPCORN_URL = "https://tv-v2.api-fetch.website/shows";
+// const sourceList = [yts, popCornTime, rarbg];
+const sourceList = [
+  { name: "yts", func: yts },
+  { name: "rarbg", func: rarbg }
+];
 
-export const checkIfViewed = async (data, userId) => {
-  const history = await UserHistoryModel.find({ userId });
-  const newData = data.movies.map((movie) => {
-    const found = history.find((el) => el.imdb_code === movie.id);
-    if (found) return { ...movie, viewed: true };
-    return { ...movie, viewed: false };
-  });
-  return { movies: newData, nextPage: data.nextPage };
+/**
+ * List of function used to sort movies of different source
+ * Return `true` if `tested` is better than `best`
+ */
+const SORT_FUNC = new Map([
+  ["dateAdded", (tested, best) => tested.dateAdded > best.dateAdded],
+  ["seeds", (tested, best) => tested.seeds > best.seeds],
+  [
+    "title",
+    (tested, best) =>
+      best.localeCompare(tested, "en", { sensitivity: "base", numeric: true })
+  ],
+  ["year", (tested, best) => tested.year > best.year],
+  ["rating", (tested, best) => tested.rating > best.year]
+]);
+
+/**
+ * Custom error (exception) for the mergeMoviesList function
+ */
+class MergeError extends Error {
+  constructor(...params) {
+    // Pass remaining arguments (including vendor specific ones) to parent constructor
+    super(...params);
+
+    // Maintains proper stack trace for where our error was thrown (only available on V8)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, MergeError);
+    }
+
+    this.name = "MergeError";
+  }
+}
+
+/**
+ * Create or update cache
+ */
+const manageCache = async (
+  cacheDetails,
+  indexes,
+  resultMovies,
+  searchOptions
+) => {
+  if (cacheDetails) {
+    indexes.forEach((value, key) => {
+      cacheDetails.indexes.set(
+        key,
+        value + (cacheDetails.indexes.get(key) || 0)
+      );
+    });
+    cacheDetails.cache.push(resultMovies);
+    await cacheDetails.save();
+  } else {
+    await SearchCache.create({
+      indexes,
+      cache: [resultMovies],
+      searchType: searchOptions
+    });
+  }
 };
 
-export const searchMoviesOnYts = async ({
-  query,
-  page,
-  minRating,
-  year,
-  collections
-}) => {
-  const queryParams = qs.stringify({
-    limit: 12,
-    sort_by: "download_count",
-    minimum_rating: minRating * 2 || 0,
-    page: page || 1,
-    query_term: `${query || ""} ${year || ""}`,
-    genre: collections
-  });
+const hasSourceEnded = (indexes, src) =>
+  indexes.get(src.name) === src.movies.length && src.nextPage;
 
-  const { data } = await axios.get(`${YTS_URL}?${queryParams}`);
+const hasIndexReachEnd = (indexes, src) =>
+  indexes.get(src.name) === src.movies.length;
 
-  // Checking `movies` because sometime `data.data.movie_count` is positive and there's no `movies` (wtf)
-  if (!data || !data.data.movies) {
+/**
+ * Take search on all sources and merge them according to the given sort
+ *
+ * ~ Stop merge when a source with nextPage true has run out
+ * of movies OR when all source have run out of movies
+ * (nextPage true because if nextPage is false, no other movies will come
+ * from this source, therefore we can add movies after this source has ended)
+ *
+ * ~ Return between n and (n * 50 - (n - 1)) movies
+ * (with n the number of sources)
+ *
+ * transformation:
+ * [{ nextPage: bool, movies: [] }, { nextPage: bool, movies: [] }, ...]  ->  {nextPage: bool, movies: []}
+ */
+const mergeMoviesList = async (
+  allData,
+  sortFunc,
+  searchOptions,
+  cacheDetails
+) => {
+  // Getting source with result
+  const sources = allData.filter((src) => src.movies.length);
+
+  // No result for all sources
+  if (!sources.length) {
     return {
       nextPage: false,
       movies: []
     };
   }
 
-  const parsedMovies = data.data.movies.map((movie) => ({
-    id: movie.imdb_code || movie.id,
-    title: movie.title_english,
-    cover: YTS_BASE_URL + movie.large_cover_image,
-    year: movie.year,
-    summary: movie.summary,
-    genres: movie.genres,
-    rating: movie.rating / 2,
-    runtime: movie.runtime
-  }));
+  const idList = [];
+  // Adding cache id to idList
+  if (cacheDetails && cacheDetails.cache.length) {
+    idList.push(
+      ...cacheDetails.cache.flatMap((moviesLst) =>
+        moviesLst.map((movie) => movie.id)
+      )
+    );
+  }
 
-  return {
-    nextPage: parsedMovies.length === 12,
-    movies: parsedMovies
-  };
+  // Only one source has result -> No merge needed
+  if (sources.length === 1) {
+    // Removinf duplicate
+    const resultMovies = sources[0].movies.filter(
+      (movie) => !idList.includes(movie.id)
+    );
+
+    await manageCache(
+      cacheDetails,
+      new Map([[sources[0].name, sources[0].movies.length]]),
+      resultMovies,
+      searchOptions
+    );
+
+    return resultMovies;
+  }
+
+  // Mutlple source have result -> we must merge acording to sort
+  const indexes = new Map(sources.map((source) => [source.name, 0]));
+  const resultMovies = [];
+
+  try {
+    // While one source (with nextPage true) hasn't run out of movies OR all sources have run out of movies
+    while (
+      !sources.filter((src) => hasSourceEnded(indexes, src)).length &&
+      sources.filter((src) => hasIndexReachEnd(indexes, src)).length !==
+      sources.length
+    ) {
+      let bestMovie = null;
+      let bestSource = null;
+
+      // Searching for the best movie (in the first movie of each source)
+      sources.forEach((source) => {
+        if (!hasIndexReachEnd(indexes, source)) {
+          let testedMovie = source.movies[indexes.get(source.name)];
+
+          // Passing movie already in our final list
+          while (idList.includes(testedMovie.id)) {
+            indexes.set(source.name, indexes.get(source.name) + 1); // i++
+
+            // One source with nextPage true has finished, we stop the merge by throwing an exception
+            if (hasSourceEnded(indexes, source)) {
+              throw new MergeError("One sources has no movies");
+            }
+            // One source with nextPage false has finished, we continue the merge, but this source will be ignore
+            if (hasIndexReachEnd(indexes, source)) {
+              return;
+            }
+
+            testedMovie = source.movies[indexes.get(source.name)];
+          }
+
+          // Testing for the best movie
+          if (bestMovie === null || sortFunc(testedMovie, bestMovie)) {
+            bestMovie = testedMovie;
+            bestSource = source.name;
+          }
+        }
+      });
+
+      // Adding best movie to list
+      if (bestMovie) {
+        resultMovies.push(bestMovie);
+        idList.push(bestMovie.id);
+        indexes.set(bestSource, indexes.get(bestSource) + 1); // i++
+      }
+    }
+  } catch (e) {
+    // If it's not an error relative to sort, we throw it, else we continue
+    if (!(e instanceof MergeError)) {
+      throw e;
+    }
+  }
+
+  // Completing or creating cache
+  await manageCache(cacheDetails, indexes, resultMovies, searchOptions);
+
+  return resultMovies;
 };
 
-// export default { searchMoviesOnYts, checkIfViewed };
+/**
+ * sort: The parameter on wich movies are gonna be sorted
+ * query: search string
+ * page: page number
+ *
+ * minRating: minimum note
+ * year: specific year
+ * genre: a specific movie genre
+ */
+const searchMoviesOnAllSource = async (searchOptions) => {
+  // Get cache
+  const cacheDetails = await SearchCache.findOne({ searchType: searchOptions });
 
-// Todo: adapt to film
+  // If wanted page is cache, return it
+  if (cacheDetails && cacheDetails.cache.length >= (searchOptions.page || 1)) {
+    return { movies: cacheDetails.cache[(searchOptions.page || 1) - 1] };
+  }
 
-// export const searchShowsOnPCT = async ({ query, page, collections }) => {
-//   const queryParams = qs.stringify({
-//     genre: collections,
-//     keywords: query,
-//     sort: "trending"
-//   });
-//   const { data } = await axios.get(`${POPCORN_URL}/${page}?${queryParams}`);
+  // Search on all sources
+  const allData = await Promise.all(
+    sourceList.map((src) =>
+      src.func(
+        searchOptions,
+        (cacheDetails && cacheDetails.indexes.get(src.name)) || 0
+      )
+    )
+  );
 
-//   const parsedShows =
-//     (data &&
-//       data.map((show) => ({
-//         cover: show.images.poster,
-//         title: show.title,
-//         year: show.year,
-//         summary: null,
-//         genres: null,
-//         rating: show.rating.percentage / 20,
-//         id: show.imdb_id,
-//         runtime: null,
-//         seaons: show.num_seasons
-//       }))) ||
-//     [];
+  // Merging sources and caching
+  const moviesList = await mergeMoviesList(
+    allData,
+    SORT_FUNC.get(searchOptions.sort || "dateAdded"),
+    searchOptions,
+    cacheDetails
+  );
 
-//   return {
-//     nextPage: parsedShows.length === 50,
-//     medias: parsedShows
-//   };
-// };
+  return { movies: moviesList };
+};
+
+export default searchMoviesOnAllSource;

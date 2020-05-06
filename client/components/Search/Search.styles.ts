@@ -5,7 +5,8 @@ const useSearchStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginBottom: theme.spacing(4)
   },
   thumbnailContainer: {
     position: "relative",
@@ -30,11 +31,7 @@ const useSearchStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 1),
     alignItems: "center",
     transition: "background 0.2s, opacity 0.2s, transform 0.2s",
-    opacity: 0,
-    "&:hover": {
-      opacity: 1,
-      background: "rgba(0,0,0,0.8)"
-    }
+    background: "rgba(0,0,0,0.8)"
   },
   skeletonThumbnail: {
     background: theme.palette.secondary.main
@@ -91,6 +88,9 @@ const useSearchStyles = makeStyles((theme) => ({
   noMedia: {
     width: "20rem",
     height: "20rem"
+  },
+  niceLink: {
+    textDecoration: "none"
   }
 }));
 
