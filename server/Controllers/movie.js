@@ -367,17 +367,26 @@ const streamMovie = async (pathMovie, start, end, res) => {
 
 const downloadMovie = (movieId, movie, sourceSite, req, res) => {
   const ArrayMagnet = [];
+  let newmovie = movie;
+  newmovie.torrents = movie.torrents.sort((a, b) =>
+    a.seeds < b.seeds ? 1 : -1
+  );
+  newmovie.torrents = movie.torrents.filter(
+    (torrent) => torrent.quality !== "3D"
+  );
+  newmovie = newmovie.torrents.length ? newmovie : movie;
   if (sourceSite !== "yts") {
-    movie.map((el) => {
+    newmovie.map((el) => {
       const [magnetTmp] = el.download.split("&");
       ArrayMagnet.push(magnetTmp);
       return undefined;
     });
   }
   let magnet;
-  if (sourceSite === "yts")
-    magnet = `magnet:?xt=urn:btih:${movie.torrents[0].hash}`;
-  else {
+  if (sourceSite === "yts") {
+    // const isfullhd = (el) => el.hash === "1080p"
+    magnet = `magnet:?xt=urn:btih:${newmovie.torrents[0].hash}`;
+  } else {
     ArrayMagnet.map((el) => {
       magnet = el;
       return undefined;
