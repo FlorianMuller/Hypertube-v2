@@ -29,12 +29,14 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
    * Filters diplayed value
    */
   const searchParams = qs.parse(location.search.slice(1));
-  const [year, setYear] = useState<number>(searchParams.year || 0);
+  const [year, setYear] = useState<number>(
+    ((searchParams.year as unknown) as number) || 0
+  );
   const [collections, setcollections] = useState<string>(
-    searchParams.collections || "all"
+    (searchParams.collections as string) || "all"
   );
   const [minRating, setMinRating] = useState<number>(
-    searchParams.minRating || null
+    ((searchParams.minRating as unknown) as number) || null
   );
 
   /**

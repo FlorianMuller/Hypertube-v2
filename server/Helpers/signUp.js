@@ -46,7 +46,8 @@ export const validPassword = (password) => {
 export const sendValidateEmail = async (user, locale) => {
   const emailInfo = confirmEmailInfo[locale];
   const token = await TokenModel.create({
-    user: user._id
+    user: user._id,
+    type: "emailSignUp"
   });
 
   await sendEmail({
