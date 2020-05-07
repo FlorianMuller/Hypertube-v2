@@ -198,7 +198,7 @@ const SignIn = (): ReactElement => {
                   value={authInfo.username}
                   helperText={
                     authError.username !== "" &&
-                      authError.username !== errorWithoutTextErrorKey
+                    authError.username !== errorWithoutTextErrorKey
                       ? _t({ id: authError.username })
                       : ""
                   }
