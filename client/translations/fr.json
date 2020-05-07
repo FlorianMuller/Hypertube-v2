@@ -118,7 +118,8 @@
   "profile.myprofile.label.firstName":"Prénom",
   "profile.myprofile.label.familyName": "Postnom",
   "profile.myprofile.label.email": "Adresse mél",
-  "profile.myprofile.changePassword": "CHANGER DE MOT DE PASSE",
+  "profile.myprofile.changePassword": "Changer de mot de passe",
+  "profile.myprofile.cancelChangePassword": "Annuler",
   "profile.myprofile.password.validate": "Changer",
   "profile.myprofile.email.invalid": "Your email adress is invalid",
   "profile.myprofile.email.sent": "Un email de verification a été envoyé",
@@ -135,7 +136,4 @@
   "profile.showcomment.month10": "Octobre",
   "profile.showcomment.month11": "Novembre",
   "profile.showcomment.month12": "Décembre"
-  
-
-
 }

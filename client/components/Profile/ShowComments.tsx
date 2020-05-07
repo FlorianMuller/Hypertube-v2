@@ -11,24 +11,24 @@ import { Comment } from "../../models/models";
 interface Props {
   username: string;
 }
+const monthNames = [
+  "profile.showcomment.month1",
+  "profile.showcomment.month2",
+  "profile.showcomment.month3",
+  "profile.showcomment.month4",
+  "profile.showcomment.month5",
+  "profile.showcomment.month6",
+  "profile.showcomment.month7",
+  "profile.showcomment.month8",
+  "profile.showcomment.month9",
+  "profile.showcomment.month10",
+  "profile.showcomment.month11",
+  "profile.showcomment.month12"
+];
 
 const ShowComment = ({ username }: Props): ReactElement => {
   const { formatMessage: _t } = useIntl();
   const classes = useStyles({});
-  const monthNames = [
-    _t({ id: "profile.showcomment.month1" }),
-    _t({ id: "profile.showcomment.month2" }),
-    _t({ id: "profile.showcomment.month3" }),
-    _t({ id: "profile.showcomment.month4" }),
-    _t({ id: "profile.showcomment.month5" }),
-    _t({ id: "profile.showcomment.month6" }),
-    _t({ id: "profile.showcomment.month7" }),
-    _t({ id: "profile.showcomment.month8" }),
-    _t({ id: "profile.showcomment.month9" }),
-    _t({ id: "profile.showcomment.month10" }),
-    _t({ id: "profile.showcomment.month11" }),
-    _t({ id: "profile.showcomment.month12" })
-  ];
   const { resData: data, setUrl } = useApi<Comment[], void>("", {
     hotReload: true
   });
@@ -44,7 +44,7 @@ const ShowComment = ({ username }: Props): ReactElement => {
   return (
     <div>
       <Paper className={classes.containerHistory}>
-        <h2 className={classes.titleHistory}>
+        <h2 className={classes.centerText}>
           {_t({ id: "profile.showcomment.lastComment" })}{" "}
         </h2>
         {data?.map((comment: Comment) => {
@@ -54,7 +54,6 @@ const ShowComment = ({ username }: Props): ReactElement => {
             <div key={comment._id} className={classes.containerComment}>
               <div className={classes.containerMovieInfos}>
                 <Rating
-                  // style={{ marginRight: "8px" }}
                   className={classes.rating}
                   name="read-only"
                   value={comment.stars}
@@ -63,7 +62,7 @@ const ShowComment = ({ username }: Props): ReactElement => {
                 <Typography variant="subtitle1">{comment.movieName}</Typography>
               </div>
               <Typography className={classes.commentDate} variant="caption">
-                {date.getDate()} {monthNames[date.getMonth()]}{" "}
+                {date.getDate()} {_t({ id: monthNames[date.getMonth()] })}{" "}
                 {date.getFullYear()}
               </Typography>
               <Typography variant="body1" className={classes.textComment}>

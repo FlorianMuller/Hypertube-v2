@@ -9,11 +9,7 @@ interface Props {
   picture?: string;
 }
 
-interface ApiResponse {
-  id: string;
-}
-
-export const sendPictureData = (picture: File): AxiosPromise<ApiResponse> => {
+const sendPictureData = (picture: File): AxiosPromise<{}> => {
   const data = new FormData();
   data.append("image", picture);
   return API({
@@ -24,15 +20,15 @@ export const sendPictureData = (picture: File): AxiosPromise<ApiResponse> => {
   });
 };
 
-const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-  if (e.target.type === "file") {
-    sendPictureData(e.target.files[0]);
-  }
-};
-
 const EditableAvatar = ({ picture }: Props): ReactElement => {
   const classes = useStyles({});
   const [mouseIn, setMouseIn] = useState(false);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (e.target.type === "file") {
+      sendPictureData(e.target.files[0]);
+    }
+  };
 
   return (
     <div
@@ -40,10 +36,10 @@ const EditableAvatar = ({ picture }: Props): ReactElement => {
       onMouseLeave={(): void => setMouseIn(false)}
       className={classes.containerPictureProfile}
     >
-      <label htmlFor="raised-button-file">
+      <label htmlFor="raised-button-file" className={classes.imageLabel}>
         <input
           accept="image/*"
-          style={{ display: "none" }}
+          className={classes.imageInput}
           id="raised-button-file"
           type="file"
           name="picture"
@@ -51,7 +47,7 @@ const EditableAvatar = ({ picture }: Props): ReactElement => {
         />
         <Avatar
           alt="user-pic"
-          src={`${window.location.origin}/api/data/avatar/${picture}`}
+          src={`${window.location.origin}/api/avatar/${picture}`}
           className={classes.large}
         />
         {mouseIn && <AddAPhotoIcon className={classes.changePhoto} />}

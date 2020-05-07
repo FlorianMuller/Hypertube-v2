@@ -3,31 +3,30 @@ import { Theme } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
   containerProfile: {
-    maxWidth: "1000px",
-    margin: "50 auto",
-
+    height: "100%",
     display: "flex",
     justifyContent: "center",
-
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    margin: theme.spacing(0, 2)
   },
   containerHistory: {
     flexGrow: 1,
-    margin: theme.spacing(0, 1),
+    margin: theme.spacing(3, 1, 1),
     overflow: "auto",
     maxWidth: "600px",
+    width: "100%",
+    minHeight: "408px",
     maxHeight: "85vh",
     borderRadius: "8px",
     padding: "15px"
   },
-  titleHistory: {
+  centerText: {
     textAlign: "center"
   },
   containerUser: {
-    marginBottom: "10px",
+    margin: theme.spacing(3, 1, 1),
     borderRadius: "8px",
-    display: "inline-block",
-    maxWidth: "400px",
+    maxWidth: "420px",
     padding: theme.spacing(3)
   },
   containerPicture: {
@@ -38,13 +37,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     cursor: "pointer",
     display: "flex",
     justifyContent: "center",
+    borderRadius: "50%",
 
     "&:hover": {
       filter: "brightness(80%)",
       cursor: "pointer"
     }
   },
+  imageLabel: {
+    borderRadius: "50%"
+  },
+  imageInput: {
+    borderRadius: "50%",
+    display: "none"
+  },
   containerInfo: {
+    marginTop: theme.spacing(3),
     display: "flex",
     alignItems: "center",
     flexDirection: "column"
@@ -66,8 +74,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   containerFullname: {
     display: "flex",
+    flexWrap: "wrap",
     width: "100%",
-    maxWidth: "250px",
     justifyContent: "center",
     overflow: "hidden"
   },
@@ -81,7 +89,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   large: {
     width: theme.spacing(35),
-    height: theme.spacing(35)
+    height: theme.spacing(35),
+    border: "white solid 5px",
+    cursor: "pointer"
   },
   changePhoto: {
     position: "absolute",
@@ -91,7 +101,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     cursor: "pointer"
   },
   textComment: {
-    wordBreak: "break-all"
+    wordBreak: "break-word"
   },
   photoIcon: {},
   username: {
@@ -105,6 +115,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   goodMessage: {
     color: "green"
+  },
+  emailChange: {
+    margin: theme.spacing(4, 0),
+    textAlign: "center"
+  },
+  usernameWrapper: {
+    cursor: "not-allowed"
+  },
+  passwordButton: {
+    width: "230px"
   }
 }));
+
 export default useStyles;

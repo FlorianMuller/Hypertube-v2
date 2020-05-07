@@ -110,7 +110,7 @@
   "error.link_menu": "Go back",
   "profile.myprofile.password.error.required": "This field is required",
   "profile.myprofile.password.error.different": "Passwords doesn't match",
-  "profile.myprofile.password.error.wronf": "The current password is incorrect",
+  "profile.myprofile.password.error.wrong": "The current password is incorrect",
   "profile.myprofile.password.changed": "New password has been set",
   "profile.myprofile.password.placeholder.currentpass": "Current password",
   "profile.myprofile.password.placeholder.newpass": "New Password",
@@ -118,7 +118,8 @@
   "profile.myprofile.label.firstName":"First name",
   "profile.myprofile.label.familyName": "Last name",
   "profile.myprofile.label.email": "Email address",
-  "profile.myprofile.changePassword": "CHANGE PASSWORD",
+  "profile.myprofile.changePassword": "Change Password",
+  "profile.myprofile.cancelChangePassword": "Cancel",
   "profile.myprofile.password.validate": "Change",
   "profile.myprofile.email.invalid": "Your email adress is invalid",
   "profile.myprofile.email.sent": "A verification email has been sent",
@@ -135,6 +136,4 @@
   "profile.showcomment.month10": "October",
   "profile.showcomment.month11": "November",
   "profile.showcomment.month12": "December"
-  
-
 }

@@ -1,7 +1,12 @@
 import bcrypt from "bcrypt";
 import UserModel from "../Schemas/User";
 import TokenModel from "../Schemas/Token";
-import { validPassword, validEmail, emailIsFree } from "../Helpers/signUp";
+import {
+  validPassword,
+  validEmail,
+  emailIsFree,
+  getPasswordHash
+} from "../Helpers/signUp";
 import enHtml from "../emailsHtml/changeEmailAdress.en.html";
 import frHtml from "../emailsHtml/changeEmailAdress.fr.html";
 
@@ -43,65 +48,63 @@ const sendValidateEmail = async (user, locale) => {
 };
 
 const editUser = async (req, res) => {
-  if (req.body.newPassword && req.body.oldPassword) {
-    const hash = await bcrypt.hash(req.body.newPassword, 10);
-    if (!validPassword(req.body.newPassword)) {
-      res.status(400).send();
-    } else {
-      try {
+  const errorRes = {};
+  const newUser = {};
+
+  try {
+    // Password change
+    if (req.body.newPassword && req.body.oldPassword) {
+      // New password is valid
+      if (validPassword(req.body.newPassword)) {
         const userInfos = await UserModel.findById(req.userId);
-        if (userInfos === null) {
-          res.status(404).send();
-        } else if (
-          !(await bcrypt.compare(req.body.oldPassword, userInfos.password))
-        ) {
-          res.status(401).send();
+        if (userInfos) {
+          // Current password is valid
+          if (await bcrypt.compare(req.body.oldPassword, userInfos.password)) {
+            newUser.password = await getPasswordHash(req.body.newPassword);
+          } else {
+            res.status(401);
+            errorRes.password = "Current password not valid";
+          }
         } else {
-          const userInfo = await UserModel.findByIdAndUpdate(
-            req.userId,
-            { password: hash },
-            {
-              runValidators: true
-            }
-          );
-          if (userInfo !== null) res.status(200).send();
-          if (userInfo === null) res.status(500).send();
+          res.status(404);
+          errorRes.password = "User not found";
         }
-      } catch (e) {
-        res.sendStatus(500);
+      } else {
+        res.status(400);
+        errorRes.password = "New password not valid";
       }
     }
-  } else if (req.body.email) {
-    if (emailIsFree(req.body.email && validEmail)) {
-      try {
-        const newEmail = req.body.email;
-        const userInfo = await UserModel.findByIdAndUpdate(req.userId, {
-          newEmail
-        });
-        if (userInfo !== null) {
-          sendValidateEmail(userInfo, "fr");
-          res.status(200).send();
-        }
-        if (userInfo === null) res.status(400).send();
-      } catch (e) {
-        res.sendStatus(500);
+
+    // Email change
+    if (req.body.email) {
+      if (validEmail(req.body.email) && emailIsFree(req.body.email)) {
+        newUser.newEmail = req.body.email;
+      } else {
+        res.status(400);
+        errorRes.email = "Email not valid or already used";
       }
-    } else res.sendStatus(500);
-  } else if (
-    !req.body.password &&
-    !req.body.picture &&
-    !req.body.emailVerified &&
-    !req.body.newEmail
-  ) {
-    try {
-      const userInfo = await UserModel.findByIdAndUpdate(req.userId, req.body, {
-        runValidators: true
-      });
-      if (userInfo !== null) res.sendStatus(200);
-      if (userInfo === null) res.sendStatus(400);
-    } catch (e) {
-      res.sendStatus(500);
     }
+
+    // Other
+    if (req.body.firstName) newUser.firstName = req.body.firstName;
+    if (req.body.lastName) newUser.lastName = req.body.lastName;
+
+    // Updating user
+    const userInfo = await UserModel.findByIdAndUpdate(req.userId, newUser, {
+      runValidators: true,
+      new: true
+    });
+    if (userInfo) {
+      if (newUser.newEmail) {
+        sendValidateEmail(userInfo, req.body.locale || "en");
+      }
+      res.send({ error: errorRes });
+    } else {
+      res.status(400).send({ error: errorRes });
+    }
+  } catch (e) {
+    console.error(e);
+    res.sendStatus(500);
   }
 };
 

@@ -2,12 +2,31 @@ import React, { ReactElement, useState, useRef, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import SaveAlt from "@material-ui/icons/SaveAlt";
+import { Typography } from "@material-ui/core";
+import useStyles from "./OnClickInput.style";
 
 interface Props {
   autocomplete?: string;
   startValue: string;
   label: string;
   name: string;
+  variant:
+    | "inherit"
+    | "button"
+    | "overline"
+    | "caption"
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "subtitle1"
+    | "subtitle2"
+    | "body1"
+    | "body2"
+    | "srOnly";
+  maxLength?: number;
   updateInfo: (newInfo: string, label: string) => void;
 }
 
@@ -16,11 +35,14 @@ const OnClickInput = ({
   label,
   name,
   updateInfo,
+  variant,
+  maxLength,
   autocomplete
 }: Props): ReactElement => {
   const [value, setValue] = useState(startValue);
   const [editMode, setEditMode] = useState(false);
   const inputEl = useRef(null);
+  const styles = useStyles({});
 
   const changeEditMode = (): void => {
     setEditMode((oldEditMode) => !oldEditMode);
@@ -50,6 +72,7 @@ const OnClickInput = ({
             changeEditMode();
             updateInfo(value, name);
           }}
+          inputProps={{ maxLength }}
         />
         <IconButton color="primary" aria-label="edit" component="span">
           <SaveAlt />
@@ -65,8 +88,9 @@ const OnClickInput = ({
         onKeyDown={changeEditMode}
         tabIndex={0}
         onClick={changeEditMode}
+        className={styles.button}
       >
-        <p>{value}&nbsp;</p>
+        <Typography variant={variant}>{value}&nbsp;</Typography>
       </div>
     );
   };

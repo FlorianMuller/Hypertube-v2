@@ -2,9 +2,10 @@ import UserModel from "../Schemas/User";
 import MovieCommentModel from "../Schemas/MovieComment";
 
 const getMovieCommentsByUsername = async (req, res) => {
-  const name = req.params.username;
+  const authorUsername = req.params.username;
   try {
-    const userComments = await MovieCommentModel.find({ name });
+    const userComments = await MovieCommentModel.find({ authorUsername });
+
     if (userComments.length === 0) {
       res.status(204).send();
     } else {

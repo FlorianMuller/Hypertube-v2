@@ -44,15 +44,15 @@ export interface AuthInfo {
 export interface Comment {
   movieName: string;
   date: number;
-  name: string;
+  authorUsername: string;
   body: string;
   stars: number;
-  _id: number;
+  _id: string;
 }
 
 export interface Review {
   id: string;
-  name: string;
+  authorUsername: string;
   date: number;
   stars: number;
   body: string;
@@ -79,6 +79,14 @@ export interface Movie {
 export interface ApiSearchReponse {
   movies: Movie[];
   nextPage: boolean;
+}
+
+export interface UserProfile {
+  username: string;
+  firstName: string;
+  email?: string;
+  lastName: string;
+  picture: string;
 }
 
 export type CustomSnackbarVariant =

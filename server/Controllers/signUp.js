@@ -1,35 +1,14 @@
-import fileType from "file-type";
-
 import validEmail, {
   createUser,
   sendValidateEmail,
   validPassword,
+  validFile,
   emailIsFree
 } from "../Helpers/signUp";
 import { setAccesTokenCookie } from "../Helpers/signIn";
 
 import UserModel from "../Schemas/User";
 import TokenModel from "../Schemas/Token";
-
-const validFile = (file) => {
-  const { name, size, data, mimetype: type } = file;
-  const ab = new Uint8Array(data);
-  const fileRes = fileType(ab);
-  if (!name || !fileRes) {
-    return false;
-  }
-  if (
-    !type ||
-    (type !== "image/png" && type !== "image/jpeg" && type !== "image/jpg") ||
-    (fileRes.ext !== "png" && fileRes.ext !== "jpeg" && fileRes.ext !== "jpg")
-  ) {
-    return false;
-  }
-  if (!size || size > 1000000) {
-    return false;
-  }
-  return true;
-};
 
 const usernameIsFree = async (username) => {
   try {
@@ -122,17 +101,17 @@ const verifyEmail = async (req, res) => {
       value: req.params.value
     }).populate("user", "emailVerified newEmail");
     if (token) {
-      // Changing user data
       if (!token.user.emailVerified) {
+        // Verifying email for the first time
         token.user.emailVerified = true;
         await token.user.save();
 
         setAccesTokenCookie(res, token.user.id);
-        // Updating email
       } else if (token.user.newEmail) {
+        // Updating email
         await UserModel.findByIdAndUpdate(
           token.user.id,
-          { email: token.user.newEmail, newEmail: null },
+          { email: token.user.newEmail, newEmail: undefined },
           { runValidators: true }
         );
       }

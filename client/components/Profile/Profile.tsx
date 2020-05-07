@@ -2,22 +2,16 @@ import React, { ReactElement } from "react";
 import { RouteComponentProps } from "react-router";
 import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
+import { Typography } from "@material-ui/core";
 import useApi from "../../hooks/useApi";
 import Loading from "../Routes/Loading";
 import Error from "../Error/Error";
 import ShowComments from "./ShowComments";
 import useStyles from "./Profile.styles";
+import { UserProfile } from "../../models/models";
 
 interface UrlParam {
   username: string;
-}
-
-interface User {
-  username: string;
-  firstName: string;
-  email: string;
-  lastName: string;
-  picture: string;
 }
 
 const Profile = ({
@@ -25,7 +19,7 @@ const Profile = ({
     params: { username }
   }
 }: RouteComponentProps<UrlParam>): ReactElement => {
-  const { resData: data, loading, error } = useApi<User, void>(
+  const { resData: data, loading, error } = useApi<UserProfile, void>(
     `/users/${username}`,
     {
       hotReload: true
@@ -43,21 +37,25 @@ const Profile = ({
 
   return (
     <div className={classes.containerProfile}>
-      <Paper className={classes.containerUser}>
-        <div className={classes.containerPicture}>
-          <Avatar
-            alt="Profile picture"
-            src={`${window.location.origin}/api/data/avatar/${data?.picture}`}
-            className={classes.large}
-          />
-        </div>
-        <div className={classes.containerInfo}>
-          <h1>
-            {data.firstName} {data.lastName}
-          </h1>
-          <p>{data.username}</p>
-        </div>
-      </Paper>
+      <div>
+        <Paper className={classes.containerUser}>
+          <div className={classes.containerPicture}>
+            <Avatar
+              alt="Profile picture"
+              src={`${window.location.origin}/api/avatar/${data?.picture}`}
+              className={classes.large}
+            />
+          </div>
+          <div className={classes.containerInfo}>
+            <Typography variant="h5" className={classes.centerText}>
+              {data.firstName} {data.lastName}
+            </Typography>
+            <Typography variant="body1">
+              @<span className={classes.username}>{data.username}</span>
+            </Typography>
+          </div>
+        </Paper>
+      </div>
       <ShowComments username={username} />
     </div>
   );
