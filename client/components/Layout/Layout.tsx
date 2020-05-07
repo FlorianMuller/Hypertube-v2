@@ -51,8 +51,8 @@ const Layout = ({ children, locale, setLocale }: Props): ReactElement => {
   const classes = useLayoutStyles({});
   const location = useLocation();
   const [expandedFilters, setExpandedFilters] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(
-    qs.parse(location.search.slice(1)).query || ""
+  const [searchQuery, setSearchQuery] = useState<string>(
+    (qs.parse(location.search.slice(1)).query as string) || ""
   );
 
   const handleClickAway = (e: React.MouseEvent<EventTarget>): void => {

@@ -442,231 +442,246 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
               onMouseMove={[Function]}
               role="img"
             >
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={1}
+              <span
+                key="1"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={1}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={2}
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
+              <span
+                key="2"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={2}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={3}
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
+              <span
+                key="3"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={3}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={4}
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
+              <span
+                key="4"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={4}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={5}
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
+              <span
+                key="5"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={5}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
             </span>
           </ForwardRef(Rating)>
         </WithStyles(ForwardRef(Rating))>
@@ -796,202 +811,209 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                     onMouseMove={[Function]}
                     role="img"
                   >
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconFilled"
-                      value={1}
+                    <span
+                      key="1"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconFilled"
+                        value={1}
                       >
-                        <ForwardRef
-                          fontSize="inherit"
+                        <span
+                          className="MuiRating-icon MuiRating-iconFilled"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             fontSize="inherit"
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               fontSize="inherit"
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                focusable="false"
-                                role="presentation"
-                                viewBox="0 0 24 24"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
                               >
-                                <path
-                                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconFilled"
-                      value={2}
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
+                    <span
+                      key="2"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconFilled"
+                        value={2}
                       >
-                        <ForwardRef
-                          fontSize="inherit"
+                        <span
+                          className="MuiRating-icon MuiRating-iconFilled"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             fontSize="inherit"
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               fontSize="inherit"
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                focusable="false"
-                                role="presentation"
-                                viewBox="0 0 24 24"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
                               >
-                                <path
-                                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconFilled"
-                      value={3}
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
+                    <span
+                      key="3"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconFilled"
+                        value={3}
                       >
-                        <ForwardRef
-                          fontSize="inherit"
+                        <span
+                          className="MuiRating-icon MuiRating-iconFilled"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             fontSize="inherit"
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               fontSize="inherit"
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                focusable="false"
-                                role="presentation"
-                                viewBox="0 0 24 24"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
                               >
-                                <path
-                                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconFilled"
-                      value={4}
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
+                    <span
+                      key="4"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconFilled"
+                        value={4}
                       >
-                        <ForwardRef
-                          fontSize="inherit"
+                        <span
+                          className="MuiRating-icon MuiRating-iconFilled"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             fontSize="inherit"
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               fontSize="inherit"
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                focusable="false"
-                                role="presentation"
-                                viewBox="0 0 24 24"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
                               >
-                                <path
-                                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconEmpty"
-                      value={5}
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
+                    <span
+                      key="5"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconEmpty"
+                        value={5}
                       >
-                        <ForwardRef
-                          color="primary"
-                          style={
-                            Object {
-                              "fontSize": "1.1rem",
-                            }
-                          }
+                        <span
+                          className="MuiRating-icon MuiRating-iconEmpty"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             color="primary"
                             style={
                               Object {
@@ -999,20 +1021,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                               }
                             }
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               color="primary"
                               style={
                                 Object {
@@ -1020,27 +1029,48 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                                 }
                               }
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
-                                focusable="false"
-                                role="presentation"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                color="primary"
                                 style={
                                   Object {
                                     "fontSize": "1.1rem",
                                   }
                                 }
-                                viewBox="0 0 24 24"
                               >
-                                <path
-                                  d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
+                                  focusable="false"
+                                  style={
+                                    Object {
+                                      "fontSize": "1.1rem",
+                                    }
+                                  }
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
                   </span>
                 </ForwardRef(Rating)>
               </WithStyles(ForwardRef(Rating))>
@@ -1372,10 +1402,9 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                                             }
                                           >
                                             <svg
-                                              aria-hidden="true"
+                                              aria-hidden={true}
                                               className="MuiSvgIcon-root"
                                               focusable="false"
-                                              role="presentation"
                                               viewBox="0 0 24 24"
                                             >
                                               <path
@@ -1541,10 +1570,9 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -1565,6 +1593,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-1"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -1608,10 +1637,9 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -1632,6 +1660,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-2"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -1675,10 +1704,9 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -1699,6 +1727,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-3"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -1742,10 +1771,9 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -1766,6 +1794,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-4"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -1809,10 +1838,9 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -1833,6 +1861,7 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-5"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -1937,36 +1966,34 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                         >
                           Send
                         </span>
-                        <NoSsr>
-                          <WithStyles(undefined)
+                        <WithStyles(memo)
+                          center={false}
+                        >
+                          <ForwardRef(TouchRipple)
                             center={false}
-                          >
-                            <ForwardRef(TouchRipple)
-                              center={false}
-                              classes={
-                                Object {
-                                  "child": "MuiTouchRipple-child",
-                                  "childLeaving": "MuiTouchRipple-childLeaving",
-                                  "childPulsate": "MuiTouchRipple-childPulsate",
-                                  "ripple": "MuiTouchRipple-ripple",
-                                  "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                  "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                  "root": "MuiTouchRipple-root",
-                                }
+                            classes={
+                              Object {
+                                "child": "MuiTouchRipple-child",
+                                "childLeaving": "MuiTouchRipple-childLeaving",
+                                "childPulsate": "MuiTouchRipple-childPulsate",
+                                "ripple": "MuiTouchRipple-ripple",
+                                "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                "root": "MuiTouchRipple-root",
                               }
+                            }
+                          >
+                            <span
+                              className="MuiTouchRipple-root"
                             >
-                              <span
-                                className="MuiTouchRipple-root"
-                              >
-                                <TransitionGroup
-                                  childFactory={[Function]}
-                                  component={null}
-                                  exit={true}
-                                />
-                              </span>
-                            </ForwardRef(TouchRipple)>
-                          </WithStyles(undefined)>
-                        </NoSsr>
+                              <TransitionGroup
+                                childFactory={[Function]}
+                                component={null}
+                                exit={true}
+                              />
+                            </span>
+                          </ForwardRef(TouchRipple)>
+                        </WithStyles(memo)>
                       </button>
                     </ForwardRef(ButtonBase)>
                   </WithStyles(ForwardRef(ButtonBase))>
@@ -2005,7 +2032,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
       component="fieldset"
     >
       <fieldset
-        className="MuiBox-root MuiBox-root-302"
+        className="MuiBox-root MuiBox-root-300"
       >
         <div
           className="makeStyles-movieRating-127"
@@ -2057,231 +2084,246 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
               onMouseMove={[Function]}
               role="img"
             >
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={1}
+              <span
+                key="1"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={1}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={2}
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
+              <span
+                key="2"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={2}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={3}
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
+              <span
+                key="3"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={3}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={4}
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
+              <span
+                key="4"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={4}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
-              <IconContainer
-                className="MuiRating-icon MuiRating-iconFilled"
-                value={5}
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
+              <span
+                key="5"
               >
-                <span
+                <IconContainer
                   className="MuiRating-icon MuiRating-iconFilled"
+                  value={5}
                 >
-                  <ForwardRef
-                    fontSize="inherit"
+                  <span
+                    className="MuiRating-icon MuiRating-iconFilled"
                   >
-                    <WithStyles(ForwardRef(SvgIcon))
+                    <ForwardRef
                       fontSize="inherit"
                     >
-                      <ForwardRef(SvgIcon)
-                        classes={
-                          Object {
-                            "colorAction": "MuiSvgIcon-colorAction",
-                            "colorDisabled": "MuiSvgIcon-colorDisabled",
-                            "colorError": "MuiSvgIcon-colorError",
-                            "colorPrimary": "MuiSvgIcon-colorPrimary",
-                            "colorSecondary": "MuiSvgIcon-colorSecondary",
-                            "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                            "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                            "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                            "root": "MuiSvgIcon-root",
-                          }
-                        }
+                      <WithStyles(ForwardRef(SvgIcon))
                         fontSize="inherit"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                          focusable="false"
-                          role="presentation"
-                          viewBox="0 0 24 24"
+                        <ForwardRef(SvgIcon)
+                          classes={
+                            Object {
+                              "colorAction": "MuiSvgIcon-colorAction",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled",
+                              "colorError": "MuiSvgIcon-colorError",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                              "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                              "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                              "root": "MuiSvgIcon-root",
+                            }
+                          }
+                          fontSize="inherit"
                         >
-                          <path
-                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                          />
-                        </svg>
-                      </ForwardRef(SvgIcon)>
-                    </WithStyles(ForwardRef(SvgIcon))>
-                  </ForwardRef>
-                </span>
-              </IconContainer>
+                          <svg
+                            aria-hidden={true}
+                            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                            />
+                          </svg>
+                        </ForwardRef(SvgIcon)>
+                      </WithStyles(ForwardRef(SvgIcon))>
+                    </ForwardRef>
+                  </span>
+                </IconContainer>
+              </span>
             </span>
           </ForwardRef(Rating)>
         </WithStyles(ForwardRef(Rating))>
@@ -2411,202 +2453,209 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                     onMouseMove={[Function]}
                     role="img"
                   >
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconFilled"
-                      value={1}
+                    <span
+                      key="1"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconFilled"
+                        value={1}
                       >
-                        <ForwardRef
-                          fontSize="inherit"
+                        <span
+                          className="MuiRating-icon MuiRating-iconFilled"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             fontSize="inherit"
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               fontSize="inherit"
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                focusable="false"
-                                role="presentation"
-                                viewBox="0 0 24 24"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
                               >
-                                <path
-                                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconFilled"
-                      value={2}
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
+                    <span
+                      key="2"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconFilled"
+                        value={2}
                       >
-                        <ForwardRef
-                          fontSize="inherit"
+                        <span
+                          className="MuiRating-icon MuiRating-iconFilled"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             fontSize="inherit"
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               fontSize="inherit"
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                focusable="false"
-                                role="presentation"
-                                viewBox="0 0 24 24"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
                               >
-                                <path
-                                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconFilled"
-                      value={3}
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
+                    <span
+                      key="3"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconFilled"
+                        value={3}
                       >
-                        <ForwardRef
-                          fontSize="inherit"
+                        <span
+                          className="MuiRating-icon MuiRating-iconFilled"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             fontSize="inherit"
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               fontSize="inherit"
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                focusable="false"
-                                role="presentation"
-                                viewBox="0 0 24 24"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
                               >
-                                <path
-                                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconFilled"
-                      value={4}
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
+                    <span
+                      key="4"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconFilled"
+                        value={4}
                       >
-                        <ForwardRef
-                          fontSize="inherit"
+                        <span
+                          className="MuiRating-icon MuiRating-iconFilled"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             fontSize="inherit"
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               fontSize="inherit"
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                focusable="false"
-                                role="presentation"
-                                viewBox="0 0 24 24"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                fontSize="inherit"
                               >
-                                <path
-                                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
-                    <IconContainer
-                      className="MuiRating-icon MuiRating-iconEmpty"
-                      value={5}
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
+                    <span
+                      key="5"
                     >
-                      <span
+                      <IconContainer
                         className="MuiRating-icon MuiRating-iconEmpty"
+                        value={5}
                       >
-                        <ForwardRef
-                          color="primary"
-                          style={
-                            Object {
-                              "fontSize": "1.1rem",
-                            }
-                          }
+                        <span
+                          className="MuiRating-icon MuiRating-iconEmpty"
                         >
-                          <WithStyles(ForwardRef(SvgIcon))
+                          <ForwardRef
                             color="primary"
                             style={
                               Object {
@@ -2614,20 +2663,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                               }
                             }
                           >
-                            <ForwardRef(SvgIcon)
-                              classes={
-                                Object {
-                                  "colorAction": "MuiSvgIcon-colorAction",
-                                  "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                  "colorError": "MuiSvgIcon-colorError",
-                                  "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                  "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                  "root": "MuiSvgIcon-root",
-                                }
-                              }
+                            <WithStyles(ForwardRef(SvgIcon))
                               color="primary"
                               style={
                                 Object {
@@ -2635,27 +2671,48 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                                 }
                               }
                             >
-                              <svg
-                                aria-hidden="true"
-                                className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
-                                focusable="false"
-                                role="presentation"
+                              <ForwardRef(SvgIcon)
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                    "colorError": "MuiSvgIcon-colorError",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                    "root": "MuiSvgIcon-root",
+                                  }
+                                }
+                                color="primary"
                                 style={
                                   Object {
                                     "fontSize": "1.1rem",
                                   }
                                 }
-                                viewBox="0 0 24 24"
                               >
-                                <path
-                                  d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"
-                                />
-                              </svg>
-                            </ForwardRef(SvgIcon)>
-                          </WithStyles(ForwardRef(SvgIcon))>
-                        </ForwardRef>
-                      </span>
-                    </IconContainer>
+                                <svg
+                                  aria-hidden={true}
+                                  className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
+                                  focusable="false"
+                                  style={
+                                    Object {
+                                      "fontSize": "1.1rem",
+                                    }
+                                  }
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"
+                                  />
+                                </svg>
+                              </ForwardRef(SvgIcon)>
+                            </WithStyles(ForwardRef(SvgIcon))>
+                          </ForwardRef>
+                        </span>
+                      </IconContainer>
+                    </span>
                   </span>
                 </ForwardRef(Rating)>
               </WithStyles(ForwardRef(Rating))>
@@ -2987,10 +3044,9 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                                             }
                                           >
                                             <svg
-                                              aria-hidden="true"
+                                              aria-hidden={true}
                                               className="MuiSvgIcon-root"
                                               focusable="false"
-                                              role="presentation"
                                               viewBox="0 0 24 24"
                                             >
                                               <path
@@ -3156,10 +3212,9 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -3180,6 +3235,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-1"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -3223,10 +3279,9 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -3247,6 +3302,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-2"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -3290,10 +3346,9 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -3314,6 +3369,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-3"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -3357,10 +3413,9 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -3381,6 +3436,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-4"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -3424,10 +3480,9 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                                   color="primary"
                                 >
                                   <svg
-                                    aria-hidden="true"
+                                    aria-hidden={true}
                                     className="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                     focusable="false"
-                                    role="presentation"
                                     viewBox="0 0 24 24"
                                   >
                                     <path
@@ -3448,6 +3503,7 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                       <input
                         checked={false}
                         className="MuiRating-visuallyhidden"
+                        disabled={false}
                         id="simple-controlled-5"
                         name="simple-controlled"
                         onBlur={[Function]}
@@ -3552,36 +3608,34 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                         >
                           Envoyer
                         </span>
-                        <NoSsr>
-                          <WithStyles(undefined)
+                        <WithStyles(memo)
+                          center={false}
+                        >
+                          <ForwardRef(TouchRipple)
                             center={false}
-                          >
-                            <ForwardRef(TouchRipple)
-                              center={false}
-                              classes={
-                                Object {
-                                  "child": "MuiTouchRipple-child",
-                                  "childLeaving": "MuiTouchRipple-childLeaving",
-                                  "childPulsate": "MuiTouchRipple-childPulsate",
-                                  "ripple": "MuiTouchRipple-ripple",
-                                  "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                  "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                  "root": "MuiTouchRipple-root",
-                                }
+                            classes={
+                              Object {
+                                "child": "MuiTouchRipple-child",
+                                "childLeaving": "MuiTouchRipple-childLeaving",
+                                "childPulsate": "MuiTouchRipple-childPulsate",
+                                "ripple": "MuiTouchRipple-ripple",
+                                "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                "root": "MuiTouchRipple-root",
                               }
+                            }
+                          >
+                            <span
+                              className="MuiTouchRipple-root"
                             >
-                              <span
-                                className="MuiTouchRipple-root"
-                              >
-                                <TransitionGroup
-                                  childFactory={[Function]}
-                                  component={null}
-                                  exit={true}
-                                />
-                              </span>
-                            </ForwardRef(TouchRipple)>
-                          </WithStyles(undefined)>
-                        </NoSsr>
+                              <TransitionGroup
+                                childFactory={[Function]}
+                                component={null}
+                                exit={true}
+                              />
+                            </span>
+                          </ForwardRef(TouchRipple)>
+                        </WithStyles(memo)>
                       </button>
                     </ForwardRef(ButtonBase)>
                   </WithStyles(ForwardRef(ButtonBase))>
