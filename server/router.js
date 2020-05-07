@@ -60,7 +60,7 @@ router.get(
     if (req.error) {
       res.sendstatus(req.error.status);
     } else if (req.user.id) {
-      setAccesTokenCookie(res, req.id);
+      setAccesTokenCookie(res, req.user.id);
       res.redirect("/");
     } else res.redirect("/?auth=google");
   }
@@ -85,7 +85,7 @@ router.get(
     if (req.error) {
       res.sendstatus(req.error.status);
     } else if (req.user.id) {
-      setAccesTokenCookie(res, req.id);
+      setAccesTokenCookie(res, req.user.id);
       res.redirect("/");
     } else res.redirect("/?auth=school");
   }

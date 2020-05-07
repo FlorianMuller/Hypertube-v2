@@ -15,6 +15,7 @@ exports[`App renders correctly 1`] = `
         "authentication.SignIn.google": "Sign in with Google",
         "authentication.SignIn.login": "Login",
         "authentication.SignIn.login.loading": "Connecting...",
+        "authentication.SignIn.omniError": "You must to sign in with your hypertube account !",
         "authentication.SignIn.password": "Password",
         "authentication.SignIn.school": "Sign in with 42",
         "authentication.SignIn.signUpButton": "Sign Up !",

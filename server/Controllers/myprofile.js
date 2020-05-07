@@ -4,7 +4,7 @@ const getUser = async (req, res) => {
   try {
     const userInfos = await UserModel.findById(
       req.userId,
-      "email username firstName lastName picture"
+      "email username firstName lastName picture googleID schoolID"
     );
 
     if (userInfos === null) {
