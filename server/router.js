@@ -10,6 +10,7 @@ import movieController from "./Controllers/movie";
 import searchController from "./Controllers/search";
 import editUserController from "./Controllers/editUser";
 import changeUserPictureController from "./Controllers/changeUserPicture";
+import ResetPassword from "./Controllers/ResetPassword";
 import checkAuth from "./Helpers/auth";
 import signOutController from "./Controllers/signOut";
 import { setAccesTokenCookie } from "./Helpers/signIn";
@@ -90,6 +91,10 @@ router.get(
     } else res.redirect("/?auth=school");
   }
 );
+/* Reset password */
+router.get("/reset-password/:lang/:email", ResetPassword.SendMail);
+// router.get("/resetPassword/:token", ResetPassword.checkToken);
+router.put("/change-password", ResetPassword.ResetPassword);
 
 /* Search */
 router.get("/movies", checkAuth, searchController.searchMovies);
