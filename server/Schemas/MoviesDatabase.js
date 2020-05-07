@@ -5,7 +5,8 @@ const MovieModel = new mongoose.Schema({
   movieName: { type: String, required: true },
   path: { type: String },
   createdAt: { type: Date, default: () => Date.now() },
-  lastViewed: { type: Date, default: () => Date.now() }
+  lastViewed: { type: Date, default: () => Date.now() },
+  magnet: { type: String }
 });
 
 export default MovieModel;

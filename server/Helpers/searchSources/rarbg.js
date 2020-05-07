@@ -197,4 +197,4 @@ const searchMoviesOnRarbg = async (options, index) => {
   };
 };
 
-export default searchMoviesOnRarbg;
+export default { searchMoviesOnRarbg, waitDecorator };

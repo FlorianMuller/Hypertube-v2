@@ -2,6 +2,7 @@ import SearchCache from "../Schemas/SearchCache";
 import yts from "./searchSources/yts";
 import rarbg from "./searchSources/rarbg";
 // import popCornTime from "./searchSources/popCornTime";
+import UserHistoryModel from "../Schemas/UserHistory";
 
 // const sourceList = [yts, popCornTime, rarbg];
 const sourceList = [
@@ -235,4 +236,14 @@ const searchMoviesOnAllSource = async (searchOptions) => {
   return { movies: moviesList };
 };
 
-export default searchMoviesOnAllSource;
+const checkIfViewed = async (data, userId) => {
+  const history = await UserHistoryModel.find({ userId });
+  const newData = data.movies.map((movie) => {
+    const found = history.find((el) => el.imdb_code === movie.id);
+    if (found) return { ...movie, viewed: true };
+    return { ...movie, viewed: false };
+  });
+  return { movies: newData, nextPage: data.nextPage };
+};
+
+export default { searchMoviesOnAllSource, checkIfViewed };
