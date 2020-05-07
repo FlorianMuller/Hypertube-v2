@@ -284,9 +284,10 @@ const searchMoviesOnAllSource = async (searchOptions) => {
   }
 
   return {
-    movies: allData.filter((src) => src.nextPage).length
-      ? cacheDetails.cache[searchOptions.page - 1]
-      : []
+    movies:
+      cacheDetails.cache.length >= searchOptions.page
+        ? cacheDetails.cache[searchOptions.page - 1]
+        : []
   };
 };
 
