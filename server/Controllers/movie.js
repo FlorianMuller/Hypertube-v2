@@ -398,7 +398,7 @@ const downloadMovie = async (
       });
     }
 
-    await Movie.create({ movieId, movieName: movie.title, magnet });
+    await Movie.create({ movieId, movieName: movie.title, magnet, path: "" });
   }
   const engine = TorrentStream(magnet || movieMagnet, options);
 
