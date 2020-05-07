@@ -7,7 +7,9 @@ import favicon from "serve-favicon";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
-import router from "./router";
+import passportGoogle from "./Helpers/omniauth/google";
+import passport42 from "./Helpers/omniauth/42";
+import apiRouter from "./router";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,6 +23,8 @@ app.set("root", "/");
 app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "ejs");
 
+// Middleware
+
 app.use(favicon(path.join(__dirname, "views", "favicon.ico")));
 app.use("/public", express.static("public"));
 app.use(morgan("dev"));
@@ -28,6 +32,8 @@ app.use(fileUpload());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passportGoogle.initialize());
+app.use(passport42.initialize());
 
 /* Webpack Hot Reload */
 
@@ -50,10 +56,14 @@ app.use(hotMiddleware);
 /* eslint-enable */
 /* ------------------ */
 
-app.use("/api", router);
+// Routing
+
+app.use("/api", apiRouter);
 app.get("*", (req, res) => {
   res.render("index");
 });
+
+// Socket
 
 io.on("connection", (socket) => {
   console.log("A user connected");
@@ -68,6 +78,8 @@ io.on("connection", (socket) => {
     socket.leave(movieId);
   });
 });
+
+// Listening
 
 http.listen(port, () => {
   console.log(`Server running on ${port}`);
