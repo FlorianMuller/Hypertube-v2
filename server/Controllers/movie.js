@@ -477,7 +477,7 @@ const downloadMovie = async (
       const directory = newFilePath.split("/").reverse()[1];
       const fileName = newFilePath.split("/").reverse()[0];
       const path = `${process.cwd()}/server/data/movie/${directory}/${fileName}`;
-      await Movie.findByIdAndUpdate({ movieId }, { path });
+      await Movie.findOneAndUpdate({ movieId }, { path });
     });
 };
 
