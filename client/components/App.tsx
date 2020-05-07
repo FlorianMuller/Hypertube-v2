@@ -79,6 +79,7 @@ const App = (): ReactElement => {
               path="/new-password/:token"
               notAuthComponent={NewPassword}
             />
+
             <Route exact path="/error" authComponent={Error} />
             <Route component={FourOhFour} />
           </Switch>
