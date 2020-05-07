@@ -27,7 +27,7 @@ const Movie = (): ReactElement => {
     source: ""
   });
   const [reviews, setReviews] = useState([
-    { id: "", name: "", date: null, stars: 0, body: "" }
+    { id: "", authorUsername: "", date: null, stars: 0, body: "" }
   ]);
   const [dataDone, setDataDone] = useState(false);
   const classes = useStyles({});

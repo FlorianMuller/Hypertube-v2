@@ -14,7 +14,7 @@ describe("Movie", () => {
     reviews = [
       {
         id: "0123456789",
-        name: "TestMan",
+        authorUsername: "TestMan",
         date: 1577118711809,
         stars: 4,
         body: "That was actually really awesome"
