@@ -35,8 +35,6 @@ const Profile = ({
     return <Error />;
   }
 
-  console.log(data.schoolID);
-
   return (
     <div className={classes.containerProfile}>
       <div>
