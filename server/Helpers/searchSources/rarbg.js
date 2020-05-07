@@ -37,17 +37,16 @@ const timeout = util.promisify(setTimeout);
 const waitDecorator = (func) => async (...params) => {
   const timeSinceLastCall = Date.now() - lastCall;
 
-  if (!lastCall || timeSinceLastCall > 1000) {
-    const ret = await func(...params);
+  if (lastCall && timeSinceLastCall < 2000) {
+    // Need to wait before call to api
+
+    lastCall = Date.now() + 2000 - timeSinceLastCall;
+    await timeout(2000 - timeSinceLastCall);
+  } else {
     lastCall = Date.now();
-    return ret;
   }
 
-  // Need to wait before call to api
-  await timeout(1000 - timeSinceLastCall);
-
   const ret = await func(...params);
-  lastCall = Date.now();
   return ret;
 };
 
@@ -129,11 +128,11 @@ const cleanMovies = (movies) => {
  * - a year is wanted
  * - a genre is wanted
  */
-const cantSearch = (options) => {
+const cantSearch = (options, index) => {
   return (
     (options.sort && !RARBG_SORT[options.sort]) ||
     options.minRating ||
-    options.page > 2 ||
+    index === -1 ||
     options.year ||
     options.genre
   );
@@ -141,7 +140,7 @@ const cantSearch = (options) => {
 
 const searchMoviesOnRarbg = async (options, index) => {
   // Check if we can make this search with Rarbg
-  if (cantSearch(options)) {
+  if (cantSearch(options, index)) {
     console.info("[rarbg] search not supported");
     return { ...defautlResponse };
   }

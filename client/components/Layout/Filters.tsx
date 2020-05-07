@@ -189,11 +189,12 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
             {_t({ id: "layout.filters.minrating" })}
           </InputLabel>
           <Rating
-            defaultValue={minRating}
-            value={minRating || 0}
+            value={Number(minRating) || 0}
+            max={4}
             onChange={(e, value): void => setMinRating(value)}
             name="ratingmin"
           />
+          <Rating value={0} max={1} readOnly />
         </div>
       </div>
 

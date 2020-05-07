@@ -60,7 +60,8 @@ const Layout = ({ children, locale, setLocale }: Props): ReactElement => {
     const { id } = target;
 
     if (
-      !id.includes("menuitem") &&
+      !id.includes("menuitem") && // Select element
+      !id.includes("menu-") && // Select back
       !id.includes("expandFiltersButton") && // expand filter's button
       !target.children.namedItem("expandFiltersIcon") && // expand filter's button
       !id.includes("expandFiltersIcon") && // expand filter's button

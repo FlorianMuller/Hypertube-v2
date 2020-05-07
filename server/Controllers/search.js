@@ -8,6 +8,9 @@ const searchMovies = async (req, res) => {
       req.query.minRating = parseFloat(req.query.minRating, 10);
     if (req.query.year) req.query.year = parseInt(req.query.year, 10);
 
+    // Page 1 by default
+    if (!req.query.page) req.query.page = 1;
+
     const moviesList = await searchMoviesOnAllSource(req.query);
     res.send(moviesList);
   } catch (e) {

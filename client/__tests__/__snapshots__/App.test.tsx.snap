@@ -8462,7 +8462,7 @@ exports[`App renders correctly 1`] = `
                                     </ForwardRef(InputLabel)>
                                   </WithStyles(ForwardRef(InputLabel))>
                                   <WithStyles(ForwardRef(Rating))
-                                    defaultValue={null}
+                                    max={4}
                                     name="ratingmin"
                                     onChange={[Function]}
                                     value={0}
@@ -8488,7 +8488,7 @@ exports[`App renders correctly 1`] = `
                                           "visuallyhidden": "MuiRating-visuallyhidden",
                                         }
                                       }
-                                      defaultValue={null}
+                                      max={4}
                                       name="ratingmin"
                                       onChange={[Function]}
                                       value={0}
@@ -8496,7 +8496,6 @@ exports[`App renders correctly 1`] = `
                                       <span
                                         aria-label={null}
                                         className="MuiRating-root"
-                                        defaultValue={null}
                                         onMouseLeave={[Function]}
                                         onMouseMove={[Function]}
                                         role={null}
@@ -8769,73 +8768,91 @@ exports[`App renders correctly 1`] = `
                                           type="radio"
                                           value={4}
                                         />
-                                        <label
-                                          className="MuiRating-label"
-                                          htmlFor="ratingmin-5"
+                                      </span>
+                                    </ForwardRef(Rating)>
+                                  </WithStyles(ForwardRef(Rating))>
+                                  <WithStyles(ForwardRef(Rating))
+                                    max={1}
+                                    readOnly={true}
+                                    value={0}
+                                  >
+                                    <ForwardRef(Rating)
+                                      classes={
+                                        Object {
+                                          "decimal": "MuiRating-decimal",
+                                          "disabled": "Mui-disabled",
+                                          "focusVisible": "Mui-focusVisible",
+                                          "icon": "MuiRating-icon",
+                                          "iconActive": "MuiRating-iconActive",
+                                          "iconEmpty": "MuiRating-iconEmpty",
+                                          "iconFilled": "MuiRating-iconFilled",
+                                          "iconFocus": "MuiRating-iconFocus",
+                                          "iconHover": "MuiRating-iconHover",
+                                          "label": "MuiRating-label",
+                                          "pristine": "MuiRating-pristine",
+                                          "readOnly": "MuiRating-readOnly",
+                                          "root": "MuiRating-root",
+                                          "sizeLarge": "MuiRating-sizeLarge",
+                                          "sizeSmall": "MuiRating-sizeSmall",
+                                          "visuallyhidden": "MuiRating-visuallyhidden",
+                                        }
+                                      }
+                                      max={1}
+                                      readOnly={true}
+                                      value={0}
+                                    >
+                                      <span
+                                        aria-label="0 Stars"
+                                        className="MuiRating-root MuiRating-readOnly"
+                                        onMouseLeave={[Function]}
+                                        onMouseMove={[Function]}
+                                        role="img"
+                                      >
+                                        <IconContainer
+                                          className="MuiRating-icon MuiRating-iconEmpty"
+                                          value={1}
                                         >
-                                          <IconContainer
+                                          <span
                                             className="MuiRating-icon MuiRating-iconEmpty"
-                                            value={5}
                                           >
-                                            <span
-                                              className="MuiRating-icon MuiRating-iconEmpty"
+                                            <ForwardRef
+                                              fontSize="inherit"
                                             >
-                                              <ForwardRef
+                                              <WithStyles(ForwardRef(SvgIcon))
                                                 fontSize="inherit"
                                               >
-                                                <WithStyles(ForwardRef(SvgIcon))
+                                                <ForwardRef(SvgIcon)
+                                                  classes={
+                                                    Object {
+                                                      "colorAction": "MuiSvgIcon-colorAction",
+                                                      "colorDisabled": "MuiSvgIcon-colorDisabled",
+                                                      "colorError": "MuiSvgIcon-colorError",
+                                                      "colorPrimary": "MuiSvgIcon-colorPrimary",
+                                                      "colorSecondary": "MuiSvgIcon-colorSecondary",
+                                                      "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                                                      "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                                                      "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                                                      "root": "MuiSvgIcon-root",
+                                                    }
+                                                  }
                                                   fontSize="inherit"
                                                 >
-                                                  <ForwardRef(SvgIcon)
-                                                    classes={
-                                                      Object {
-                                                        "colorAction": "MuiSvgIcon-colorAction",
-                                                        "colorDisabled": "MuiSvgIcon-colorDisabled",
-                                                        "colorError": "MuiSvgIcon-colorError",
-                                                        "colorPrimary": "MuiSvgIcon-colorPrimary",
-                                                        "colorSecondary": "MuiSvgIcon-colorSecondary",
-                                                        "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
-                                                        "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
-                                                        "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
-                                                        "root": "MuiSvgIcon-root",
-                                                      }
-                                                    }
-                                                    fontSize="inherit"
+                                                  <svg
+                                                    aria-hidden="true"
+                                                    className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                                                    focusable="false"
+                                                    role="presentation"
+                                                    viewBox="0 0 24 24"
                                                   >
-                                                    <svg
-                                                      aria-hidden="true"
-                                                      className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
-                                                      focusable="false"
-                                                      role="presentation"
-                                                      viewBox="0 0 24 24"
-                                                    >
-                                                      <path
-                                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                                                      />
-                                                    </svg>
-                                                  </ForwardRef(SvgIcon)>
-                                                </WithStyles(ForwardRef(SvgIcon))>
-                                              </ForwardRef>
-                                            </span>
-                                          </IconContainer>
-                                          <span
-                                            className="MuiRating-visuallyhidden"
-                                          >
-                                            5 Stars
+                                                    <path
+                                                      d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                                    />
+                                                  </svg>
+                                                </ForwardRef(SvgIcon)>
+                                              </WithStyles(ForwardRef(SvgIcon))>
+                                            </ForwardRef>
                                           </span>
-                                        </label>
-                                        <input
-                                          checked={false}
-                                          className="MuiRating-visuallyhidden"
-                                          id="ratingmin-5"
-                                          name="ratingmin"
-                                          onBlur={[Function]}
-                                          onChange={[Function]}
-                                          onClick={[Function]}
-                                          onFocus={[Function]}
-                                          type="radio"
-                                          value={5}
-                                        />
+                                        </IconContainer>
                                       </span>
                                     </ForwardRef(Rating)>
                                   </WithStyles(ForwardRef(Rating))>
@@ -9025,7 +9042,6 @@ exports[`App renders correctly 1`] = `
                                               >
                                                 Best Rating
                                               </ForwardRef(WithStyles)>,
-                                              <ForwardRef(WithStyles) />,
                                             ],
                                             "classes": Object {
                                               "disabled": "Mui-disabled",
@@ -9158,7 +9174,6 @@ exports[`App renders correctly 1`] = `
                                                 >
                                                   Best Rating
                                                 </ForwardRef(WithStyles)>,
-                                                <ForwardRef(WithStyles) />,
                                               ],
                                               "classes": Object {
                                                 "disabled": "Mui-disabled",
@@ -9292,7 +9307,6 @@ exports[`App renders correctly 1`] = `
                                                   >
                                                     Best Rating
                                                   </ForwardRef(WithStyles)>,
-                                                  <ForwardRef(WithStyles) />,
                                                 ],
                                                 "classes": Object {
                                                   "disabled": "Mui-disabled",
@@ -9432,7 +9446,6 @@ exports[`App renders correctly 1`] = `
                                                     >
                                                       Best Rating
                                                     </ForwardRef(WithStyles)>,
-                                                    <ForwardRef(WithStyles) />,
                                                   ],
                                                   "classes": Object {
                                                     "disabled": "Mui-disabled",

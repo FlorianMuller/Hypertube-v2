@@ -65,8 +65,10 @@ const getOrder = (sort) => YTS_ORDER[sort];
  * - sorting is not supported
  * - genre is not supported
  */
-const cantSearch = (sort, genre) =>
-  (sort && !YTS_SORT[sort]) || (genre && !OUR_TO_YTS_GENRES[genre]);
+const cantSearch = (sort, genre, index) =>
+  (sort && !YTS_SORT[sort]) ||
+  (genre && !OUR_TO_YTS_GENRES[genre]) ||
+  index === -1;
 
 /**
  * Search moovies on YTS and return axios reponse
@@ -115,7 +117,7 @@ const getMovies = async (options, index) => {
 
 export const searchMoviesOnYts = async (options, index) => {
   // Checking if source can use this sorting method and this genre
-  if (cantSearch(options.sort, options.genre)) {
+  if (cantSearch(options.sort, options.genre, index)) {
     console.info("[yts]: Sort or genre not supported");
     return {
       name: "yts",

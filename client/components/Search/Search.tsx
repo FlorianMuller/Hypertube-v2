@@ -25,7 +25,7 @@ const Search = (): ReactElement => {
   const history = useHistory();
   const location = useLocation();
 
-  const { resData: data, loading, error, setUrl } = useApi<
+  const { resData: data, loading, error, setUrl, cancelAllRequests } = useApi<
     ApiSearchReponse,
     void
   >(formatQueryUrl(location.search, 1), {
@@ -55,6 +55,15 @@ const Search = (): ReactElement => {
       }
     }
   }, [data]);
+
+  /**
+   * Canceling all pending request when compnent unmount
+   */
+  useEffect(() => {
+    return (): void => {
+      cancelAllRequests();
+    };
+  }, []);
 
   /**
    * Getting next 12 movies (and next page if needed)

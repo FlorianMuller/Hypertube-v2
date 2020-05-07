@@ -101,16 +101,17 @@ const getRecommendation = async (_req, res) => {
   try {
     // Get best rated movies of the current year (or year before in january)
     const { movies } = await searchMoviesOnAllSource({
+      page: 1,
       year: new Date().getFullYear() - (new Date().getMonth() > 0 ? 0 : 1),
       sort: "rating"
     });
-    const top = movies.slice(15);
+    const top = movies.slice(0, 15);
 
     // Shuffle array
     top.sort(() => 0.5 - Math.random());
 
     // Sending sub-array of the first 4 elements after shuffle
-    res.send({ list: top.slice(4) });
+    res.send({ list: top.slice(0, 4) });
   } catch (e) {
     console.error(e);
     res.sendStatus(500);

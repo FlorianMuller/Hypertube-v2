@@ -28,10 +28,8 @@ router.get("/check-auth", checkAuth, (req, res) => {
 });
 router.put("/users/logout", signOutController);
 
-/* Search */
-router.get("/movies", checkAuth, searchController.searchMovies);
-
 /* Movie */
+router.get("/movies", searchController.searchMovies);
 router.get("/movies/recommended", checkAuth, movieController.getRecommendation);
 router.get("/movies/:id", checkAuth, movieController.getInfos);
 router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
