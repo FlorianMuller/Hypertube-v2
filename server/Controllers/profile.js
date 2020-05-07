@@ -22,7 +22,7 @@ const getUserByUsername = async (req, res) => {
   try {
     const userInfos = await UserModel.findOne(
       { username },
-      "username firstName lastName picture"
+      "username firstName lastName picture schoolID googleID"
     );
     if (userInfos === null) {
       res.sendStatus(404);

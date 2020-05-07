@@ -35,16 +35,26 @@ const Profile = ({
     return <Error />;
   }
 
+  console.log(data.schoolID);
+
   return (
     <div className={classes.containerProfile}>
       <div>
         <Paper className={classes.containerUser}>
           <div className={classes.containerPicture}>
-            <Avatar
-              alt="Profile picture"
-              src={`${window.location.origin}/api/avatar/${data?.picture}`}
-              className={classes.large}
-            />
+            {data.googleID || data.schoolID ? (
+              <Avatar
+                alt="Profile picture"
+                src={`${data?.picture}`}
+                className={classes.large}
+              />
+            ) : (
+              <Avatar
+                alt="Profile picture"
+                src={`${window.location.origin}/api/avatar/${data?.picture}`}
+                className={classes.large}
+              />
+            )}
           </div>
           <div className={classes.containerInfo}>
             <Typography variant="h5" className={classes.centerText}>
