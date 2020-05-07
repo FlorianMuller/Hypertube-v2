@@ -7,6 +7,8 @@ import API from "../../util/api";
 
 interface Props {
   picture?: string;
+  googleID?: string;
+  schoolID?: string;
 }
 
 const sendPictureData = (picture: File): AxiosPromise<{}> => {
@@ -20,9 +22,15 @@ const sendPictureData = (picture: File): AxiosPromise<{}> => {
   });
 };
 
-const EditableAvatar = ({ picture }: Props): ReactElement => {
+const EditableAvatar = ({
+  picture,
+  googleID,
+  schoolID
+}: Props): ReactElement => {
   const classes = useStyles({});
   const [mouseIn, setMouseIn] = useState(false);
+
+  const url = !!(googleID || schoolID);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.type === "file") {
@@ -47,7 +55,11 @@ const EditableAvatar = ({ picture }: Props): ReactElement => {
         />
         <Avatar
           alt="user-pic"
-          src={`${window.location.origin}/api/avatar/${picture}`}
+          src={
+            !url
+              ? `${window.location.origin}/api/avatar/${picture}`
+              : `${picture}`
+          }
           className={classes.large}
         />
         {mouseIn && <AddAPhotoIcon className={classes.changePhoto} />}
