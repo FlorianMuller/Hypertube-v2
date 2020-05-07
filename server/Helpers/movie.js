@@ -26,8 +26,8 @@ const findReviews = async (movieId) => {
     const reviews = await MovieCommentModel.find({ movieId });
     const ourReviews = [];
     if (reviews.length > 0) {
-      reviews.forEach(({ _id, name, date, stars, body }) => {
-        ourReviews.push({ id: _id, name, date, stars, body });
+      reviews.forEach(({ _id, authorUsername, date, stars, body }) => {
+        ourReviews.push({ id: _id, authorUsername, date, stars, body });
       });
     }
     return ourReviews;
@@ -39,15 +39,15 @@ const findReviews = async (movieId) => {
 
 const saveReview = async (comment) => {
   try {
-    await MovieCommentModel.create({
-      _id: comment._id,
+    return await MovieCommentModel.create({
+      _id: comment._id || undefined,
       movieId: comment.movieId,
-      name: comment.name,
+      movieName: comment.movieName,
+      authorUsername: comment.authorUsername,
       date: comment.date,
       stars: comment.stars,
       body: comment.body
     });
-    return true;
   } catch (e) {
     console.error(e.message);
     return e.message;
