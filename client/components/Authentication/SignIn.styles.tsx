@@ -60,6 +60,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     textInput: {
       width: "300px"
+    },
+    omniauthBtn: {
+      marginTop: "20px",
+      minWidth: "160px",
+      backgroundColor: "white",
+      color: "purple",
+      "&:hover": {
+        backgroundColor: "#ffdefe"
+      }
     }
   })
 );

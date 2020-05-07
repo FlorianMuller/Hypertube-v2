@@ -38,6 +38,7 @@ const SignIn = (): ReactElement => {
   const { formatMessage: _t } = useIntl();
   const classes = useStyle({});
   const history = useHistory();
+  const [errorOmni, setErroOmni] = useState("");
   const location = useLocation<{ from?: Location<{}> }>();
   const [authInfo, setAuthInfo] = useState<AuthInfo>({
     username: "",
@@ -47,6 +48,12 @@ const SignIn = (): ReactElement => {
     username: "",
     password: ""
   });
+  const style = {
+    omniError: {
+      marginTop: "20px",
+      color: "red"
+    }
+  };
 
   const { callApi, loading, res, error } = useApi<{}, { error?: string }>(
     "/users/login",
@@ -104,6 +111,18 @@ const SignIn = (): ReactElement => {
     }
   }, [res]);
 
+  useEffect(() => {
+    const cleanParams = history.location.search.replace("?", "");
+    const tabParams = cleanParams.split("&");
+    tabParams.forEach((el) => {
+      const [param, value] = el.split("=");
+      if (param === "auth") {
+        setErroOmni(value);
+      }
+    });
+    console.log(errorOmni);
+  }, [errorOmni]);
+
   /**
    * Login failed
    */
@@ -158,6 +177,19 @@ const SignIn = (): ReactElement => {
               🍿
             </span>
           </Typography>
+
+          <Button href="/api/user/42" className={classes.omniauthBtn}>
+            {_t({ id: "authentication.SignIn.school" })}
+          </Button>
+          <Button href="/api/user/google" className={classes.omniauthBtn}>
+            {_t({ id: "authentication.SignIn.google" })}
+          </Button>
+          {errorOmni !== "" && (
+            <span style={style.omniError}>
+              {_t({ id: "authentication.SignIn.omniError" })}
+            </span>
+          )}
+
           <form onSubmit={handleSubmit} className={classes.form}>
             <Grid container direction="column" alignItems="center">
               <Grid item className={classes.item}>
@@ -165,7 +197,7 @@ const SignIn = (): ReactElement => {
                   value={authInfo.username}
                   helperText={
                     authError.username !== "" &&
-                    authError.username !== errorWithoutTextErrorKey
+                      authError.username !== errorWithoutTextErrorKey
                       ? _t({ id: authError.username })
                       : ""
                   }
