@@ -9,6 +9,7 @@ const tokenSchema = new mongoose.Schema({
     default: () => crypto.randomBytes(15).toString("hex"),
     unique: true
   },
+  associatedData: mongoose.Mixed,
   createdAt: { type: Date, default: () => Date.now() }
 });
 

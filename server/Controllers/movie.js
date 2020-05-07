@@ -17,7 +17,7 @@ const getInfos = (req, res) => {
             totalStars += parseInt(review.stars, 10);
             reviews.push({
               id: Date.parse(review.createdate),
-              name: review.reviewer,
+              authorUsername: review.reviewer,
               date: Date.parse(review.reviewdate),
               stars: parseInt(review.stars, 10),
               body: review.reviewbody
@@ -65,7 +65,9 @@ const receiveReviews = (req, res) => {
         const ret = await movieHelpers.saveReview({
           _id: new mongoose.Types.ObjectId(),
           movieId,
-          name: req.body.name,
+          authorUsername: req.body.authorUsername,
+          // todo: Put Movie name here in the future
+          movieName: "4242",
           date: req.body.date,
           stars: req.body.stars,
           body: req.body.body
@@ -74,7 +76,7 @@ const receiveReviews = (req, res) => {
           const fullDate = String(new Date(req.body.date)).split(" ");
           ioConnection.ioConnection.to(movieId).emit("New comments", {
             id: Date.now(),
-            name: req.body.name,
+            authorUsername: req.body.authorUsername,
             date: movieHelpers.timestampToDate(
               fullDate[1],
               fullDate[2],

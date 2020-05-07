@@ -373,10 +373,10 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
   reviews={
     Array [
       Object {
+        "authorUsername": "TestMan",
         "body": "That was actually really awesome",
         "date": 1577118711809,
         "id": "0123456789",
-        "name": "TestMan",
         "stars": 4,
       },
     ]
@@ -1988,10 +1988,10 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
   reviews={
     Array [
       Object {
+        "authorUsername": "TestMan",
         "body": "That was actually really awesome",
         "date": 1577118711809,
         "id": "0123456789",
-        "name": "TestMan",
         "stars": 4,
       },
     ]

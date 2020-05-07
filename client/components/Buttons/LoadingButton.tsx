@@ -15,6 +15,7 @@ export interface Props {
   circularProgressColor?: "inherit" | "primary" | "secondary";
   buttonClass?: string;
   circularProgressClass?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const LoadingButton = ({
@@ -27,7 +28,8 @@ const LoadingButton = ({
   color,
   circularProgressColor,
   buttonClass,
-  circularProgressClass
+  circularProgressClass,
+  onClick
 }: Props): ReactElement => {
   const classes = useStyles({});
   return (
@@ -46,6 +48,7 @@ const LoadingButton = ({
         size={size || "medium"}
         color={color || "default"}
         className={buttonClass}
+        onClick={onClick}
       >
         {loading && loadingText ? loadingText : text}
       </Button>

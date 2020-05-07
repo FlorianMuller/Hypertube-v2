@@ -10,12 +10,12 @@ describe("Movie Comments", () => {
 
   beforeAll(() => {
     mockedMovieId = "B123rR";
-    mockedUserId = String(new mongoose.Types.ObjectId());
     mockedReview = {
-      _id: mockedUserId,
+      _id: new mongoose.Types.ObjectId(),
       movieId: mockedMovieId,
-      name: "TestMan",
-      date: 1577118711809,
+      movieName: "4242",
+      authorUsername: "TestMan",
+      date: new Date(1577118711809),
       stars: 4,
       body: "That was actually really awesome"
     };
@@ -56,20 +56,16 @@ describe("Movie Comments", () => {
   });
 
   it("should inserts user's review", async () => {
-    await movieHelpers.saveReview(mockedReview);
-    const reviewDb = await MovieCommentModel.findById(mockedUserId);
-    expect(reviewDb.toJSON()).toEqual(finalReview);
+    const insetedReview = await movieHelpers.saveReview(mockedReview);
+
+    expect(insetedReview.toJSON()).toEqual(finalReview);
   });
 
   it("should finds our review in the database", async () => {
     const ourReviews = await movieHelpers.findReviews(mockedMovieId);
-    let isReviewHere;
-    ourReviews.forEach(({ id }) => {
-      if (id === mockedReview._id) {
-        isReviewHere = true;
-      }
-    });
-    expect(isReviewHere).toBeTruthy();
+    expect(
+      ourReviews.filter(({ id }) => finalReview._id.equals(id)).length
+    ).toBe(1);
   });
 
   it("should sorts both reviews from API and Database", () => {
@@ -81,12 +77,12 @@ describe("Movie Comments", () => {
       {
         ...mockedReview,
         _id: "0123456789",
-        date: 1575500400000
+        date: new Date(1575500400000)
       }
     ];
     const mockedOurReviews = [
-      { ...mockedReview, _id: "0123456789", date: 1576278000000 },
-      { ...mockedReview, _id: "0123456789", date: 1575759600000 }
+      { ...mockedReview, _id: "0123456789", date: new Date(1576278000000) },
+      { ...mockedReview, _id: "0123456789", date: new Date(1575759600000) }
     ];
     const bothReviews = movieHelpers.sortReviews(
       mockedApiReviews,
@@ -96,7 +92,8 @@ describe("Movie Comments", () => {
       {
         _id: "0123456789",
         movieId: "B123rR",
-        name: "TestMan",
+        movieName: "4242",
+        authorUsername: "TestMan",
         date: "Dec, 05, 2019",
         stars: 4,
         body: "That was actually really awesome"
@@ -104,7 +101,8 @@ describe("Movie Comments", () => {
       {
         _id: "0123456789",
         movieId: "B123rR",
-        name: "TestMan",
+        movieName: "4242",
+        authorUsername: "TestMan",
         date: "Dec, 08, 2019",
         stars: 4,
         body: "That was actually really awesome"
@@ -112,7 +110,8 @@ describe("Movie Comments", () => {
       {
         _id: "0123456789",
         movieId: "B123rR",
-        name: "TestMan",
+        movieName: "4242",
+        authorUsername: "TestMan",
         date: "Dec, 14, 2019",
         stars: 4,
         body: "That was actually really awesome"
@@ -120,7 +119,8 @@ describe("Movie Comments", () => {
       {
         _id: "0123456789",
         movieId: "B123rR",
-        name: "TestMan",
+        movieName: "4242",
+        authorUsername: "TestMan",
         date: "Dec, 23, 2019",
         stars: 4,
         body: "That was actually really awesome"
