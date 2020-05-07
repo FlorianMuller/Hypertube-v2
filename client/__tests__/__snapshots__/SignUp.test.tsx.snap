@@ -3549,10 +3549,9 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                                                     }
                                                                   >
                                                                     <svg
-                                                                      aria-hidden="true"
+                                                                      aria-hidden={true}
                                                                       className="MuiSvgIcon-root"
                                                                       focusable="false"
-                                                                      role="presentation"
                                                                       viewBox="0 0 24 24"
                                                                     >
                                                                       <path
@@ -3565,36 +3564,34 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                                             </span>
                                                             Upload
                                                           </span>
-                                                          <NoSsr>
-                                                            <WithStyles(undefined)
+                                                          <WithStyles(memo)
+                                                            center={false}
+                                                          >
+                                                            <ForwardRef(TouchRipple)
                                                               center={false}
-                                                            >
-                                                              <ForwardRef(TouchRipple)
-                                                                center={false}
-                                                                classes={
-                                                                  Object {
-                                                                    "child": "MuiTouchRipple-child",
-                                                                    "childLeaving": "MuiTouchRipple-childLeaving",
-                                                                    "childPulsate": "MuiTouchRipple-childPulsate",
-                                                                    "ripple": "MuiTouchRipple-ripple",
-                                                                    "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                                                    "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                                                    "root": "MuiTouchRipple-root",
-                                                                  }
+                                                              classes={
+                                                                Object {
+                                                                  "child": "MuiTouchRipple-child",
+                                                                  "childLeaving": "MuiTouchRipple-childLeaving",
+                                                                  "childPulsate": "MuiTouchRipple-childPulsate",
+                                                                  "ripple": "MuiTouchRipple-ripple",
+                                                                  "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                                                  "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                                                  "root": "MuiTouchRipple-root",
                                                                 }
+                                                              }
+                                                            >
+                                                              <span
+                                                                className="MuiTouchRipple-root"
                                                               >
-                                                                <span
-                                                                  className="MuiTouchRipple-root"
-                                                                >
-                                                                  <TransitionGroup
-                                                                    childFactory={[Function]}
-                                                                    component={null}
-                                                                    exit={true}
-                                                                  />
-                                                                </span>
-                                                              </ForwardRef(TouchRipple)>
-                                                            </WithStyles(undefined)>
-                                                          </NoSsr>
+                                                                <TransitionGroup
+                                                                  childFactory={[Function]}
+                                                                  component={null}
+                                                                  exit={true}
+                                                                />
+                                                              </span>
+                                                            </ForwardRef(TouchRipple)>
+                                                          </WithStyles(memo)>
                                                         </span>
                                                       </ForwardRef(ButtonBase)>
                                                     </WithStyles(ForwardRef(ButtonBase))>
@@ -3733,7 +3730,7 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                           type="submit"
                                         >
                                           <LoadingButton
-                                            buttonClass=" makeStyles-customButton-275"
+                                            buttonClass=" makeStyles-customButton-273"
                                             loading={false}
                                             loadingText="Sending all your precious data"
                                             size="large"
@@ -3741,10 +3738,10 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                             type="submit"
                                           >
                                             <div
-                                              className="makeStyles-circularProgressContainer-276"
+                                              className="makeStyles-circularProgressContainer-274"
                                             >
                                               <WithStyles(ForwardRef(Button))
-                                                className=" makeStyles-customButton-275"
+                                                className=" makeStyles-customButton-273"
                                                 color="default"
                                                 disabled={false}
                                                 size="large"
@@ -3752,7 +3749,7 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                                 variant="contained"
                                               >
                                                 <ForwardRef(Button)
-                                                  className=" makeStyles-customButton-275"
+                                                  className=" makeStyles-customButton-273"
                                                   classes={
                                                     Object {
                                                       "colorInherit": "MuiButton-colorInherit",
@@ -3793,7 +3790,7 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                                   variant="contained"
                                                 >
                                                   <WithStyles(ForwardRef(ButtonBase))
-                                                    className="MuiButton-root MuiButton-contained  makeStyles-customButton-275 MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                                                    className="MuiButton-root MuiButton-contained  makeStyles-customButton-273 MuiButton-containedSizeLarge MuiButton-sizeLarge"
                                                     component="button"
                                                     disabled={false}
                                                     focusRipple={true}
@@ -3801,7 +3798,7 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                                     type="submit"
                                                   >
                                                     <ForwardRef(ButtonBase)
-                                                      className="MuiButton-root MuiButton-contained  makeStyles-customButton-275 MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                                                      className="MuiButton-root MuiButton-contained  makeStyles-customButton-273 MuiButton-containedSizeLarge MuiButton-sizeLarge"
                                                       classes={
                                                         Object {
                                                           "disabled": "Mui-disabled",
@@ -3816,7 +3813,7 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                                       type="submit"
                                                     >
                                                       <button
-                                                        className="MuiButtonBase-root MuiButton-root MuiButton-contained  makeStyles-customButton-275 MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                                                        className="MuiButtonBase-root MuiButton-root MuiButton-contained  makeStyles-customButton-273 MuiButton-containedSizeLarge MuiButton-sizeLarge"
                                                         disabled={false}
                                                         onBlur={[Function]}
                                                         onDragLeave={[Function]}
@@ -3837,36 +3834,34 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                                         >
                                                           I register on this awesome website
                                                         </span>
-                                                        <NoSsr>
-                                                          <WithStyles(undefined)
+                                                        <WithStyles(memo)
+                                                          center={false}
+                                                        >
+                                                          <ForwardRef(TouchRipple)
                                                             center={false}
-                                                          >
-                                                            <ForwardRef(TouchRipple)
-                                                              center={false}
-                                                              classes={
-                                                                Object {
-                                                                  "child": "MuiTouchRipple-child",
-                                                                  "childLeaving": "MuiTouchRipple-childLeaving",
-                                                                  "childPulsate": "MuiTouchRipple-childPulsate",
-                                                                  "ripple": "MuiTouchRipple-ripple",
-                                                                  "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                                                  "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                                                  "root": "MuiTouchRipple-root",
-                                                                }
+                                                            classes={
+                                                              Object {
+                                                                "child": "MuiTouchRipple-child",
+                                                                "childLeaving": "MuiTouchRipple-childLeaving",
+                                                                "childPulsate": "MuiTouchRipple-childPulsate",
+                                                                "ripple": "MuiTouchRipple-ripple",
+                                                                "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                                                "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                                                "root": "MuiTouchRipple-root",
                                                               }
+                                                            }
+                                                          >
+                                                            <span
+                                                              className="MuiTouchRipple-root"
                                                             >
-                                                              <span
-                                                                className="MuiTouchRipple-root"
-                                                              >
-                                                                <TransitionGroup
-                                                                  childFactory={[Function]}
-                                                                  component={null}
-                                                                  exit={true}
-                                                                />
-                                                              </span>
-                                                            </ForwardRef(TouchRipple)>
-                                                          </WithStyles(undefined)>
-                                                        </NoSsr>
+                                                              <TransitionGroup
+                                                                childFactory={[Function]}
+                                                                component={null}
+                                                                exit={true}
+                                                              />
+                                                            </span>
+                                                          </ForwardRef(TouchRipple)>
+                                                        </WithStyles(memo)>
                                                       </button>
                                                     </ForwardRef(ButtonBase)>
                                                   </WithStyles(ForwardRef(ButtonBase))>
@@ -3990,36 +3985,34 @@ exports[`SignUp should render <SignUp> in english 1`] = `
                                         >
                                           Or sign in here !
                                         </span>
-                                        <NoSsr>
-                                          <WithStyles(undefined)
+                                        <WithStyles(memo)
+                                          center={false}
+                                        >
+                                          <ForwardRef(TouchRipple)
                                             center={false}
-                                          >
-                                            <ForwardRef(TouchRipple)
-                                              center={false}
-                                              classes={
-                                                Object {
-                                                  "child": "MuiTouchRipple-child",
-                                                  "childLeaving": "MuiTouchRipple-childLeaving",
-                                                  "childPulsate": "MuiTouchRipple-childPulsate",
-                                                  "ripple": "MuiTouchRipple-ripple",
-                                                  "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                                  "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                                  "root": "MuiTouchRipple-root",
-                                                }
+                                            classes={
+                                              Object {
+                                                "child": "MuiTouchRipple-child",
+                                                "childLeaving": "MuiTouchRipple-childLeaving",
+                                                "childPulsate": "MuiTouchRipple-childPulsate",
+                                                "ripple": "MuiTouchRipple-ripple",
+                                                "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                                "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                                "root": "MuiTouchRipple-root",
                                               }
+                                            }
+                                          >
+                                            <span
+                                              className="MuiTouchRipple-root"
                                             >
-                                              <span
-                                                className="MuiTouchRipple-root"
-                                              >
-                                                <TransitionGroup
-                                                  childFactory={[Function]}
-                                                  component={null}
-                                                  exit={true}
-                                                />
-                                              </span>
-                                            </ForwardRef(TouchRipple)>
-                                          </WithStyles(undefined)>
-                                        </NoSsr>
+                                              <TransitionGroup
+                                                childFactory={[Function]}
+                                                component={null}
+                                                exit={true}
+                                              />
+                                            </span>
+                                          </ForwardRef(TouchRipple)>
+                                        </WithStyles(memo)>
                                       </button>
                                     </ForwardRef(ButtonBase)>
                                   </WithStyles(ForwardRef(ButtonBase))>
@@ -7591,10 +7584,9 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                                                     }
                                                                   >
                                                                     <svg
-                                                                      aria-hidden="true"
+                                                                      aria-hidden={true}
                                                                       className="MuiSvgIcon-root"
                                                                       focusable="false"
-                                                                      role="presentation"
                                                                       viewBox="0 0 24 24"
                                                                     >
                                                                       <path
@@ -7607,36 +7599,34 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                                             </span>
                                                             Upload
                                                           </span>
-                                                          <NoSsr>
-                                                            <WithStyles(undefined)
+                                                          <WithStyles(memo)
+                                                            center={false}
+                                                          >
+                                                            <ForwardRef(TouchRipple)
                                                               center={false}
-                                                            >
-                                                              <ForwardRef(TouchRipple)
-                                                                center={false}
-                                                                classes={
-                                                                  Object {
-                                                                    "child": "MuiTouchRipple-child",
-                                                                    "childLeaving": "MuiTouchRipple-childLeaving",
-                                                                    "childPulsate": "MuiTouchRipple-childPulsate",
-                                                                    "ripple": "MuiTouchRipple-ripple",
-                                                                    "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                                                    "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                                                    "root": "MuiTouchRipple-root",
-                                                                  }
+                                                              classes={
+                                                                Object {
+                                                                  "child": "MuiTouchRipple-child",
+                                                                  "childLeaving": "MuiTouchRipple-childLeaving",
+                                                                  "childPulsate": "MuiTouchRipple-childPulsate",
+                                                                  "ripple": "MuiTouchRipple-ripple",
+                                                                  "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                                                  "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                                                  "root": "MuiTouchRipple-root",
                                                                 }
+                                                              }
+                                                            >
+                                                              <span
+                                                                className="MuiTouchRipple-root"
                                                               >
-                                                                <span
-                                                                  className="MuiTouchRipple-root"
-                                                                >
-                                                                  <TransitionGroup
-                                                                    childFactory={[Function]}
-                                                                    component={null}
-                                                                    exit={true}
-                                                                  />
-                                                                </span>
-                                                              </ForwardRef(TouchRipple)>
-                                                            </WithStyles(undefined)>
-                                                          </NoSsr>
+                                                                <TransitionGroup
+                                                                  childFactory={[Function]}
+                                                                  component={null}
+                                                                  exit={true}
+                                                                />
+                                                              </span>
+                                                            </ForwardRef(TouchRipple)>
+                                                          </WithStyles(memo)>
                                                         </span>
                                                       </ForwardRef(ButtonBase)>
                                                     </WithStyles(ForwardRef(ButtonBase))>
@@ -7775,7 +7765,7 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                           type="submit"
                                         >
                                           <LoadingButton
-                                            buttonClass=" makeStyles-customButton-275"
+                                            buttonClass=" makeStyles-customButton-273"
                                             loading={false}
                                             loadingText="Envoi de tes précieuses données en cours"
                                             size="large"
@@ -7783,10 +7773,10 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                             type="submit"
                                           >
                                             <div
-                                              className="makeStyles-circularProgressContainer-276"
+                                              className="makeStyles-circularProgressContainer-274"
                                             >
                                               <WithStyles(ForwardRef(Button))
-                                                className=" makeStyles-customButton-275"
+                                                className=" makeStyles-customButton-273"
                                                 color="default"
                                                 disabled={false}
                                                 size="large"
@@ -7794,7 +7784,7 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                                 variant="contained"
                                               >
                                                 <ForwardRef(Button)
-                                                  className=" makeStyles-customButton-275"
+                                                  className=" makeStyles-customButton-273"
                                                   classes={
                                                     Object {
                                                       "colorInherit": "MuiButton-colorInherit",
@@ -7835,7 +7825,7 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                                   variant="contained"
                                                 >
                                                   <WithStyles(ForwardRef(ButtonBase))
-                                                    className="MuiButton-root MuiButton-contained  makeStyles-customButton-275 MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                                                    className="MuiButton-root MuiButton-contained  makeStyles-customButton-273 MuiButton-containedSizeLarge MuiButton-sizeLarge"
                                                     component="button"
                                                     disabled={false}
                                                     focusRipple={true}
@@ -7843,7 +7833,7 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                                     type="submit"
                                                   >
                                                     <ForwardRef(ButtonBase)
-                                                      className="MuiButton-root MuiButton-contained  makeStyles-customButton-275 MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                                                      className="MuiButton-root MuiButton-contained  makeStyles-customButton-273 MuiButton-containedSizeLarge MuiButton-sizeLarge"
                                                       classes={
                                                         Object {
                                                           "disabled": "Mui-disabled",
@@ -7858,7 +7848,7 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                                       type="submit"
                                                     >
                                                       <button
-                                                        className="MuiButtonBase-root MuiButton-root MuiButton-contained  makeStyles-customButton-275 MuiButton-containedSizeLarge MuiButton-sizeLarge"
+                                                        className="MuiButtonBase-root MuiButton-root MuiButton-contained  makeStyles-customButton-273 MuiButton-containedSizeLarge MuiButton-sizeLarge"
                                                         disabled={false}
                                                         onBlur={[Function]}
                                                         onDragLeave={[Function]}
@@ -7879,36 +7869,34 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                                         >
                                                           Je m'inscris sur ce site cool
                                                         </span>
-                                                        <NoSsr>
-                                                          <WithStyles(undefined)
+                                                        <WithStyles(memo)
+                                                          center={false}
+                                                        >
+                                                          <ForwardRef(TouchRipple)
                                                             center={false}
-                                                          >
-                                                            <ForwardRef(TouchRipple)
-                                                              center={false}
-                                                              classes={
-                                                                Object {
-                                                                  "child": "MuiTouchRipple-child",
-                                                                  "childLeaving": "MuiTouchRipple-childLeaving",
-                                                                  "childPulsate": "MuiTouchRipple-childPulsate",
-                                                                  "ripple": "MuiTouchRipple-ripple",
-                                                                  "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                                                  "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                                                  "root": "MuiTouchRipple-root",
-                                                                }
+                                                            classes={
+                                                              Object {
+                                                                "child": "MuiTouchRipple-child",
+                                                                "childLeaving": "MuiTouchRipple-childLeaving",
+                                                                "childPulsate": "MuiTouchRipple-childPulsate",
+                                                                "ripple": "MuiTouchRipple-ripple",
+                                                                "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                                                "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                                                "root": "MuiTouchRipple-root",
                                                               }
+                                                            }
+                                                          >
+                                                            <span
+                                                              className="MuiTouchRipple-root"
                                                             >
-                                                              <span
-                                                                className="MuiTouchRipple-root"
-                                                              >
-                                                                <TransitionGroup
-                                                                  childFactory={[Function]}
-                                                                  component={null}
-                                                                  exit={true}
-                                                                />
-                                                              </span>
-                                                            </ForwardRef(TouchRipple)>
-                                                          </WithStyles(undefined)>
-                                                        </NoSsr>
+                                                              <TransitionGroup
+                                                                childFactory={[Function]}
+                                                                component={null}
+                                                                exit={true}
+                                                              />
+                                                            </span>
+                                                          </ForwardRef(TouchRipple)>
+                                                        </WithStyles(memo)>
                                                       </button>
                                                     </ForwardRef(ButtonBase)>
                                                   </WithStyles(ForwardRef(ButtonBase))>
@@ -8032,36 +8020,34 @@ exports[`SignUp should render <SignUp> in french 1`] = `
                                         >
                                           Ou connectes toi la !
                                         </span>
-                                        <NoSsr>
-                                          <WithStyles(undefined)
+                                        <WithStyles(memo)
+                                          center={false}
+                                        >
+                                          <ForwardRef(TouchRipple)
                                             center={false}
-                                          >
-                                            <ForwardRef(TouchRipple)
-                                              center={false}
-                                              classes={
-                                                Object {
-                                                  "child": "MuiTouchRipple-child",
-                                                  "childLeaving": "MuiTouchRipple-childLeaving",
-                                                  "childPulsate": "MuiTouchRipple-childPulsate",
-                                                  "ripple": "MuiTouchRipple-ripple",
-                                                  "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                                  "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                                  "root": "MuiTouchRipple-root",
-                                                }
+                                            classes={
+                                              Object {
+                                                "child": "MuiTouchRipple-child",
+                                                "childLeaving": "MuiTouchRipple-childLeaving",
+                                                "childPulsate": "MuiTouchRipple-childPulsate",
+                                                "ripple": "MuiTouchRipple-ripple",
+                                                "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                                "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                                "root": "MuiTouchRipple-root",
                                               }
+                                            }
+                                          >
+                                            <span
+                                              className="MuiTouchRipple-root"
                                             >
-                                              <span
-                                                className="MuiTouchRipple-root"
-                                              >
-                                                <TransitionGroup
-                                                  childFactory={[Function]}
-                                                  component={null}
-                                                  exit={true}
-                                                />
-                                              </span>
-                                            </ForwardRef(TouchRipple)>
-                                          </WithStyles(undefined)>
-                                        </NoSsr>
+                                              <TransitionGroup
+                                                childFactory={[Function]}
+                                                component={null}
+                                                exit={true}
+                                              />
+                                            </span>
+                                          </ForwardRef(TouchRipple)>
+                                        </WithStyles(memo)>
                                       </button>
                                     </ForwardRef(ButtonBase)>
                                   </WithStyles(ForwardRef(ButtonBase))>
@@ -8099,10 +8085,10 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
   }
 >
   <WithStyles(ForwardRef(Paper))
-    className="makeStyles-paper-288"
+    className="makeStyles-paper-286"
   >
     <ForwardRef(Paper)
-      className="makeStyles-paper-288"
+      className="makeStyles-paper-286"
       classes={
         Object {
           "elevation0": "MuiPaper-elevation0",
@@ -8137,14 +8123,14 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
       }
     >
       <div
-        className="MuiPaper-root makeStyles-paper-288 MuiPaper-elevation1 MuiPaper-rounded"
+        className="MuiPaper-root makeStyles-paper-286 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <WithStyles(ForwardRef(Grid))
-          className="makeStyles-titles-289"
+          className="makeStyles-titles-287"
           container={true}
         >
           <ForwardRef(Grid)
-            className="makeStyles-titles-289"
+            className="makeStyles-titles-287"
             classes={
               Object {
                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -8255,7 +8241,7 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
             container={true}
           >
             <div
-              className="MuiGrid-root makeStyles-titles-289 MuiGrid-container"
+              className="MuiGrid-root makeStyles-titles-287 MuiGrid-container"
             >
               <WithStyles(ForwardRef(Grid))
                 item={true}
@@ -8667,10 +8653,10 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                           className="MuiGrid-root MuiGrid-item"
                         >
                           <WithStyles(ForwardRef(Avatar))
-                            className="makeStyles-emailRound-291"
+                            className="makeStyles-emailRound-289"
                           >
                             <ForwardRef(Avatar)
-                              className="makeStyles-emailRound-291"
+                              className="makeStyles-emailRound-289"
                               classes={
                                 Object {
                                   "circle": "MuiAvatar-circle",
@@ -8684,18 +8670,18 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                               }
                             >
                               <div
-                                className="MuiAvatar-root MuiAvatar-circle makeStyles-emailRound-291 MuiAvatar-colorDefault"
+                                className="MuiAvatar-root MuiAvatar-circle makeStyles-emailRound-289 MuiAvatar-colorDefault"
                               >
                                 <ForwardRef
-                                  className="makeStyles-emailIcon-292"
+                                  className="makeStyles-emailIcon-290"
                                   color="secondary"
                                 >
                                   <WithStyles(ForwardRef(SvgIcon))
-                                    className="makeStyles-emailIcon-292"
+                                    className="makeStyles-emailIcon-290"
                                     color="secondary"
                                   >
                                     <ForwardRef(SvgIcon)
-                                      className="makeStyles-emailIcon-292"
+                                      className="makeStyles-emailIcon-290"
                                       classes={
                                         Object {
                                           "colorAction": "MuiSvgIcon-colorAction",
@@ -8712,10 +8698,9 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                       color="secondary"
                                     >
                                       <svg
-                                        aria-hidden="true"
-                                        className="MuiSvgIcon-root makeStyles-emailIcon-292 MuiSvgIcon-colorSecondary"
+                                        aria-hidden={true}
+                                        className="MuiSvgIcon-root makeStyles-emailIcon-290 MuiSvgIcon-colorSecondary"
                                         focusable="false"
-                                        role="presentation"
                                         viewBox="0 0 24 24"
                                       >
                                         <path
@@ -8848,11 +8833,11 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                           className="MuiGrid-root MuiGrid-item"
                         >
                           <WithStyles(ForwardRef(Grid))
-                            className="makeStyles-randomWrapper-293"
+                            className="makeStyles-randomWrapper-291"
                             container={true}
                           >
                             <ForwardRef(Grid)
-                              className="makeStyles-randomWrapper-293"
+                              className="makeStyles-randomWrapper-291"
                               classes={
                                 Object {
                                   "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -8963,14 +8948,14 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                               container={true}
                             >
                               <div
-                                className="MuiGrid-root makeStyles-randomWrapper-293 MuiGrid-container"
+                                className="MuiGrid-root makeStyles-randomWrapper-291 MuiGrid-container"
                               >
                                 <WithStyles(ForwardRef(Grid))
-                                  className="makeStyles-subtitle-290"
+                                  className="makeStyles-subtitle-288"
                                   item={true}
                                 >
                                   <ForwardRef(Grid)
-                                    className="makeStyles-subtitle-290"
+                                    className="makeStyles-subtitle-288"
                                     classes={
                                       Object {
                                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -9081,7 +9066,7 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                     item={true}
                                   >
                                     <div
-                                      className="MuiGrid-root makeStyles-subtitle-290 MuiGrid-item"
+                                      className="MuiGrid-root makeStyles-subtitle-288 MuiGrid-item"
                                     >
                                       <WithStyles(ForwardRef(Typography))
                                         align="center"
@@ -9139,11 +9124,11 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                   </ForwardRef(Grid)>
                                 </WithStyles(ForwardRef(Grid))>
                                 <WithStyles(ForwardRef(Grid))
-                                  className="makeStyles-subtitle-290"
+                                  className="makeStyles-subtitle-288"
                                   item={true}
                                 >
                                   <ForwardRef(Grid)
-                                    className="makeStyles-subtitle-290"
+                                    className="makeStyles-subtitle-288"
                                     classes={
                                       Object {
                                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -9254,7 +9239,7 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                     item={true}
                                   >
                                     <div
-                                      className="MuiGrid-root makeStyles-subtitle-290 MuiGrid-item"
+                                      className="MuiGrid-root makeStyles-subtitle-288 MuiGrid-item"
                                     >
                                       <WithStyles(ForwardRef(Typography))
                                         align="center"
@@ -9309,11 +9294,11 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                   </ForwardRef(Grid)>
                                 </WithStyles(ForwardRef(Grid))>
                                 <WithStyles(ForwardRef(Grid))
-                                  className="makeStyles-subtitle-290"
+                                  className="makeStyles-subtitle-288"
                                   item={true}
                                 >
                                   <ForwardRef(Grid)
-                                    className="makeStyles-subtitle-290"
+                                    className="makeStyles-subtitle-288"
                                     classes={
                                       Object {
                                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -9424,7 +9409,7 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                     item={true}
                                   >
                                     <div
-                                      className="MuiGrid-root makeStyles-subtitle-290 MuiGrid-item"
+                                      className="MuiGrid-root makeStyles-subtitle-288 MuiGrid-item"
                                     >
                                       <WithStyles(ForwardRef(Typography))
                                         align="center"
@@ -9495,11 +9480,11 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                 </ForwardRef(Grid)>
               </WithStyles(ForwardRef(Grid))>
               <WithStyles(ForwardRef(Grid))
-                className="makeStyles-resendWrapper-294"
+                className="makeStyles-resendWrapper-292"
                 container={true}
               >
                 <ForwardRef(Grid)
-                  className="makeStyles-resendWrapper-294"
+                  className="makeStyles-resendWrapper-292"
                   classes={
                     Object {
                       "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -9610,7 +9595,7 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                   container={true}
                 >
                   <div
-                    className="MuiGrid-root makeStyles-resendWrapper-294 MuiGrid-container"
+                    className="MuiGrid-root makeStyles-resendWrapper-292 MuiGrid-container"
                   >
                     <WithStyles(ForwardRef(Grid))
                       item={true}
@@ -9897,13 +9882,13 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                           className="MuiGrid-root MuiGrid-item"
                         >
                           <WithStyles(ForwardRef(Button))
-                            className="makeStyles-resendButton-295"
+                            className="makeStyles-resendButton-293"
                             onClick={[Function]}
                             size="small"
                             variant="outlined"
                           >
                             <ForwardRef(Button)
-                              className="makeStyles-resendButton-295"
+                              className="makeStyles-resendButton-293"
                               classes={
                                 Object {
                                   "colorInherit": "MuiButton-colorInherit",
@@ -9942,7 +9927,7 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                               variant="outlined"
                             >
                               <WithStyles(ForwardRef(ButtonBase))
-                                className="MuiButton-root MuiButton-outlined makeStyles-resendButton-295 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                                className="MuiButton-root MuiButton-outlined makeStyles-resendButton-293 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
                                 component="button"
                                 disabled={false}
                                 focusRipple={true}
@@ -9951,7 +9936,7 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                 type="button"
                               >
                                 <ForwardRef(ButtonBase)
-                                  className="MuiButton-root MuiButton-outlined makeStyles-resendButton-295 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                                  className="MuiButton-root MuiButton-outlined makeStyles-resendButton-293 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
                                   classes={
                                     Object {
                                       "disabled": "Mui-disabled",
@@ -9967,7 +9952,7 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                   type="button"
                                 >
                                   <button
-                                    className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-resendButton-295 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                                    className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-resendButton-293 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
                                     disabled={false}
                                     onBlur={[Function]}
                                     onClick={[Function]}
@@ -9989,36 +9974,34 @@ exports[`SignUp should render <SignUpDone> in english 1`] = `
                                     >
                                       Resend email
                                     </span>
-                                    <NoSsr>
-                                      <WithStyles(undefined)
+                                    <WithStyles(memo)
+                                      center={false}
+                                    >
+                                      <ForwardRef(TouchRipple)
                                         center={false}
-                                      >
-                                        <ForwardRef(TouchRipple)
-                                          center={false}
-                                          classes={
-                                            Object {
-                                              "child": "MuiTouchRipple-child",
-                                              "childLeaving": "MuiTouchRipple-childLeaving",
-                                              "childPulsate": "MuiTouchRipple-childPulsate",
-                                              "ripple": "MuiTouchRipple-ripple",
-                                              "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                              "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                              "root": "MuiTouchRipple-root",
-                                            }
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
                                           }
+                                        }
+                                      >
+                                        <span
+                                          className="MuiTouchRipple-root"
                                         >
-                                          <span
-                                            className="MuiTouchRipple-root"
-                                          >
-                                            <TransitionGroup
-                                              childFactory={[Function]}
-                                              component={null}
-                                              exit={true}
-                                            />
-                                          </span>
-                                        </ForwardRef(TouchRipple)>
-                                      </WithStyles(undefined)>
-                                    </NoSsr>
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(memo)>
                                   </button>
                                 </ForwardRef(ButtonBase)>
                               </WithStyles(ForwardRef(ButtonBase))>
@@ -10095,10 +10078,10 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
   }
 >
   <WithStyles(ForwardRef(Paper))
-    className="makeStyles-paper-288"
+    className="makeStyles-paper-286"
   >
     <ForwardRef(Paper)
-      className="makeStyles-paper-288"
+      className="makeStyles-paper-286"
       classes={
         Object {
           "elevation0": "MuiPaper-elevation0",
@@ -10133,14 +10116,14 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
       }
     >
       <div
-        className="MuiPaper-root makeStyles-paper-288 MuiPaper-elevation1 MuiPaper-rounded"
+        className="MuiPaper-root makeStyles-paper-286 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <WithStyles(ForwardRef(Grid))
-          className="makeStyles-titles-289"
+          className="makeStyles-titles-287"
           container={true}
         >
           <ForwardRef(Grid)
-            className="makeStyles-titles-289"
+            className="makeStyles-titles-287"
             classes={
               Object {
                 "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -10251,7 +10234,7 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
             container={true}
           >
             <div
-              className="MuiGrid-root makeStyles-titles-289 MuiGrid-container"
+              className="MuiGrid-root makeStyles-titles-287 MuiGrid-container"
             >
               <WithStyles(ForwardRef(Grid))
                 item={true}
@@ -10663,10 +10646,10 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                           className="MuiGrid-root MuiGrid-item"
                         >
                           <WithStyles(ForwardRef(Avatar))
-                            className="makeStyles-emailRound-291"
+                            className="makeStyles-emailRound-289"
                           >
                             <ForwardRef(Avatar)
-                              className="makeStyles-emailRound-291"
+                              className="makeStyles-emailRound-289"
                               classes={
                                 Object {
                                   "circle": "MuiAvatar-circle",
@@ -10680,18 +10663,18 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                               }
                             >
                               <div
-                                className="MuiAvatar-root MuiAvatar-circle makeStyles-emailRound-291 MuiAvatar-colorDefault"
+                                className="MuiAvatar-root MuiAvatar-circle makeStyles-emailRound-289 MuiAvatar-colorDefault"
                               >
                                 <ForwardRef
-                                  className="makeStyles-emailIcon-292"
+                                  className="makeStyles-emailIcon-290"
                                   color="secondary"
                                 >
                                   <WithStyles(ForwardRef(SvgIcon))
-                                    className="makeStyles-emailIcon-292"
+                                    className="makeStyles-emailIcon-290"
                                     color="secondary"
                                   >
                                     <ForwardRef(SvgIcon)
-                                      className="makeStyles-emailIcon-292"
+                                      className="makeStyles-emailIcon-290"
                                       classes={
                                         Object {
                                           "colorAction": "MuiSvgIcon-colorAction",
@@ -10708,10 +10691,9 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                       color="secondary"
                                     >
                                       <svg
-                                        aria-hidden="true"
-                                        className="MuiSvgIcon-root makeStyles-emailIcon-292 MuiSvgIcon-colorSecondary"
+                                        aria-hidden={true}
+                                        className="MuiSvgIcon-root makeStyles-emailIcon-290 MuiSvgIcon-colorSecondary"
                                         focusable="false"
-                                        role="presentation"
                                         viewBox="0 0 24 24"
                                       >
                                         <path
@@ -10844,11 +10826,11 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                           className="MuiGrid-root MuiGrid-item"
                         >
                           <WithStyles(ForwardRef(Grid))
-                            className="makeStyles-randomWrapper-293"
+                            className="makeStyles-randomWrapper-291"
                             container={true}
                           >
                             <ForwardRef(Grid)
-                              className="makeStyles-randomWrapper-293"
+                              className="makeStyles-randomWrapper-291"
                               classes={
                                 Object {
                                   "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -10959,14 +10941,14 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                               container={true}
                             >
                               <div
-                                className="MuiGrid-root makeStyles-randomWrapper-293 MuiGrid-container"
+                                className="MuiGrid-root makeStyles-randomWrapper-291 MuiGrid-container"
                               >
                                 <WithStyles(ForwardRef(Grid))
-                                  className="makeStyles-subtitle-290"
+                                  className="makeStyles-subtitle-288"
                                   item={true}
                                 >
                                   <ForwardRef(Grid)
-                                    className="makeStyles-subtitle-290"
+                                    className="makeStyles-subtitle-288"
                                     classes={
                                       Object {
                                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -11077,7 +11059,7 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                     item={true}
                                   >
                                     <div
-                                      className="MuiGrid-root makeStyles-subtitle-290 MuiGrid-item"
+                                      className="MuiGrid-root makeStyles-subtitle-288 MuiGrid-item"
                                     >
                                       <WithStyles(ForwardRef(Typography))
                                         align="center"
@@ -11135,11 +11117,11 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                   </ForwardRef(Grid)>
                                 </WithStyles(ForwardRef(Grid))>
                                 <WithStyles(ForwardRef(Grid))
-                                  className="makeStyles-subtitle-290"
+                                  className="makeStyles-subtitle-288"
                                   item={true}
                                 >
                                   <ForwardRef(Grid)
-                                    className="makeStyles-subtitle-290"
+                                    className="makeStyles-subtitle-288"
                                     classes={
                                       Object {
                                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -11250,7 +11232,7 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                     item={true}
                                   >
                                     <div
-                                      className="MuiGrid-root makeStyles-subtitle-290 MuiGrid-item"
+                                      className="MuiGrid-root makeStyles-subtitle-288 MuiGrid-item"
                                     >
                                       <WithStyles(ForwardRef(Typography))
                                         align="center"
@@ -11305,11 +11287,11 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                   </ForwardRef(Grid)>
                                 </WithStyles(ForwardRef(Grid))>
                                 <WithStyles(ForwardRef(Grid))
-                                  className="makeStyles-subtitle-290"
+                                  className="makeStyles-subtitle-288"
                                   item={true}
                                 >
                                   <ForwardRef(Grid)
-                                    className="makeStyles-subtitle-290"
+                                    className="makeStyles-subtitle-288"
                                     classes={
                                       Object {
                                         "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -11420,7 +11402,7 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                     item={true}
                                   >
                                     <div
-                                      className="MuiGrid-root makeStyles-subtitle-290 MuiGrid-item"
+                                      className="MuiGrid-root makeStyles-subtitle-288 MuiGrid-item"
                                     >
                                       <WithStyles(ForwardRef(Typography))
                                         align="center"
@@ -11491,11 +11473,11 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                 </ForwardRef(Grid)>
               </WithStyles(ForwardRef(Grid))>
               <WithStyles(ForwardRef(Grid))
-                className="makeStyles-resendWrapper-294"
+                className="makeStyles-resendWrapper-292"
                 container={true}
               >
                 <ForwardRef(Grid)
-                  className="makeStyles-resendWrapper-294"
+                  className="makeStyles-resendWrapper-292"
                   classes={
                     Object {
                       "align-content-xs-center": "MuiGrid-align-content-xs-center",
@@ -11606,7 +11588,7 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                   container={true}
                 >
                   <div
-                    className="MuiGrid-root makeStyles-resendWrapper-294 MuiGrid-container"
+                    className="MuiGrid-root makeStyles-resendWrapper-292 MuiGrid-container"
                   >
                     <WithStyles(ForwardRef(Grid))
                       item={true}
@@ -11893,13 +11875,13 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                           className="MuiGrid-root MuiGrid-item"
                         >
                           <WithStyles(ForwardRef(Button))
-                            className="makeStyles-resendButton-295"
+                            className="makeStyles-resendButton-293"
                             onClick={[Function]}
                             size="small"
                             variant="outlined"
                           >
                             <ForwardRef(Button)
-                              className="makeStyles-resendButton-295"
+                              className="makeStyles-resendButton-293"
                               classes={
                                 Object {
                                   "colorInherit": "MuiButton-colorInherit",
@@ -11938,7 +11920,7 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                               variant="outlined"
                             >
                               <WithStyles(ForwardRef(ButtonBase))
-                                className="MuiButton-root MuiButton-outlined makeStyles-resendButton-295 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                                className="MuiButton-root MuiButton-outlined makeStyles-resendButton-293 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
                                 component="button"
                                 disabled={false}
                                 focusRipple={true}
@@ -11947,7 +11929,7 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                 type="button"
                               >
                                 <ForwardRef(ButtonBase)
-                                  className="MuiButton-root MuiButton-outlined makeStyles-resendButton-295 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                                  className="MuiButton-root MuiButton-outlined makeStyles-resendButton-293 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
                                   classes={
                                     Object {
                                       "disabled": "Mui-disabled",
@@ -11963,7 +11945,7 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                   type="button"
                                 >
                                   <button
-                                    className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-resendButton-295 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
+                                    className="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-resendButton-293 MuiButton-outlinedSizeSmall MuiButton-sizeSmall"
                                     disabled={false}
                                     onBlur={[Function]}
                                     onClick={[Function]}
@@ -11985,36 +11967,34 @@ exports[`SignUp should render <SignUpDone> in french 1`] = `
                                     >
                                       Renvoyer l'email
                                     </span>
-                                    <NoSsr>
-                                      <WithStyles(undefined)
+                                    <WithStyles(memo)
+                                      center={false}
+                                    >
+                                      <ForwardRef(TouchRipple)
                                         center={false}
-                                      >
-                                        <ForwardRef(TouchRipple)
-                                          center={false}
-                                          classes={
-                                            Object {
-                                              "child": "MuiTouchRipple-child",
-                                              "childLeaving": "MuiTouchRipple-childLeaving",
-                                              "childPulsate": "MuiTouchRipple-childPulsate",
-                                              "ripple": "MuiTouchRipple-ripple",
-                                              "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                              "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                              "root": "MuiTouchRipple-root",
-                                            }
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
                                           }
+                                        }
+                                      >
+                                        <span
+                                          className="MuiTouchRipple-root"
                                         >
-                                          <span
-                                            className="MuiTouchRipple-root"
-                                          >
-                                            <TransitionGroup
-                                              childFactory={[Function]}
-                                              component={null}
-                                              exit={true}
-                                            />
-                                          </span>
-                                        </ForwardRef(TouchRipple)>
-                                      </WithStyles(undefined)>
-                                    </NoSsr>
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(memo)>
                                   </button>
                                 </ForwardRef(ButtonBase)>
                               </WithStyles(ForwardRef(ButtonBase))>

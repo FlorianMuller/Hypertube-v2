@@ -28,7 +28,10 @@ describe("Sign Up", () => {
 
   afterAll(async () => {
     await UserModel.findByIdAndDelete(mockedUser._id);
-    await TokenModel.findOneAndDelete({ user: mockedUser._id });
+    await TokenModel.findOneAndDelete({
+      user: mockedUser._id,
+      type: "emailSignUp"
+    });
   });
 
   it("should insert user", async () => {
@@ -47,7 +50,10 @@ describe("Sign Up", () => {
 
   it("should create a token for our user", async () => {
     await sendValidateEmail(resultUser, "en");
-    const token = await TokenModel.findOne({ user: resultUser._id });
+    const token = await TokenModel.findOne({
+      user: resultUser._id,
+      type: "emailSignUp"
+    });
 
     expect(token).not.toBeNull();
   });
