@@ -107,19 +107,23 @@ const verifyEmail = async (req, res) => {
         await token.user.save();
 
         setAccesTokenCookie(res, token.user.id);
+        res.sendStatus(200);
       } else if (token.user.newEmail) {
         // Updating email
-        await UserModel.findByIdAndUpdate(
-          token.user.id,
-          { email: token.user.newEmail, newEmail: undefined },
-          { runValidators: true }
-        );
+        if (token.user.newEmail === token.associatedData.newEmail) {
+          await UserModel.findByIdAndUpdate(
+            token.user.id,
+            { email: token.user.newEmail, newEmail: undefined },
+            { runValidators: true }
+          );
+          res.sendStatus(200);
+        } else {
+          res.sendStatus(400);
+        }
       }
 
       // Deleting the token
       await TokenModel.findByIdAndDelete(token._id);
-
-      res.sendStatus(200);
     } else {
       res.sendStatus(400);
     }

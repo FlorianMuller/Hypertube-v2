@@ -29,7 +29,8 @@ const confirmEmailInfo = {
 const sendValidateEmail = async (user, locale) => {
   const emailInfo = confirmEmailInfo[locale];
   const token = await TokenModel.create({
-    user: user._id
+    user: user._id,
+    associatedData: { newEmail: user.newEmail }
   });
 
   await sendEmail({
