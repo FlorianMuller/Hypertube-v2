@@ -69,9 +69,12 @@ const App = (): ReactElement => {
               path="/myprofile"
               authComponent={MyProfile}
             />
-
             <Route exact path="/" component={Home} />
-            <Route path="/reset-password" notAuthComponent={ResetPassword} />
+            <CustomRoute
+              exact
+              path="/reset-password"
+              notAuthComponent={ResetPassword}
+            />
             <CustomRoute
               path="/new-password/:token"
               notAuthComponent={NewPassword}

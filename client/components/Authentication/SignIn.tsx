@@ -112,6 +112,7 @@ const SignIn = (): ReactElement => {
   }, [res]);
 
   useEffect(() => {
+    console.log(history);
     const cleanParams = history.location.search.replace("?", "");
     const tabParams = cleanParams.split("&");
     tabParams.forEach((el) => {
