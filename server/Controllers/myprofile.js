@@ -11,8 +11,11 @@ const getUser = async (req, res) => {
       res.sendStatus(400);
     } else {
       // adding `isOnmiAuth` virtual and removing `googleID` and `schoolID` (used to calculate isOnmiAuth)
-      res.status(200).send({
+      res.send({
         ...userInfos.toJSON({ virtuals: true }),
+        picture: userInfos.isOnmiAuth
+          ? userInfos.picture
+          : `${process.env.CLIENT_ORIGIN}/api/avatar/${userInfos.picture}`,
         googleID: undefined,
         schoolID: undefined
       });

@@ -21,23 +21,18 @@ export const createAccestToken = (userId) => {
   });
 };
 
-export const createLoggedCookie = () => {
-  return "xt1RCazuMrzUU!";
-};
-
-export const setLoggedCookie = (res) => {
-  const loggedCookie = createLoggedCookie();
-  res.cookie(loggedCookieName, loggedCookie, {
-    ...loggedCookieOption,
-    maxAge: ACCES_TOKEN_EXPIRATION * 1000
-  });
-};
-
 export const setAccesTokenCookie = (res, userId) => {
   const accesToken = createAccestToken(userId);
 
   res.cookie(accestTokenName, accesToken, {
     ...accesTokenOption,
+    maxAge: ACCES_TOKEN_EXPIRATION * 1000
+  });
+};
+
+export const setLoggedCookie = (res) => {
+  res.cookie(loggedCookieName, "xt1RCazuMrzUU!", {
+    ...loggedCookieOption,
     maxAge: ACCES_TOKEN_EXPIRATION * 1000
   });
 };

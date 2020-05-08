@@ -13,8 +13,7 @@ import changeUserPictureController from "./Controllers/changeUserPicture";
 import ResetPassword from "./Controllers/ResetPassword";
 import checkAuth from "./Helpers/auth";
 import signOutController from "./Controllers/signOut";
-import { setAccesTokenCookie } from "./Helpers/signIn";
-// import omniauthGoogle from './Helpers/omniauth/google'
+import { setAccesTokenCookie, setLoggedCookie } from "./Helpers/signIn";
 
 const router = express.Router();
 
@@ -62,6 +61,7 @@ router.get(
       res.sendstatus(req.error.status);
     } else if (req.user.id) {
       setAccesTokenCookie(res, req.user.id);
+      setLoggedCookie(res);
       res.redirect("/");
     } else res.redirect("/?auth=google");
   }
@@ -87,6 +87,7 @@ router.get(
       res.sendstatus(req.error.status);
     } else if (req.user.id) {
       setAccesTokenCookie(res, req.user.id);
+      setLoggedCookie(res);
       res.redirect("/");
     } else res.redirect("/?auth=school");
   }

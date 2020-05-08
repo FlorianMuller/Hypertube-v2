@@ -43,11 +43,7 @@ const MyProfile = (): ReactElement => {
     <div className={classes.containerProfile}>
       <div>
         <Paper className={classes.containerUser}>
-          <EditableAvatar
-            picture={data?.picture}
-            googleID={data?.googleID}
-            schoolID={data?.schoolID}
-          />
+          <EditableAvatar picture={data?.picture} />
           <div className={classes.containerInfo}>
             {/* FirstName and lastName */}
             <div className={classes.containerFullname}>
