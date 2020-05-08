@@ -1,13 +1,13 @@
 import SearchCache from "../Schemas/SearchCache";
 import yts from "./searchSources/yts";
-import rarbg from "./searchSources/rarbg";
+import rarbgHelper from "./searchSources/rarbg";
 // import popCornTime from "./searchSources/popCornTime";
 import UserHistoryModel from "../Schemas/UserHistory";
 
 // const sourceList = [yts, popCornTime, rarbg];
 const sourceList = [
   { name: "yts", func: yts },
-  { name: "rarbg", func: rarbg }
+  { name: "rarbg", func: rarbgHelper.searchMoviesOnRarbg }
 ];
 
 /**
@@ -143,7 +143,7 @@ const mergeMoviesList = async (
     while (
       !sources.filter((src) => hasSourceEnded(indexes, src)).length &&
       sources.filter((src) => hasIndexReachEnd(indexes, src)).length !==
-      sources.length
+        sources.length
     ) {
       let bestMovie = null;
       let bestSource = null;

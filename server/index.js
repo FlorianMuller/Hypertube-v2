@@ -10,7 +10,9 @@ import schedule from "node-schedule";
 import fs from "fs";
 import mongoose from "./mongo";
 
-import router from "./router";
+import passportGoogle from "./Helpers/omniauth/google";
+import passport42 from "./Helpers/omniauth/42";
+import apiRouter from "./router";
 
 import MovieModel from "./Schemas/MoviesDatabase";
 import SearchCache from "./Schemas/SearchCache";
@@ -26,6 +28,8 @@ app.set("root", "/");
 app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "ejs");
 
+// Middleware
+
 app.use(favicon(path.join(__dirname, "views", "favicon.ico")));
 app.use("/public", express.static("public"));
 app.use(morgan("dev"));
@@ -33,6 +37,8 @@ app.use(fileUpload());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passportGoogle.initialize());
+app.use(passport42.initialize());
 
 /* Webpack Hot Reload */
 
@@ -76,7 +82,9 @@ schedule.scheduleJob("59 * * * * *", async () => {
 /* eslint-enable */
 /* ------------------ */
 
-app.use("/api", router);
+// Routing
+
+app.use("/api", apiRouter);
 app.get("*", (req, res) => {
   res.render("index");
 });

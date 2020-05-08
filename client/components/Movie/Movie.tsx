@@ -54,7 +54,6 @@ const Movie = (): ReactElement => {
   const { infos, reviews: reviewsData } = resData || {};
 
   const movieInfos = infos as MovieInfos;
-  console.log(movieInfos);
 
   const [reviews, setReviews] = useState<Reviews>();
 

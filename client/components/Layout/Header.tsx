@@ -110,8 +110,8 @@ const Header = ({
             {expandedFilters ? (
               <ExpandLess id="expandFiltersIcon" />
             ) : (
-                <ExpandMore id="expandFiltersIcon" />
-              )}
+              <ExpandMore id="expandFiltersIcon" />
+            )}
           </IconButton>
 
           {/* Language + profile button */}

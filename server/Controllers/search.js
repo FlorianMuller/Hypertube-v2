@@ -1,5 +1,3 @@
-import qs from "qs";
-
 import helpers from "../Helpers/search";
 // import { searchMoviesOnYts, checkIfViewed } from "../Helpers/search";
 

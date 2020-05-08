@@ -32,7 +32,7 @@ const MoviePlayer = ({ imdbId, srcVideo }: Props): ReactElement => {
 
   useEffect(() => {
     getSubtitles();
-  });
+  }, [pathSubEn, pathSubFr, pathSubEs]);
 
   return (
     <div className={classes.containerPlayer}>

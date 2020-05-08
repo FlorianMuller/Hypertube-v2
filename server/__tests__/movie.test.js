@@ -15,17 +15,13 @@ describe("Movie Comments", () => {
   // let finalHistory;
 
   beforeAll(() => {
-    mockedMovieId = "4242";
-    mockedUserId = String(new mongoose.Types.ObjectId());
-    mockedUserId2 = String(new mongoose.Types.ObjectId());
-    mockedUserId3 = String(new mongoose.Types.ObjectId());
-    mockedUserId4 = String(new mongoose.Types.ObjectId());
+    mockedMovieId = "B123rR";
     mockedReview = {
-      _id: mockedUserId,
+      _id: new mongoose.Types.ObjectId(),
       movieId: mockedMovieId,
-      movieName: "ExampleMovie",
-      name: "TestMan",
-      date: 1577118711809,
+      movieName: "4242",
+      authorUsername: "TestMan",
+      date: new Date(1577118711809),
       stars: 4,
       body: "That was actually really awesome"
     };
@@ -81,73 +77,77 @@ describe("Movie Comments", () => {
   });
 
   it("should inserts user's review", async () => {
-    await movieHelpers.saveReview(mockedReview);
-    const reviewDb = await MovieCommentModel.findById(mockedUserId);
-    expect(reviewDb.toJSON()).toEqual(finalReview);
+    const insetedReview = await movieHelpers.saveReview(mockedReview);
+
+    expect(insetedReview.toJSON()).toEqual(finalReview);
   });
 
   it("should finds user's review", async () => {
     const ourReviews = await movieHelpers.findReviews(mockedMovieId);
-    let isReviewHere;
-    ourReviews.review.forEach(({ id }) => {
-      if (id === mockedUserId) {
-        isReviewHere = true;
-      }
-    });
-    expect(isReviewHere).toBeTruthy();
+    expect(
+      ourReviews.review.filter(({ id }) => finalReview._id.equals(id)).length
+    ).toBe(1);
   });
 
-  it("should sorts user's review", async () => {
-    await movieHelpers.saveReview({
-      ...mockedReview,
-      _id: mockedUserId2,
-      date: 1579259796560
-    });
-    await movieHelpers.saveReview({
-      ...mockedReview,
-      _id: mockedUserId3,
-      date: 1577487600000
-    });
-    await movieHelpers.saveReview({
-      ...mockedReview,
-      _id: mockedUserId4,
-      date: 1573426800000
-    });
-    const ourReviews = await movieHelpers.findReviews(mockedMovieId);
-    expect(ourReviews).toEqual({
-      movieRating: 4,
-      review: [
-        {
-          id: mockedUserId4,
-          name: "TestMan",
-          date: "Nov, 11, 2019",
-          stars: 4,
-          body: "That was actually really awesome"
-        },
-        {
-          id: mockedUserId,
-          name: "TestMan",
-          date: "Dec, 23, 2019",
-          stars: 4,
-          body: "That was actually really awesome"
-        },
-        {
-          id: mockedUserId3,
-          name: "TestMan",
-          date: "Dec, 28, 2019",
-          stars: 4,
-          body: "That was actually really awesome"
-        },
-        {
-          id: mockedUserId2,
-          name: "TestMan",
-          date: "Jan, 17, 2020",
-          stars: 4,
-          body: "That was actually really awesome"
-        }
-      ]
-    });
-  });
+  // it("should sorts both reviews from API and Database", () => {
+  //   const mockedApiReviews = [
+  //     {
+  //       ...mockedReview,
+  //       _id: "0123456789"
+  //     },
+  //     {
+  //       ...mockedReview,
+  //       _id: "0123456789",
+  //       date: new Date(1575500400000)
+  //     }
+  //   ];
+  //   const mockedOurReviews = [
+  //     { ...mockedReview, _id: "0123456789", date: new Date(1576278000000) },
+  //     { ...mockedReview, _id: "0123456789", date: new Date(1575759600000) }
+  //   ];
+  //   const bothReviews = movieHelpers.sortReviews(
+  //     mockedApiReviews,
+  //     mockedOurReviews
+  //   );
+  //   expect(bothReviews).toEqual([
+  //     {
+  //       _id: "0123456789",
+  //       movieId: "B123rR",
+  //       movieName: "4242",
+  //       authorUsername: "TestMan",
+  //       date: "Dec, 05, 2019",
+  //       stars: 4,
+  //       body: "That was actually really awesome"
+  //     },
+  //     {
+  //       _id: "0123456789",
+  //       movieId: "B123rR",
+  //       movieName: "4242",
+  //       authorUsername: "TestMan",
+  //       date: "Dec, 08, 2019",
+  //       stars: 4,
+  //       body: "That was actually really awesome"
+  //     },
+  //     {
+  //       _id: "0123456789",
+  //       movieId: "B123rR",
+  //       movieName: "4242",
+  //       authorUsername: "TestMan",
+  //       date: "Dec, 14, 2019",
+  //       stars: 4,
+  //       body: "That was actually really awesome"
+  //     },
+  //     {
+  //       _id: "0123456789",
+  //       movieId: "B123rR",
+  //       movieName: "4242",
+  //       authorUsername: "TestMan",
+  //       date: "Dec, 23, 2019",
+  //       stars: 4,
+  //       body: "That was actually really awesome"
+  //     }
+  //   ]);
+  // });
 
   // it("should logs user's history", async () => {
   //   await movieHelpers.logHistory(mockedHistory);

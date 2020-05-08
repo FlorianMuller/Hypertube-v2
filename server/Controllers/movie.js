@@ -18,6 +18,7 @@ import MovieCommentModel from "../Schemas/MovieComment";
 import UserHistoryModel from "../Schemas/UserHistory";
 import Io from "../Helpers/socket";
 import awaitDecoration from "../Helpers/searchSources/rarbg";
+import UserModel from "../Schemas/User";
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
@@ -484,7 +485,7 @@ const downloadMovie = async (
 const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
   const movieId = req.params.imdbId;
   const movieFound = await Movie.findOne({ movieId });
-  if (movieFound && movieFound.magnet && !movieFound?.path) {
+  if (movieFound && movieFound.magnet && !movieFound.path) {
     downloadMovie(movieId, null, null, req, res, movieFound.magnet);
   } else {
     if (TOKEN === null) {
@@ -523,13 +524,13 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
             return res.status(500).send("Internal Server Error");
           }
           if (result) {
-            Movie.findOne({ movieId }, (error, movieFound) => {
+            Movie.findOne({ movieId }, (error, found) => {
               if (error) {
                 console.error(error.message);
                 return res.statu(500).send("Intenal server error");
               }
-              let pathMovie = movieFound.path;
-              const [pathFile, pathRepo] = movieFound.path.split("/").reverse();
+              let pathMovie = found.path;
+              const [pathFile, pathRepo] = found.path.split("/").reverse();
               pathMovie = `${process.cwd()}/server/data/movie/${pathRepo}/${pathFile}`;
               const stat = fs.statSync(pathMovie);
               const fileSize = stat.size;
@@ -575,13 +576,15 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
   }
 });
 
-const receiveReviews = (req, res) => {
+const receiveReviews = async (req, res) => {
   const comment = req.body;
+  const user = await UserModel.findOne({ _id: req.userId });
+  console.log(user.username);
   try {
     MovieCommentModel.create({
       movieId: comment.movieId,
       movieName: comment.movieName,
-      name: comment.name,
+      authorUsername: user.username,
       date: Date.now(),
       stars: comment.stars,
       body: comment.body

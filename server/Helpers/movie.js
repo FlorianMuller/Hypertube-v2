@@ -14,20 +14,8 @@ const findReviews = async (movieId) => {
     const reviews = await MovieCommentModel.find({ movieId });
     const ourReviews = { movieRating: 0, review: [] };
     if (reviews.length > 0) {
-      let totalStars = 0;
-      reviews.forEach(({ _id, name, date, stars, body }) => {
-        totalStars += stars;
-        ourReviews.review.push({ id: _id, name, date, stars, body });
-      });
-      ourReviews.movieRating = Math.floor(totalStars / reviews.length);
-      ourReviews.review.sort((reviewA, reviewB) => reviewA.date - reviewB.date);
-      ourReviews.review.forEach(({ date }, index) => {
-        const fullDate = String(new Date(date)).split(" ");
-        ourReviews.review[index].date = timestampToDate(
-          fullDate[1],
-          fullDate[2],
-          fullDate[3]
-        );
+      reviews.forEach(({ _id, authorUsername, date, stars, body }) => {
+        ourReviews.review.push({ id: _id, authorUsername, date, stars, body });
       });
     }
     return ourReviews;
@@ -132,16 +120,15 @@ const downloadVideo = (movieId, magnet) => {
 
 const saveReview = async (comment) => {
   try {
-    await MovieCommentModel.create({
-      _id: comment._id,
+    return await MovieCommentModel.create({
+      _id: comment._id || undefined,
       movieId: comment.movieId,
       movieName: comment.movieName,
-      name: comment.name,
+      authorUsername: comment.authorUsername,
       date: comment.date,
       stars: comment.stars,
       body: comment.body
     });
-    return true;
   } catch (e) {
     console.error(e.message);
     return e.message;

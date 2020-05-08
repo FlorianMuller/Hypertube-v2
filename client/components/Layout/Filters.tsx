@@ -4,27 +4,20 @@ import _ from "lodash";
 import qs from "qs";
 import { useIntl } from "react-intl";
 import { useLocation, useHistory } from "react-router-dom";
-import { Paper, Select, MenuItem, InputLabel, Chip } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
-import { Delete as DeleteIcon } from "@material-ui/icons";
 
-import GenreSelect from "./GenreSelect";
-import SortSelect from "./SortSelect";
+import { Button, Paper, Select, MenuItem, InputLabel } from "@material-ui/core";
+import { Rating } from "@material-ui/lab";
+
+import FiltersSelect from "./FiltersSelect";
+
 import useDebounce from "../../hooks/useDebounce";
+
 import { useFiltersStyles } from "./Layout.styles";
-import { Filters as FiltersType } from "../../models/models";
 
 interface Props {
   searchQuery: string;
   onReset: () => void;
 }
-
-const defaultValue: FiltersType = {
-  year: 0,
-  genre: "all",
-  minRating: null,
-  sort: "dateAdded"
-};
 
 const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
   const classes = useFiltersStyles({});
@@ -37,16 +30,13 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
    */
   const searchParams = qs.parse(location.search.slice(1));
   const [year, setYear] = useState<number>(
-    searchParams.year || defaultValue.year
+    ((searchParams.year as unknown) as number) || 0
   );
-  const [genre, setGenre] = useState<string>(
-    searchParams.genre || defaultValue.genre
+  const [collections, setcollections] = useState<string>(
+    (searchParams.collections as string) || "all"
   );
   const [minRating, setMinRating] = useState<number>(
-    searchParams.minRating || defaultValue.minRating
-  );
-  const [sort, setSort] = useState<string>(
-    searchParams.sort || defaultValue.sort
+    ((searchParams.minRating as unknown) as number) || null
   );
 
   /**
@@ -55,23 +45,8 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
    */
   const debouncedQueryField = useDebounce(searchQuery, 500);
   const debouncedYear = useDebounce(year, 500);
-  const debouncedGenre = useDebounce(genre, 500);
+  const debouncedCollections = useDebounce(collections, 500);
   const debouncedMinRating = useDebounce(minRating, 500);
-  const debounceSort = useDebounce(sort, 500);
-
-  const areFiltersDefault = (): boolean =>
-    year === defaultValue.year &&
-    genre === defaultValue.genre &&
-    minRating === defaultValue.minRating &&
-    sort === defaultValue.sort;
-
-  useEffect(() => {
-    const newUrlParams = qs.parse(location.search.slice(1));
-    if (newUrlParams.year) setYear(newUrlParams.year);
-    if (newUrlParams.genre) setGenre(newUrlParams.genre);
-    if (newUrlParams.minRating) setMinRating(newUrlParams.minRating);
-    if (newUrlParams.sort) setSort(newUrlParams.sort);
-  }, [location]);
 
   /**
    * Changing url
@@ -80,11 +55,10 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
     const queryParams = qs.stringify(
       {
         query: debouncedQueryField,
-        genre:
-          debouncedGenre !== defaultValue.genre ? debouncedGenre : undefined,
+        collections:
+          debouncedCollections !== "all" ? debouncedCollections : undefined,
         year: debouncedYear,
-        minRating: debouncedMinRating,
-        sort: debounceSort !== defaultValue.sort ? debounceSort : undefined
+        minRating: debouncedMinRating
       },
       {
         addQueryPrefix: true,
@@ -98,9 +72,8 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
       history.location.pathname === "/search" ||
       debouncedQueryField ||
       debouncedYear ||
-      debouncedGenre !== defaultValue.genre ||
-      debouncedMinRating ||
-      debounceSort !== defaultValue.sort
+      debouncedCollections !== "all" ||
+      debouncedMinRating
     ) {
       history.push({
         pathname: `/search`,
@@ -110,39 +83,23 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
   }, [
     debouncedQueryField,
     debouncedYear,
-    debouncedGenre,
-    debouncedMinRating,
-    debounceSort
+    debouncedCollections,
+    debouncedMinRating
   ]);
 
   const resetFilter = (): void => {
-    setYear(defaultValue.year);
-    setGenre(defaultValue.genre);
-    setMinRating(defaultValue.minRating);
-    setSort(defaultValue.sort);
+    setYear(0);
+    setcollections("all");
+    setMinRating(null);
     // Reset all param outside of <Filters>:
     onReset();
   };
 
   return (
-    <Paper className={classes.paper}>
-      {/* Reset */}
-      <div className={classes.resetFilterButtonWrapper}>
-        {!areFiltersDefault() && (
-          <Chip
-            label={_t({ id: "layout.filters.select.reset" })}
-            variant="outlined"
-            color="secondary"
-            onClick={resetFilter}
-            icon={<DeleteIcon />}
-            size="small"
-            className={classes.resetFilterButton}
-          />
-        )}
-      </div>
-
+    <Paper>
       {/* Production year */}
-      <div className={classes.filterElement}>
+      <div>
+        {/* Year */}
         <InputLabel id="production-year">
           {_t({ id: "layout.filters.production_year" })}
         </InputLabel>
@@ -152,20 +109,14 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
           onChange={(e: ChangeEvent<{ value: number }>): void =>
             setYear(e.target.value)
           }
-          className={classes.select}
         >
           {/* Default year production */}
-          <MenuItem
-            className={classes.centerItem}
-            id="menuitem-yeardefault"
-            value={0}
-          >
+          <MenuItem id="menuitem-yeardefault" value={0}>
             {_t({ id: "layout.filters.all" })}
           </MenuItem>
           {/* 1900 to now */}
           {_.rangeRight(1900, moment().year() + 1).map((yearSelect: number) => (
             <MenuItem
-              className={classes.centerItem}
               id={`menuitem-year${yearSelect}`}
               value={yearSelect}
               key={`menuitem-year${yearSelect}`}
@@ -176,17 +127,23 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
         </Select>
       </div>
 
-      {/* Genre */}
-      <div className={classes.filterElement}>
-        <InputLabel id="genre">{_t({ id: "layout.filters.genre" })}</InputLabel>
-        <GenreSelect labelid="genre" genre={genre} setGenre={setGenre} />
+      {/* Collection */}
+      <div>
+        <InputLabel id="collection">
+          {_t({ id: "layout.filters.collection" })}
+        </InputLabel>
+        <FiltersSelect
+          labelid="collection"
+          collections={collections}
+          setCollections={(value): void => setcollections(value)}
+        />
       </div>
 
       {/* Rating */}
       <div className={classes.ratingContainer}>
         <div>
           <InputLabel id="rating">
-            {_t({ id: "layout.filters.minrating" })}
+            {_t({ id: "layout.filters.select.minrating" })}
           </InputLabel>
           <Rating
             defaultValue={minRating}
@@ -196,12 +153,9 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
           />
         </div>
       </div>
-
-      {/* Sort */}
-      <div className={classes.filterElement}>
-        <InputLabel id="sort">{_t({ id: "layout.filters.sort" })}</InputLabel>
-        <SortSelect labelid="sort" sort={sort} setSort={setSort} />
-      </div>
+      <Button onClick={resetFilter} className={classes.resetFilterButton}>
+        {_t({ id: "layout.filters.select.reset" })}
+      </Button>
     </Paper>
   );
 };

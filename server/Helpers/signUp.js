@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import bcrypt from "bcrypt";
+import fileType from "file-type";
 
 import UserModel from "../Schemas/User";
 import TokenModel from "../Schemas/Token";
@@ -22,10 +23,31 @@ const confirmEmailInfo = {
   }
 };
 
+export const emailIsFree = async (email) => {
+  try {
+    const users = await UserModel.findOne({ email });
+    return users === null;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
+export const validEmail = (email) => {
+  const regex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+  return email && regex.test(String(email));
+};
+
+export const validPassword = (password) => {
+  const regex = /(?=^.{8,}$)((?!.*\s)(?=.*[A-Z])(?=.*[a-z]))((?=(.*\d){1,})|(?=(.*\W){1,}))^.*$/;
+  return password && regex.test(password);
+};
+
 export const sendValidateEmail = async (user, locale) => {
   const emailInfo = confirmEmailInfo[locale];
   const token = await TokenModel.create({
-    user: user._id
+    user: user._id,
+    type: "emailSignUp"
   });
 
   await sendEmail({
@@ -43,20 +65,47 @@ export const sendValidateEmail = async (user, locale) => {
   });
 };
 
+export const validFile = (file) => {
+  const { name, size, data, mimetype: type } = file;
+  const ab = new Uint8Array(data);
+  const fileRes = fileType(ab);
+  if (!name || !fileRes) {
+    return false;
+  }
+  if (
+    !type ||
+    (type !== "image/png" && type !== "image/jpeg" && type !== "image/jpg") ||
+    (fileRes.ext !== "png" && fileRes.ext !== "jpeg" && fileRes.ext !== "jpg")
+  ) {
+    return false;
+  }
+  if (!size || size > 1000000) {
+    return false;
+  }
+  return true;
+};
+
+export const savePicture = (picture) => {
+  const hashedPT = `${picture.name.split(".")[0] +
+    crypto.randomBytes(5).toString("hex")}.${picture.mimetype.split("/")[1]}`;
+
+  picture.mv(`./server/data/avatar/${hashedPT}`, (e) => {
+    if (e) console.error(e);
+  });
+
+  return hashedPT;
+};
+
+export const getPasswordHash = async (password) => bcrypt.hash(password, 10);
+
 export const createUser = async (user, dontInsertPicture) => {
   let hashedPT;
   if (!dontInsertPicture) {
-    hashedPT = `${user.picture.name.split(".")[0] +
-      crypto.randomBytes(5).toString("hex")}.${
-      user.picture.mimetype.split("/")[1]
-    }`;
-    user.picture.mv(`./server/data/avatar/${hashedPT}`, (e) => {
-      if (e) console.error(e);
-    });
+    hashedPT = savePicture(user.picture);
   } else {
     hashedPT = user.picture;
   }
-  const hashedPW = bcrypt.hashSync(user.password, 10);
+  const hashedPW = await getPasswordHash(user.password);
   return UserModel.create({
     ...user,
     password: hashedPW,

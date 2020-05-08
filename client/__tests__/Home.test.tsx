@@ -15,7 +15,8 @@ const mockedMoviesList = [
     summary: "The one with Dany Boon you kwow, all the France is gonna laugh",
     genres: ["comedy"],
     rating: 4,
-    runtime: 100
+    runtime: 100,
+    viewed: false
   },
   {
     id: "2",
@@ -25,7 +26,8 @@ const mockedMoviesList = [
     summary: "You've seen it hundreds time, but here it is, an other one",
     genres: ["action", "adventure"],
     rating: 4,
-    runtime: 100
+    runtime: 100,
+    viewed: false
   },
   {
     id: "3",
@@ -35,7 +37,8 @@ const mockedMoviesList = [
     summary: "The one with jokes for the parents",
     genres: ["action", "adventure"],
     rating: 4,
-    runtime: 100
+    runtime: 100,
+    viewed: false
   },
   {
     id: "4",
@@ -45,7 +48,8 @@ const mockedMoviesList = [
     summary: "I don't know anything about it, I was too afraid to see it",
     genres: ["horror"],
     rating: 4,
-    runtime: 100
+    runtime: 100,
+    viewed: false
   }
 ];
 
