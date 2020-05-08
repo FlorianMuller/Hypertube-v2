@@ -1,50 +1,14 @@
-import fileType from "file-type";
-
-import { createUser, sendValidateEmail } from "../Helpers/signUp";
+import validEmail, {
+  createUser,
+  sendValidateEmail,
+  validPassword,
+  validFile,
+  emailIsFree
+} from "../Helpers/signUp";
 import { setAccesTokenCookie } from "../Helpers/signIn";
 
 import UserModel from "../Schemas/User";
 import TokenModel from "../Schemas/Token";
-
-const validEmail = (email) => {
-  const regex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-  return email && regex.test(String(email));
-};
-
-const validPassword = (password) => {
-  const regex = /(?=^.{8,}$)((?!.*\s)(?=.*[A-Z])(?=.*[a-z]))((?=(.*\d){1,})|(?=(.*\W){1,}))^.*$/;
-  return password && regex.test(password);
-};
-
-const validFile = (file) => {
-  const { name, size, data, mimetype: type } = file;
-  const ab = new Uint8Array(data);
-  const fileRes = fileType(ab);
-  if (!name || !fileRes) {
-    return false;
-  }
-  if (
-    !type ||
-    (type !== "image/png" && type !== "image/jpeg" && type !== "image/jpg") ||
-    (fileRes.ext !== "png" && fileRes.ext !== "jpeg" && fileRes.ext !== "jpg")
-  ) {
-    return false;
-  }
-  if (!size || size > 1000000) {
-    return false;
-  }
-  return true;
-};
-
-const emailIsFree = async (email) => {
-  try {
-    const users = await UserModel.findOne({ email });
-    return users === null;
-  } catch (e) {
-    console.error(e);
-    return false;
-  }
-};
 
 const usernameIsFree = async (username) => {
   try {
@@ -135,21 +99,31 @@ const verifyEmail = async (req, res) => {
     // Getting data from DB
     const token = await TokenModel.findOne({
       value: req.params.value
-    }).populate("user", "emailVerified");
-
+    }).populate("user", "emailVerified newEmail");
     if (token) {
-      // Changing user data
       if (!token.user.emailVerified) {
+        // Verifying email for the first time
         token.user.emailVerified = true;
         await token.user.save();
 
         setAccesTokenCookie(res, token.user.id);
+        res.sendStatus(200);
+      } else if (token.user.newEmail) {
+        // Updating email
+        if (token.user.newEmail === token.associatedData.newEmail) {
+          await UserModel.findByIdAndUpdate(
+            token.user.id,
+            { email: token.user.newEmail, newEmail: undefined },
+            { runValidators: true }
+          );
+          res.sendStatus(200);
+        } else {
+          res.sendStatus(400);
+        }
       }
 
       // Deleting the token
       await TokenModel.findByIdAndDelete(token._id);
-
-      res.sendStatus(200);
     } else {
       res.sendStatus(400);
     }

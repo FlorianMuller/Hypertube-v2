@@ -32,7 +32,7 @@ const MovieComments = ({
   const { formatMessage: _t } = useIntl();
   const [stars, setStars] = useState(0);
   const [comment, setComment] = useState({
-    name: "",
+    authorUsername: "",
     date: null,
     body: ""
   });
@@ -58,7 +58,7 @@ const MovieComments = ({
       setStars(parseInt(e.target.value, 10));
     } else {
       setComment({
-        name: "toto",
+        authorUsername: "toto",
         date: Date.now(),
         body: e.target.value
       });
@@ -79,7 +79,7 @@ const MovieComments = ({
       API.post(`/movies/${movieId}/reviews`, body)
         .then(() => {
           setComment({
-            name: "",
+            authorUsername: "",
             date: null,
             body: ""
           });
@@ -109,25 +109,27 @@ const MovieComments = ({
       <Paper className={classes.containerComment}>
         {reviews.length > 0 ? (
           <div className={classes.containerPeople} id="scrollComment">
-            {reviews.map(({ id, name, date, stars: nbStars, body }) => (
-              <div key={id} className={classes.comment}>
-                <span style={{ fontSize: "1.1rem" }}>
-                  {name} - {date} -{" "}
-                </span>
-                <Rating
-                  size="small"
-                  value={nbStars}
-                  readOnly
-                  emptyIcon={
-                    <StarBorderIcon
-                      style={{ fontSize: "1.1rem" }}
-                      color="primary"
-                    />
-                  }
-                />
-                <div className={classes.commentText}>{body}</div>
-              </div>
-            ))}
+            {reviews.map(
+              ({ id, authorUsername, date, stars: nbStars, body }) => (
+                <div key={id} className={classes.comment}>
+                  <span style={{ fontSize: "1.1rem" }}>
+                    {authorUsername} - {date} -{" "}
+                  </span>
+                  <Rating
+                    size="small"
+                    value={nbStars}
+                    readOnly
+                    emptyIcon={
+                      <StarBorderIcon
+                        style={{ fontSize: "1.1rem" }}
+                        color="primary"
+                      />
+                    }
+                  />
+                  <div className={classes.commentText}>{body}</div>
+                </div>
+              )
+            )}
           </div>
         ) : (
           <div className={classes.comment}>

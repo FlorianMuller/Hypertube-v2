@@ -13,7 +13,8 @@ const GradientButton = ({
   color,
   circularProgressColor,
   buttonClass,
-  circularProgressClass
+  circularProgressClass,
+  onClick
 }: LoadingButtonProps): ReactElement => {
   const classes = useStyles({});
   return (
@@ -28,6 +29,7 @@ const GradientButton = ({
       circularProgressColor={circularProgressColor}
       buttonClass={`${buttonClass || ""} ${classes.customButton}`}
       circularProgressClass={circularProgressClass}
+      onClick={onClick}
     />
   );
 };
