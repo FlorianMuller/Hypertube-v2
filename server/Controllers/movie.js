@@ -396,7 +396,7 @@ const downloadMovie = async (
   setTimeout(() => {
     if (!isDownloading) Io.socket.to(movieId).emit("movie-not-ref");
     return undefined;
-  }, 60000);
+  }, 120000);
   engine
     .on("ready", () => {
       isDownloading = true;
