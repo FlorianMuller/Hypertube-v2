@@ -37,16 +37,16 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
    */
   const searchParams = qs.parse(location.search.slice(1));
   const [year, setYear] = useState<number>(
-    searchParams.year || defaultValue.year
+    ((searchParams.year as unknown) as number) || defaultValue.year
   );
   const [genre, setGenre] = useState<string>(
-    searchParams.genre || defaultValue.genre
+    (searchParams.genre as string) || defaultValue.genre
   );
   const [minRating, setMinRating] = useState<number>(
-    searchParams.minRating || defaultValue.minRating
+    ((searchParams.minRating as unknown) as number) || defaultValue.minRating
   );
   const [sort, setSort] = useState<string>(
-    searchParams.sort || defaultValue.sort
+    ((searchParams.sort as unknown) as string) || defaultValue.sort
   );
 
   /**
@@ -67,10 +67,11 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
 
   useEffect(() => {
     const newUrlParams = qs.parse(location.search.slice(1));
-    if (newUrlParams.year) setYear(newUrlParams.year);
-    if (newUrlParams.genre) setGenre(newUrlParams.genre);
-    if (newUrlParams.minRating) setMinRating(newUrlParams.minRating);
-    if (newUrlParams.sort) setSort(newUrlParams.sort);
+    if (newUrlParams.year) setYear((newUrlParams.year as unknown) as number);
+    if (newUrlParams.genre) setGenre(newUrlParams.genre as string);
+    if (newUrlParams.minRating)
+      setMinRating((newUrlParams.minRating as unknown) as number);
+    if (newUrlParams.sort) setSort(newUrlParams.sort as string);
   }, [location]);
 
   /**

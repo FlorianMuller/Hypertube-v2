@@ -1,46 +1,79 @@
-import React, { ReactElement } from "react";
-
+import React, { ReactElement, useState, useEffect } from "react";
 import useStyles from "./MoviePlayer.styles";
+import API from "../../util/api";
+import Loading from "../Routes/Loading";
 
 interface Props {
-  movieId: string;
-  source: string;
+  imdbId: string;
+  srcVideo: string;
 }
 
-const MoviePlayer = ({ movieId, source }: Props): ReactElement => {
+const MoviePlayer = ({ imdbId, srcVideo }: Props): ReactElement => {
+  const [playerReader, setPlayerReader] = useState(false);
+  const [pathSubEn, setPathSubEn] = useState(undefined);
+  const [pathSubFr, setPathSubFr] = useState(undefined);
+  const [pathSubEs, setPathSubEs] = useState(undefined);
+
   const classes = useStyles({});
 
+  const getSubtitles = async (): Promise<void> => {
+    let data;
+    await API.get(`/movie/subtitles/${imdbId}`).then(async (res) => {
+      data = res.data;
+      if (data.subPathEn)
+        setPathSubEn(`http://localhost:8080/api/subtitles/${data.subPathEn}`);
+      if (data.subPathEs)
+        setPathSubEs(`http://localhost:8080/api/subtitles/${data.subPathEs}`);
+      if (data.subPathFr)
+        setPathSubFr(`http://localhost:8080/api/subtitles/${data.subPathFr}`);
+      setPlayerReader(true);
+    });
+  };
+
+  useEffect(() => {
+    getSubtitles();
+  }, [pathSubEn, pathSubFr, pathSubEs]);
+
   return (
-    <>
-      <div className={classes.containerPlayer}>
+    <div className={classes.containerPlayer}>
+      {playerReader ? (
         <video
-          controls
-          //   crossOrigin
-          playsInline
-          poster={`http://archive.org/19/items/${movieId}/__ia_thumb.jpg`}
-          id="player"
+          src={srcVideo}
           className={classes.player}
+          controls
+          preload="auto"
         >
-          <source
-            src={`http://archive.org/19/items/${movieId}/${source}`}
-            // type="video/mp4"
-          />
-          <track
-            kind="captions"
-            label="English"
-            srcLang="en"
-            src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
-            default
-          />
-          <track
-            kind="captions"
-            label="Français"
-            srcLang="fr"
-            src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt"
-          />
+          <track kind="captions" />
+          {pathSubEn && (
+            <track
+              kind="subtitles"
+              label="English"
+              srcLang="en"
+              src={pathSubEn}
+              default
+            />
+          )}
+          {pathSubFr && (
+            <track
+              kind="subtitles"
+              label="Français"
+              srcLang="fr"
+              src={pathSubFr}
+            />
+          )}
+          {pathSubEs && (
+            <track
+              kind="subtitles"
+              label="Espanol"
+              srcLang="es"
+              src={pathSubEs}
+            />
+          )}
         </video>
-      </div>
-    </>
+      ) : (
+        <Loading />
+      )}
+    </div>
   );
 };
 

@@ -3,13 +3,14 @@
 
 import SearchCache from "../Schemas/SearchCache";
 import yts from "./searchSources/yts";
-import rarbg from "./searchSources/rarbg";
+import rarbgHelper from "./searchSources/rarbg";
 // import popCornTime from "./searchSources/popCornTime";
+import UserHistoryModel from "../Schemas/UserHistory";
 
 // const sourceList = [yts, popCornTime, rarbg];
 const sourceList = [
   { name: "yts", func: yts },
-  { name: "rarbg", func: rarbg }
+  { name: "rarbg", func: rarbgHelper.searchMoviesOnRarbg }
 ];
 
 /**
@@ -291,4 +292,39 @@ const searchMoviesOnAllSource = async (searchOptions) => {
   };
 };
 
-export default searchMoviesOnAllSource;
+const checkIfViewed = async (data, userId) => {
+  const history = await UserHistoryModel.find({ userId });
+  const newData = data.movies.map((movie) => {
+    const found = history.find((el) => el.imdb_code === movie.id);
+    if (found) {
+      return {
+        genres: movie.genres,
+        id: movie.id,
+        title: movie.title,
+        cover: movie.cover,
+        year: movie.year,
+        summary: movie.summary,
+        rating: movie.rating,
+        runtime: movie.runtime,
+        dateAdded: movie.dateAdded,
+        viewed: true
+      };
+    }
+    return {
+      genres: movie.genres,
+      id: movie.id,
+      title: movie.title,
+      cover: movie.cover,
+      year: movie.year,
+      summary: movie.summary,
+      rating: movie.rating,
+      runtime: movie.runtime,
+      dateAdded: movie.dateAdded,
+      viewed: false
+    };
+  });
+
+  return { movies: newData, nextPage: data.nextPage };
+};
+
+export default { searchMoviesOnAllSource, checkIfViewed };

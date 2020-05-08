@@ -112,7 +112,6 @@ const SignIn = (): ReactElement => {
   }, [res]);
 
   useEffect(() => {
-    console.log(history);
     const cleanParams = history.location.search.replace("?", "");
     const tabParams = cleanParams.split("&");
     tabParams.forEach((el) => {
@@ -121,7 +120,6 @@ const SignIn = (): ReactElement => {
         setErroOmni(value);
       }
     });
-    console.log(errorOmni);
   }, [errorOmni]);
 
   /**

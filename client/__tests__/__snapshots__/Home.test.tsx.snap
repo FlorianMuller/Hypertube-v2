@@ -44,6 +44,7 @@ exports[`Home should render <Home> in english 1`] = `
                 "runtime": 100,
                 "summary": "The one with Dany Boon you kwow, all the France is gonna laugh",
                 "title": "The comic movies",
+                "viewed": false,
                 "year": 2020,
               }
             }
@@ -156,6 +157,7 @@ exports[`Home should render <Home> in english 1`] = `
                 "runtime": 100,
                 "summary": "You've seen it hundreds time, but here it is, an other one",
                 "title": "The marvel block buster",
+                "viewed": false,
                 "year": 2020,
               }
             }
@@ -268,6 +270,7 @@ exports[`Home should render <Home> in english 1`] = `
                 "runtime": 100,
                 "summary": "The one with jokes for the parents",
                 "title": "The cool kid moovie",
+                "viewed": false,
                 "year": 2020,
               }
             }
@@ -379,6 +382,7 @@ exports[`Home should render <Home> in english 1`] = `
                 "runtime": 100,
                 "summary": "I don't know anything about it, I was too afraid to see it",
                 "title": "The horror movie",
+                "viewed": false,
                 "year": 2020,
               }
             }
@@ -528,6 +532,7 @@ exports[`Home should render <Home> in french 1`] = `
                 "runtime": 100,
                 "summary": "The one with Dany Boon you kwow, all the France is gonna laugh",
                 "title": "The comic movies",
+                "viewed": false,
                 "year": 2020,
               }
             }
@@ -640,6 +645,7 @@ exports[`Home should render <Home> in french 1`] = `
                 "runtime": 100,
                 "summary": "You've seen it hundreds time, but here it is, an other one",
                 "title": "The marvel block buster",
+                "viewed": false,
                 "year": 2020,
               }
             }
@@ -752,6 +758,7 @@ exports[`Home should render <Home> in french 1`] = `
                 "runtime": 100,
                 "summary": "The one with jokes for the parents",
                 "title": "The cool kid moovie",
+                "viewed": false,
                 "year": 2020,
               }
             }
@@ -863,6 +870,7 @@ exports[`Home should render <Home> in french 1`] = `
                 "runtime": 100,
                 "summary": "I don't know anything about it, I was too afraid to see it",
                 "title": "The horror movie",
+                "viewed": false,
                 "year": 2020,
               }
             }

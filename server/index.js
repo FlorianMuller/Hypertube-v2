@@ -6,18 +6,23 @@ import path from "path";
 import favicon from "serve-favicon";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
+import schedule from "node-schedule";
+import fs from "fs";
+import mongoose from "./mongo";
 
 import passportGoogle from "./Helpers/omniauth/google";
 import passport42 from "./Helpers/omniauth/42";
 import apiRouter from "./router";
 
+import MovieModel from "./Schemas/MoviesDatabase";
+import SearchCache from "./Schemas/SearchCache";
+
+import socket from "./Helpers/socket";
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 const http = require("http").createServer(app);
-const io = require("socket.io")(http);
-
-const ioConnection = io;
 
 app.set("root", "/");
 app.set("views", path.join(__dirname, "./views"));
@@ -53,6 +58,27 @@ app.use(
 
 app.use(hotMiddleware);
 
+const Movie = mongoose.model("Movie", MovieModel);
+
+schedule.scheduleJob("00 59 23 * * *", () => {
+  console.log("Removing movies from server...");
+  const lastMonth = new Date().setUTCMonth(new Date().getUTCMonth() - 1); // Last month
+  Movie.find({ lastViewed: { $lte: lastMonth } }, (err, result) => {
+    result.forEach((movie) => {
+      Movie.findByIdAndRemove({ _id: movie._id });
+      fs.unlinkSync(movie.path); // Delete movie repo
+    });
+  });
+  console.log("Removing from server is done!");
+});
+
+schedule.scheduleJob("59 * * * * *", async () => {
+  console.log("Deleting search caches...");
+  const limitDate = new Date(Date.now() - 20 * 60000); // 20 minutes ago;
+  await SearchCache.deleteMany({ createdAt: { $lte: limitDate } });
+  console.log("Deleting search caches done !");
+});
+
 /* eslint-enable */
 /* ------------------ */
 
@@ -63,26 +89,12 @@ app.get("*", (req, res) => {
   res.render("index");
 });
 
-// Socket
-
-io.on("connection", (socket) => {
-  console.log("A user connected");
-
-  socket.on("join-movie-room", (movieId) => {
-    console.log("Joined movie room");
-    socket.join(movieId);
-  });
-
-  socket.on("leave-movie-room", (movieId) => {
-    console.log("Left movie room");
-    socket.leave(movieId);
-  });
-});
-
-// Listening
-
 http.listen(port, () => {
   console.log(`Server running on ${port}`);
 });
 
-export default { ioConnection };
+async function initIo() {
+  await socket.init(http);
+}
+
+initIo();

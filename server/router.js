@@ -6,8 +6,8 @@ import user from "./Controllers/myprofile";
 
 import signUpController from "./Controllers/signUp";
 import SignInControllers from "./Controllers/signIn";
-import movieController from "./Controllers/movie";
 import searchController from "./Controllers/search";
+import movieController from "./Controllers/movie";
 import editUserController from "./Controllers/editUser";
 import changeUserPictureController from "./Controllers/changeUserPicture";
 import ResetPassword from "./Controllers/ResetPassword";
@@ -97,6 +97,25 @@ router.get(
 );
 
 /* Movie */
+router.use("/movie", checkAuth, express.static("./server/data/movie"));
+router.get(
+  "/movie/infos/:imdbId/:language",
+  checkAuth,
+  movieController.getInfos
+);
+router.get("/movie/play/:imdbId", checkAuth, movieController.PlayMovie);
+router.get("/movie/subtitles/:imdbId", checkAuth, movieController.getSubtitles);
+router.use("/subtitles", checkAuth, express.static("./server/data/subtitles"));
+router.get("/movie/streaming/:directory/:fileName", checkAuth, (req, res) => {
+  const { fileName } = req.params;
+  const { directory } = req.params;
+  const dest = `./server/data/movie/${directory}/${fileName}`;
+
+  console.log(dest);
+  res.status(200).send(dest);
+});
+router.get("/movie/review/:id", checkAuth, movieController.getReviews);
+router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
 router.get("/movies", searchController.searchMovies);
 router.get("/movies/recommended", checkAuth, movieController.getRecommendation);
 router.get("/movies/:id", checkAuth, movieController.getInfos);

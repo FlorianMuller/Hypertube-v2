@@ -1,4 +1,5 @@
-import searchMoviesOnAllSource from "../Helpers/search";
+import helpers from "../Helpers/search";
+// import { searchMoviesOnYts, checkIfViewed } from "../Helpers/search";
 
 const searchMovies = async (req, res) => {
   try {
@@ -11,7 +12,8 @@ const searchMovies = async (req, res) => {
     // Page 1 by default
     if (!req.query.page) req.query.page = 1;
 
-    const moviesList = await searchMoviesOnAllSource(req.query);
+    let moviesList = await helpers.searchMoviesOnAllSource(req.query);
+    moviesList = await helpers.checkIfViewed(moviesList, req.userId);
     res.send(moviesList);
   } catch (e) {
     console.error(e);

@@ -41,6 +41,23 @@ export interface AuthInfo {
   [key: string]: string;
 }
 
+export interface MovieInfos {
+  title: string;
+  casting: string[];
+  description: string;
+  creator: string;
+  runTime: number;
+  prodDate: string;
+  imdbRating: number;
+  poster: string;
+  imdbid: string;
+}
+
+export interface Reviews {
+  movieRating: number;
+  review: Array<Review>;
+}
+
 export interface Comment {
   movieName: string;
   date: number;
@@ -75,6 +92,7 @@ export interface Movie {
   genres: string[];
   rating: number;
   runtime: number;
+  viewed: boolean;
 }
 
 export interface ApiSearchReponse {

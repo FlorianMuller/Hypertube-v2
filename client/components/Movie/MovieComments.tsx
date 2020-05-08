@@ -15,28 +15,29 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import useStyles from "./MovieComments.styles";
 
 import API from "../../util/api";
-import { Review } from "../../models/models";
+import { Reviews } from "../../models/models";
 import checkInvalidCommentOrStars from "./MovieComments.service";
 
 interface Props {
   movieId: string;
-  movieRating: number;
-  reviews: Array<Review>;
+  reviews: Reviews;
+  movieName: string;
+  setReviews: Function;
 }
 
 const MovieComments = ({
   movieId,
-  movieRating,
-  reviews
+  reviews,
+  movieName,
+  setReviews
 }: Props): ReactElement => {
   const { formatMessage: _t } = useIntl();
   const [stars, setStars] = useState(0);
   const [comment, setComment] = useState({
-    authorUsername: "",
     date: null,
     body: ""
   });
-  const [error, setError] = useState({ comment: false, stars: false });
+  const [error, setError] = useState(null);
   const scroll = Scroll.animateScroll;
   const classes = useStyles({});
 
@@ -58,7 +59,6 @@ const MovieComments = ({
       setStars(parseInt(e.target.value, 10));
     } else {
       setComment({
-        authorUsername: "toto",
         date: Date.now(),
         body: e.target.value
       });
@@ -69,21 +69,25 @@ const MovieComments = ({
     });
   };
 
-  const sendComment = (): void => {
+  const sendComment = async (): Promise<void> => {
     const ret = checkInvalidCommentOrStars(stars, comment.body);
     if (!ret.comment && !ret.stars) {
       const body = {
         ...comment,
-        stars
+        stars,
+        movieId,
+        movieName
       };
-      API.post(`/movies/${movieId}/reviews`, body)
-        .then(() => {
+      await API.post(`/movies/${movieId}/reviews`, body)
+        .then(async () => {
           setComment({
-            authorUsername: "",
             date: null,
             body: ""
           });
           setStars(0);
+          await API.get(`/movie/review/${movieId}`).then((req) => {
+            setReviews(req.data);
+          });
         })
         .catch((e) => {
           console.error(e);
@@ -98,7 +102,8 @@ const MovieComments = ({
       <Box component="fieldset" borderColor="transparent">
         <div className={classes.movieRating}>{_t({ id: "movie.rating" })}</div>
         <Rating
-          value={movieRating}
+          precision={0.1}
+          value={reviews.movieRating}
           readOnly
           emptyIcon={<StarBorderIcon color="primary" />}
         />
@@ -107,9 +112,9 @@ const MovieComments = ({
         {_t({ id: "movie.comment.title" })}
       </span>
       <Paper className={classes.containerComment}>
-        {reviews.length > 0 ? (
+        {reviews.review?.length > 0 ? (
           <div className={classes.containerPeople} id="scrollComment">
-            {reviews.map(
+            {reviews.review.map(
               ({ id, authorUsername, date, stars: nbStars, body }) => (
                 <div key={id} className={classes.comment}>
                   <span style={{ fontSize: "1.1rem" }}>
@@ -138,9 +143,9 @@ const MovieComments = ({
         )}
         <div className={classes.personalCommentContainer}>
           <TextField
-            error={error.comment}
+            error={error?.comment}
             helperText={
-              error.comment &&
+              error?.comment &&
               _t({ id: "authentication.signUp.error.required" })
             }
             className={classes.textField}
@@ -175,7 +180,7 @@ const MovieComments = ({
                 }
                 emptyIcon={<StarBorderIcon color="primary" />}
               />
-              {error.stars && (
+              {error?.stars && (
                 <span className={classes.rateRequired}>
                   {_t({ id: "authentication.signUp.error.required" })}
                 </span>

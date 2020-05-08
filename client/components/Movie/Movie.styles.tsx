@@ -32,36 +32,56 @@ const useStyles = makeStyles((theme: Theme) =>
         width: "100%"
       }
     },
-    movieTitleImage: {
-      display: "flex",
-      justifyContent: "space-evenly",
-      alignItems: "center",
-      width: "90%",
-      marginBottom: "1rem"
-    },
     containerPresentation: {
       marginTop: "5rem",
       borderRadius: "4px",
-      maxWidth: "60%",
-      minWidth: "60%",
-      padding: "2rem"
+      maxWidth: "50%",
+      minWidth: "50%",
+      padding: "2rem",
+      [theme.breakpoints.down("sm")]: {
+        maxWidth: "80%",
+        minWidth: "80%"
+      }
+      // border: "2px solid blue"
     },
     containerMovie: {
+      display: "flex"
+      // border: "2px solid red"
+    },
+    moviePoster: {
+      width: "40%",
+      [theme.breakpoints.down("md")]: {
+        display: "none"
+      }
+    },
+    generalInfos: {
+      fontSize: "1rem",
+      // border: "2px solid green",
+      width: "100%",
+      marginLeft: "1rem",
       display: "flex",
       flexDirection: "column",
-      alignItems: "center"
+      alignItems: "center",
+      justifyContent: "space-around"
     },
-    labelMovie: {
-      marginBottom: "1rem",
-      fontSize: "1rem"
+    movieTitle: {
+      fontSize: "1.5rem"
     },
     descriptionMovie: {
       maxHeight: "15rem",
       overflow: "auto",
       overflowX: "hidden",
-      marginBottom: "1rem",
-      paddingRight: "1rem",
-      fontSize: "1rem"
+      margin: "1rem",
+      maxWidth: "95%"
+    },
+    dateAndTime: {
+      display: "flex",
+      width: "95%",
+      justifyContent: "space-around",
+      [theme.breakpoints.down("lg")]: {
+        flexDirection: "column",
+        alignItems: "center"
+      }
     }
   })
 );
