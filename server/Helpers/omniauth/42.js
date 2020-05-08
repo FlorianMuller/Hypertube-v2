@@ -68,7 +68,7 @@ passport.use(
       tokenURL: process.env.SCHOOL_TOKEN_API,
       clientID: process.env.SCHOOL_CLIENT_ID,
       clientSecret: process.env.SCHOOL_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/api/user/42/callback"
+      callbackURL: `${process.env.CLIENT_ORIGIN}/api/user/42/callback`
     },
     async (_accessToken, _refreshToken, profile, done) => {
       const user = await Axios("https://api.intra.42.fr/v2/me", {

@@ -13,17 +13,17 @@ import OnClickInput from "./OnClickInput";
 import Password from "./Password";
 import EditableAvatar from "./EditableAvatar";
 import { validateEmail } from "../Authentication/SignUp.service";
-import { UserProfile } from "../../models/models";
+import { MyUserProfile } from "../../models/models";
 
 const MyProfile = (): ReactElement => {
   const { locale, formatMessage: _t } = useIntl();
-  const { resData: data } = useApi<UserProfile, void>("/users", {
+  const { resData: data } = useApi<MyUserProfile, void>("/users", {
     hotReload: true
   });
   const classes = useStyles({});
 
   const [changingPassword, setChangingPassword] = useState(false);
-  const { callApi } = useApi<UserProfile, void>("/users", { method: "put" });
+  const { callApi } = useApi<MyUserProfile, void>("/users", { method: "put" });
   // emailStatus = 0 : email not typed, 1 = typed and wrong, 2 = typed and ok
   const [emailStatus, setEmailStatus] = useState(0);
   const updateInfo = (value: string, name: string): void => {
@@ -43,11 +43,7 @@ const MyProfile = (): ReactElement => {
     <div className={classes.containerProfile}>
       <div>
         <Paper className={classes.containerUser}>
-          <EditableAvatar
-            picture={data?.picture}
-            googleID={data?.googleID}
-            schoolID={data?.schoolID}
-          />
+          <EditableAvatar picture={data?.picture} />
           <div className={classes.containerInfo}>
             {/* FirstName and lastName */}
             <div className={classes.containerFullname}>
@@ -72,7 +68,7 @@ const MyProfile = (): ReactElement => {
             </div>
 
             {/* Username */}
-            <Typography variant="body1" className={classes.usernameWrapper}>
+            <Typography variant="body1" className={classes.notAllowed}>
               @<span className={classes.username}>{data?.username}</span>
             </Typography>
 
@@ -100,30 +96,34 @@ const MyProfile = (): ReactElement => {
             </div>
 
             {/* Password */}
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.passwordButton}
-              onClick={(): void => {
-                setChangingPassword((val) => {
-                  return !val;
-                });
-              }}
-            >
-              {changingPassword
-                ? _t({ id: "profile.myprofile.cancelChangePassword" })
-                : _t({ id: "profile.myprofile.changePassword" })}
-            </Button>
-            {changingPassword && (
-              <Password
-                onValidation={(isPasswordChanged): void => {
-                  if (isPasswordChanged) {
-                    setTimeout(() => {
-                      setChangingPassword(false);
-                    }, 1500);
-                  }
-                }}
-              />
+            {!data?.isOnmiAuth && (
+              <>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  className={classes.passwordButton}
+                  onClick={(): void => {
+                    setChangingPassword((val) => {
+                      return !val;
+                    });
+                  }}
+                >
+                  {changingPassword
+                    ? _t({ id: "profile.myprofile.cancelChangePassword" })
+                    : _t({ id: "profile.myprofile.changePassword" })}
+                </Button>
+                {changingPassword && (
+                  <Password
+                    onValidation={(isPasswordChanged): void => {
+                      if (isPasswordChanged) {
+                        setTimeout(() => {
+                          setChangingPassword(false);
+                        }, 1500);
+                      }
+                    }}
+                  />
+                )}
+              </>
             )}
           </div>
         </Paper>
