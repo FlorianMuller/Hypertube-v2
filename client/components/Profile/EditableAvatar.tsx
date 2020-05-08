@@ -1,34 +1,33 @@
-import React, { ReactElement, useState, ChangeEvent } from "react";
+import React, { ReactElement, useState, ChangeEvent, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-import { AxiosPromise } from "axios";
 import useStyles from "./Profile.styles";
-import API from "../../util/api";
+import sendPictureData from "./EditableAvatar.service";
 
 interface Props {
   picture?: string;
 }
 
-const sendPictureData = (picture: File): AxiosPromise<{}> => {
-  const data = new FormData();
-  data.append("image", picture);
-  return API({
-    method: "post",
-    url: "/users/picture",
-    headers: { "Content-Type": "multipart/form-data" },
-    data
-  });
-};
-
 const EditableAvatar = ({ picture }: Props): ReactElement => {
   const classes = useStyles({});
   const [mouseIn, setMouseIn] = useState(false);
+  const [picturePath, setPicturePath] = useState(picture);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.type === "file") {
-      sendPictureData(e.target.files[0]);
+      sendPictureData(e.target.files[0]).then((res) => {
+        if (res.data?.newPath) {
+          setPicturePath(res.data.newPath);
+        }
+      });
     }
   };
+
+  useEffect(() => {
+    if (picture) {
+      setPicturePath(picture);
+    }
+  }, [picture]);
 
   return (
     <div
@@ -45,7 +44,7 @@ const EditableAvatar = ({ picture }: Props): ReactElement => {
           name="picture"
           onChange={handleInputChange}
         />
-        <Avatar alt="user-pic" src={picture} className={classes.large} />
+        <Avatar alt="user-pic" src={picturePath} className={classes.large} />
         {mouseIn && <AddAPhotoIcon className={classes.changePhoto} />}
       </label>
     </div>

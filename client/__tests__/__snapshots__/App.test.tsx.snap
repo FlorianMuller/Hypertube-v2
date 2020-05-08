@@ -2201,6 +2201,7 @@ exports[`App renders correctly 1`] = `
                                 </WithStyles(ForwardRef(InputLabel))>
                                 <WithStyles(ForwardRef(Select))
                                   className="makeStyles-select-112"
+                                  defaultValue={0}
                                   labelId="production-year"
                                   onChange={[Function]}
                                   value={0}
@@ -2221,12 +2222,14 @@ exports[`App renders correctly 1`] = `
                                         "selectMenu": "MuiSelect-selectMenu",
                                       }
                                     }
+                                    defaultValue={0}
                                     labelId="production-year"
                                     onChange={[Function]}
                                     value={0}
                                   >
                                     <WithStyles(ForwardRef(Input))
                                       className="makeStyles-select-112"
+                                      defaultValue={0}
                                       inputComponent={
                                         Object {
                                           "$$typeof": Symbol(react.forward_ref),
@@ -3185,6 +3188,7 @@ exports[`App renders correctly 1`] = `
                                             "underline": "MuiInput-underline",
                                           }
                                         }
+                                        defaultValue={0}
                                         inputComponent={
                                           Object {
                                             "$$typeof": Symbol(react.forward_ref),
@@ -4143,6 +4147,7 @@ exports[`App renders correctly 1`] = `
                                               "underline": null,
                                             }
                                           }
+                                          defaultValue={0}
                                           fullWidth={false}
                                           inputComponent={
                                             Object {
@@ -5108,6 +5113,7 @@ exports[`App renders correctly 1`] = `
                                                 "root": "MuiInputBase-root MuiInput-root MuiInput-underline",
                                               }
                                             }
+                                            defaultValue={0}
                                             fullWidth={false}
                                             inputComponent={
                                               Object {
@@ -6087,6 +6093,7 @@ exports[`App renders correctly 1`] = `
                                                     "selectMenu": "MuiSelect-selectMenu",
                                                   }
                                                 }
+                                                defaultValue={0}
                                                 displayEmpty={false}
                                                 inputRef={[Function]}
                                                 labelId="production-year"

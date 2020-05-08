@@ -18,7 +18,7 @@ const SortSelect = ({ sort, labelid, setSort }: Props): ReactElement => {
   return (
     <Select
       labelId={labelid}
-      defaultValue={sort}
+      defaultValue="dateAdded"
       value={sort}
       onChange={(e: ChangeEvent<{ value: string }>): void =>
         setSort(e.target.value)

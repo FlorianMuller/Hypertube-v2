@@ -46,7 +46,7 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
     ((searchParams.minRating as unknown) as number) || defaultValue.minRating
   );
   const [sort, setSort] = useState<string>(
-    ((searchParams.sort as unknown) as string) || defaultValue.sort
+    (searchParams.sort as string) || defaultValue.sort
   );
 
   /**
@@ -149,6 +149,7 @@ const Filters = ({ searchQuery, onReset }: Props): ReactElement => {
         </InputLabel>
         <Select
           labelId="production-year"
+          defaultValue={0}
           value={year}
           onChange={(e: ChangeEvent<{ value: number }>): void =>
             setYear(e.target.value)
