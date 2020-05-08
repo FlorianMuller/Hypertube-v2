@@ -338,7 +338,6 @@ exports[`Home should render <Home> in english 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -353,7 +352,6 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -379,34 +377,36 @@ exports[`Home should render <Home> in english 1`] = `
                               >
                                 comedy
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -481,13 +481,18 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             >
                               <svg
-                                aria-hidden={true}
+                                aria-hidden="true"
                                 className="MuiSvgIcon-root makeStyles-ratingIcon-13"
                                 focusable="false"
+                                role="presentation"
                                 viewBox="0 0 24 24"
                               >
                                 <path
                                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                />
+                                <path
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
                                 />
                               </svg>
                             </ForwardRef(SvgIcon)>
@@ -601,34 +606,36 @@ exports[`Home should render <Home> in english 1`] = `
                                   >
                                     Watch film
                                   </span>
-                                  <WithStyles(memo)
-                                    center={false}
-                                  >
-                                    <ForwardRef(TouchRipple)
+                                  <NoSsr>
+                                    <WithStyles(undefined)
                                       center={false}
-                                      classes={
-                                        Object {
-                                          "child": "MuiTouchRipple-child",
-                                          "childLeaving": "MuiTouchRipple-childLeaving",
-                                          "childPulsate": "MuiTouchRipple-childPulsate",
-                                          "ripple": "MuiTouchRipple-ripple",
-                                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                          "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                          "root": "MuiTouchRipple-root",
-                                        }
-                                      }
                                     >
-                                      <span
-                                        className="MuiTouchRipple-root"
+                                      <ForwardRef(TouchRipple)
+                                        center={false}
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
+                                          }
+                                        }
                                       >
-                                        <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                                          exit={true}
-                                        />
-                                      </span>
-                                    </ForwardRef(TouchRipple)>
-                                  </WithStyles(memo)>
+                                        <span
+                                          className="MuiTouchRipple-root"
+                                        >
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(undefined)>
+                                  </NoSsr>
                                 </button>
                               </ForwardRef(ButtonBase)>
                             </WithStyles(ForwardRef(ButtonBase))>
@@ -949,7 +956,6 @@ exports[`Home should render <Home> in english 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -964,7 +970,6 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -990,34 +995,36 @@ exports[`Home should render <Home> in english 1`] = `
                               >
                                 action
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -1073,7 +1080,6 @@ exports[`Home should render <Home> in english 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -1088,7 +1094,6 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -1114,34 +1119,36 @@ exports[`Home should render <Home> in english 1`] = `
                               >
                                 adventure
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -1216,13 +1223,18 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             >
                               <svg
-                                aria-hidden={true}
+                                aria-hidden="true"
                                 className="MuiSvgIcon-root makeStyles-ratingIcon-13"
                                 focusable="false"
+                                role="presentation"
                                 viewBox="0 0 24 24"
                               >
                                 <path
                                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                />
+                                <path
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
                                 />
                               </svg>
                             </ForwardRef(SvgIcon)>
@@ -1336,34 +1348,36 @@ exports[`Home should render <Home> in english 1`] = `
                                   >
                                     Watch film
                                   </span>
-                                  <WithStyles(memo)
-                                    center={false}
-                                  >
-                                    <ForwardRef(TouchRipple)
+                                  <NoSsr>
+                                    <WithStyles(undefined)
                                       center={false}
-                                      classes={
-                                        Object {
-                                          "child": "MuiTouchRipple-child",
-                                          "childLeaving": "MuiTouchRipple-childLeaving",
-                                          "childPulsate": "MuiTouchRipple-childPulsate",
-                                          "ripple": "MuiTouchRipple-ripple",
-                                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                          "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                          "root": "MuiTouchRipple-root",
-                                        }
-                                      }
                                     >
-                                      <span
-                                        className="MuiTouchRipple-root"
+                                      <ForwardRef(TouchRipple)
+                                        center={false}
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
+                                          }
+                                        }
                                       >
-                                        <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                                          exit={true}
-                                        />
-                                      </span>
-                                    </ForwardRef(TouchRipple)>
-                                  </WithStyles(memo)>
+                                        <span
+                                          className="MuiTouchRipple-root"
+                                        >
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(undefined)>
+                                  </NoSsr>
                                 </button>
                               </ForwardRef(ButtonBase)>
                             </WithStyles(ForwardRef(ButtonBase))>
@@ -1684,7 +1698,6 @@ exports[`Home should render <Home> in english 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -1699,7 +1712,6 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -1725,34 +1737,36 @@ exports[`Home should render <Home> in english 1`] = `
                               >
                                 action
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -1808,7 +1822,6 @@ exports[`Home should render <Home> in english 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -1823,7 +1836,6 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -1849,34 +1861,36 @@ exports[`Home should render <Home> in english 1`] = `
                               >
                                 adventure
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -1951,13 +1965,18 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             >
                               <svg
-                                aria-hidden={true}
+                                aria-hidden="true"
                                 className="MuiSvgIcon-root makeStyles-ratingIcon-13"
                                 focusable="false"
+                                role="presentation"
                                 viewBox="0 0 24 24"
                               >
                                 <path
                                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                />
+                                <path
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
                                 />
                               </svg>
                             </ForwardRef(SvgIcon)>
@@ -2071,34 +2090,36 @@ exports[`Home should render <Home> in english 1`] = `
                                   >
                                     Watch film
                                   </span>
-                                  <WithStyles(memo)
-                                    center={false}
-                                  >
-                                    <ForwardRef(TouchRipple)
+                                  <NoSsr>
+                                    <WithStyles(undefined)
                                       center={false}
-                                      classes={
-                                        Object {
-                                          "child": "MuiTouchRipple-child",
-                                          "childLeaving": "MuiTouchRipple-childLeaving",
-                                          "childPulsate": "MuiTouchRipple-childPulsate",
-                                          "ripple": "MuiTouchRipple-ripple",
-                                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                          "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                          "root": "MuiTouchRipple-root",
-                                        }
-                                      }
                                     >
-                                      <span
-                                        className="MuiTouchRipple-root"
+                                      <ForwardRef(TouchRipple)
+                                        center={false}
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
+                                          }
+                                        }
                                       >
-                                        <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                                          exit={true}
-                                        />
-                                      </span>
-                                    </ForwardRef(TouchRipple)>
-                                  </WithStyles(memo)>
+                                        <span
+                                          className="MuiTouchRipple-root"
+                                        >
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(undefined)>
+                                  </NoSsr>
                                 </button>
                               </ForwardRef(ButtonBase)>
                             </WithStyles(ForwardRef(ButtonBase))>
@@ -2418,7 +2439,6 @@ exports[`Home should render <Home> in english 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -2433,7 +2453,6 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -2459,34 +2478,36 @@ exports[`Home should render <Home> in english 1`] = `
                               >
                                 horror
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -2561,13 +2582,18 @@ exports[`Home should render <Home> in english 1`] = `
                               }
                             >
                               <svg
-                                aria-hidden={true}
+                                aria-hidden="true"
                                 className="MuiSvgIcon-root makeStyles-ratingIcon-13"
                                 focusable="false"
+                                role="presentation"
                                 viewBox="0 0 24 24"
                               >
                                 <path
                                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                />
+                                <path
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
                                 />
                               </svg>
                             </ForwardRef(SvgIcon)>
@@ -2681,34 +2707,36 @@ exports[`Home should render <Home> in english 1`] = `
                                   >
                                     Watch film
                                   </span>
-                                  <WithStyles(memo)
-                                    center={false}
-                                  >
-                                    <ForwardRef(TouchRipple)
+                                  <NoSsr>
+                                    <WithStyles(undefined)
                                       center={false}
-                                      classes={
-                                        Object {
-                                          "child": "MuiTouchRipple-child",
-                                          "childLeaving": "MuiTouchRipple-childLeaving",
-                                          "childPulsate": "MuiTouchRipple-childPulsate",
-                                          "ripple": "MuiTouchRipple-ripple",
-                                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                          "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                          "root": "MuiTouchRipple-root",
-                                        }
-                                      }
                                     >
-                                      <span
-                                        className="MuiTouchRipple-root"
+                                      <ForwardRef(TouchRipple)
+                                        center={false}
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
+                                          }
+                                        }
                                       >
-                                        <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                                          exit={true}
-                                        />
-                                      </span>
-                                    </ForwardRef(TouchRipple)>
-                                  </WithStyles(memo)>
+                                        <span
+                                          className="MuiTouchRipple-root"
+                                        >
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(undefined)>
+                                  </NoSsr>
                                 </button>
                               </ForwardRef(ButtonBase)>
                             </WithStyles(ForwardRef(ButtonBase))>
@@ -3066,7 +3094,6 @@ exports[`Home should render <Home> in french 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -3081,7 +3108,6 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -3107,34 +3133,36 @@ exports[`Home should render <Home> in french 1`] = `
                               >
                                 comedy
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -3209,13 +3237,18 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             >
                               <svg
-                                aria-hidden={true}
+                                aria-hidden="true"
                                 className="MuiSvgIcon-root makeStyles-ratingIcon-13"
                                 focusable="false"
+                                role="presentation"
                                 viewBox="0 0 24 24"
                               >
                                 <path
                                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                />
+                                <path
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
                                 />
                               </svg>
                             </ForwardRef(SvgIcon)>
@@ -3329,34 +3362,36 @@ exports[`Home should render <Home> in french 1`] = `
                                   >
                                     Regarder le film
                                   </span>
-                                  <WithStyles(memo)
-                                    center={false}
-                                  >
-                                    <ForwardRef(TouchRipple)
+                                  <NoSsr>
+                                    <WithStyles(undefined)
                                       center={false}
-                                      classes={
-                                        Object {
-                                          "child": "MuiTouchRipple-child",
-                                          "childLeaving": "MuiTouchRipple-childLeaving",
-                                          "childPulsate": "MuiTouchRipple-childPulsate",
-                                          "ripple": "MuiTouchRipple-ripple",
-                                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                          "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                          "root": "MuiTouchRipple-root",
-                                        }
-                                      }
                                     >
-                                      <span
-                                        className="MuiTouchRipple-root"
+                                      <ForwardRef(TouchRipple)
+                                        center={false}
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
+                                          }
+                                        }
                                       >
-                                        <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                                          exit={true}
-                                        />
-                                      </span>
-                                    </ForwardRef(TouchRipple)>
-                                  </WithStyles(memo)>
+                                        <span
+                                          className="MuiTouchRipple-root"
+                                        >
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(undefined)>
+                                  </NoSsr>
                                 </button>
                               </ForwardRef(ButtonBase)>
                             </WithStyles(ForwardRef(ButtonBase))>
@@ -3677,7 +3712,6 @@ exports[`Home should render <Home> in french 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -3692,7 +3726,6 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -3718,34 +3751,36 @@ exports[`Home should render <Home> in french 1`] = `
                               >
                                 action
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -3801,7 +3836,6 @@ exports[`Home should render <Home> in french 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -3816,7 +3850,6 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -3842,34 +3875,36 @@ exports[`Home should render <Home> in french 1`] = `
                               >
                                 adventure
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -3944,13 +3979,18 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             >
                               <svg
-                                aria-hidden={true}
+                                aria-hidden="true"
                                 className="MuiSvgIcon-root makeStyles-ratingIcon-13"
                                 focusable="false"
+                                role="presentation"
                                 viewBox="0 0 24 24"
                               >
                                 <path
                                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                />
+                                <path
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
                                 />
                               </svg>
                             </ForwardRef(SvgIcon)>
@@ -4064,34 +4104,36 @@ exports[`Home should render <Home> in french 1`] = `
                                   >
                                     Regarder le film
                                   </span>
-                                  <WithStyles(memo)
-                                    center={false}
-                                  >
-                                    <ForwardRef(TouchRipple)
+                                  <NoSsr>
+                                    <WithStyles(undefined)
                                       center={false}
-                                      classes={
-                                        Object {
-                                          "child": "MuiTouchRipple-child",
-                                          "childLeaving": "MuiTouchRipple-childLeaving",
-                                          "childPulsate": "MuiTouchRipple-childPulsate",
-                                          "ripple": "MuiTouchRipple-ripple",
-                                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                          "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                          "root": "MuiTouchRipple-root",
-                                        }
-                                      }
                                     >
-                                      <span
-                                        className="MuiTouchRipple-root"
+                                      <ForwardRef(TouchRipple)
+                                        center={false}
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
+                                          }
+                                        }
                                       >
-                                        <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                                          exit={true}
-                                        />
-                                      </span>
-                                    </ForwardRef(TouchRipple)>
-                                  </WithStyles(memo)>
+                                        <span
+                                          className="MuiTouchRipple-root"
+                                        >
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(undefined)>
+                                  </NoSsr>
                                 </button>
                               </ForwardRef(ButtonBase)>
                             </WithStyles(ForwardRef(ButtonBase))>
@@ -4412,7 +4454,6 @@ exports[`Home should render <Home> in french 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -4427,7 +4468,6 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -4453,34 +4493,36 @@ exports[`Home should render <Home> in french 1`] = `
                               >
                                 action
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -4536,7 +4578,6 @@ exports[`Home should render <Home> in french 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -4551,7 +4592,6 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -4577,34 +4617,36 @@ exports[`Home should render <Home> in french 1`] = `
                               >
                                 adventure
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -4679,13 +4721,18 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             >
                               <svg
-                                aria-hidden={true}
+                                aria-hidden="true"
                                 className="MuiSvgIcon-root makeStyles-ratingIcon-13"
                                 focusable="false"
+                                role="presentation"
                                 viewBox="0 0 24 24"
                               >
                                 <path
                                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                />
+                                <path
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
                                 />
                               </svg>
                             </ForwardRef(SvgIcon)>
@@ -4799,34 +4846,36 @@ exports[`Home should render <Home> in french 1`] = `
                                   >
                                     Regarder le film
                                   </span>
-                                  <WithStyles(memo)
-                                    center={false}
-                                  >
-                                    <ForwardRef(TouchRipple)
+                                  <NoSsr>
+                                    <WithStyles(undefined)
                                       center={false}
-                                      classes={
-                                        Object {
-                                          "child": "MuiTouchRipple-child",
-                                          "childLeaving": "MuiTouchRipple-childLeaving",
-                                          "childPulsate": "MuiTouchRipple-childPulsate",
-                                          "ripple": "MuiTouchRipple-ripple",
-                                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                          "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                          "root": "MuiTouchRipple-root",
-                                        }
-                                      }
                                     >
-                                      <span
-                                        className="MuiTouchRipple-root"
+                                      <ForwardRef(TouchRipple)
+                                        center={false}
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
+                                          }
+                                        }
                                       >
-                                        <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                                          exit={true}
-                                        />
-                                      </span>
-                                    </ForwardRef(TouchRipple)>
-                                  </WithStyles(memo)>
+                                        <span
+                                          className="MuiTouchRipple-root"
+                                        >
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(undefined)>
+                                  </NoSsr>
                                 </button>
                               </ForwardRef(ButtonBase)>
                             </WithStyles(ForwardRef(ButtonBase))>
@@ -5146,7 +5195,6 @@ exports[`Home should render <Home> in french 1`] = `
                         <WithStyles(ForwardRef(ButtonBase))
                           className="MuiChip-root makeStyles-tag-8 MuiChip-colorPrimary MuiChip-clickableColorPrimary MuiChip-clickable"
                           component="div"
-                          onKeyDown={[Function]}
                           onKeyUp={[Function]}
                           role="button"
                           tabIndex={0}
@@ -5161,7 +5209,6 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             }
                             component="div"
-                            onKeyDown={[Function]}
                             onKeyUp={[Function]}
                             role="button"
                             tabIndex={0}
@@ -5187,34 +5234,36 @@ exports[`Home should render <Home> in french 1`] = `
                               >
                                 horror
                               </span>
-                              <WithStyles(memo)
-                                center={false}
-                              >
-                                <ForwardRef(TouchRipple)
+                              <NoSsr>
+                                <WithStyles(undefined)
                                   center={false}
-                                  classes={
-                                    Object {
-                                      "child": "MuiTouchRipple-child",
-                                      "childLeaving": "MuiTouchRipple-childLeaving",
-                                      "childPulsate": "MuiTouchRipple-childPulsate",
-                                      "ripple": "MuiTouchRipple-ripple",
-                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                      "root": "MuiTouchRipple-root",
-                                    }
-                                  }
                                 >
-                                  <span
-                                    className="MuiTouchRipple-root"
+                                  <ForwardRef(TouchRipple)
+                                    center={false}
+                                    classes={
+                                      Object {
+                                        "child": "MuiTouchRipple-child",
+                                        "childLeaving": "MuiTouchRipple-childLeaving",
+                                        "childPulsate": "MuiTouchRipple-childPulsate",
+                                        "ripple": "MuiTouchRipple-ripple",
+                                        "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                        "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                        "root": "MuiTouchRipple-root",
+                                      }
+                                    }
                                   >
-                                    <TransitionGroup
-                                      childFactory={[Function]}
-                                      component={null}
-                                      exit={true}
-                                    />
-                                  </span>
-                                </ForwardRef(TouchRipple)>
-                              </WithStyles(memo)>
+                                    <span
+                                      className="MuiTouchRipple-root"
+                                    >
+                                      <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                                        exit={true}
+                                      />
+                                    </span>
+                                  </ForwardRef(TouchRipple)>
+                                </WithStyles(undefined)>
+                              </NoSsr>
                             </div>
                           </ForwardRef(ButtonBase)>
                         </WithStyles(ForwardRef(ButtonBase))>
@@ -5289,13 +5338,18 @@ exports[`Home should render <Home> in french 1`] = `
                               }
                             >
                               <svg
-                                aria-hidden={true}
+                                aria-hidden="true"
                                 className="MuiSvgIcon-root makeStyles-ratingIcon-13"
                                 focusable="false"
+                                role="presentation"
                                 viewBox="0 0 24 24"
                               >
                                 <path
                                   d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                                />
+                                <path
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
                                 />
                               </svg>
                             </ForwardRef(SvgIcon)>
@@ -5409,34 +5463,36 @@ exports[`Home should render <Home> in french 1`] = `
                                   >
                                     Regarder le film
                                   </span>
-                                  <WithStyles(memo)
-                                    center={false}
-                                  >
-                                    <ForwardRef(TouchRipple)
+                                  <NoSsr>
+                                    <WithStyles(undefined)
                                       center={false}
-                                      classes={
-                                        Object {
-                                          "child": "MuiTouchRipple-child",
-                                          "childLeaving": "MuiTouchRipple-childLeaving",
-                                          "childPulsate": "MuiTouchRipple-childPulsate",
-                                          "ripple": "MuiTouchRipple-ripple",
-                                          "ripplePulsate": "MuiTouchRipple-ripplePulsate",
-                                          "rippleVisible": "MuiTouchRipple-rippleVisible",
-                                          "root": "MuiTouchRipple-root",
-                                        }
-                                      }
                                     >
-                                      <span
-                                        className="MuiTouchRipple-root"
+                                      <ForwardRef(TouchRipple)
+                                        center={false}
+                                        classes={
+                                          Object {
+                                            "child": "MuiTouchRipple-child",
+                                            "childLeaving": "MuiTouchRipple-childLeaving",
+                                            "childPulsate": "MuiTouchRipple-childPulsate",
+                                            "ripple": "MuiTouchRipple-ripple",
+                                            "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                            "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                            "root": "MuiTouchRipple-root",
+                                          }
+                                        }
                                       >
-                                        <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                                          exit={true}
-                                        />
-                                      </span>
-                                    </ForwardRef(TouchRipple)>
-                                  </WithStyles(memo)>
+                                        <span
+                                          className="MuiTouchRipple-root"
+                                        >
+                                          <TransitionGroup
+                                            childFactory={[Function]}
+                                            component={null}
+                                            exit={true}
+                                          />
+                                        </span>
+                                      </ForwardRef(TouchRipple)>
+                                    </WithStyles(undefined)>
+                                  </NoSsr>
                                 </button>
                               </ForwardRef(ButtonBase)>
                             </WithStyles(ForwardRef(ButtonBase))>
