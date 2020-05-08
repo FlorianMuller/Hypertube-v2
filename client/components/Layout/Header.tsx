@@ -73,6 +73,7 @@ const Header = ({
 
   const logOut = async (): Promise<void> => {
     await API.put(`/users/logout`);
+    setProfileMenuAnchor(undefined);
     history.push("/");
     onMenuProfile();
     setLogged(!!cookies.get("loggedCookie"));
