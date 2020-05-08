@@ -9,20 +9,15 @@ import { path as ffmpegPath } from "@ffmpeg-installer/ffmpeg";
 import ffmpeg from "fluent-ffmpeg";
 import movieHelpers from "../Helpers/movie";
 import searchHelpers from "../Helpers/search";
-import mongoose from "../mongo";
-// import ioConnection from "..";
 
 import MovieModel from "../Schemas/MoviesDatabase";
 import MovieCommentModel from "../Schemas/MovieComment";
-// import UserModel from "../Schemas/User";
 import UserHistoryModel from "../Schemas/UserHistory";
 import Io from "../Helpers/socket";
 import awaitDecoration from "../Helpers/searchSources/rarbg";
 import UserModel from "../Schemas/User";
 
 ffmpeg.setFfmpegPath(ffmpegPath);
-
-const Movie = mongoose.model("Movie", MovieModel);
 
 const OpenSubtitles = new OS({
   useragent: "noelledeur",
@@ -372,35 +367,27 @@ const downloadMovie = async (
   movieMagnet
 ) => {
   let magnet;
+
   if (movieMagnet === null) {
-    const ArrayMagnet = [];
-    let newmovie = movie;
-    newmovie.torrents = movie.torrents.sort((a, b) =>
-      a.seeds < b.seeds ? 1 : -1
-    );
-    newmovie.torrents = movie.torrents.filter(
-      (torrent) => torrent.quality !== "3D"
-    );
-    newmovie = newmovie.torrents.length ? newmovie : movie;
-    if (sourceSite !== "yts") {
-      newmovie.map((el) => {
-        const [magnetTmp] = el.download.split("&");
-        ArrayMagnet.push(magnetTmp);
-        return undefined;
-      });
-    }
-    if (sourceSite === "yts") {
-      // const isfullhd = (el) => el.hash === "1080p"
-      magnet = `magnet:?xt=urn:btih:${newmovie.torrents[0].hash}`;
-    } else {
-      ArrayMagnet.map((el) => {
-        magnet = el;
-        return undefined;
-      });
+    if (sourceSite === "rarbg") {
+      const sorted = movie.sort((a, b) => b.seeds - a.seeds);
+      const no3d = sorted.filter(
+        (torrent) => torrent.category !== "Movies/x264/3D"
+      );
+
+      [magnet] = (no3d.length ? no3d[0].download : sorted[0].download).split(
+        "&"
+      );
+    } else if (sourceSite === "yts") {
+      const sorted = movie.sort((a, b) => b.seeders - a.seeders);
+      const no3d = sorted.filter((torrent) => torrent.quality !== "3D");
+
+      magnet = no3d.length ? no3d[0].hash : sorted[0].hash;
     }
 
-    await Movie.create({ movieId, movieName: movie.title, magnet, path: "" });
+    await MovieModel.create({ movieId, magnet, path: "" });
   }
+
   const engine = TorrentStream(magnet || movieMagnet, options);
 
   let newFilePath;
@@ -478,13 +465,13 @@ const downloadMovie = async (
       const directory = newFilePath.split("/").reverse()[1];
       const fileName = newFilePath.split("/").reverse()[0];
       const path = `${process.cwd()}/server/data/movie/${directory}/${fileName}`;
-      await Movie.findOneAndUpdate({ movieId }, { path });
+      await MovieModel.findOneAndUpdate({ movieId }, { path });
     });
 };
 
 const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
   const movieId = req.params.imdbId;
-  const movieFound = await Movie.findOne({ movieId });
+  const movieFound = await MovieModel.findOne({ movieId });
   if (movieFound && movieFound.magnet && !movieFound.path) {
     downloadMovie(movieId, null, null, req, res, movieFound.magnet);
   } else {
@@ -507,7 +494,7 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
       sourceSite = "yts";
     } else {
       sourceUrl = `https://torrentapi.org/pubapi_v2.php?token=${TOKEN}&app_id=Hypertube1&mode=search&category=movies&format=json_extended&limit=100&search_imdb=${movieId}`;
-      sourceSite = "TorrentApi";
+      sourceSite = "rarbg";
     }
     await Axios.get(sourceUrl)
       .then(async (movieRes) => {
@@ -518,13 +505,13 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
             : movieRes.data.torrent_results;
 
         // Check if the movie is already download in the database
-        Movie.findOne({ movieId }, (err, result) => {
+        MovieModel.findOne({ movieId }, (err, result) => {
           if (err) {
             console.error(err);
             return res.status(500).send("Internal Server Error");
           }
           if (result) {
-            Movie.findOne({ movieId }, (error, found) => {
+            MovieModel.findOne({ movieId }, (error, found) => {
               if (error) {
                 console.error(error.message);
                 return res.statu(500).send("Intenal server error");

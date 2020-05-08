@@ -8,7 +8,6 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import schedule from "node-schedule";
 import fs from "fs";
-import mongoose from "./mongo";
 
 import passportGoogle from "./Helpers/omniauth/google";
 import passport42 from "./Helpers/omniauth/42";
@@ -20,7 +19,7 @@ import SearchCache from "./Schemas/SearchCache";
 import socket from "./Helpers/socket";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const http = require("http").createServer(app);
 
@@ -58,14 +57,12 @@ app.use(
 
 app.use(hotMiddleware);
 
-const Movie = mongoose.model("Movie", MovieModel);
-
 schedule.scheduleJob("00 59 23 * * *", () => {
   console.log("Removing movies from server...");
   const lastMonth = new Date().setUTCMonth(new Date().getUTCMonth() - 1); // Last month
-  Movie.find({ lastViewed: { $lte: lastMonth } }, (err, result) => {
+  MovieModel.find({ lastViewed: { $lte: lastMonth } }, (err, result) => {
     result.forEach((movie) => {
-      Movie.findByIdAndRemove({ _id: movie._id });
+      MovieModel.findByIdAndRemove({ _id: movie._id });
       fs.unlinkSync(movie.path); // Delete movie repo
     });
   });
@@ -73,10 +70,8 @@ schedule.scheduleJob("00 59 23 * * *", () => {
 });
 
 schedule.scheduleJob("59 * * * * *", async () => {
-  console.log("Deleting search caches...");
   const limitDate = new Date(Date.now() - 20 * 60000); // 20 minutes ago;
   await SearchCache.deleteMany({ createdAt: { $lte: limitDate } });
-  console.log("Deleting search caches done !");
 });
 
 /* eslint-enable */
