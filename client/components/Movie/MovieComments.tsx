@@ -101,12 +101,6 @@ const MovieComments = ({
     <div className={classes.containerRatingAndComment}>
       <Box component="fieldset" borderColor="transparent">
         <div className={classes.movieRating}>{_t({ id: "movie.rating" })}</div>
-        <Rating
-          precision={0.1}
-          value={reviews.movieRating}
-          readOnly
-          emptyIcon={<StarBorderIcon color="primary" />}
-        />
       </Box>
       <span className={classes.commentTitle}>
         {_t({ id: "movie.comment.title" })}
