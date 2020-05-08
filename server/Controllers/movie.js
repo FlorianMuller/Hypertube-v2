@@ -379,7 +379,7 @@ const downloadMovie = async (
         "&"
       );
     } else if (sourceSite === "yts") {
-      const sorted = movie.sort((a, b) => b.seeders - a.seeders);
+      const sorted = movie.torrents.sort((a, b) => b.seeders - a.seeders);
       const no3d = sorted.filter((torrent) => torrent.quality !== "3D");
 
       magnet = no3d.length ? no3d[0].hash : sorted[0].hash;
