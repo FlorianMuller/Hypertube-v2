@@ -12,9 +12,6 @@ import {
   Hidden
 } from "@material-ui/core";
 import { Search, AccountCircle } from "@material-ui/icons";
-
-import SearchIcon from "@material-ui/icons/Search";
-
 import Cookies from "universal-cookie";
 import API from "../../util/api";
 import { useHeaderStyles } from "./Layout.styles";
