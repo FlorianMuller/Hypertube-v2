@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema({
   emailVerified: { type: Boolean, default: false }
 });
 
+// disable: to use this in the function
+// eslint-disable-next-line func-names
+userSchema.virtual("isOnmiAuth").get(function() {
+  return !!(this.googleID || this.schoolID);
+});
+
 const UserModel = mongoose.model("User", userSchema);
 
 export default UserModel;

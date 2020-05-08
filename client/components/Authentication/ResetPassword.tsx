@@ -19,13 +19,13 @@ const ResetPassword = (): ReactElement => {
   const send = async (): Promise<void> => {
     // change the callApi function according to back-end
     if (validateEmail(email)) {
-      API.get(`/reset-password/${localStorageData.language}/${email}`).then(
-        ({ data }) => {
-          if (data.status === 401) setValidEmail(0);
-          if (data.status === 200) setValidEmail(1);
-          return undefined;
-        }
-      );
+      API.get(
+        `/users/reset-password/${localStorageData.language}/${email}`
+      ).then(({ data }) => {
+        if (data.status === 401) setValidEmail(0);
+        if (data.status === 200) setValidEmail(1);
+        return undefined;
+      });
     } else {
       return setValidEmail(0);
     }

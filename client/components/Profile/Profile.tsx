@@ -42,7 +42,7 @@ const Profile = ({
           <div className={classes.containerPicture}>
             <Avatar
               alt="Profile picture"
-              src={`${window.location.origin}/api/avatar/${data?.picture}`}
+              src={data?.picture || ""}
               className={classes.large}
             />
           </div>

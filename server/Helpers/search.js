@@ -1,3 +1,6 @@
+/* eslint-disable no-await-in-loop */
+// Why disable no-await-in-loop ? Because I need the page before to get the next one, I can't parallelize this
+
 import SearchCache from "../Schemas/SearchCache";
 import yts from "./searchSources/yts";
 import rarbgHelper from "./searchSources/rarbg";
@@ -44,29 +47,39 @@ class MergeError extends Error {
 }
 
 /**
- * Create or update cache
+ * Update cache
  */
-const manageCache = async (
+const updateCache = async (
+  allData,
   cacheDetails,
   indexes,
   resultMovies,
   searchOptions
 ) => {
-  if (cacheDetails) {
+  const recentCache = await SearchCache.findOne({
+    searchType: searchOptions
+  });
+
+  // if page is not already cache, update it
+  if (recentCache.cache.length === cacheDetails.cache.length) {
+    // Adding indexes
     indexes.forEach((value, key) => {
-      cacheDetails.indexes.set(
-        key,
-        value + (cacheDetails.indexes.get(key) || 0)
-      );
+      recentCache.indexes.set(key, value + (recentCache.indexes.get(key) || 0));
     });
-    cacheDetails.cache.push(resultMovies);
-    await cacheDetails.save();
-  } else {
-    await SearchCache.create({
-      indexes,
-      cache: [resultMovies],
-      searchType: searchOptions
+
+    // Setting film who will no longer send result index's to -1
+    allData.forEach((src) => {
+      if (!src.movies.length && !src.nextPage) {
+        recentCache.indexes.set(src.name, -1);
+      }
     });
+
+    // Caching movies
+    if (resultMovies.length) {
+      recentCache.cache.push(resultMovies);
+    }
+
+    await recentCache.save();
   }
 };
 
@@ -124,7 +137,8 @@ const mergeMoviesList = async (
       (movie) => !idList.includes(movie.id)
     );
 
-    await manageCache(
+    await updateCache(
+      allData,
       cacheDetails,
       new Map([[sources[0].name, sources[0].movies.length]]),
       resultMovies,
@@ -192,48 +206,90 @@ const mergeMoviesList = async (
   }
 
   // Completing or creating cache
-  await manageCache(cacheDetails, indexes, resultMovies, searchOptions);
+  await updateCache(
+    allData,
+    cacheDetails,
+    indexes,
+    resultMovies,
+    searchOptions
+  );
 
   return resultMovies;
 };
 
+const getCache = async (searchOptions) => {
+  const cacheDetails = await SearchCache.findOne({ searchType: searchOptions });
+
+  if (!cacheDetails) {
+    try {
+      const newCacheDetails = await SearchCache.create({
+        indexes: new Map(),
+        cache: [],
+        searchType: searchOptions
+      });
+      return newCacheDetails;
+    } catch (e) {
+      // if it's a duplicate error
+      if (e.name === "MongoError" && e.code === 11000) {
+        return SearchCache.findOne({ searchType: searchOptions });
+      }
+      throw e;
+    }
+  }
+
+  return cacheDetails;
+};
+
 /**
+ * page: page number [required]
+ *
  * sort: The parameter on wich movies are gonna be sorted
  * query: search string
- * page: page number
- *
  * minRating: minimum note
  * year: specific year
  * genre: a specific movie genre
  */
 const searchMoviesOnAllSource = async (searchOptions) => {
   // Get cache
-  const cacheDetails = await SearchCache.findOne({ searchType: searchOptions });
+  let cacheDetails = await getCache(searchOptions);
 
   // If wanted page is cache, return it
-  if (cacheDetails && cacheDetails.cache.length >= (searchOptions.page || 1)) {
-    return { movies: cacheDetails.cache[(searchOptions.page || 1) - 1] };
+  if (cacheDetails.cache.length >= searchOptions.page) {
+    return { movies: cacheDetails.cache[searchOptions.page - 1] };
   }
 
-  // Search on all sources
-  const allData = await Promise.all(
-    sourceList.map((src) =>
-      src.func(
-        searchOptions,
-        (cacheDetails && cacheDetails.indexes.get(src.name)) || 0
+  // let moviesList;
+  let allData;
+  while (
+    cacheDetails.cache.length < searchOptions.page &&
+    (allData === undefined || allData.filter((src) => src.nextPage).length)
+  ) {
+    // Search on all sources
+    allData = await Promise.all(
+      // eslint-disable-next-line no-loop-func
+      sourceList.map((src) =>
+        src.func(searchOptions, cacheDetails.indexes.get(src.name) || 0)
       )
-    )
-  );
+    );
 
-  // Merging sources and caching
-  const moviesList = await mergeMoviesList(
-    allData,
-    SORT_FUNC.get(searchOptions.sort || "dateAdded"),
-    searchOptions,
-    cacheDetails
-  );
+    // Merging sources and caching
+    await mergeMoviesList(
+      allData,
+      SORT_FUNC.get(searchOptions.sort || "dateAdded"),
+      searchOptions,
+      cacheDetails
+    );
 
-  return { movies: moviesList };
+    // Getting updated cache
+    cacheDetails = await getCache(searchOptions);
+  }
+
+  return {
+    movies:
+      cacheDetails.cache.length >= searchOptions.page
+        ? cacheDetails.cache[searchOptions.page - 1]
+        : []
+  };
 };
 
 const checkIfViewed = async (data, userId) => {

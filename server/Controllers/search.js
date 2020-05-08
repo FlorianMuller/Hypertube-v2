@@ -9,6 +9,9 @@ const searchMovies = async (req, res) => {
       req.query.minRating = parseFloat(req.query.minRating, 10);
     if (req.query.year) req.query.year = parseInt(req.query.year, 10);
 
+    // Page 1 by default
+    if (!req.query.page) req.query.page = 1;
+
     let moviesList = await helpers.searchMoviesOnAllSource(req.query);
     moviesList = await helpers.checkIfViewed(moviesList, req.userId);
     res.send(moviesList);

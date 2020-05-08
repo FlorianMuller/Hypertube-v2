@@ -13,8 +13,7 @@ import changeUserPictureController from "./Controllers/changeUserPicture";
 import ResetPassword from "./Controllers/ResetPassword";
 import checkAuth from "./Helpers/auth";
 import signOutController from "./Controllers/signOut";
-import { setAccesTokenCookie } from "./Helpers/signIn";
-// import omniauthGoogle from './Helpers/omniauth/google'
+import { setAccesTokenCookie, setLoggedCookie } from "./Helpers/signIn";
 
 const router = express.Router();
 
@@ -23,11 +22,14 @@ router.use("/avatar", checkAuth, express.static("./server/data/avatar"));
 
 /* User */
 router.get("/users", checkAuth, user.getUser);
-router.put("/users", checkAuth, editUserController);
-router.post("/users/picture", checkAuth, changeUserPictureController);
+router.get("/users/:username", profile.getUserByUsername);
+
 router.post("/users", signUpController.signUp);
 
-router.get("/users/:username", profile.getUserByUsername);
+router.put("/users", checkAuth, editUserController);
+router.post("/users/picture", checkAuth, changeUserPictureController);
+router.get("/users/reset-password/:lang/:email", ResetPassword.SendMail);
+router.put("/users/reset-password", ResetPassword.ResetPassword);
 
 router.put(
   "/users/:id/send-validation-email",
@@ -61,7 +63,8 @@ router.get(
     if (req.error) {
       res.sendstatus(req.error.status);
     } else if (req.user.id) {
-      setAccesTokenCookie(res, req.id);
+      setAccesTokenCookie(res, req.user.id);
+      setLoggedCookie(res);
       res.redirect("/");
     } else res.redirect("/?auth=google");
   }
@@ -86,18 +89,12 @@ router.get(
     if (req.error) {
       res.sendstatus(req.error.status);
     } else if (req.user.id) {
-      setAccesTokenCookie(res, req.id);
+      setAccesTokenCookie(res, req.user.id);
+      setLoggedCookie(res);
       res.redirect("/");
     } else res.redirect("/?auth=school");
   }
 );
-/* Reset password */
-router.get("/reset-password/:lang/:email", ResetPassword.SendMail);
-// router.get("/resetPassword/:token", ResetPassword.checkToken);
-router.put("/change-password", ResetPassword.ResetPassword);
-
-/* Search */
-router.get("/movies", checkAuth, searchController.searchMovies);
 
 /* Movie */
 router.use("/movie", checkAuth, express.static("./server/data/movie"));
@@ -119,6 +116,7 @@ router.get("/movie/streaming/:directory/:fileName", checkAuth, (req, res) => {
 });
 router.get("/movie/review/:id", checkAuth, movieController.getReviews);
 router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
+router.get("/movies", searchController.searchMovies);
 router.get("/movies/recommended", checkAuth, movieController.getRecommendation);
 router.get("/movies/:id", checkAuth, movieController.getInfos);
 
@@ -128,6 +126,6 @@ router.get(
   checkAuth,
   profile.getMovieCommentsByUsername
 );
-// router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
+// router.post("/comments", checkAuth, movieController.receiveReviews);
 
 export default router;

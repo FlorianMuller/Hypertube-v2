@@ -17,6 +17,7 @@ import {
   ExpandLess,
   AccountCircle
 } from "@material-ui/icons";
+import Cookies from "universal-cookie";
 
 import API from "../../util/api";
 import { useHeaderStyles } from "./Layout.styles";
@@ -47,6 +48,8 @@ const Header = ({
   const history = useHistory();
   const [localeAnchorEl, setLocaleAnchorEl] = useState(undefined);
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(undefined);
+  const cookies = new Cookies();
+  const [logged, setLogged] = useState(false);
   const [localeLst, setLocaleLst] = useState(
     localeCompleteLst.filter((loc) => loc !== locale)
   );
@@ -64,10 +67,15 @@ const Header = ({
     setProfileMenuAnchor(undefined);
   };
 
+  useEffect(() => {
+    setLogged(!!cookies.get("loggedCookie"));
+  });
+
   const logOut = async (): Promise<void> => {
     await API.put(`/users/logout`);
     history.push("/");
     onMenuProfile();
+    setLogged(!!cookies.get("loggedCookie"));
   };
 
   return (
@@ -80,39 +88,47 @@ const Header = ({
               <Hidden mdUp>{_t({ id: "title_short" })}</Hidden>
             </Link>
           </Typography>
-          <Hidden smDown>
-            <Typography className={classes.linkMedia} variant="subtitle2">
-              <Link className={classes.titleLink} to="/search">
-                {_t({ id: "header.last_add" })}
-              </Link>
-            </Typography>
-          </Hidden>
+          {logged && (
+            <Hidden smDown>
+              <Typography className={classes.linkMedia} variant="subtitle2">
+                <Link className={classes.titleLink} to="/search">
+                  {_t({ id: "header.last_add" })}
+                </Link>
+              </Typography>
+            </Hidden>
+          )}
         </div>
         <div className={classes.headerContent}>
-          {/* Searchbar */}
-          <OutlinedInput
-            value={searchQuery}
-            onChange={(e): void => onSearchChange(e.target.value)}
-            onFocus={(): void => setExpandedFilters(true)}
-            placeholder={_t({ id: "layout.filters.search" })}
-            className={classes.searchInput}
-            startAdornment={<Search className={classes.inputLabel} />}
-            labelWidth={0}
-            id="menuitem-search"
-            autoComplete="off"
-          />
-          {/* Filters button */}
-          <IconButton
-            id="expandFiltersButton"
-            onClick={(): void => setExpandedFilters((oldIsExp) => !oldIsExp)}
-            className={classes.localeItem}
-          >
-            {expandedFilters ? (
-              <ExpandLess id="expandFiltersIcon" />
-            ) : (
-              <ExpandMore id="expandFiltersIcon" />
-            )}
-          </IconButton>
+          {logged && (
+            <>
+              {/* Searchbar */}
+              <OutlinedInput
+                value={searchQuery}
+                onChange={(e): void => onSearchChange(e.target.value)}
+                onFocus={(): void => setExpandedFilters(true)}
+                placeholder={_t({ id: "layout.filters.search" })}
+                className={classes.searchInput}
+                startAdornment={<Search className={classes.inputLabel} />}
+                labelWidth={0}
+                id="menuitem-search"
+                autoComplete="off"
+              />
+              {/* Filters button */}
+              <IconButton
+                id="expandFiltersButton"
+                onClick={(): void =>
+                  setExpandedFilters((oldIsExp) => !oldIsExp)
+                }
+                className={classes.localeItem}
+              >
+                {expandedFilters ? (
+                  <ExpandLess id="expandFiltersIcon" />
+                ) : (
+                  <ExpandMore id="expandFiltersIcon" />
+                )}
+              </IconButton>
+            </>
+          )}
 
           {/* Language + profile button */}
           <div className={classes.buttonsMenu}>
@@ -150,14 +166,16 @@ const Header = ({
                 </MenuItem>
               ))}
             </Menu>
-
             {/* Profile */}
-            <IconButton
-              className={classes.headerButtons}
-              onClick={(e): void => setProfileMenuAnchor(e.currentTarget)}
-            >
-              <AccountCircle />
-            </IconButton>
+            {logged && (
+              <IconButton
+                className={classes.headerButtons}
+                onClick={(e): void => setProfileMenuAnchor(e.currentTarget)}
+              >
+                <AccountCircle />
+              </IconButton>
+            )}
+
             <Menu
               keepMounted
               anchorEl={profileMenuAnchor}

@@ -40,7 +40,6 @@ const SortSelect = ({ sort, labelid, setSort }: Props): ReactElement => {
       <MenuItem value="rating" id="menuitem-rating">
         {_t({ id: "layout.filters_sort.rating" })}
       </MenuItem>
-      <MenuItem />
     </Select>
   );
 };
