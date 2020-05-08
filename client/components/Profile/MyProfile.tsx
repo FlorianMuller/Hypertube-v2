@@ -26,7 +26,6 @@ const MyProfile = (): ReactElement => {
   const { callApi } = useApi<MyUserProfile, void>("/users", { method: "put" });
   // emailStatus = 0 : email not typed, 1 = typed and wrong, 2 = typed and ok
   const [emailStatus, setEmailStatus] = useState(0);
-
   const updateInfo = (value: string, name: string): void => {
     if (value && name === "email") {
       if (!validateEmail(value)) setEmailStatus(1);
@@ -44,7 +43,11 @@ const MyProfile = (): ReactElement => {
     <div className={classes.containerProfile}>
       <div>
         <Paper className={classes.containerUser}>
-          <EditableAvatar picture={data?.picture} />
+          <EditableAvatar
+            picture={data?.picture}
+            googleID={data?.googleID}
+            schoolID={data?.schoolID}
+          />
           <div className={classes.containerInfo}>
             {/* FirstName and lastName */}
             <div className={classes.containerFullname}>

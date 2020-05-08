@@ -87,6 +87,8 @@ export interface UserProfile {
   email?: string;
   lastName: string;
   picture: string;
+  googleID: string;
+  schoolID: string;
 }
 
 export interface MyUserProfile extends UserProfile {

@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from "react";
+import React, { useState, ReactElement, useEffect } from "react";
 import { useIntl } from "react-intl";
 import { Link, useHistory } from "react-router-dom";
 import {
@@ -12,6 +12,7 @@ import {
   Hidden
 } from "@material-ui/core";
 import { Search, AccountCircle } from "@material-ui/icons";
+import Cookies from "universal-cookie";
 
 import API from "../../util/api";
 import { useHeaderStyles } from "./Layout.styles";
@@ -36,6 +37,8 @@ const Header = ({
   const [localeAnchorEl, setLocaleAnchorEl] = useState(undefined);
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(undefined);
   const history = useHistory();
+  const cookies = new Cookies();
+  const [logged, setLogged] = useState(false);
 
   const setNewLocale = (newLocale: string): void => {
     setLocale(newLocale);
@@ -46,10 +49,15 @@ const Header = ({
     setProfileMenuAnchor(undefined);
   };
 
+  useEffect(() => {
+    setLogged(!!cookies.get("loggedCookie"));
+  });
+
   const logOut = async (): Promise<void> => {
     await API.put(`/users/logout`);
     history.push("/");
     onMenuProfile();
+    setLogged(!!cookies.get("loggedCookie"));
   };
 
   return (
@@ -62,25 +70,29 @@ const Header = ({
               <Hidden mdUp>{_t({ id: "title_short" })}</Hidden>
             </Link>
           </Typography>
-          <Hidden smDown>
-            <Typography className={classes.linkMedia} variant="subtitle2">
-              <Link className={classes.titleLink} to="/search">
-                {_t({ id: "header.trending_movies" })}
-              </Link>
-            </Typography>
-          </Hidden>
+          {logged && (
+            <Hidden smDown>
+              <Typography className={classes.linkMedia} variant="subtitle2">
+                <Link className={classes.titleLink} to="/search">
+                  {_t({ id: "header.trending_movies" })}
+                </Link>
+              </Typography>
+            </Hidden>
+          )}
         </div>
         <div className={classes.headerContent}>
-          <OutlinedInput
-            value={searchQuery}
-            onChange={(e): void => onSearchChange(e.target.value)}
-            onFocus={onExpandFilters}
-            placeholder={_t({ id: "layout.filters.search" })}
-            className={classes.searchInput}
-            startAdornment={<Search className={classes.inputLabel} />}
-            labelWidth={0}
-            id="menuitem-search"
-          />
+          {logged && (
+            <OutlinedInput
+              value={searchQuery}
+              onChange={(e): void => onSearchChange(e.target.value)}
+              onFocus={onExpandFilters}
+              placeholder={_t({ id: "layout.filters.search" })}
+              className={classes.searchInput}
+              startAdornment={<Search className={classes.inputLabel} />}
+              labelWidth={0}
+              id="menuitem-search"
+            />
+          )}
           <div className={classes.buttonsMenu}>
             <IconButton
               className={classes.headerButtons}
@@ -103,12 +115,15 @@ const Header = ({
                 {_t({ id: "header.language.en" })}
               </MenuItem>
             </Menu>
-            <IconButton
-              className={classes.headerButtons}
-              onClick={(e): void => setProfileMenuAnchor(e.currentTarget)}
-            >
-              <AccountCircle />
-            </IconButton>
+            {logged && (
+              <IconButton
+                className={classes.headerButtons}
+                onClick={(e): void => setProfileMenuAnchor(e.currentTarget)}
+              >
+                <AccountCircle />
+              </IconButton>
+            )}
+
             <Menu
               keepMounted
               anchorEl={profileMenuAnchor}

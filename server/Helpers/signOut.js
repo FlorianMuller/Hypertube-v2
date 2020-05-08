@@ -1,7 +1,14 @@
-import { accestTokenName, accesTokenOption } from "./signIn";
+import {
+  accestTokenName,
+  loggedCookieName,
+  accesTokenOption,
+  loggedCookieOption
+} from "./signIn";
 
-const deleteAccessTokenCookie = (res) => {
+export const deleteAccessTokenCookie = (res) => {
   res.clearCookie(accestTokenName, accesTokenOption);
 };
 
-export default deleteAccessTokenCookie;
+export const deleteLoggedCookie = (res) => {
+  res.clearCookie(loggedCookieName, loggedCookieOption);
+};

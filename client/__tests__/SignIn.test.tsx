@@ -13,7 +13,13 @@ jest.mock("react-router-dom", () => ({
   useHistory: (): History<LocationState> => ({
     length: null,
     action: null,
-    location: null,
+    location: {
+      hash: "",
+      key: "jdn9b3",
+      pathname: "/",
+      search: "",
+      state: undefined
+    },
     push: jest.fn(),
     replace: jest.fn(),
     go: jest.fn(),

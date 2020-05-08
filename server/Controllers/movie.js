@@ -103,7 +103,7 @@ const getRecommendation = async (_req, res) => {
   try {
     // Get most downloaded movies of the current year (or year before in january)
     const { movies } = await searchMoviesOnYts({
-      year: new Date().getFullYear() - (new Date().getMonth > 0 ? 0 : 1)
+      year: new Date().getFullYear() - (new Date().getMonth() > 0 ? 0 : 1)
     });
 
     // Shuffle array
