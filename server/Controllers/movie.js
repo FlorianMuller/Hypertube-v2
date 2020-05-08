@@ -579,7 +579,6 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
 const receiveReviews = async (req, res) => {
   const comment = req.body;
   const user = await UserModel.findOne({ _id: req.userId });
-  console.log(user.username);
   try {
     MovieCommentModel.create({
       movieId: comment.movieId,

@@ -296,9 +296,34 @@ const checkIfViewed = async (data, userId) => {
   const history = await UserHistoryModel.find({ userId });
   const newData = data.movies.map((movie) => {
     const found = history.find((el) => el.imdb_code === movie.id);
-    if (found) return { ...movie, viewed: true };
-    return { ...movie, viewed: false };
+    if (found) {
+      return {
+        genres: movie.genres,
+        id: movie.id,
+        title: movie.title,
+        cover: movie.cover,
+        year: movie.year,
+        summary: movie.summary,
+        rating: movie.rating,
+        runtime: movie.runtime,
+        dateAdded: movie.dateAdded,
+        viewed: true
+      };
+    }
+    return {
+      genres: movie.genres,
+      id: movie.id,
+      title: movie.title,
+      cover: movie.cover,
+      year: movie.year,
+      summary: movie.summary,
+      rating: movie.rating,
+      runtime: movie.runtime,
+      dateAdded: movie.dateAdded,
+      viewed: false
+    };
   });
+
   return { movies: newData, nextPage: data.nextPage };
 };
 
