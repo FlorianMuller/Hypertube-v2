@@ -86,7 +86,6 @@ const MovieComments = ({
           });
           setStars(0);
           await API.get(`/movie/review/${movieId}`).then((req) => {
-            console.log(req.data);
             setReviews(req.data);
           });
         })
