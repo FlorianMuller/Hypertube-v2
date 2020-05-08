@@ -21,15 +21,12 @@ export const createAccestToken = (userId) => {
   });
 };
 
-export const createLoggedCookie = (userId) => {
-  return jwt.sign({ id: userId }, process.env.SECRET_KEY, {
-    expiresIn: ACCES_TOKEN_EXPIRATION
-  });
+export const createLoggedCookie = () => {
+  return "xt1RCazuMrzUU!";
 };
 
-export const setLoggedCookie = (res, userId) => {
-  const loggedCookie = createLoggedCookie(userId);
-
+export const setLoggedCookie = (res) => {
+  const loggedCookie = createLoggedCookie();
   res.cookie(loggedCookieName, loggedCookie, {
     ...loggedCookieOption,
     maxAge: ACCES_TOKEN_EXPIRATION * 1000

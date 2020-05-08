@@ -16,7 +16,7 @@ const signIn = async (req, res) => {
       if (user && (await bcrypt.compare(password, user.password))) {
         if (user.emailVerified) {
           setAccesTokenCookie(res, user.id);
-          setLoggedCookie(res, user.id);
+          setLoggedCookie(res);
 
           res.sendStatus(200);
         } else {
