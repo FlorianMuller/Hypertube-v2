@@ -45,11 +45,7 @@ const EditableAvatar = ({ picture }: Props): ReactElement => {
           name="picture"
           onChange={handleInputChange}
         />
-        <Avatar
-          alt="user-pic"
-          src={`${window.location.origin}/api/avatar/${picture}`}
-          className={classes.large}
-        />
+        <Avatar alt="user-pic" src={picture} className={classes.large} />
         {mouseIn && <AddAPhotoIcon className={classes.changePhoto} />}
       </label>
     </div>

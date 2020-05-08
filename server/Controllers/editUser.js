@@ -58,17 +58,17 @@ const editUser = async (req, res) => {
       // New password is valid
       if (validPassword(req.body.newPassword)) {
         const userInfos = await UserModel.findById(req.userId);
-        if (userInfos) {
+        if (userInfos && !userInfos.isOnmiAuth) {
           // Current password is valid
           if (await bcrypt.compare(req.body.oldPassword, userInfos.password)) {
             newUser.password = await getPasswordHash(req.body.newPassword);
           } else {
-            res.status(401);
+            res.status(400);
             errorRes.password = "Current password not valid";
           }
         } else {
-          res.status(404);
-          errorRes.password = "User not found";
+          res.status(401);
+          errorRes.password = "This user can't have a password";
         }
       } else {
         res.status(400);

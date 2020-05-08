@@ -22,12 +22,20 @@ const getUserByUsername = async (req, res) => {
   try {
     const userInfos = await UserModel.findOne(
       { username },
-      "username firstName lastName picture"
+      "username firstName lastName picture schoolID googleID"
     );
     if (userInfos === null) {
       res.sendStatus(404);
     }
-    res.status(200).send(userInfos);
+    // setting picture path + removing `googleID` and `schoolID` (used to calculate isOnmiAuth)
+    res.send({
+      ...userInfos.toJSON(),
+      picture: userInfos.isOnmiAuth
+        ? userInfos.picture
+        : `${process.env.CLIENT_ORIGIN}/api/avatar/${userInfos.picture}`,
+      googleID: undefined,
+      schoolID: undefined
+    });
   } catch (e) {
     console.error(e);
     res.sendStatus(500);
