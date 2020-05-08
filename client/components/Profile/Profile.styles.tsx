@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing(4, 0),
     textAlign: "center"
   },
-  usernameWrapper: {
+  notAllowed: {
     cursor: "not-allowed"
   },
   passwordButton: {

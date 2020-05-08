@@ -65,7 +65,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/api/user/google/callback"
+      callbackURL: `${process.env.CLIENT_ORIGIN}/api/user/google/callback`
     },
     async (_accessToken, _refreshToken, profile, done) => {
       const exist = await userExist(profile.id);

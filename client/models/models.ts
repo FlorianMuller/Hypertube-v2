@@ -89,6 +89,10 @@ export interface UserProfile {
   picture: string;
 }
 
+export interface MyUserProfile extends UserProfile {
+  isOnmiAuth: boolean;
+}
+
 export type CustomSnackbarVariant =
   | "success"
   | "warning"
