@@ -1,15 +1,20 @@
-import qs from "qs";
-
-import { searchMoviesOnYts } from "../Helpers/search";
+import searchMoviesOnAllSource from "../Helpers/search";
 
 const searchMovies = async (req, res) => {
-  const parsedQuery = qs.parse(req.query);
-
   try {
-    const data = await searchMoviesOnYts(parsedQuery);
-    res.status(200).send(data);
-  } catch (error) {
-    console.error(error);
+    // Converting param to real number
+    if (req.query.page) req.query.page = parseInt(req.query.page, 10);
+    if (req.query.minRating)
+      req.query.minRating = parseFloat(req.query.minRating, 10);
+    if (req.query.year) req.query.year = parseInt(req.query.year, 10);
+
+    // Page 1 by default
+    if (!req.query.page) req.query.page = 1;
+
+    const moviesList = await searchMoviesOnAllSource(req.query);
+    res.send(moviesList);
+  } catch (e) {
+    console.error(e);
     res.sendStatus(500);
   }
 };

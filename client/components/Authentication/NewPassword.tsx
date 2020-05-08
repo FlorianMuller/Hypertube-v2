@@ -35,7 +35,11 @@ const NewPassword = (): ReactElement => {
     setConfirmedPasswordError(localConfirmedPasswordError);
 
     if (localConfirmedPasswordError === "" && localNewPasswordError === "") {
-      API.put("/change-password", { newPassword, confirmedPassword, token })
+      API.put("/users/reset-password", {
+        newPassword,
+        confirmedPassword,
+        token
+      })
         .then((res) => {
           if (res.data.status === 200) {
             setValidPassword(1);

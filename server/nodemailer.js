@@ -37,7 +37,7 @@ export const sendEmail = async (option) => {
 
   if (process.env.ENVIRONEMENT === "dev") {
     // url to preview mail send through Ethereal
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
   }
 
   return info;

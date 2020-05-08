@@ -80,7 +80,7 @@ const App = (): ReactElement => {
               notAuthComponent={NewPassword}
             />
 
-            <Route exact path="/error" authComponent={Error} />
+            <Route exact path="/error" component={Error} />
             <Route component={FourOhFour} />
           </Switch>
         </Layout>

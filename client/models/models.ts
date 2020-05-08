@@ -59,10 +59,11 @@ export interface Review {
 }
 
 export interface Filters {
-  query: string;
-  collections: string[];
-  year: number;
-  minRating: number;
+  query?: string;
+  genre?: string;
+  year?: number;
+  minRating?: number;
+  sort?: string;
 }
 
 export interface Movie {
