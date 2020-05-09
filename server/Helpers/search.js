@@ -294,7 +294,8 @@ const searchMoviesOnAllSource = async (searchOptions) => {
 
 const checkIfViewed = async (data, userId) => {
   const history = await UserHistoryModel.find({ userId });
-  const newData = data.movies.map((movie) => {
+  const list = data.movies ? data.movies : data;
+  const newData = list.map((movie) => {
     const found = history.find((el) => el.movieId === movie.id);
     if (found) {
       return {

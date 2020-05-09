@@ -623,13 +623,16 @@ const getRecommendation = async (_req, res) => {
       year: new Date().getFullYear() - (new Date().getMonth() > 0 ? 0 : 1),
       sort: "rating"
     });
-    const top = movies.slice(0, 15);
+    let top = movies.slice(0, 15);
 
     // Shuffle array
     top.sort(() => 0.5 - Math.random());
 
     // Sending sub-array of the first 4 elements after shuffle
-    res.send({ list: top.slice(0, 4) });
+
+    top = await searchHelpers.checkIfViewed(top, _req.userId);
+
+    res.send({ list: top.movies.slice(0, 4) });
   } catch (e) {
     console.error(e);
     res.sendStatus(500);
