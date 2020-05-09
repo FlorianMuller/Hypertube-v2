@@ -4,6 +4,7 @@ import TokenModel from "../Schemas/Token";
 import { sendEmail } from "../nodemailer";
 import enHtml from "../emailsHtml/resetPassword.en.html";
 import frHtml from "../emailsHtml/resetPassword.fr.html";
+import { validPassword } from "../Helpers/signUp";
 
 const resetEmailInfo = {
   en: {
@@ -52,7 +53,7 @@ const SendMail = async (req, res) => {
 
 const CheckResetToken = async (resetPasswordToken) => {
   const found = await TokenModel.findOne({ value: resetPasswordToken });
-  if (found !== undefined) {
+  if (found) {
     return true;
   }
   return false;
@@ -62,7 +63,10 @@ const ResetPassword = async (req, res) => {
   if (req.body.newPassword === null) return res.sendStatus(400);
   if (req.body.newPassword !== req.body.confirmedPassword)
     return res.send({ status: 401 });
-  if ((await CheckResetToken(req.body.token)) === false)
+  if (
+    (await CheckResetToken(req.body.token)) === false &&
+    validPassword(req.body.newPassword)
+  )
     return res.send({ status: 401 });
   const found = await TokenModel.findOne({ value: req.body.token });
   if (found) {

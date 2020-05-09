@@ -83,7 +83,7 @@ const Header = ({
     <AppBar color="inherit" position="sticky" className={classes.appBar}>
       <Toolbar>
         <div className={classes.linksContainer}>
-          <Typography className={classes.title} variant="h6">
+          <Typography variant="h6">
             <Link className={classes.titleLink} to="/">
               <Hidden smDown>{_t({ id: "title" })}</Hidden>
               <Hidden mdUp>{_t({ id: "title_short" })}</Hidden>

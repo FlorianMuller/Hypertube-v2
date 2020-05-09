@@ -103,7 +103,13 @@ exports[`Movie should renders <MovieComments> in english 1`] = `
                 1577118711809
                  -
                  
+                <a
+                  href="/profile/TestMan"
+                >
+                  Profile
+                </a>
               </span>
+              <br />
               <WithStyles(ForwardRef(Rating))
                 emptyIcon={
                   <UNDEFINED
@@ -1457,7 +1463,13 @@ exports[`Movie should renders <MovieComments> in french 1`] = `
                 1577118711809
                  -
                  
+                <a
+                  href="/profile/TestMan"
+                >
+                  Profile
+                </a>
               </span>
+              <br />
               <WithStyles(ForwardRef(Rating))
                 emptyIcon={
                   <UNDEFINED

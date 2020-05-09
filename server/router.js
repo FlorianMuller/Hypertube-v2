@@ -22,7 +22,7 @@ router.use("/avatar", checkAuth, express.static("./server/data/avatar"));
 
 /* User */
 router.get("/users", checkAuth, user.getUser);
-router.get("/users/:username", profile.getUserByUsername);
+router.get("/users/:username", checkAuth, profile.getUserByUsername);
 
 router.post("/users", signUpController.signUp);
 
@@ -116,7 +116,7 @@ router.get("/movie/streaming/:directory/:fileName", checkAuth, (req, res) => {
 });
 router.get("/movie/review/:id", checkAuth, movieController.getReviews);
 router.post("/movies/:id/reviews", checkAuth, movieController.receiveReviews);
-router.get("/movies", searchController.searchMovies);
+router.get("/movies", checkAuth, searchController.searchMovies);
 router.get("/movies/recommended", checkAuth, movieController.getRecommendation);
 router.get("/movies/:id", checkAuth, movieController.getInfos);
 

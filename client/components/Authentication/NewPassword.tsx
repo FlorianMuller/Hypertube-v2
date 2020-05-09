@@ -57,7 +57,7 @@ const NewPassword = (): ReactElement => {
   return (
     <div className={classes.containerPassword}>
       <Paper className={classes.paper}>
-        <h1>Nouveau mot de passe</h1>
+        <h1>{_t({ id: "newpassword.newpassword.placeholder" })}</h1>
         <TextField
           inputProps={{ maxLength: 1028 }}
           autoComplete="new-password"
@@ -78,7 +78,7 @@ const NewPassword = (): ReactElement => {
           className={classes.input}
           value={confirmedPassword}
           onChange={(e): void => setConfirmedPassword(e.target.value)}
-          placeholder={_t({ id: "newpassword.confirmedpassword.placeholder" })}
+          placeholder={_t({ id: "newpassword.newpassword.placeholder" })}
           error={!!confirmedPasswordError}
           helperText={
             confirmedPasswordError

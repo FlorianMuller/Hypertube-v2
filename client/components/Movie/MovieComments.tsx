@@ -68,7 +68,6 @@ const MovieComments = ({
       stars: stars === 0 && index !== "rating"
     });
   };
-
   const sendComment = async (): Promise<void> => {
     const ret = checkInvalidCommentOrStars(stars, comment.body);
     if (!ret.comment && !ret.stars) {
@@ -113,7 +112,9 @@ const MovieComments = ({
                 <div key={id} className={classes.comment}>
                   <span style={{ fontSize: "1.1rem" }}>
                     {authorUsername} - {date} -{" "}
+                    <a href={`/profile/${authorUsername}`}>Profile</a>
                   </span>
+                  <br />
                   <Rating
                     size="small"
                     value={nbStars}
