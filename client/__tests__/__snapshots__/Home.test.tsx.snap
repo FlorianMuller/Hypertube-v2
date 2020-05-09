@@ -1,0 +1,977 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home should render <Home> in english 1`] = `
+<StaticRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+    staticContext={Object {}}
+  >
+    <Home>
+      <div
+        className="makeStyles-mainPoster-1"
+      >
+        <div
+          className="makeStyles-boxContent-2"
+        >
+          <MovieThumbnail
+            key="1"
+            movie={
+              Object {
+                "cover": "path/to/pic",
+                "genres": Array [
+                  "comedy",
+                ],
+                "id": "1",
+                "rating": 4,
+                "runtime": 100,
+                "summary": "The one with Dany Boon you kwow, all the France is gonna laugh",
+                "title": "The comic movies",
+                "viewed": false,
+                "year": 2020,
+              }
+            }
+          >
+            <div
+              className="makeStyles-thumbnailContainer-4"
+              key="1"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <Image
+                animationDuration={500}
+                aspectRatio={1}
+                color="rgba(0,0,0,0)"
+                disableError={false}
+                disableSpinner={true}
+                disableTransition={false}
+                errorIcon={
+                  <ForwardRef(WithStyles)
+                    className="makeStyles-altContainer-14"
+                  >
+                    <ForwardRef(WithStyles)
+                      variant="h4"
+                    >
+                      The comic movies
+                    </ForwardRef(WithStyles)>
+                  </ForwardRef(WithStyles)>
+                }
+                imageStyle={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+                loading={
+                  <ForwardRef(WithStyles)
+                    size={48}
+                  />
+                }
+                src="path/to/pic"
+                style={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+              >
+                <div
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(0,0,0,0)",
+                      "height": 450,
+                      "paddingTop": "calc(1 / 1 * 100%)",
+                      "position": "relative",
+                      "width": 300,
+                    }
+                  }
+                >
+                  <img
+                    onError={[Function]}
+                    onLoad={[Function]}
+                    src="path/to/pic"
+                    style={
+                      Object {
+                        "filterBrightness": 0,
+                        "filterSaturate": 20,
+                        "height": 450,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "transition": "
+        filterBrightness 375ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        filterSaturate 500ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0.0, 0.2, 1)",
+                        "width": 300,
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "left": 0,
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </Image>
+            </div>
+          </MovieThumbnail>
+          <MovieThumbnail
+            key="2"
+            movie={
+              Object {
+                "cover": "path/to/pic",
+                "genres": Array [
+                  "action",
+                  "adventure",
+                ],
+                "id": "2",
+                "rating": 4,
+                "runtime": 100,
+                "summary": "You've seen it hundreds time, but here it is, an other one",
+                "title": "The marvel block buster",
+                "viewed": false,
+                "year": 2020,
+              }
+            }
+          >
+            <div
+              className="makeStyles-thumbnailContainer-4"
+              key="2"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <Image
+                animationDuration={500}
+                aspectRatio={1}
+                color="rgba(0,0,0,0)"
+                disableError={false}
+                disableSpinner={true}
+                disableTransition={false}
+                errorIcon={
+                  <ForwardRef(WithStyles)
+                    className="makeStyles-altContainer-14"
+                  >
+                    <ForwardRef(WithStyles)
+                      variant="h4"
+                    >
+                      The marvel block buster
+                    </ForwardRef(WithStyles)>
+                  </ForwardRef(WithStyles)>
+                }
+                imageStyle={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+                loading={
+                  <ForwardRef(WithStyles)
+                    size={48}
+                  />
+                }
+                src="path/to/pic"
+                style={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+              >
+                <div
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(0,0,0,0)",
+                      "height": 450,
+                      "paddingTop": "calc(1 / 1 * 100%)",
+                      "position": "relative",
+                      "width": 300,
+                    }
+                  }
+                >
+                  <img
+                    onError={[Function]}
+                    onLoad={[Function]}
+                    src="path/to/pic"
+                    style={
+                      Object {
+                        "filterBrightness": 0,
+                        "filterSaturate": 20,
+                        "height": 450,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "transition": "
+        filterBrightness 375ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        filterSaturate 500ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0.0, 0.2, 1)",
+                        "width": 300,
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "left": 0,
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </Image>
+            </div>
+          </MovieThumbnail>
+          <MovieThumbnail
+            key="3"
+            movie={
+              Object {
+                "cover": "path/to/pic",
+                "genres": Array [
+                  "action",
+                  "adventure",
+                ],
+                "id": "3",
+                "rating": 4,
+                "runtime": 100,
+                "summary": "The one with jokes for the parents",
+                "title": "The cool kid moovie",
+                "viewed": false,
+                "year": 2020,
+              }
+            }
+          >
+            <div
+              className="makeStyles-thumbnailContainer-4"
+              key="3"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <Image
+                animationDuration={500}
+                aspectRatio={1}
+                color="rgba(0,0,0,0)"
+                disableError={false}
+                disableSpinner={true}
+                disableTransition={false}
+                errorIcon={
+                  <ForwardRef(WithStyles)
+                    className="makeStyles-altContainer-14"
+                  >
+                    <ForwardRef(WithStyles)
+                      variant="h4"
+                    >
+                      The cool kid moovie
+                    </ForwardRef(WithStyles)>
+                  </ForwardRef(WithStyles)>
+                }
+                imageStyle={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+                loading={
+                  <ForwardRef(WithStyles)
+                    size={48}
+                  />
+                }
+                src="path/to/pic"
+                style={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+              >
+                <div
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(0,0,0,0)",
+                      "height": 450,
+                      "paddingTop": "calc(1 / 1 * 100%)",
+                      "position": "relative",
+                      "width": 300,
+                    }
+                  }
+                >
+                  <img
+                    onError={[Function]}
+                    onLoad={[Function]}
+                    src="path/to/pic"
+                    style={
+                      Object {
+                        "filterBrightness": 0,
+                        "filterSaturate": 20,
+                        "height": 450,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "transition": "
+        filterBrightness 375ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        filterSaturate 500ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0.0, 0.2, 1)",
+                        "width": 300,
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "left": 0,
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </Image>
+            </div>
+          </MovieThumbnail>
+          <MovieThumbnail
+            key="4"
+            movie={
+              Object {
+                "cover": "path/to/pic",
+                "genres": Array [
+                  "horror",
+                ],
+                "id": "4",
+                "rating": 4,
+                "runtime": 100,
+                "summary": "I don't know anything about it, I was too afraid to see it",
+                "title": "The horror movie",
+                "viewed": false,
+                "year": 2020,
+              }
+            }
+          >
+            <div
+              className="makeStyles-thumbnailContainer-4"
+              key="4"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <Image
+                animationDuration={500}
+                aspectRatio={1}
+                color="rgba(0,0,0,0)"
+                disableError={false}
+                disableSpinner={true}
+                disableTransition={false}
+                errorIcon={
+                  <ForwardRef(WithStyles)
+                    className="makeStyles-altContainer-14"
+                  >
+                    <ForwardRef(WithStyles)
+                      variant="h4"
+                    >
+                      The horror movie
+                    </ForwardRef(WithStyles)>
+                  </ForwardRef(WithStyles)>
+                }
+                imageStyle={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+                loading={
+                  <ForwardRef(WithStyles)
+                    size={48}
+                  />
+                }
+                src="path/to/pic"
+                style={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+              >
+                <div
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(0,0,0,0)",
+                      "height": 450,
+                      "paddingTop": "calc(1 / 1 * 100%)",
+                      "position": "relative",
+                      "width": 300,
+                    }
+                  }
+                >
+                  <img
+                    onError={[Function]}
+                    onLoad={[Function]}
+                    src="path/to/pic"
+                    style={
+                      Object {
+                        "filterBrightness": 0,
+                        "filterSaturate": 20,
+                        "height": 450,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "transition": "
+        filterBrightness 375ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        filterSaturate 500ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0.0, 0.2, 1)",
+                        "width": 300,
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "left": 0,
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </Image>
+            </div>
+          </MovieThumbnail>
+        </div>
+      </div>
+    </Home>
+  </Router>
+</StaticRouter>
+`;
+
+exports[`Home should render <Home> in french 1`] = `
+<StaticRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+    staticContext={Object {}}
+  >
+    <Home>
+      <div
+        className="makeStyles-mainPoster-1"
+      >
+        <div
+          className="makeStyles-boxContent-2"
+        >
+          <MovieThumbnail
+            key="1"
+            movie={
+              Object {
+                "cover": "path/to/pic",
+                "genres": Array [
+                  "comedy",
+                ],
+                "id": "1",
+                "rating": 4,
+                "runtime": 100,
+                "summary": "The one with Dany Boon you kwow, all the France is gonna laugh",
+                "title": "The comic movies",
+                "viewed": false,
+                "year": 2020,
+              }
+            }
+          >
+            <div
+              className="makeStyles-thumbnailContainer-4"
+              key="1"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <Image
+                animationDuration={500}
+                aspectRatio={1}
+                color="rgba(0,0,0,0)"
+                disableError={false}
+                disableSpinner={true}
+                disableTransition={false}
+                errorIcon={
+                  <ForwardRef(WithStyles)
+                    className="makeStyles-altContainer-14"
+                  >
+                    <ForwardRef(WithStyles)
+                      variant="h4"
+                    >
+                      The comic movies
+                    </ForwardRef(WithStyles)>
+                  </ForwardRef(WithStyles)>
+                }
+                imageStyle={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+                loading={
+                  <ForwardRef(WithStyles)
+                    size={48}
+                  />
+                }
+                src="path/to/pic"
+                style={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+              >
+                <div
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(0,0,0,0)",
+                      "height": 450,
+                      "paddingTop": "calc(1 / 1 * 100%)",
+                      "position": "relative",
+                      "width": 300,
+                    }
+                  }
+                >
+                  <img
+                    onError={[Function]}
+                    onLoad={[Function]}
+                    src="path/to/pic"
+                    style={
+                      Object {
+                        "filterBrightness": 0,
+                        "filterSaturate": 20,
+                        "height": 450,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "transition": "
+        filterBrightness 375ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        filterSaturate 500ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0.0, 0.2, 1)",
+                        "width": 300,
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "left": 0,
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </Image>
+            </div>
+          </MovieThumbnail>
+          <MovieThumbnail
+            key="2"
+            movie={
+              Object {
+                "cover": "path/to/pic",
+                "genres": Array [
+                  "action",
+                  "adventure",
+                ],
+                "id": "2",
+                "rating": 4,
+                "runtime": 100,
+                "summary": "You've seen it hundreds time, but here it is, an other one",
+                "title": "The marvel block buster",
+                "viewed": false,
+                "year": 2020,
+              }
+            }
+          >
+            <div
+              className="makeStyles-thumbnailContainer-4"
+              key="2"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <Image
+                animationDuration={500}
+                aspectRatio={1}
+                color="rgba(0,0,0,0)"
+                disableError={false}
+                disableSpinner={true}
+                disableTransition={false}
+                errorIcon={
+                  <ForwardRef(WithStyles)
+                    className="makeStyles-altContainer-14"
+                  >
+                    <ForwardRef(WithStyles)
+                      variant="h4"
+                    >
+                      The marvel block buster
+                    </ForwardRef(WithStyles)>
+                  </ForwardRef(WithStyles)>
+                }
+                imageStyle={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+                loading={
+                  <ForwardRef(WithStyles)
+                    size={48}
+                  />
+                }
+                src="path/to/pic"
+                style={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+              >
+                <div
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(0,0,0,0)",
+                      "height": 450,
+                      "paddingTop": "calc(1 / 1 * 100%)",
+                      "position": "relative",
+                      "width": 300,
+                    }
+                  }
+                >
+                  <img
+                    onError={[Function]}
+                    onLoad={[Function]}
+                    src="path/to/pic"
+                    style={
+                      Object {
+                        "filterBrightness": 0,
+                        "filterSaturate": 20,
+                        "height": 450,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "transition": "
+        filterBrightness 375ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        filterSaturate 500ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0.0, 0.2, 1)",
+                        "width": 300,
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "left": 0,
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </Image>
+            </div>
+          </MovieThumbnail>
+          <MovieThumbnail
+            key="3"
+            movie={
+              Object {
+                "cover": "path/to/pic",
+                "genres": Array [
+                  "action",
+                  "adventure",
+                ],
+                "id": "3",
+                "rating": 4,
+                "runtime": 100,
+                "summary": "The one with jokes for the parents",
+                "title": "The cool kid moovie",
+                "viewed": false,
+                "year": 2020,
+              }
+            }
+          >
+            <div
+              className="makeStyles-thumbnailContainer-4"
+              key="3"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <Image
+                animationDuration={500}
+                aspectRatio={1}
+                color="rgba(0,0,0,0)"
+                disableError={false}
+                disableSpinner={true}
+                disableTransition={false}
+                errorIcon={
+                  <ForwardRef(WithStyles)
+                    className="makeStyles-altContainer-14"
+                  >
+                    <ForwardRef(WithStyles)
+                      variant="h4"
+                    >
+                      The cool kid moovie
+                    </ForwardRef(WithStyles)>
+                  </ForwardRef(WithStyles)>
+                }
+                imageStyle={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+                loading={
+                  <ForwardRef(WithStyles)
+                    size={48}
+                  />
+                }
+                src="path/to/pic"
+                style={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+              >
+                <div
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(0,0,0,0)",
+                      "height": 450,
+                      "paddingTop": "calc(1 / 1 * 100%)",
+                      "position": "relative",
+                      "width": 300,
+                    }
+                  }
+                >
+                  <img
+                    onError={[Function]}
+                    onLoad={[Function]}
+                    src="path/to/pic"
+                    style={
+                      Object {
+                        "filterBrightness": 0,
+                        "filterSaturate": 20,
+                        "height": 450,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "transition": "
+        filterBrightness 375ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        filterSaturate 500ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0.0, 0.2, 1)",
+                        "width": 300,
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "left": 0,
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </Image>
+            </div>
+          </MovieThumbnail>
+          <MovieThumbnail
+            key="4"
+            movie={
+              Object {
+                "cover": "path/to/pic",
+                "genres": Array [
+                  "horror",
+                ],
+                "id": "4",
+                "rating": 4,
+                "runtime": 100,
+                "summary": "I don't know anything about it, I was too afraid to see it",
+                "title": "The horror movie",
+                "viewed": false,
+                "year": 2020,
+              }
+            }
+          >
+            <div
+              className="makeStyles-thumbnailContainer-4"
+              key="4"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <Image
+                animationDuration={500}
+                aspectRatio={1}
+                color="rgba(0,0,0,0)"
+                disableError={false}
+                disableSpinner={true}
+                disableTransition={false}
+                errorIcon={
+                  <ForwardRef(WithStyles)
+                    className="makeStyles-altContainer-14"
+                  >
+                    <ForwardRef(WithStyles)
+                      variant="h4"
+                    >
+                      The horror movie
+                    </ForwardRef(WithStyles)>
+                  </ForwardRef(WithStyles)>
+                }
+                imageStyle={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+                loading={
+                  <ForwardRef(WithStyles)
+                    size={48}
+                  />
+                }
+                src="path/to/pic"
+                style={
+                  Object {
+                    "height": 450,
+                    "width": 300,
+                  }
+                }
+              >
+                <div
+                  style={
+                    Object {
+                      "backgroundColor": "rgba(0,0,0,0)",
+                      "height": 450,
+                      "paddingTop": "calc(1 / 1 * 100%)",
+                      "position": "relative",
+                      "width": 300,
+                    }
+                  }
+                >
+                  <img
+                    onError={[Function]}
+                    onLoad={[Function]}
+                    src="path/to/pic"
+                    style={
+                      Object {
+                        "filterBrightness": 0,
+                        "filterSaturate": 20,
+                        "height": 450,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "transition": "
+        filterBrightness 375ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        filterSaturate 500ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 250ms cubic-bezier(0.4, 0.0, 0.2, 1)",
+                        "width": 300,
+                      }
+                    }
+                  />
+                  <div
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "display": "flex",
+                        "height": "100%",
+                        "justifyContent": "center",
+                        "left": 0,
+                        "pointerEvents": "none",
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </Image>
+            </div>
+          </MovieThumbnail>
+        </div>
+      </div>
+    </Home>
+  </Router>
+</StaticRouter>
+`;
