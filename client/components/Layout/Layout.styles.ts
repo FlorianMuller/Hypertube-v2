@@ -53,15 +53,15 @@ export const useHeaderStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexGrow: 1,
     [theme.breakpoints.down("xs")]: {
-      display: "none"
+      marginRight: "20px"
     }
   },
-  title: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.down("xs")]: {
-      display: "none"
-    }
-  },
+  // title: {
+  //   marginRight: theme.spacing(2)
+  //   // [theme.breakpoints.down("xs")]: {
+  //   //   display: "none"
+  //   // }
+  // },
   linkMedia: {
     margin: theme.spacing(0, 0.5)
   },

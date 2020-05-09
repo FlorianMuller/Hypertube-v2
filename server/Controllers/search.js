@@ -14,6 +14,7 @@ const searchMovies = async (req, res) => {
 
     let moviesList = await helpers.searchMoviesOnAllSource(req.query);
     moviesList = await helpers.checkIfViewed(moviesList, req.userId);
+    // console.log(moviesList);
     res.send(moviesList);
   } catch (e) {
     console.error(e);

@@ -26,16 +26,17 @@ const getUserByUsername = async (req, res) => {
     );
     if (userInfos === null) {
       res.sendStatus(404);
+    } else {
+      // setting picture path + removing `googleID` and `schoolID` (used to calculate isOnmiAuth)
+      res.send({
+        ...userInfos.toJSON(),
+        picture: userInfos.isOnmiAuth
+          ? userInfos.picture
+          : `${process.env.CLIENT_ORIGIN}/api/avatar/${userInfos.picture}`,
+        googleID: undefined,
+        schoolID: undefined
+      });
     }
-    // setting picture path + removing `googleID` and `schoolID` (used to calculate isOnmiAuth)
-    res.send({
-      ...userInfos.toJSON(),
-      picture: userInfos.isOnmiAuth
-        ? userInfos.picture
-        : `${process.env.CLIENT_ORIGIN}/api/avatar/${userInfos.picture}`,
-      googleID: undefined,
-      schoolID: undefined
-    });
   } catch (e) {
     console.error(e);
     res.sendStatus(500);
