@@ -3,14 +3,14 @@
 
 import SearchCache from "../Schemas/SearchCache";
 import yts from "./searchSources/yts";
-import rarbgHelper from "./searchSources/rarbg";
+import { searchMoviesOnRarbg } from "./searchSources/rarbg";
 // import popCornTime from "./searchSources/popCornTime";
 import UserHistoryModel from "../Schemas/UserHistory";
 
 // const sourceList = [yts, popCornTime, rarbg];
 const sourceList = [
   { name: "yts", func: yts },
-  { name: "rarbg", func: rarbgHelper.searchMoviesOnRarbg }
+  { name: "rarbg", func: searchMoviesOnRarbg }
 ];
 
 /**

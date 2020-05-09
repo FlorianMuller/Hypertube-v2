@@ -14,7 +14,7 @@ import MovieModel from "../Schemas/MoviesDatabase";
 import MovieCommentModel from "../Schemas/MovieComment";
 import UserHistoryModel from "../Schemas/UserHistory";
 import Io from "../Helpers/socket";
-import awaitDecoration from "../Helpers/searchSources/rarbg";
+import { waitDecorator, getRarbgToken } from "../Helpers/searchSources/rarbg";
 import UserModel from "../Schemas/User";
 
 ffmpeg.setFfmpegPath(ffmpegPath);
@@ -30,7 +30,7 @@ const TMDBURL = "https://api.themoviedb.org/3/movie/";
 const TMDBKEY = "b0d86f66b9c1cc3286e862e306745391";
 const TMDB_API_KEY_V3 = "83c2bcadbf1d325b41d0bb1253079038";
 const TMDBPOSTERURL = "http://image.tmdb.org/t/p/w300//";
-let TOKEN = null;
+let RARBG_TOKEN = null;
 
 const options = {
   connections: 100,
@@ -469,23 +469,54 @@ const downloadMovie = async (
     });
 };
 
-const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
+const callRarbg = waitDecorator((url) => {
+  return Axios.get(url);
+});
+
+const safeRarbgCall = async (url) => {
+  const res = await callRarbg(url);
+  if (!res.data.error) return res;
+
+  // Api need a token
+  if ([1, 2, 4].includes(res.data.error_code)) {
+    RARBG_TOKEN = await getRarbgToken();
+    return callRarbg(url);
+  }
+
+  // Other error
+  return res;
+};
+
+const getMovieFromUrl = async (url) => {
+  if (url.startsWith("https://torrentapi.org")) {
+    return safeRarbgCall(url);
+  }
+
+  return Axios.get(url);
+};
+
+const PlayMovie = async (req, res) => {
   const movieId = req.params.imdbId;
   const movieFound = await MovieModel.findOne({ movieId });
+
   if (movieFound && movieFound.magnet && !movieFound.path) {
+    // Movie already found
     downloadMovie(movieId, null, null, req, res, movieFound.magnet);
   } else {
-    if (TOKEN === null) {
-      const result = await Axios.get(
-        "https://torrentapi.org/pubapi_v2.php?get_token=get_token&app_id=Hypertube1"
-      );
-      TOKEN = result.data.token;
+    // Need to found the movie in one of our sources
+
+    if (RARBG_TOKEN === null) {
+      RARBG_TOKEN = await getRarbgToken();
     }
+
+    // Trying YTS
     const response = await Axios(
       `https://yts.ae/api/v2/list_movies.json?query_term=${req.params.imdbId}`
     );
     let sourceUrl;
     let sourceSite;
+
+    // Choosing a source
     if (
       response.data.data.movie_count &&
       response.data.data.movies[0].imdb_code === req.params.imdbId
@@ -493,10 +524,12 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
       sourceUrl = `https://yts.ae/api/v2/movie_details.json?movie_id=${response.data.data.movies[0].id}`;
       sourceSite = "yts";
     } else {
-      sourceUrl = `https://torrentapi.org/pubapi_v2.php?token=${TOKEN}&app_id=Hypertube1&mode=search&category=movies&format=json_extended&limit=100&search_imdb=${movieId}`;
+      sourceUrl = `https://torrentapi.org/pubapi_v2.php?token=${RARBG_TOKEN}&app_id=Hypertube1&mode=search&category=movies&format=json_extended&limit=100&search_imdb=${movieId}`;
       sourceSite = "rarbg";
     }
-    await Axios.get(sourceUrl)
+
+    // Getting movie with a valid source
+    getMovieFromUrl(sourceUrl)
       .then(async (movieRes) => {
         if (movieRes.data.error) return res.status(500).send("Ressource error");
         const movie =
@@ -561,7 +594,7 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
         res.sendStatus(500);
       });
   }
-});
+};
 
 const receiveReviews = async (req, res) => {
   const comment = req.body;

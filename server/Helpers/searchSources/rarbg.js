@@ -34,12 +34,11 @@ const timeout = util.promisify(setTimeout);
  * Make sure one second has passed between each call to
  * the rarbg's api
  */
-const waitDecorator = (func) => async (...params) => {
+export const waitDecorator = (func) => async (...params) => {
   const timeSinceLastCall = Date.now() - lastCall;
 
   if (lastCall && timeSinceLastCall < 2000) {
     // Need to wait before call to api
-
     lastCall = Date.now() + 2000 - timeSinceLastCall;
     await timeout(2000 - timeSinceLastCall);
   } else {
@@ -54,7 +53,7 @@ const waitDecorator = (func) => async (...params) => {
  * Return a rarbg token to call its api
  */
 // @waitDecorator
-const getRarbgToken = waitDecorator(async () => {
+export const getRarbgToken = waitDecorator(async () => {
   const {
     data: { token }
   } = await axios.get(RARBG_URL, {
@@ -138,7 +137,7 @@ const cantSearch = (options, index) => {
   );
 };
 
-const searchMoviesOnRarbg = async (options, index) => {
+export const searchMoviesOnRarbg = async (options, index) => {
   // Check if we can make this search with Rarbg
   if (cantSearch(options, index)) {
     console.info("[rarbg] search not supported");
@@ -195,5 +194,3 @@ const searchMoviesOnRarbg = async (options, index) => {
     movies: formatedMovies
   };
 };
-
-export default { searchMoviesOnRarbg, waitDecorator };
