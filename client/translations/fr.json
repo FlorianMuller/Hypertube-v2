@@ -62,7 +62,7 @@
   "movie.creator": "Crée par : ",
   "movie.prodDate": "Date de production : ",
   "movie.runTime": "Durée : ",
-  "movie.imdb.rating": "Note d'IMDb",
+  "movie.imdb.rating": "Note de TMDb",
   "movie.rating": "Note du film",
   "movie.comment.title": "Quelque chose à dire à son propos ?",
   "movie.comment.none": "Il n'y a aucun commentaire pour l'instant, ajoute le tien !",

@@ -3392,7 +3392,7 @@ exports[`SignIn should render <SignIn> in french 1`] = `
                                   <span
                                     className="MuiButton-label"
                                   >
-                                    Connection avec 42
+                                    Connexion avec 42
                                   </span>
                                   <WithStyles(memo)
                                     center={false}
@@ -3513,7 +3513,7 @@ exports[`SignIn should render <SignIn> in french 1`] = `
                                   <span
                                     className="MuiButton-label"
                                   >
-                                    Connection avec Google
+                                    Connexion avec Google
                                   </span>
                                   <WithStyles(memo)
                                     center={false}

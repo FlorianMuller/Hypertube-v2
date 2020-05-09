@@ -122,7 +122,7 @@ exports[`App renders correctly 1`] = `
         "movie.description": "About this movie : ",
         "movie.error": "Sorry, this movie is not available.",
         "movie.error.invalid": "Sorry, this movie does not exists. Maybe find an other one ?",
-        "movie.imdb.rating": "IMDb's rating",
+        "movie.imdb.rating": "TMDb's rating",
         "movie.notRef": "Sorry but this movie is no longer referenced",
         "movie.prodDate": "Production date : ",
         "movie.rating": "Movie's rating",
