@@ -3,8 +3,8 @@ dist/
 data/
 .eslintcache
 .DS_STORE
-.env
 .vscode/settings.json
 .vscode/
 .vscode
+.env
 .nvmrc
