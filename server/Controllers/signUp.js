@@ -1,11 +1,12 @@
-import validEmail, {
+import {
+  validEmail,
   createUser,
   sendValidateEmail,
   validPassword,
   validFile,
   emailIsFree
 } from "../Helpers/signUp";
-import { setAccesTokenCookie } from "../Helpers/signIn";
+import { setAccesTokenCookie, setLoggedCookie } from "../Helpers/signIn";
 
 import UserModel from "../Schemas/User";
 import TokenModel from "../Schemas/Token";
@@ -116,6 +117,7 @@ const verifyEmail = async (req, res) => {
         token.user.emailVerified = true;
         await token.user.save();
 
+        setLoggedCookie(res);
         setAccesTokenCookie(res, token.user.id);
         res.sendStatus(200);
       } else if (token.user.newEmail) {
