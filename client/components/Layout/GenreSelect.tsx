@@ -48,7 +48,7 @@ const GenreSelect = ({ genre, setGenre, labelid }: Props): ReactElement => {
   return (
     <Select
       labelId={labelid}
-      defaultValue={genre}
+      defaultValue="all"
       value={genre}
       onChange={(e: ChangeEvent<{ value: string }>): void =>
         setGenre(e.target.value)

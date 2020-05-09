@@ -14,6 +14,7 @@ const useSearchStyles = makeStyles((theme) => ({
     width: "300px",
     margin: theme.spacing(5),
     transition: "transform 0.2s",
+    backgroundColor: "#212121",
     "&:hover": {
       [theme.breakpoints.up("sm")]: {
         transform: "scale(1.15)"

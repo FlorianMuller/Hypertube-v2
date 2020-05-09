@@ -9,20 +9,15 @@ import { path as ffmpegPath } from "@ffmpeg-installer/ffmpeg";
 import ffmpeg from "fluent-ffmpeg";
 import movieHelpers from "../Helpers/movie";
 import searchHelpers from "../Helpers/search";
-import mongoose from "../mongo";
-// import ioConnection from "..";
 
 import MovieModel from "../Schemas/MoviesDatabase";
 import MovieCommentModel from "../Schemas/MovieComment";
-// import UserModel from "../Schemas/User";
 import UserHistoryModel from "../Schemas/UserHistory";
 import Io from "../Helpers/socket";
-import awaitDecoration from "../Helpers/searchSources/rarbg";
+import { waitDecorator, getRarbgToken } from "../Helpers/searchSources/rarbg";
 import UserModel from "../Schemas/User";
 
 ffmpeg.setFfmpegPath(ffmpegPath);
-
-const Movie = mongoose.model("Movie", MovieModel);
 
 const OpenSubtitles = new OS({
   useragent: "noelledeur",
@@ -35,7 +30,7 @@ const TMDBURL = "https://api.themoviedb.org/3/movie/";
 const TMDBKEY = "b0d86f66b9c1cc3286e862e306745391";
 const TMDB_API_KEY_V3 = "83c2bcadbf1d325b41d0bb1253079038";
 const TMDBPOSTERURL = "http://image.tmdb.org/t/p/w300//";
-let TOKEN = null;
+let RARBG_TOKEN = null;
 
 const options = {
   connections: 100,
@@ -372,35 +367,27 @@ const downloadMovie = async (
   movieMagnet
 ) => {
   let magnet;
+
   if (movieMagnet === null) {
-    const ArrayMagnet = [];
-    let newmovie = movie;
-    newmovie.torrents = movie.torrents.sort((a, b) =>
-      a.seeds < b.seeds ? 1 : -1
-    );
-    newmovie.torrents = movie.torrents.filter(
-      (torrent) => torrent.quality !== "3D"
-    );
-    newmovie = newmovie.torrents.length ? newmovie : movie;
-    if (sourceSite !== "yts") {
-      newmovie.map((el) => {
-        const [magnetTmp] = el.download.split("&");
-        ArrayMagnet.push(magnetTmp);
-        return undefined;
-      });
-    }
-    if (sourceSite === "yts") {
-      // const isfullhd = (el) => el.hash === "1080p"
-      magnet = `magnet:?xt=urn:btih:${newmovie.torrents[0].hash}`;
-    } else {
-      ArrayMagnet.map((el) => {
-        magnet = el;
-        return undefined;
-      });
+    if (sourceSite === "rarbg") {
+      const sorted = movie.sort((a, b) => b.seeds - a.seeds);
+      const no3d = sorted.filter(
+        (torrent) => torrent.category !== "Movies/x264/3D"
+      );
+
+      [magnet] = (no3d.length ? no3d[0].download : sorted[0].download).split(
+        "&"
+      );
+    } else if (sourceSite === "yts") {
+      const sorted = movie.torrents.sort((a, b) => b.seeders - a.seeders);
+      const no3d = sorted.filter((torrent) => torrent.quality !== "3D");
+
+      magnet = no3d.length ? no3d[0].hash : sorted[0].hash;
     }
 
-    await Movie.create({ movieId, movieName: movie.title, magnet, path: "" });
+    await MovieModel.create({ movieId, magnet, path: "" });
   }
+
   const engine = TorrentStream(magnet || movieMagnet, options);
 
   let newFilePath;
@@ -409,7 +396,7 @@ const downloadMovie = async (
   setTimeout(() => {
     if (!isDownloading) Io.socket.to(movieId).emit("movie-not-ref");
     return undefined;
-  }, 60000);
+  }, 120000);
   engine
     .on("ready", () => {
       isDownloading = true;
@@ -478,27 +465,58 @@ const downloadMovie = async (
       const directory = newFilePath.split("/").reverse()[1];
       const fileName = newFilePath.split("/").reverse()[0];
       const path = `${process.cwd()}/server/data/movie/${directory}/${fileName}`;
-      await Movie.findOneAndUpdate({ movieId }, { path });
+      await MovieModel.findOneAndUpdate({ movieId }, { path });
     });
 };
 
-const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
+const callRarbg = waitDecorator((url) => {
+  return Axios.get(url);
+});
+
+const safeRarbgCall = async (url) => {
+  const res = await callRarbg(url);
+  if (!res.data.error) return res;
+
+  // Api need a token
+  if ([1, 2, 4].includes(res.data.error_code)) {
+    RARBG_TOKEN = await getRarbgToken();
+    return callRarbg(url);
+  }
+
+  // Other error
+  return res;
+};
+
+const getMovieFromUrl = async (url) => {
+  if (url.startsWith("https://torrentapi.org")) {
+    return safeRarbgCall(url);
+  }
+
+  return Axios.get(url);
+};
+
+const PlayMovie = async (req, res) => {
   const movieId = req.params.imdbId;
-  const movieFound = await Movie.findOne({ movieId });
+  const movieFound = await MovieModel.findOne({ movieId });
+
   if (movieFound && movieFound.magnet && !movieFound.path) {
+    // Movie already found
     downloadMovie(movieId, null, null, req, res, movieFound.magnet);
   } else {
-    if (TOKEN === null) {
-      const result = await Axios.get(
-        "https://torrentapi.org/pubapi_v2.php?get_token=get_token&app_id=Hypertube1"
-      );
-      TOKEN = result.data.token;
+    // Need to found the movie in one of our sources
+
+    if (RARBG_TOKEN === null) {
+      RARBG_TOKEN = await getRarbgToken();
     }
+
+    // Trying YTS
     const response = await Axios(
       `https://yts.ae/api/v2/list_movies.json?query_term=${req.params.imdbId}`
     );
     let sourceUrl;
     let sourceSite;
+
+    // Choosing a source
     if (
       response.data.data.movie_count &&
       response.data.data.movies[0].imdb_code === req.params.imdbId
@@ -506,10 +524,12 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
       sourceUrl = `https://yts.ae/api/v2/movie_details.json?movie_id=${response.data.data.movies[0].id}`;
       sourceSite = "yts";
     } else {
-      sourceUrl = `https://torrentapi.org/pubapi_v2.php?token=${TOKEN}&app_id=Hypertube1&mode=search&category=movies&format=json_extended&limit=100&search_imdb=${movieId}`;
-      sourceSite = "TorrentApi";
+      sourceUrl = `https://torrentapi.org/pubapi_v2.php?token=${RARBG_TOKEN}&app_id=Hypertube1&mode=search&category=movies&format=json_extended&limit=100&search_imdb=${movieId}`;
+      sourceSite = "rarbg";
     }
-    await Axios.get(sourceUrl)
+
+    // Getting movie with a valid source
+    getMovieFromUrl(sourceUrl)
       .then(async (movieRes) => {
         if (movieRes.data.error) return res.status(500).send("Ressource error");
         const movie =
@@ -518,13 +538,13 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
             : movieRes.data.torrent_results;
 
         // Check if the movie is already download in the database
-        Movie.findOne({ movieId }, (err, result) => {
+        MovieModel.findOne({ movieId }, (err, result) => {
           if (err) {
             console.error(err);
             return res.status(500).send("Internal Server Error");
           }
           if (result) {
-            Movie.findOne({ movieId }, (error, found) => {
+            MovieModel.findOne({ movieId }, (error, found) => {
               if (error) {
                 console.error(error.message);
                 return res.statu(500).send("Intenal server error");
@@ -574,7 +594,7 @@ const PlayMovie = awaitDecoration.waitDecorator(async (req, res) => {
         res.sendStatus(500);
       });
   }
-});
+};
 
 const receiveReviews = async (req, res) => {
   const comment = req.body;

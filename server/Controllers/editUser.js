@@ -30,6 +30,7 @@ const sendValidateEmail = async (user, locale) => {
   const emailInfo = confirmEmailInfo[locale];
   const token = await TokenModel.create({
     user: user._id,
+    type: "emailChange",
     associatedData: { newEmail: user.newEmail }
   });
 

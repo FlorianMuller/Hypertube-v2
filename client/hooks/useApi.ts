@@ -70,6 +70,15 @@ const useApi = <T, E>(
     }
   }, [url, method, headers, data]);
 
+  /**
+   * Canceling all pending request when compnent unmount
+   */
+  useEffect(() => {
+    return (): void => {
+      cancelSource.cancel();
+    };
+  }, []);
+
   return {
     callApi,
     loading,

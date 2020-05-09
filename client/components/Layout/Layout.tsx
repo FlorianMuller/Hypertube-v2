@@ -65,7 +65,8 @@ const Layout = ({ children, locale, setLocale }: Props): ReactElement => {
       !id.includes("expandFiltersButton") && // expand filter's button
       !target.children.namedItem("expandFiltersIcon") && // expand filter's button
       !id.includes("expandFiltersIcon") && // expand filter's button
-      !target.parentElement.id.includes("expandFiltersIcon") && // expand filter's button
+      (!target.parentElement ||
+        !target.parentElement.id.includes("expandFiltersIcon")) && // expand filter's button
       !target.children.namedItem("menuitem-search") && // Check if it's search input's wrapper
       !id.includes("body")
     ) {

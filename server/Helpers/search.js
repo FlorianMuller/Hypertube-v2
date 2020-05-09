@@ -3,14 +3,14 @@
 
 import SearchCache from "../Schemas/SearchCache";
 import yts from "./searchSources/yts";
-import rarbgHelper from "./searchSources/rarbg";
+import { searchMoviesOnRarbg } from "./searchSources/rarbg";
 // import popCornTime from "./searchSources/popCornTime";
 import UserHistoryModel from "../Schemas/UserHistory";
 
 // const sourceList = [yts, popCornTime, rarbg];
 const sourceList = [
   { name: "yts", func: yts },
-  { name: "rarbg", func: rarbgHelper.searchMoviesOnRarbg }
+  { name: "rarbg", func: searchMoviesOnRarbg }
 ];
 
 /**
@@ -255,7 +255,7 @@ const searchMoviesOnAllSource = async (searchOptions) => {
 
   // If wanted page is cache, return it
   if (cacheDetails.cache.length >= searchOptions.page) {
-    return { movies: cacheDetails.cache[searchOptions.page - 1] };
+    return { movies: cacheDetails.cache[searchOptions.page - 1].toObject() };
   }
 
   // let moviesList;
@@ -287,7 +287,7 @@ const searchMoviesOnAllSource = async (searchOptions) => {
   return {
     movies:
       cacheDetails.cache.length >= searchOptions.page
-        ? cacheDetails.cache[searchOptions.page - 1]
+        ? cacheDetails.cache[searchOptions.page - 1].toObject()
         : []
   };
 };
@@ -295,7 +295,7 @@ const searchMoviesOnAllSource = async (searchOptions) => {
 const checkIfViewed = async (data, userId) => {
   const history = await UserHistoryModel.find({ userId });
   const newData = data.movies.map((movie) => {
-    const found = history.find((el) => el.imdb_code === movie.id);
+    const found = history.find((el) => el.movieId === movie.id);
     if (found) {
       return {
         genres: movie.genres,
@@ -311,20 +311,12 @@ const checkIfViewed = async (data, userId) => {
       };
     }
     return {
-      genres: movie.genres,
-      id: movie.id,
-      title: movie.title,
-      cover: movie.cover,
-      year: movie.year,
-      summary: movie.summary,
-      rating: movie.rating,
-      runtime: movie.runtime,
-      dateAdded: movie.dateAdded,
-      viewed: false
+      ...movie,
+      viewed: !!found
     };
   });
 
-  return { movies: newData, nextPage: data.nextPage };
+  return { movies: newData };
 };
 
 export default { searchMoviesOnAllSource, checkIfViewed };

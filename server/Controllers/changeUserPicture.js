@@ -10,12 +10,18 @@ const changeUserPicture = async (req, res) => {
         req.userId,
         { picture: hashedPT },
         {
-          runValidators: true
+          runValidators: true,
+          new: true
         }
       );
 
-      if (userInfo !== null) res.sendStatus(200);
-      if (userInfo === null) res.sendStatus(401);
+      if (userInfo !== null) {
+        res.send({
+          newPath: `${process.env.CLIENT_ORIGIN}/api/avatar/${userInfo.picture}`
+        });
+      } else {
+        res.sendStatus(401);
+      }
     } catch (e) {
       console.error(e.message);
       res.sendStatus(500);

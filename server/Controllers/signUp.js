@@ -1,11 +1,12 @@
-import validEmail, {
+import {
+  validEmail,
   createUser,
   sendValidateEmail,
   validPassword,
   validFile,
   emailIsFree
 } from "../Helpers/signUp";
-import { setAccesTokenCookie } from "../Helpers/signIn";
+import { setAccesTokenCookie, setLoggedCookie } from "../Helpers/signIn";
 
 import UserModel from "../Schemas/User";
 import TokenModel from "../Schemas/Token";
@@ -81,7 +82,10 @@ const resendValidationEmail = async (req, res) => {
       // check if 1mn is passed
       if (Date.now() - token.createdAt.getTime() >= 60000) {
         // Deleting old token
-        await TokenModel.findOneAndDelete({ user: user._id });
+        await TokenModel.findOneAndDelete({
+          user: user._id,
+          type: "emailSignUp"
+        });
         // Sending a new mail
         await sendValidateEmail(user, req.body.locale || "en");
         res.sendStatus(200);
@@ -101,9 +105,11 @@ const verifyEmail = async (req, res) => {
   try {
     // Getting data from DB
     const token = await TokenModel.findOne({
-      value: req.params.value,
-      type: "emailSignUp"
-    }).populate("user", "emailVerified");
+      $or: [
+        { value: req.params.value, type: "emailSignUp" },
+        { value: req.params.value, type: "emailChange" }
+      ]
+    }).populate("user", "emailVerified newEmail");
 
     if (token) {
       if (!token.user.emailVerified) {
@@ -111,6 +117,7 @@ const verifyEmail = async (req, res) => {
         token.user.emailVerified = true;
         await token.user.save();
 
+        setLoggedCookie(res);
         setAccesTokenCookie(res, token.user.id);
         res.sendStatus(200);
       } else if (token.user.newEmail) {
@@ -125,6 +132,8 @@ const verifyEmail = async (req, res) => {
         } else {
           res.sendStatus(400);
         }
+      } else {
+        res.sendStatus(400);
       }
 
       // Deleting the token
